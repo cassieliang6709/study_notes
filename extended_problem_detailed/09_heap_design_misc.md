@@ -111,3 +111,42 @@ title: "09 堆、设计、区间与杂项详细教学"
 18. Task Scheduler
 19. Sudoku Solver
 
+
+---
+
+## Quiz
+
+**Q1: `LRU Cache` 的数据结构组合是什么，为什么？**
+
+- [ ] 数组 + 排序
+- [ ] 哈希表 + 双向链表：O(1) 访问 + O(1) 移动节点到头部 ✅
+- [ ] 单链表 + 哈希表
+- [ ] 优先队列
+
+**Q2: 合并区间（Merge Intervals）的第一步是什么？**
+
+- [ ] 直接遍历合并
+- [ ] 按区间起点排序 ✅
+- [ ] 找最大终点
+- [ ] 用堆维护
+
+**Q3: `Find Median from Data Stream` 为什么用两个堆而不是一个排序数组？**
+
+- [ ] 两个堆更省空间
+- [ ] 每次插入 O(log n)，取中位数 O(1)；排序数组插入 O(n) ✅
+- [ ] 堆能保证元素唯一
+- [ ] 数组无法求中位数
+
+**Q4: 区间调度问题（最多不重叠区间数）的贪心策略是什么？**
+
+- [ ] 按起点最早排序，依次选
+- [ ] 按终点最早排序，依次选不重叠的区间 ✅
+- [ ] 选最短的区间
+- [ ] 动态规划
+
+**Q5: `Insert Interval` 插入一个新区间后，与现有区间重叠的判断条件是什么？**
+
+- [ ] `new.start <= existing.end`
+- [ ] `new.start <= existing.end AND new.end >= existing.start` ✅
+- [ ] `new.start == existing.start`
+- [ ] `new.end >= existing.start`

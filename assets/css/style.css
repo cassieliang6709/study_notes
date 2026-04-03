@@ -389,6 +389,48 @@ html.dark .home-hero p { color: var(--sidebar-part); }
 
 html.dark .home-card span { color: var(--sidebar-fg); }
 
+/* --- Task list (Quiz) --- */
+.page-inner .task-list {
+  list-style: none;
+  padding-left: 0.25rem;
+}
+
+.page-inner .task-list-item {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  padding: 4px 8px;
+  border-radius: 4px;
+  margin-top: 4px;
+  line-height: 1.6;
+}
+
+.page-inner .task-list-item:hover {
+  background: var(--code-bg);
+}
+
+.page-inner .task-list-item-checkbox {
+  flex-shrink: 0;
+  margin-top: 2px;
+  accent-color: var(--link);
+}
+
+/* Highlight the correct answer line */
+.page-inner .task-list-item:has(.task-list-item-checkbox) {
+  color: var(--fg);
+}
+
+/* CJK font & line height */
+.page-inner {
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+.page-inner p,
+.page-inner li {
+  line-height: 1.85;
+}
+
 /* --- Mobile --- */
 @media (max-width: 768px) {
   #sidebar {

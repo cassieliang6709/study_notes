@@ -111,3 +111,42 @@ title: "04 树与递归详细教学"
 13. Binary Tree Maximum Path Sum
 14. Serialize and Deserialize Binary Tree
 
+
+---
+
+## Quiz
+
+**Q1: `Binary Tree Right Side View` 用 BFS，每层取哪个节点？**
+
+- [ ] 第一个节点
+- [ ] 最后一个节点 ✅
+- [ ] 最大值节点
+- [ ] 中间节点
+
+**Q2: `Diameter of Binary Tree` 的直径等于什么？**
+
+- [ ] 根节点到最深叶子的路径
+- [ ] 左子树深度 + 右子树深度（在任意节点处取最大值） ✅
+- [ ] 节点总数
+- [ ] 最深叶子的层数
+
+**Q3: `Flatten Binary Tree to Linked List` 展开后的顺序是什么遍历顺序？**
+
+- [ ] 中序
+- [ ] 后序
+- [ ] 前序 ✅
+- [ ] 层序
+
+**Q4: `Validate Binary Search Tree` 为什么不能只比较 node.val 和左右子节点？**
+
+- [ ] 因为 BST 不要求左右子节点有序
+- [ ] 因为整棵左子树都要小于根，单层比较会漏掉孙节点违规的情况 ✅
+- [ ] 因为 Python 比较整数会出错
+- [ ] 因为二叉树可能不平衡
+
+**Q5: `Path Sum III`（路径不必从根开始）最优解法的核心思想是什么？**
+
+- [ ] 暴力枚举所有路径
+- [ ] 前缀和 + 哈希表，记录到当前节点的路径和出现次数 ✅
+- [ ] DFS 只从根节点出发
+- [ ] BFS 按层累加
