@@ -1,0 +1,17 @@
+[book]
+authors = ["Cassie Yue Liang", "OpenAI Codex"]
+language = "zh-CN"
+src = "src"
+title = "AI Projects Self-Study Hub"
+description = "A practical self-study book for RAG, LLM-from-scratch, alignment, and agent RL projects."
+
+[output.html]
+default-theme = "light"
+preferred-dark-theme = "light"
+git-repository-url = "https://github.com/cassieliang6709"
+site-url = "/"
+no-section-label = true
+
+[output.html.fold]
+enable = true
+level = 1

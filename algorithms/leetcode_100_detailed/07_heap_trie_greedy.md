@@ -78,33 +78,129 @@ class TrieNode:
 
 ### 1. Jump Game
 
-```text
-// 维护最远可达位置
+**题目含义**
+
+数组中每个位置给出你最多能跳多远，问能否到达终点。贪心的核心是维护当前能到达的最远位置。
+
+**Python 代码**
+
+```python
+from typing import List
+
+
+class Solution:
+    def canJump(self, nums: List[int]) -> bool:
+        farthest = 0
+        for i, step in enumerate(nums):
+            if i > farthest:
+                return False
+            farthest = max(farthest, i + step)
+        return True
 ```
+
+**时间复杂度**
+
+`O(n)`。
+
+**空间复杂度**
+
+`O(1)`。
+
+**怎么想到这个方法**
+
+题目不是问具体路径，只问能不能到，所以没必要做 DP。贪心维护“目前最远能到哪”就足够了。
+
+**常见 Follow-up**
+
+- 如果要求最少步数，怎么升级成 `Jump Game II`？
+- 为什么当 `i > farthest` 时就能提前返回？
 
 ### 2. Jump Game II
 
-```text
-// 当前步能覆盖到哪里
-// 下一步最远能扩到哪里
+**题目含义**
+
+和 `Jump Game` 不同，这次要你求最少跳跃次数。仍然是贪心，但多维护一层当前步数能覆盖的边界。
+
+**Python 代码**
+
+```python
+from typing import List
+
+
+class Solution:
+    def jump(self, nums: List[int]) -> int:
+        steps = 0
+        end = 0
+        farthest = 0
+
+        for i in range(len(nums) - 1):
+            farthest = max(farthest, i + nums[i])
+            if i == end:
+                steps += 1
+                end = farthest
+
+        return steps
 ```
+
+**时间复杂度**
+
+`O(n)`。
+
+**空间复杂度**
+
+`O(1)`。
+
+**怎么想到这个方法**
+
+最少步数版可以把每一步看成一层区间扩展，和 BFS 分层很像，但可以压缩成贪心边界写法。
+
+**常见 Follow-up**
+
+- 为什么不需要真的把每个位置入队？
+- 如果还要返回路径，数据结构怎么变？
 
 ### 3. Partition Labels
 
-```text
-// 当前段必须扩到段内所有字符最后出现位置的最远处
+**题目含义**
+
+你要把字符串切成尽量多段，并保证同一个字符只出现在一段里。关键是先知道每个字符最后一次出现的位置，然后贪心切段。
+
+**Python 代码**
+
+```python
+from typing import List
+
+
+class Solution:
+    def partitionLabels(self, s: str) -> List[int]:
+        last = {ch: i for i, ch in enumerate(s)}
+        ans = []
+        start = 0
+        end = 0
+
+        for i, ch in enumerate(s):
+            end = max(end, last[ch])
+            if i == end:
+                ans.append(end - start + 1)
+                start = i + 1
+
+        return ans
 ```
 
----
+**时间复杂度**
 
-## 四、推荐刷题顺序
+`O(n)`。
 
-1. Kth Largest Element in an Array
-2. Top K Frequent Elements
-3. Merge k Sorted Lists
-4. Find Median from Data Stream
-5. Implement Trie
-6. Jump Game
-7. Jump Game II
-8. Partition Labels
+**空间复杂度**
+
+`O(1)` 或 `O(k)`。
+
+**怎么想到这个方法**
+
+先预处理每个字符最后出现位置，然后一遍扫描动态扩展当前段的右边界。这是很典型的区间贪心。
+
+**常见 Follow-up**
+
+- 如果字符集不是小写字母，写法要改吗？
+- 为什么在 `i == end` 时就能安全切段？
 

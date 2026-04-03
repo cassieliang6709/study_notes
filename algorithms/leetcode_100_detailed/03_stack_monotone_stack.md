@@ -56,75 +56,282 @@ for i, x in enumerate(nums):
 
 ### 1. Valid Parentheses
 
-```text
-// 看到括号匹配，第一反应就是栈
-// 遇到右括号，就检查栈顶是否是对应左括号
+**题目含义**
+
+这是最基础的栈题。  
+遇到左括号就入栈，遇到右括号就检查栈顶是否是对应的左括号。
+
+**Python 代码**
+
+```python
+class Solution:
+    def isValid(self, s: str) -> bool:
+        mp = {')': '(', ']': '[', '}': '{'}
+        stack = []
+
+        for ch in s:
+            if ch in mp:
+                if not stack or stack.pop() != mp[ch]:
+                    return False
+            else:
+                stack.append(ch)
+
+        return not stack
 ```
+
+**时间复杂度**
+
+`O(n)`。
+
+**空间复杂度**
+
+`O(n)`。
+
+**怎么想到这个方法**
+
+看到括号匹配、嵌套结构、最近未匹配元素，这三个信号基本就能直接想到栈。
+
+**常见 Follow-up**
+
+- 如果括号种类变多，代码需要变吗？
+- 如果要求返回第一个非法位置怎么办？
 
 ### 2. Min Stack
 
-```text
-// 栈里每个位置额外记住当前最小值
-// 这样 getMin 才能 O(1)
+**题目含义**
+
+设计一个栈，同时支持 `getMin()` 返回当前最小值。关键是让最小值也跟着栈同步维护，而不是每次现扫一遍。
+
+**Python 代码**
+
+```python
+class MinStack:
+    def __init__(self):
+        self.stack = []
+        self.min_stack = []
+
+    def push(self, val: int) -> None:
+        self.stack.append(val)
+        if not self.min_stack or val <= self.min_stack[-1]:
+            self.min_stack.append(val)
+
+    def pop(self) -> None:
+        val = self.stack.pop()
+        if val == self.min_stack[-1]:
+            self.min_stack.pop()
+
+    def top(self) -> int:
+        return self.stack[-1]
+
+    def getMin(self) -> int:
+        return self.min_stack[-1]
 ```
+
+**时间复杂度**
+
+`O(1)` 每次操作。
+
+**空间复杂度**
+
+`O(n)`。
+
+**怎么想到这个方法**
+
+设计题里一旦某个查询要做到 `O(1)`，就要问自己能不能在写入时把未来查询需要的信息一并维护起来。这里就是同步维护最小值栈。
+
+**常见 Follow-up**
+
+- 如果要支持 `getMax()` 呢？
+- 能不能每个栈节点直接存当前最小值？
 
 ### 3. Decode String
 
-```text
-// 处理嵌套结构
-// 每遇到 '['，把之前状态压栈
-// 每遇到 ']'，把当前段展开回去
+**题目含义**
+
+当遇到 `[` 时，说明当前字符串和重复次数要暂存起来，进入新层级。  
+当遇到 `]` 时，从栈里弹出之前的状态，把当前字符串按次数展开再接回去。
+
+**Python 代码**
+
+```python
+class Solution:
+    def decodeString(self, s: str) -> str:
+        stack = []
+        cur_num = 0
+        cur_str = ""
+
+        for ch in s:
+            if ch.isdigit():
+                cur_num = cur_num * 10 + int(ch)
+            elif ch == "[":
+                stack.append((cur_str, cur_num))
+                cur_str = ""
+                cur_num = 0
+            elif ch == "]":
+                prev_str, num = stack.pop()
+                cur_str = prev_str + num * cur_str
+            else:
+                cur_str += ch
+
+        return cur_str
 ```
+
+**时间复杂度**
+
+`O(n)`。
+
+**空间复杂度**
+
+`O(n)`。
+
+**怎么想到这个方法**
+
+字符串解码一看到嵌套括号，就要想到用栈保存“进入括号之前”的状态。每遇到 `]` 就把当前片段弹出并展开。
+
+**常见 Follow-up**
+
+- 如果出现多位数字，为什么当前写法依然对？
+- 递归下降也能做，优缺点是什么？
 
 ### 4. Daily Temperatures
 
-```text
-// 单调递减栈
-// 当前更高温一出现，就把前面等待它的天数全部结算
+**题目含义**
+
+对每一天，题目要你找后面第一个更高温度出现的天数差。关键词是“下一个更大元素”，所以单调栈最合适。
+
+**Python 代码**
+
+```python
+from typing import List
+
+
+class Solution:
+    def dailyTemperatures(self, temperatures: List[int]) -> List[int]:
+        ans = [0] * len(temperatures)
+        stack = []
+
+        for i, temp in enumerate(temperatures):
+            while stack and temperatures[stack[-1]] < temp:
+                j = stack.pop()
+                ans[j] = i - j
+            stack.append(i)
+
+        return ans
 ```
+
+**时间复杂度**
+
+`O(n)`。
+
+**空间复杂度**
+
+`O(n)`。
+
+**怎么想到这个方法**
+
+“下一个更大元素”就是单调栈最经典的识别信号。栈里存还没找到答案的位置，并保持对应值单调。
+
+**常见 Follow-up**
+
+- 如果问的是前一个更大元素呢？
+- 如果不返回天数差，只返回温度值，怎么改？
 
 ### 5. Largest Rectangle in Histogram
 
-核心理解：
+**题目含义**
 
-```text
-// 每个柱子都可能成为某个最大矩形的最矮柱
-// 一旦它右边遇到更矮柱，它的“扩张边界”就确定了
+题目要你在柱状图里找到最大矩形面积。关键在于固定某根柱子当最矮高度，然后往左右找到第一个更矮的位置，所以这是单调栈的经典题。
+
+**Python 代码**
+
+```python
+from typing import List
+
+
+class Solution:
+    def largestRectangleArea(self, heights: List[int]) -> int:
+        stack = []
+        ans = 0
+        heights.append(0)
+
+        for i, h in enumerate(heights):
+            while stack and heights[stack[-1]] > h:
+                height = heights[stack.pop()]
+                left = stack[-1] if stack else -1
+                width = i - left - 1
+                ans = max(ans, height * width)
+            stack.append(i)
+
+        heights.pop()
+        return ans
 ```
+
+**时间复杂度**
+
+`O(n)`。
+
+**空间复杂度**
+
+`O(n)`。
+
+**怎么想到这个方法**
+
+看到“每根柱子向左右扩展到哪里”，就要想到找左右第一个更小元素，这正是单调栈的拿手戏。
+
+**常见 Follow-up**
+
+- 如果是二维 `maximal rectangle`，怎么降维？
+- 为什么结尾常常补一个 0？
 
 ### 6. Longest Valid Parentheses
 
-两种方式：
+**题目含义**
+
+栈里不直接存括号，而是存下标。  
+初始化放一个 `-1`，表示“上一个无法匹配的位置”。  
+这样每当找到一个合法区间时，就可以用：
 
 ```text
-// 栈解法
-// DP 解法
+当前下标 - 栈顶下标
 ```
 
-建议先学：
+计算区间长度。
 
-```text
-// 先学栈解法，更直观
+**Python 代码**
+
+```python
+class Solution:
+    def longestValidParentheses(self, s: str) -> int:
+        stack = [-1]
+        ans = 0
+
+        for i, ch in enumerate(s):
+            if ch == "(":
+                stack.append(i)
+            else:
+                stack.pop()
+                if not stack:
+                    stack.append(i)
+                else:
+                    ans = max(ans, i - stack[-1])
+
+        return ans
 ```
 
----
+**时间复杂度**
 
-## 六、做题时的自检
+`O(n)`。
 
-```text
-// 栈里存值，还是存下标？
-// 是要找“下一个更大”，还是“上一个更小”？
-// 弹栈时答案如何计算？
-```
+**空间复杂度**
 
----
+`O(n)`。
 
-## 七、推荐刷题顺序
+**怎么想到这个方法**
 
-1. Valid Parentheses
-2. Min Stack
-3. Decode String
-4. Daily Temperatures
-5. Largest Rectangle in Histogram
-6. Longest Valid Parentheses
+这题表面像括号匹配，实际上是“最长合法区间”。栈里放下标而不是字符，才能顺手算长度。
+
+**常见 Follow-up**
+
+- DP 解法也能做吗？
+- 为什么栈里常先压入 `-1`？
 

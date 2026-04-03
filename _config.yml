@@ -4,13 +4,13 @@ markdown: kramdown
 encoding: utf-8
 
 exclude:
-  - datasets/
-  - models/
+  - resources/
   - Gemfile
   - Gemfile.lock
   - vercel.json
   - README.md
-  - code/
+  - books/*/src/
+  - books/*/book/
 
 defaults:
   - scope:

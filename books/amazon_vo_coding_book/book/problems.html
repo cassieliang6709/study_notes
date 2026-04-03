@@ -1,0 +1,668 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>题目还原与解法 - Amazon VO Coding 高频题清单</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="favicon-8114d1fc.png">
+        <link rel="stylesheet" href="css/variables-8adf115d.css">
+        <link rel="stylesheet" href="css/general-2459343d.css">
+        <link rel="stylesheet" href="css/chrome-ae938929.css">
+        <link rel="stylesheet" href="css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "";
+            const default_light_theme = "light";
+            const default_dark_theme = "light";
+            window.path_to_searchindex_js = "searchindex-fb249387.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc-89012b62.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Amazon VO Coding 高频题清单</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="题目还原与解法"><a class="header" href="#题目还原与解法">题目还原与解法</a></h1>
+<h2 id="1-cache-家族"><a class="header" href="#1-cache-家族">1. Cache 家族</a></h2>
+<h3 id="11-lru--lfu--custom-cache"><a class="header" href="#11-lru--lfu--custom-cache">1.1 LRU / LFU / Custom Cache</a></h3>
+<p><code>优先级：S</code></p>
+<p>社区原始描述：</p>
+<ul>
+<li>一亩三分地有帖直接写到“实现一个 cache”</li>
+<li>另一帖公开描述里写到 “missed cache 和 LRU cache simulation”</li>
+<li>还有 Reddit 用户明确说 Amazon 问过 <code>LRU Cache</code>，另一个回复说自己被问到 <code>LFU Cache</code></li>
+</ul>
+<p>还原题目：</p>
+<ul>
+<li>设计一个缓存系统，支持 <code>get(key)</code> 和 <code>put(key, value)</code>，超出容量时按最近最少使用淘汰</li>
+<li>follow-up 常见会改成：
+<ul>
+<li>LFU</li>
+<li>支持 <code>miss count</code></li>
+<li>让你解释为什么能做到 <code>O(1)</code></li>
+<li>问如果要支持并发或 TTL 怎么改</li>
+</ul>
+</li>
+</ul>
+<p>核心解法：</p>
+<ul>
+<li><code>LRU</code>: <code>HashMap + Doubly Linked List</code></li>
+<li><code>LFU</code>: <code>key -&gt; node</code>，<code>freq -&gt; doubly linked list</code>，再维护 <code>min_freq</code></li>
+<li>面试时先讲：
+<ul>
+<li>为什么单链表不够</li>
+<li>为什么需要 O(1) 删除任意节点</li>
+<li>eviction 时怎么保证正确更新</li>
+</ul>
+</li>
+</ul>
+<p>易错点：</p>
+<ul>
+<li>更新已有 key 时忘记移动节点</li>
+<li>容量为 0</li>
+<li><code>LFU</code> 在频率升级后没有正确更新 <code>min_freq</code></li>
+<li>删除尾节点后没同步从 map 去掉</li>
+</ul>
+<p>建议练习：</p>
+<ul>
+<li>LeetCode 146 <code>LRU Cache</code></li>
+<li>LeetCode 460 <code>LFU Cache</code></li>
+<li>自己口述一个 <code>TTL cache</code> 的扩展版本</li>
+</ul>
+<h2 id="2-graph--bfs--dfs-家族"><a class="header" href="#2-graph--bfs--dfs-家族">2. Graph / BFS / DFS 家族</a></h2>
+<h3 id="21-word-ladder"><a class="header" href="#21-word-ladder">2.1 Word Ladder</a></h3>
+<p><code>优先级：S</code></p>
+<p>社区原始描述：</p>
+<ul>
+<li>一亩三分地总结帖直接写：<code>bfs dfs考的很多，word ladder，word search基本成了必考</code></li>
+</ul>
+<p>还原题目：</p>
+<ul>
+<li>给 <code>beginWord</code>、<code>endWord</code> 和字典，每次只能改一个字符，问最短转换长度</li>
+<li>follow-up：
+<ul>
+<li>输出路径而不只是长度</li>
+<li>优化时间复杂度</li>
+</ul>
+</li>
+</ul>
+<p>核心解法：</p>
+<ul>
+<li>标准 <code>BFS</code></li>
+<li>进阶直接讲 <code>bidirectional BFS</code></li>
+<li>若 interviewer 追优化，讲：
+<ul>
+<li>wildcard pattern 预处理</li>
+<li>双向 BFS 降搜索空间</li>
+</ul>
+</li>
+</ul>
+<p>易错点：</p>
+<ul>
+<li><code>endWord</code> 不在字典里</li>
+<li>访问标记时机不对导致重复入队</li>
+<li>复杂度说不清楚</li>
+</ul>
+<p>建议练习：</p>
+<ul>
+<li>LeetCode 127 <code>Word Ladder</code></li>
+<li>LeetCode 126 <code>Word Ladder II</code></li>
+</ul>
+<h3 id="22-word-search"><a class="header" href="#22-word-search">2.2 Word Search</a></h3>
+<p><code>优先级：S</code></p>
+<p>社区原始描述：</p>
+<ul>
+<li>同一篇总结帖把 <code>word search</code> 和 <code>word ladder</code> 放在一起，直接说成“基本成了必考”</li>
+</ul>
+<p>还原题目：</p>
+<ul>
+<li>在二维网格中找一个单词，字符可上下左右移动，同一个格子不能重复使用</li>
+<li>follow-up：
+<ul>
+<li>多个单词版本</li>
+<li>如何剪枝</li>
+</ul>
+</li>
+</ul>
+<p>核心解法：</p>
+<ul>
+<li><code>DFS + Backtracking</code></li>
+<li>多单词时讲 <code>Trie + DFS</code></li>
+</ul>
+<p>易错点：</p>
+<ul>
+<li>访问标记恢复</li>
+<li>边界判断顺序</li>
+<li>多单词版本没有做前缀剪枝</li>
+</ul>
+<p>建议练习：</p>
+<ul>
+<li>LeetCode 79 <code>Word Search</code></li>
+<li>LeetCode 212 <code>Word Search II</code></li>
+</ul>
+<h3 id="23-course-schedule"><a class="header" href="#23-course-schedule">2.3 Course Schedule</a></h3>
+<p><code>优先级：A</code></p>
+<p>社区原始描述：</p>
+<ul>
+<li>一亩三分地总结帖直接列出了 <code>210 course schedule</code></li>
+</ul>
+<p>还原题目：</p>
+<ul>
+<li>给依赖关系，判断能否完成所有课程，或输出一种可行顺序</li>
+</ul>
+<p>核心解法：</p>
+<ul>
+<li><code>Topological Sort</code></li>
+<li><code>BFS(Kahn)</code> 和 <code>DFS cycle detection</code> 都要会讲</li>
+</ul>
+<p>易错点：</p>
+<ul>
+<li>边方向说反</li>
+<li>只会判断可行，不会输出顺序</li>
+</ul>
+<p>建议练习：</p>
+<ul>
+<li>LeetCode 207</li>
+<li>LeetCode 210</li>
+</ul>
+<h2 id="3-dp--backtracking-家族"><a class="header" href="#3-dp--backtracking-家族">3. DP / Backtracking 家族</a></h2>
+<h3 id="31-word-break-i--ii"><a class="header" href="#31-word-break-i--ii">3.1 Word Break I / II</a></h3>
+<p><code>优先级：S</code></p>
+<p>社区原始描述：</p>
+<ul>
+<li>总结帖直接列了 <code>139 140 word break</code></li>
+<li>另一个 VO 准备帖里明确出现：<code>wordbreak II。follow up 问能不能更快</code></li>
+</ul>
+<p>还原题目：</p>
+<ul>
+<li><code>Word Break I</code>: 判断字符串能否被字典拆分</li>
+<li><code>Word Break II</code>: 输出所有合法拆分</li>
+<li>follow-up：
+<ul>
+<li>如何减少重复搜索</li>
+<li>如何更快</li>
+</ul>
+</li>
+</ul>
+<p>核心解法：</p>
+<ul>
+<li><code>Word Break I</code>: <code>DP</code></li>
+<li><code>Word Break II</code>: <code>DFS + memo</code></li>
+<li>如果 interviewer 继续问优化，可以讲 <code>Trie + memo</code></li>
+</ul>
+<p>易错点：</p>
+<ul>
+<li><code>Word Break II</code> 没做 memo 导致指数爆炸</li>
+<li>字符串切片过多，解释不清性能瓶颈</li>
+</ul>
+<p>建议练习：</p>
+<ul>
+<li>LeetCode 139</li>
+<li>LeetCode 140</li>
+<li>LeetCode 472 <code>Concatenated Words</code></li>
+</ul>
+<h3 id="32-0-1-knapsack--edit-distance"><a class="header" href="#32-0-1-knapsack--edit-distance">3.2 0-1 Knapsack / Edit Distance</a></h3>
+<p><code>优先级：B</code></p>
+<p>社区原始描述：</p>
+<ul>
+<li>总结帖列出 <code>0-1 knapsack</code></li>
+<li>同帖列出 <code>72 edit distance</code></li>
+</ul>
+<p>还原题目：</p>
+<ul>
+<li>这类题在 Amazon VO 里更像“验证你是否掌握标准 DP 推导”的保底题</li>
+</ul>
+<p>核心解法：</p>
+<ul>
+<li>背包：状态定义、二维到一维压缩</li>
+<li>编辑距离：<code>dp[i][j]</code> 表示前缀最小编辑次数</li>
+</ul>
+<p>建议练习：</p>
+<ul>
+<li>LeetCode 72</li>
+<li>经典 0-1 背包模板</li>
+</ul>
+<h2 id="4-tree-家族"><a class="header" href="#4-tree-家族">4. Tree 家族</a></h2>
+<h3 id="41-lca--diameter--path-sum--boundary--vertical-order"><a class="header" href="#41-lca--diameter--path-sum--boundary--vertical-order">4.1 LCA / Diameter / Path Sum / Boundary / Vertical Order</a></h3>
+<p><code>优先级：S</code></p>
+<p>社区原始描述：</p>
+<ul>
+<li>总结帖列出：
+<ul>
+<li><code>236 lca of tree</code></li>
+<li><code>545 boundary of tree</code></li>
+<li><code>314 binary vertical traversal</code></li>
+<li><code>437 path sum</code></li>
+<li><code>543 diameter of tree</code></li>
+</ul>
+</li>
+<li>另一帖还有一句：<code>bottom view of a binary tree，题目一贴出来我就觉得和 vertical 那道题差不多</code></li>
+</ul>
+<p>还原题目：</p>
+<ul>
+<li>Amazon 很喜欢把二叉树基础题包装成 traversal 变体</li>
+<li>常见问法：
+<ul>
+<li>最近公共祖先</li>
+<li>树的直径</li>
+<li>路径和计数</li>
+<li>边界遍历</li>
+<li>vertical order / bottom view</li>
+</ul>
+</li>
+</ul>
+<p>核心解法：</p>
+<ul>
+<li><code>LCA</code>: 递归返回左右子树命中情况</li>
+<li><code>Diameter</code>: 后序遍历，同时维护最大值</li>
+<li><code>Path Sum III</code>: 前缀和 + hashmap</li>
+<li><code>Vertical Order / Bottom View</code>: <code>BFS</code> 配合列坐标</li>
+<li><code>Boundary</code>: 分左边界、叶子、右边界</li>
+</ul>
+<p>易错点：</p>
+<ul>
+<li>把 <code>Path Sum I</code> 和 <code>Path Sum III</code> 混了</li>
+<li><code>vertical order</code> 不清楚同列同层的输出顺序</li>
+<li><code>bottom view</code> 和 <code>vertical traversal</code> 混用</li>
+</ul>
+<p>建议练习：</p>
+<ul>
+<li>LeetCode 236</li>
+<li>LeetCode 543</li>
+<li>LeetCode 437</li>
+<li>LeetCode 314</li>
+<li>LeetCode 545</li>
+</ul>
+<h2 id="5-随机结构--o1-设计"><a class="header" href="#5-随机结构--o1-设计">5. 随机结构 / O(1) 设计</a></h2>
+<h3 id="51-insert-delete-getrandom-o1"><a class="header" href="#51-insert-delete-getrandom-o1">5.1 Insert Delete GetRandom O(1)</a></h3>
+<p><code>优先级：A</code></p>
+<p>社区原始描述：</p>
+<ul>
+<li>一亩三分地帖子直接写到：<code>类似 380 + - random O(1)，follow up 如果有dup怎么办</code></li>
+</ul>
+<p>还原题目：</p>
+<ul>
+<li>设计一个数据结构，支持：
+<ul>
+<li><code>insert</code></li>
+<li><code>remove</code></li>
+<li><code>getRandom</code></li>
+</ul>
+</li>
+<li>所有操作尽量 <code>O(1)</code></li>
+<li>follow-up：如果允许重复值怎么办</li>
+</ul>
+<p>核心解法：</p>
+<ul>
+<li>标准版：<code>array + value_to_index</code></li>
+<li>重复值版：<code>array + value_to_indices(set)</code></li>
+</ul>
+<p>易错点：</p>
+<ul>
+<li>删除时忘记交换最后一个元素</li>
+<li>交换后没更新被换元素的下标</li>
+<li>重复值版没同步更新 index set</li>
+</ul>
+<p>建议练习：</p>
+<ul>
+<li>LeetCode 380</li>
+<li>LeetCode 381</li>
+</ul>
+<h2 id="6-binary-search--unknown-size"><a class="header" href="#6-binary-search--unknown-size">6. Binary Search / Unknown Size</a></h2>
+<h3 id="61-search-in-sorted-array-of-unknown-length"><a class="header" href="#61-search-in-sorted-array-of-unknown-length">6.1 Search in Sorted Array of Unknown Length</a></h3>
+<p><code>优先级：A</code></p>
+<p>社区原始描述：</p>
+<ul>
+<li>一亩三分地 Amazon VO 帖里明确写到：<code>search element in one sorted array which has infinate length</code></li>
+</ul>
+<p>还原题目：</p>
+<ul>
+<li>给一个有序数组，但你不知道长度，查目标值位置</li>
+<li>follow-up：如果数组其实是有限的，只是你拿不到长度，怎么办</li>
+</ul>
+<p>核心解法：</p>
+<ul>
+<li>先指数扩张右边界：<code>1, 2, 4, 8...</code></li>
+<li>再在 <code>[left, right]</code> 上做二分</li>
+</ul>
+<p>易错点：</p>
+<ul>
+<li>边界扩张时越界处理说不清</li>
+<li>把“未知长度”误解成“真的无限”</li>
+</ul>
+<p>建议练习：</p>
+<ul>
+<li>LeetCode 702 <code>Search in a Sorted Array of Unknown Size</code></li>
+</ul>
+<h2 id="7-sliding-window--string"><a class="header" href="#7-sliding-window--string">7. Sliding Window / String</a></h2>
+<h3 id="71-找所有排列出现位置"><a class="header" href="#71-找所有排列出现位置">7.1 找所有排列出现位置</a></h3>
+<p><code>优先级：A</code></p>
+<p>社区原始描述：</p>
+<ul>
+<li>一亩三分地帖子给出的描述非常接近原题：<code>给两个string，在string1中找到所有符合string2的排列组合的subsequence，返回相应的index</code></li>
+</ul>
+<p>还原题目：</p>
+<ul>
+<li>在长串中找所有子串起点，使该子串是短串的一个排列</li>
+<li>本质是 <code>find all anagrams / permutation in string</code></li>
+</ul>
+<p>核心解法：</p>
+<ul>
+<li>固定窗口长度</li>
+<li>维护频次数组或 hashmap</li>
+<li>窗口右移时增一个、减一个</li>
+</ul>
+<p>易错点：</p>
+<ul>
+<li><code>subsequence</code> 和 <code>substring</code> 在原帖里可能被混说，但题意明显是固定长度窗口匹配</li>
+<li>字典比较复杂度不会讲</li>
+</ul>
+<p>建议练习：</p>
+<ul>
+<li>LeetCode 438 <code>Find All Anagrams in a String</code></li>
+<li>LeetCode 567 <code>Permutation in String</code></li>
+</ul>
+<h2 id="8-heap--selection"><a class="header" href="#8-heap--selection">8. Heap / Selection</a></h2>
+<h3 id="81-kth-largest-element"><a class="header" href="#81-kth-largest-element">8.1 Kth Largest Element</a></h3>
+<p><code>优先级：A</code></p>
+<p>社区原始描述：</p>
+<ul>
+<li>一亩三分地总结帖直接列出 <code>215 kth largest element in array</code></li>
+</ul>
+<p>还原题目：</p>
+<ul>
+<li>给数组和 <code>k</code>，返回第 <code>k</code> 大元素</li>
+</ul>
+<p>核心解法：</p>
+<ul>
+<li><code>min-heap</code> 大小 <code>k</code></li>
+<li>或 <code>quickselect</code></li>
+</ul>
+<p>易错点：</p>
+<ul>
+<li>第 <code>k</code> 大和排序下标混淆</li>
+<li>只会堆，不会解释 quickselect 的平均复杂度</li>
+</ul>
+<p>建议练习：</p>
+<ul>
+<li>LeetCode 215</li>
+</ul>
+<h2 id="9-greedy"><a class="header" href="#9-greedy">9. Greedy</a></h2>
+<h3 id="91-gas-station"><a class="header" href="#91-gas-station">9.1 Gas Station</a></h3>
+<p><code>优先级：B</code></p>
+<p>社区原始描述：</p>
+<ul>
+<li>一亩三分地总结帖直接列出 <code>134 gas station</code></li>
+</ul>
+<p>还原题目：</p>
+<ul>
+<li>判断从哪个站点出发可以环绕一圈</li>
+</ul>
+<p>核心解法：</p>
+<ul>
+<li>总油量不足直接失败</li>
+<li>线性扫描维护当前油量，跌破 0 就重置起点</li>
+</ul>
+<h2 id="10-小型设计编码题"><a class="header" href="#10-小型设计编码题">10. 小型设计编码题</a></h2>
+<h3 id="101-calendar--meeting-schedule"><a class="header" href="#101-calendar--meeting-schedule">10.1 Calendar / Meeting Schedule</a></h3>
+<p><code>优先级：B</code></p>
+<p>社区原始描述：</p>
+<ul>
+<li>一亩三分地 VO 帖里明确写到：<code>设计一个日历系统</code>，要求支持“创建事件”“查看某个时间是否 busy”“查看某日的所有事件”</li>
+</ul>
+<p>还原题目：</p>
+<ul>
+<li>这类题介于 coding 和 LLD 之间</li>
+<li>面试官想看：
+<ul>
+<li>数据结构选择</li>
+<li>时间区间冲突判断</li>
+<li>API 设计</li>
+<li>复杂度解释</li>
+</ul>
+</li>
+</ul>
+<p>核心解法：</p>
+<ul>
+<li>单用户版可先用：
+<ul>
+<li><code>date -&gt; sorted intervals</code></li>
+<li><code>TreeMap / ordered list</code></li>
+</ul>
+</li>
+<li>如果 interviewer 继续问，讲：
+<ul>
+<li>重叠校验</li>
+<li>recurring events</li>
+<li>多时区</li>
+<li>并发写入</li>
+</ul>
+</li>
+</ul>
+<h2 id="最后怎么刷"><a class="header" href="#最后怎么刷">最后怎么刷</a></h2>
+<p>推荐顺序：</p>
+<ol>
+<li><code>LRU / LFU</code></li>
+<li><code>Word Ladder / Word Search</code></li>
+<li><code>Word Break / Concatenated Words</code></li>
+<li><code>LCA / Diameter / Path Sum / Vertical Order</code></li>
+<li><code>Random O(1) / Unknown Size Binary Search</code></li>
+<li><code>Course Schedule / Kth Largest / Gas Station</code></li>
+</ol>
+<p>如果你要 mock Amazon VO，建议每题都强制自己回答这 4 句：</p>
+<ol>
+<li>暴力解是什么</li>
+<li>为什么不够好</li>
+<li>最优结构为什么是这个</li>
+<li>如果 interviewer 要我继续优化，我准备怎么扩展</li>
+</ol>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="high-frequency-list.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="documents.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="high-frequency-list.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="documents.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr-ef4e11c1.min.js"></script>
+        <script src="mark-09e88c2c.min.js"></script>
+        <script src="searcher-c2a407aa.js"></script>
+
+        <script src="clipboard-1626706a.min.js"></script>
+        <script src="highlight-abc7f01d.js"></script>
+        <script src="book-a0b12cfe.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

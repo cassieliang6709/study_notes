@@ -7,25 +7,30 @@ title: "Study Notes"
 整理后的目录结构如下：
 
 - [algorithms](./algorithms): 算法讲义、LeetCode 路线图、刷题笔记
-- [extended_problem_detailed](./extended_problem_detailed): 扩展题单详细教学
-- [extended_problem_patterns_cn.md](./extended_problem_patterns_cn.md): 扩展题型汇总总览
 - [python](./python): Python OOP 学习笔记
 - [ood](./ood): OOD 总结与案例
-- [code](./code): 练习代码、作业代码、测试文件
-- [datasets](./datasets): 训练数据与语料
-- [models](./models): 训练生成的模型文件
+- [books](./books): 独立书籍型项目与生成网页
+- [resources](./resources): 代码、数据集、模型等运行资源
+
+主要专题入口：
+
+- [扩展题型总览（中文）](./algorithms/extended_problem_patterns_cn.md)
+- [扩展题单详细教学](./algorithms/extended_problem_detailed/)
+- [扩展题单完整答案](./algorithms/extended_problem_full_solutions/)
+- [From OOP to OOD](./ood/from_oop_to_ood_cn.md)
+- [AI Projects Self Study](./books/ai_projects_self_study/)
+- [Amazon VO Coding Book](./books/amazon_vo_coding_book/book/)
 
 建议使用方式：
 
-1. 看文档时从 `algorithms`、`python`、`ood` 开始
-2. 跑代码时进入 `code`
-3. 处理训练数据时进入 `datasets`
-4. 模型产物统一放在 `models`
+1. 看笔记时从 `algorithms`、`python`、`ood` 开始
+2. 看独立网页书时进入 `books`
+3. 跑代码、处理数据、查看模型时进入 `resources`
 
 说明：
 
-- 本次整理只调整了目录位置，没有改动代码内容
-- 文档内主要链接已改为相对路径，后续移动目录时更稳定
+- 这次整理主要做目录重组，没有改动学习内容本身
+- 根目录现在只保留“入口”和“主分类”，减少源码、数据和生成物混放
 
 ## Local Development
 

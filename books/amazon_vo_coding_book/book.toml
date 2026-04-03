@@ -1,0 +1,13 @@
+[book]
+authors = ["Cassie", "OpenAI Codex"]
+language = "zh-CN"
+src = "src"
+title = "Amazon VO Coding 高频题清单"
+
+[build]
+build-dir = "book"
+
+[output.html]
+default-theme = "light"
+preferred-dark-theme = "light"
+site-url = "/"

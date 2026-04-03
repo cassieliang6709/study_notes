@@ -1,0 +1,4623 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>AI Projects Self-Study Hub</title>
+        <meta name="robots" content="noindex">
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="A practical self-study book for RAG, LLM-from-scratch, alignment, and agent RL projects.">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="favicon-8114d1fc.png">
+        <link rel="stylesheet" href="css/variables-8adf115d.css">
+        <link rel="stylesheet" href="css/general-2459343d.css">
+        <link rel="stylesheet" href="css/chrome-ae938929.css">
+        <link rel="stylesheet" href="css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "";
+            const default_light_theme = "light";
+            const default_dark_theme = "light";
+            window.path_to_searchindex_js = "searchindex-8f1293f2.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc-2cea49e9.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">AI Projects Self-Study Hub</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/cassieliang6709" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="ai-projects-self-study-hub"><a class="header" href="#ai-projects-self-study-hub">AI Projects Self-Study Hub</a></h1>
+<p>这本书不是项目收藏夹，而是一个可执行的自学路线。</p>
+<p>你给我的那批项目本身都不错，但如果只是把仓库链接堆在一起，基本学不会。真正需要的是三件事：</p>
+<ul>
+<li>先做哪个，后做哪个</li>
+<li>每个项目第一周到底该做什么</li>
+<li>怎么验证自己不是“看懂了”，而是真的会了</li>
+</ul>
+<p>这本 mdBook 就是为这个目的重做的。</p>
+<hr>
+<h2 id="这本书解决什么问题"><a class="header" href="#这本书解决什么问题">这本书解决什么问题</a></h2>
+<p>很多 AI 项目自学最后都会卡在同一个地方：</p>
+<ul>
+<li>README 看了，但不知道先跑哪一部分</li>
+<li>notebook 跑通了，但说不清核心链路</li>
+<li>项目做完了，但不知道自己到底学到了什么</li>
+</ul>
+<p>所以这本书的结构不是“仓库介绍”，而是四层：</p>
+<ol>
+<li>导学页：这个项目值不值得现在做</li>
+<li><code>7-Day Plan</code>：第一周每天具体做什么</li>
+<li>自测题：检查你是否真的掌握</li>
+<li>参考答案：用来核对理解，不是先看的</li>
+</ol>
+<hr>
+<h2 id="推荐学习顺序"><a class="header" href="#推荐学习顺序">推荐学习顺序</a></h2>
+<p>如果你是第一次系统学这条线，我建议按这个顺序：</p>
+<ol>
+<li><a href="#project-guide-rag-from-scratch">rag-from-scratch</a></li>
+<li><a href="#complex-rag-guide">Complex RAG Guide</a></li>
+<li><a href="#rag-techniques">RAG Techniques</a></li>
+<li><a href="#project-guide-deepsearcher">DeepSearcher</a></li>
+<li><a href="#project-guide-minimind">MiniMind</a></li>
+<li><a href="#project-guide-stanford-cs336">Stanford CS336</a></li>
+<li><a href="#project-guide-modelalignmentfromscratch">ModelAlignmentFromScratch</a></li>
+<li><a href="#project-guide-openpipe-art">OpenPipe ART</a></li>
+<li><a href="#project-guide-full-stack-fastapi-template">full-stack-fastapi-template</a></li>
+</ol>
+<p>这样排不是因为前面的“更火”，而是因为：</p>
+<ul>
+<li>前四个先把 RAG 做扎实</li>
+<li>中间两个补齐模型本体理解</li>
+<li>最后两个再看 alignment 和 agent RL</li>
+</ul>
+<hr>
+<h2 id="三条主线"><a class="header" href="#三条主线">三条主线</a></h2>
+<h3 id="1-rag--retrieval-systems"><a class="header" href="#1-rag--retrieval-systems">1. RAG / Retrieval Systems</a></h3>
+<p>适合你如果现在最想做：</p>
+<ul>
+<li>企业知识库问答</li>
+<li>检索增强生成</li>
+<li>deep research</li>
+<li>多步搜索</li>
+</ul>
+<p>入口：</p>
+<ul>
+<li><a href="#rag-systems">RAG Systems Track</a></li>
+</ul>
+<h3 id="2-llm-from-scratch"><a class="header" href="#2-llm-from-scratch">2. LLM From Scratch</a></h3>
+<p>适合你如果现在最想真正搞懂：</p>
+<ul>
+<li>tokenizer</li>
+<li>transformer</li>
+<li>pretraining</li>
+<li>小模型从零训练</li>
+</ul>
+<p>入口：</p>
+<ul>
+<li><a href="#llm-from-scratch">LLM From Scratch Track</a></li>
+</ul>
+<h3 id="3-alignment--agent-rl"><a class="header" href="#3-alignment--agent-rl">3. Alignment / Agent RL</a></h3>
+<p>适合你如果已经有一点模型基础，想进一步理解：</p>
+<ul>
+<li>SFT</li>
+<li>preference optimization</li>
+<li>GRPO</li>
+<li>agent reinforcement training</li>
+</ul>
+<p>入口：</p>
+<ul>
+<li><a href="#alignment--agent-rl-1">Alignment / Agent RL Track</a></li>
+</ul>
+<h3 id="4-fastapi--full-stack-web"><a class="header" href="#4-fastapi--full-stack-web">4. FastAPI / Full Stack Web</a></h3>
+<p>适合你如果现在想真正补齐：</p>
+<ul>
+<li>FastAPI 后端</li>
+<li>前端调用 API</li>
+<li>登录认证</li>
+<li>数据库和 CRUD</li>
+</ul>
+<p>入口：</p>
+<ul>
+<li><a href="#track-4-fastapi--full-stack-web">FastAPI / Full Stack Web Track</a></li>
+</ul>
+<hr>
+<h2 id="先看什么最有用"><a class="header" href="#先看什么最有用">先看什么最有用</a></h2>
+<p>如果你只准备开始一个项目，不要乱翻。</p>
+<p>按这个顺序：</p>
+<ol>
+<li>看 <a href="#怎么真正学会一个项目">怎么真正学会一个项目</a></li>
+<li>选一条 track</li>
+<li>打开对应项目导学页</li>
+<li>接着做对应 <code>7-Day Plan</code></li>
+</ol>
+<p>如果你现在就想从最稳的入口开始，直接去：</p>
+<ul>
+<li><a href="#project-guide-rag-from-scratch">rag-from-scratch</a></li>
+</ul>
+<hr>
+<h2 id="这本书里最值得你反复用的部分"><a class="header" href="#这本书里最值得你反复用的部分">这本书里最值得你反复用的部分</a></h2>
+<h3 id="项目导学"><a class="header" href="#项目导学">项目导学</a></h3>
+<p>它回答的是：</p>
+<ul>
+<li>这个项目最适合学什么</li>
+<li>为什么现在做它</li>
+<li>先看什么</li>
+<li>第一周最小任务是什么</li>
+</ul>
+<h3 id="7-day-plans"><a class="header" href="#7-day-plans">7-Day Plans</a></h3>
+<p>它回答的是：</p>
+<ul>
+<li>今天具体做什么</li>
+<li>今天结束时应该产出什么</li>
+<li>哪些任务是第一轮必须完成的</li>
+</ul>
+<h3 id="自测题"><a class="header" href="#自测题">自测题</a></h3>
+<p>它回答的是：</p>
+<ul>
+<li>你会不会解释</li>
+<li>你会不会比较</li>
+<li>你能不能自己复盘一个系统</li>
+</ul>
+<hr>
+<h2 id="项目索引"><a class="header" href="#项目索引">项目索引</a></h2>
+<h3 id="rag"><a class="header" href="#rag">RAG</a></h3>
+<ul>
+<li><a href="#project-guide-rag-from-scratch">rag-from-scratch</a></li>
+<li><a href="#complex-rag-guide">Complex RAG Guide</a></li>
+<li><a href="#rag-techniques">RAG Techniques</a></li>
+<li><a href="#project-guide-deepsearcher">DeepSearcher</a></li>
+</ul>
+<h3 id="llm--training"><a class="header" href="#llm--training">LLM / Training</a></h3>
+<ul>
+<li><a href="#project-guide-minimind">MiniMind</a></li>
+<li><a href="#project-guide-stanford-cs336">Stanford CS336</a></li>
+</ul>
+<h3 id="alignment--agent-rl"><a class="header" href="#alignment--agent-rl">Alignment / Agent RL</a></h3>
+<ul>
+<li><a href="#project-guide-modelalignmentfromscratch">ModelAlignmentFromScratch</a></li>
+<li><a href="#project-guide-openpipe-art">OpenPipe ART</a></li>
+</ul>
+<h3 id="fastapi--full-stack-web"><a class="header" href="#fastapi--full-stack-web">FastAPI / Full Stack Web</a></h3>
+<ul>
+<li><a href="#project-guide-full-stack-fastapi-template">full-stack-fastapi-template</a></li>
+</ul>
+<h3 id="weekly-execution"><a class="header" href="#weekly-execution">Weekly execution</a></h3>
+<ul>
+<li><a href="#rag-from-scratch-7-day-plan">rag-from-scratch 7-Day Plan</a></li>
+<li><a href="#complex-rag-guide-7-day-plan">Complex RAG Guide 7-Day Plan</a></li>
+<li><a href="#rag-techniques-7-day-plan">RAG Techniques 7-Day Plan</a></li>
+<li><a href="#deepsearcher-7-day-plan">DeepSearcher 7-Day Plan</a></li>
+<li><a href="#minimind-7-day-plan">MiniMind 7-Day Plan</a></li>
+<li><a href="#stanford-cs336-7-day-plan">Stanford CS336 7-Day Plan</a></li>
+<li><a href="#modelalignmentfromscratch-7-day-plan">ModelAlignmentFromScratch 7-Day Plan</a></li>
+<li><a href="#openpipe-art-7-day-plan">OpenPipe ART 7-Day Plan</a></li>
+<li><a href="#7-day-plan-full-stack-fastapi-template">full-stack-fastapi-template 7-Day Plan</a></li>
+</ul>
+<h3 id="self-tests"><a class="header" href="#self-tests">Self-tests</a></h3>
+<ul>
+<li><a href="#rag-自测">RAG 自测</a></li>
+<li><a href="#llm-from-scratch-自测">LLM From Scratch 自测</a></li>
+<li><a href="#alignment--agent-rl-自测">Alignment / Agent RL 自测</a></li>
+<li><a href="#自测题fastapi--full-stack-web">FastAPI / Full Stack Web 自测</a></li>
+<li><a href="#综合项目自测-1">综合项目自测</a></li>
+</ul>
+<h3 id="answer-keys"><a class="header" href="#answer-keys">Answer keys</a></h3>
+<ul>
+<li><a href="#rag-参考答案">RAG 参考答案</a></li>
+<li><a href="#llm-from-scratch-参考答案">LLM From Scratch 参考答案</a></li>
+<li><a href="#alignment--agent-rl-参考答案">Alignment / Agent RL 参考答案</a></li>
+<li><a href="#参考答案fastapi--full-stack-web">FastAPI / Full Stack Web 参考答案</a></li>
+<li><a href="#综合项目参考答案">综合项目参考答案</a></li>
+</ul>
+<hr>
+<h2 id="最后一个提醒"><a class="header" href="#最后一个提醒">最后一个提醒</a></h2>
+<p>这本书最核心的目标不是让你“知道更多名词”，而是让你真的能做到下面这几件事：</p>
+<ul>
+<li>讲清一个项目的最小主链路</li>
+<li>改一个局部模块并观察变化</li>
+<li>比较两个相邻项目在架构上的差别</li>
+<li>用自己的话复盘为什么某个设计有效</li>
+</ul>
+<p>如果你做到了，这套资料才算有用。</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="怎么真正学会一个项目"><a class="header" href="#怎么真正学会一个项目">怎么真正学会一个项目</a></h1>
+<p>这页不是资料导航，而是方法页。</p>
+<p>很多人做项目学不会，不是因为资料不够，而是因为顺序错了。最常见的错误有三个：</p>
+<ul>
+<li>一上来就试图看懂全部代码</li>
+<li>只看 README，不跑最小链路</li>
+<li>一直抄仓库，不做自己的小改动</li>
+</ul>
+<p>你应该反过来。</p>
+<hr>
+<h2 id="正确顺序"><a class="header" href="#正确顺序">正确顺序</a></h2>
+<h3 id="第-1-步先找到最小主链路"><a class="header" href="#第-1-步先找到最小主链路">第 1 步：先找到最小主链路</a></h3>
+<p>你先不要问“这个仓库全部做了什么”，先问：</p>
+<ul>
+<li>最小输入是什么</li>
+<li>中间经过哪几个关键步骤</li>
+<li>最后输出是什么</li>
+</ul>
+<p>如果你连这条主链路都讲不清，就还没开始真正理解。</p>
+<h3 id="第-2-步先跑通再观察"><a class="header" href="#第-2-步先跑通再观察">第 2 步：先跑通，再观察</a></h3>
+<p>第一遍不求改代码，只求跑通。</p>
+<p>你至少要确认：</p>
+<ul>
+<li>代码真的能运行</li>
+<li>你知道每一步的输入输出长什么样</li>
+<li>你知道哪里最值得改</li>
+</ul>
+<h3 id="第-3-步只改一个变量"><a class="header" href="#第-3-步只改一个变量">第 3 步：只改一个变量</a></h3>
+<p>不要第二天就改成“自己的大项目”。</p>
+<p>第一轮最有价值的修改通常只有这些：</p>
+<ul>
+<li>换一份小数据</li>
+<li>改一个 prompt</li>
+<li>改 retrieval 的 <code>top-k</code></li>
+<li>改 chunk size</li>
+<li>改一个训练超参数</li>
+</ul>
+<p>如果一个改动都没做过，你其实还是在“看别人做项目”。</p>
+<h3 id="第-4-步写最短总结"><a class="header" href="#第-4-步写最短总结">第 4 步：写最短总结</a></h3>
+<p>做完一个项目后，你最少要写下这四件事：</p>
+<ol>
+<li>这个项目在解决什么问题</li>
+<li>它的最小可运行链路是什么</li>
+<li>它最关键的两个设计选择是什么</li>
+<li>如果你重写，第一层先改哪里</li>
+</ol>
+<hr>
+<h2 id="每种项目应该怎么学"><a class="header" href="#每种项目应该怎么学">每种项目应该怎么学</a></h2>
+<h3 id="rag-项目"><a class="header" href="#rag-项目">RAG 项目</a></h3>
+<p>重点不是“会调 API”，而是：</p>
+<ul>
+<li>你的检索内容对不对</li>
+<li>召回出来的内容够不够</li>
+<li>回答是不是被 context 真正约束住了</li>
+</ul>
+<p>你必须盯这些中间产物：</p>
+<ul>
+<li>query</li>
+<li>retrieved chunks</li>
+<li>reranked results</li>
+<li>final prompt</li>
+<li>final answer</li>
+</ul>
+<h3 id="llm-from-scratch-项目"><a class="header" href="#llm-from-scratch-项目">LLM From Scratch 项目</a></h3>
+<p>重点不是“模型跑起来了”，而是：</p>
+<ul>
+<li>tokenizer 在干什么</li>
+<li>attention 输入输出怎么变</li>
+<li>loss 是怎么下降的</li>
+<li>数据、模型、训练循环之间怎么接起来</li>
+</ul>
+<p>你至少要能解释：</p>
+<ul>
+<li>一个 batch 怎么被送进模型</li>
+<li>logits 是怎么来的</li>
+<li>loss 是怎么算的</li>
+</ul>
+<h3 id="alignment--agent-rl-项目"><a class="header" href="#alignment--agent-rl-项目">Alignment / Agent RL 项目</a></h3>
+<p>重点不是“训练名字记住了”，而是：</p>
+<ul>
+<li>reward 或 preference 信号从哪里来</li>
+<li>policy 为什么会朝某个方向更新</li>
+<li>rollout 在 agent setting 里为什么更难</li>
+</ul>
+<p>你至少要能说清：</p>
+<ul>
+<li>SFT 和 preference optimization 的区别</li>
+<li>为什么 agent RL 比单轮回答训练更不稳定</li>
+</ul>
+<hr>
+<h2 id="自学时最该做的三种笔记"><a class="header" href="#自学时最该做的三种笔记">自学时最该做的三种笔记</a></h2>
+<h3 id="1-主链路图"><a class="header" href="#1-主链路图">1. 主链路图</a></h3>
+<p>写成一行就够：</p>
+<pre><code class="language-text">input -&gt; retrieve -&gt; rerank -&gt; build context -&gt; generate -&gt; evaluate
+</code></pre>
+<h3 id="2-实验记录"><a class="header" href="#2-实验记录">2. 实验记录</a></h3>
+<p>每次只记三件事：</p>
+<ul>
+<li>改了什么</li>
+<li>结果怎样</li>
+<li>你觉得为什么</li>
+</ul>
+<h3 id="3-失败记录"><a class="header" href="#3-失败记录">3. 失败记录</a></h3>
+<p>失败记录比成功总结更值钱。</p>
+<p>你要记：</p>
+<ul>
+<li>哪一步坏了</li>
+<li>你原来以为会怎样</li>
+<li>实际为什么不对</li>
+</ul>
+<hr>
+<h2 id="什么时候算学会了"><a class="header" href="#什么时候算学会了">什么时候算“学会了”</a></h2>
+<p>不是你把仓库跑通了，而是你能做到下面至少两件：</p>
+<ul>
+<li>不看仓库，自己复述最小架构</li>
+<li>改一个关键参数并解释变化</li>
+<li>用自己的小数据重跑</li>
+<li>用自己的语言讲清这个项目和前一个项目的差别</li>
+</ul>
+<p>如果做不到，说明你还在“浏览”，不是“掌握”。</p>
+<hr>
+<h2 id="推荐使用方式"><a class="header" href="#推荐使用方式">推荐使用方式</a></h2>
+<p>这本书最好的打开顺序是：</p>
+<ol>
+<li>先看 <a href="README.html">首页</a></li>
+<li>再看你选中的主线</li>
+<li>再看项目导学页</li>
+<li>进入对应 <code>7-Day Plan</code></li>
+<li>做完后做自测</li>
+<li>最后再看参考答案</li>
+</ol>
+<p>这样才像学习系统，而不是资料堆。</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="学习主线"><a class="header" href="#学习主线">学习主线</a></h1>
+<p>这部分按学习目标分三条线：</p>
+<ul>
+<li><a href="#rag-systems">RAG Systems</a></li>
+<li><a href="#llm-from-scratch">LLM From Scratch</a></li>
+<li><a href="#alignment--agent-rl-1">Alignment / Agent RL</a></li>
+<li><a href="#track-4-fastapi--full-stack-web">FastAPI / Full Stack Web</a></li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="rag-systems"><a href="#rag-systems" class="header">RAG Systems</a></h1>
+<h2 id="title-track-1-rag-systems"><a class="header" href="#title-track-1-rag-systems">title: “Track 1: RAG Systems”</a></h2>
+<h1 id="track-1-rag-systems"><a class="header" href="#track-1-rag-systems">Track 1: RAG Systems</a></h1>
+<p>这条线解决的是：</p>
+<ul>
+<li>怎么把外部知识接进 LLM</li>
+<li>怎么让回答更 grounded</li>
+<li>怎么从“简单问答”走到“复杂检索 + 推理 + 报告”</li>
+</ul>
+<hr>
+<h2 id="这条线的正确顺序"><a class="header" href="#这条线的正确顺序">这条线的正确顺序</a></h2>
+<ol>
+<li><a href="#project-guide-rag-from-scratch">rag-from-scratch</a></li>
+<li><a href="#complex-rag-guide">complex-RAG-guide</a></li>
+<li><a href="#rag-techniques">rag_techniques</a></li>
+<li><a href="#project-guide-deepsearcher">deep-searcher</a></li>
+</ol>
+<p>这不是按 star 排的，是按学习阻力排的。</p>
+<hr>
+<h2 id="每一站分别学什么"><a class="header" href="#每一站分别学什么">每一站分别学什么</a></h2>
+<h3 id="1-rag-from-scratch"><a class="header" href="#1-rag-from-scratch">1. rag-from-scratch</a></h3>
+<p>你在这里学：</p>
+<ul>
+<li>最基础的 RAG 主链路</li>
+<li>retrieval 和 generation 怎么连起来</li>
+<li>最小 notebook 级实验方式</li>
+</ul>
+<p>做完应该能做到：</p>
+<ul>
+<li>自己写一个最小检索问答 demo</li>
+</ul>
+<h3 id="2-complex-rag-guide"><a class="header" href="#2-complex-rag-guide">2. complex-RAG-guide</a></h3>
+<p>你在这里学：</p>
+<ul>
+<li>更复杂的 chunking</li>
+<li>query rewriting</li>
+<li>filtering</li>
+<li>planning / execution</li>
+<li>evaluation</li>
+</ul>
+<p>做完应该能做到：</p>
+<ul>
+<li>不再把 RAG 理解成“向量库 + prompt”这么简单</li>
+</ul>
+<h3 id="3-rag_techniques"><a class="header" href="#3-rag_techniques">3. rag_techniques</a></h3>
+<p>你在这里学：</p>
+<ul>
+<li>不同 RAG 技术点的横向比较</li>
+<li>什么技术适合什么场景</li>
+<li>怎么做实验而不是只会抄 pipeline</li>
+</ul>
+<p>做完应该能做到：</p>
+<ul>
+<li>你知道可以优化哪一层，而不是只会换模型</li>
+</ul>
+<h3 id="4-deep-searcher"><a class="header" href="#4-deep-searcher">4. deep-searcher</a></h3>
+<p>你在这里学：</p>
+<ul>
+<li>更产品化的 deep research 结构</li>
+<li>private data search</li>
+<li>更完整的配置、provider、vector DB 组合</li>
+</ul>
+<p>做完应该能做到：</p>
+<ul>
+<li>把 RAG 往“系统”而不是“demo”推进</li>
+</ul>
+<hr>
+<h2 id="这条线的核心知识图"><a class="header" href="#这条线的核心知识图">这条线的核心知识图</a></h2>
+<p>从简单到复杂，可以理解成：</p>
+<ol>
+<li>检索到上下文</li>
+<li>把上下文喂给模型</li>
+<li>判断上下文够不够</li>
+<li>不够就改 query 或换 retrieval</li>
+<li>对结果做过滤、校验、评估</li>
+<li>最后做多步规划和报告生成</li>
+</ol>
+<hr>
+<h2 id="先别急着学的东西"><a class="header" href="#先别急着学的东西">先别急着学的东西</a></h2>
+<p>如果你还没跑通第一个最小 RAG，不要急着碰这些：</p>
+<ul>
+<li>agentic RAG</li>
+<li>graph-based planning</li>
+<li>很复杂的 reranking 组合</li>
+<li>大而全的评估框架</li>
+</ul>
+<p>先把主链路跑通。</p>
+<hr>
+<h2 id="这条线的完成标准"><a class="header" href="#这条线的完成标准">这条线的完成标准</a></h2>
+<p>做到下面这些，才算真的学到：</p>
+<ul>
+<li>你能解释 chunking 为什么会影响效果</li>
+<li>你知道 retrieval quality 和 generation quality 不是一回事</li>
+<li>你能比较简单 RAG 和复杂 RAG 的结构差别</li>
+<li>你能自己做一个带引用或带 source attribution 的回答系统</li>
+</ul>
+<hr>
+<h2 id="建议产出"><a class="header" href="#建议产出">建议产出</a></h2>
+<p>学这条线时，建议你最终自己做一个项目：</p>
+<ul>
+<li>一个本地文档问答工具</li>
+<li>一个课程笔记检索助手</li>
+<li>一个 PDF / 网页混合检索问答器</li>
+</ul>
+<p>要求不要大，但必须自己配数据、自己跑检索、自己看效果。</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="llm-from-scratch"><a href="#llm-from-scratch" class="header">LLM From Scratch</a></h1>
+<h2 id="title-track-2-llm-from-scratch"><a class="header" href="#title-track-2-llm-from-scratch">title: “Track 2: LLM From Scratch”</a></h2>
+<h1 id="track-2-llm-from-scratch"><a class="header" href="#track-2-llm-from-scratch">Track 2: LLM From Scratch</a></h1>
+<p>这条线解决的是：</p>
+<ul>
+<li>语言模型到底是怎么训练出来的</li>
+<li>tokenizer、embedding、attention、loss、sampling 到底怎么串起来</li>
+<li>为什么很多“会调 API”的人，其实并不真的理解模型本体</li>
+</ul>
+<hr>
+<h2 id="这条线的正确顺序-1"><a class="header" href="#这条线的正确顺序-1">这条线的正确顺序</a></h2>
+<ol>
+<li><a href="#project-guide-minimind">MiniMind</a></li>
+<li><a href="#project-guide-stanford-cs336">Stanford CS336</a></li>
+</ol>
+<hr>
+<h2 id="为什么先-minimind-再-cs336"><a class="header" href="#为什么先-minimind-再-cs336">为什么先 MiniMind 再 CS336</a></h2>
+<p>因为：</p>
+<ul>
+<li><code>MiniMind</code> 更像低门槛实战入口</li>
+<li><code>CS336</code> 更像系统课程 + 工程作业路线</li>
+</ul>
+<p>如果一上来就直接啃 CS336，容易被系统深度和工作量压住。</p>
+<hr>
+<h2 id="每一站分别学什么-1"><a class="header" href="#每一站分别学什么-1">每一站分别学什么</a></h2>
+<h3 id="1-minimind"><a class="header" href="#1-minimind">1. MiniMind</a></h3>
+<p>你在这里学：</p>
+<ul>
+<li>小模型从零训练的完整感</li>
+<li>训练脚本、tokenizer、模型结构、推理脚本怎么配合</li>
+<li>在个人机器资源有限的情况下，如何理解 LLM 训练流程</li>
+</ul>
+<p>做完应该能做到：</p>
+<ul>
+<li>你能讲清楚一个超小语言模型是怎么被训练和使用的</li>
+</ul>
+<h3 id="2-cs336"><a class="header" href="#2-cs336">2. CS336</a></h3>
+<p>你在这里学：</p>
+<ul>
+<li>language modeling 的系统知识</li>
+<li>从 tokenizer 到 transformer 再到优化与系统层设计</li>
+<li>真正课程级别的从零实现路径</li>
+</ul>
+<p>做完应该能做到：</p>
+<ul>
+<li>你不只是“知道 attention”，而是知道整条训练链路</li>
+</ul>
+<hr>
+<h2 id="这条线的重点"><a class="header" href="#这条线的重点">这条线的重点</a></h2>
+<p>学这条线时，不要只看模型公式。</p>
+<p>你要同时看三层：</p>
+<ol>
+<li>数学和概念</li>
+<li>代码实现</li>
+<li>训练系统与工程代价</li>
+</ol>
+<hr>
+<h2 id="正确的学习顺序"><a class="header" href="#正确的学习顺序">正确的学习顺序</a></h2>
+<p>建议按下面顺序啃：</p>
+<ol>
+<li>tokenizer</li>
+<li>embedding</li>
+<li>self-attention</li>
+<li>transformer block</li>
+<li>language modeling loss</li>
+<li>training loop</li>
+<li>inference / generation</li>
+<li>scaling 和系统问题</li>
+</ol>
+<hr>
+<h2 id="这条线的完成标准-1"><a class="header" href="#这条线的完成标准-1">这条线的完成标准</a></h2>
+<p>做到下面这些，才算真的入门：</p>
+<ul>
+<li>你能自己讲一遍 decoder-only LM 的主链路</li>
+<li>你知道 pretraining 的输入输出到底是什么</li>
+<li>你能读懂一个小模型训练脚本，不只会运行</li>
+<li>你能指出 tokenizer、context length、batch、optimizer 在训练中的作用</li>
+</ul>
+<hr>
+<h2 id="建议产出-1"><a class="header" href="#建议产出-1">建议产出</a></h2>
+<p>学完这条线，建议你自己做一个最小项目：</p>
+<ul>
+<li>手写一个极小 decoder-only transformer</li>
+<li>在小语料上训练</li>
+<li>跑一个最简单的文本生成 demo</li>
+</ul>
+<p>重点不是效果多强，而是你真的自己走过一遍。</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="alignment--agent-rl-1"><a href="#alignment--agent-rl-1" class="header">Alignment / Agent RL</a></h1>
+<h2 id="title-track-3-alignment-and-agent-rl"><a class="header" href="#title-track-3-alignment-and-agent-rl">title: “Track 3: Alignment And Agent RL”</a></h2>
+<h1 id="track-3-alignment-and-agent-rl"><a class="header" href="#track-3-alignment-and-agent-rl">Track 3: Alignment And Agent RL</a></h1>
+<p>这条线解决的是：</p>
+<ul>
+<li>预训练后的模型为什么还不够好用</li>
+<li>怎么通过 SFT、偏好优化、RL 让模型更符合目标</li>
+<li>多步 agent 为什么需要专门训练，而不是只靠 prompt</li>
+</ul>
+<hr>
+<h2 id="这条线的正确顺序-2"><a class="header" href="#这条线的正确顺序-2">这条线的正确顺序</a></h2>
+<ol>
+<li><a href="#project-guide-modelalignmentfromscratch">ModelAlignmentFromScratch</a></li>
+<li><a href="#project-guide-openpipe-art">OpenPipe ART</a></li>
+</ol>
+<hr>
+<h2 id="为什么这样排"><a class="header" href="#为什么这样排">为什么这样排</a></h2>
+<p>因为：</p>
+<ul>
+<li><code>ModelAlignmentFromScratch</code> 更像教学型、手写型 alignment 项目</li>
+<li><code>ART</code> 更像更现代、更框架化、面向 agent tasks 的训练工具</li>
+</ul>
+<p>先理解单模型 alignment，再看 agent reinforcement，会稳很多。</p>
+<hr>
+<h2 id="每一站分别学什么-2"><a class="header" href="#每一站分别学什么-2">每一站分别学什么</a></h2>
+<h3 id="1-modelalignmentfromscratch"><a class="header" href="#1-modelalignmentfromscratch">1. ModelAlignmentFromScratch</a></h3>
+<p>你在这里学：</p>
+<ul>
+<li>SFT 在做什么</li>
+<li>EI 在做什么</li>
+<li>GRPO 在做什么</li>
+<li>reward、sampling、training loop 怎么结合</li>
+</ul>
+<p>做完应该能做到：</p>
+<ul>
+<li>你知道“对齐”不是一句空话，而是一组具体训练方法</li>
+</ul>
+<h3 id="2-openpipe-art"><a class="header" href="#2-openpipe-art">2. OpenPipe ART</a></h3>
+<p>你在这里学：</p>
+<ul>
+<li>agent reinforcement training 的任务形式</li>
+<li>多步任务、轨迹、奖励、优化之间的关系</li>
+<li>为什么 agent RL 的难点和普通 SFT 不一样</li>
+</ul>
+<p>做完应该能做到：</p>
+<ul>
+<li>你能理解 agent 训练为什么要强调 interaction 和 trajectory</li>
+</ul>
+<hr>
+<h2 id="学这条线前你最好已经会"><a class="header" href="#学这条线前你最好已经会">学这条线前你最好已经会</a></h2>
+<ul>
+<li>PyTorch 基础</li>
+<li>transformer 基础</li>
+<li>language model training loop 基础</li>
+<li>最好已经做过一点小模型训练或至少认真看过 <a href="#llm-from-scratch">Track 2</a></li>
+</ul>
+<hr>
+<h2 id="这条线最容易误解的地方"><a class="header" href="#这条线最容易误解的地方">这条线最容易误解的地方</a></h2>
+<h3 id="误解-1"><a class="header" href="#误解-1">误解 1</a></h3>
+<p>“SFT 就等于 alignment”</p>
+<p>不对。</p>
+<p>SFT 只是 alignment 里最基础的一层。</p>
+<h3 id="误解-2"><a class="header" href="#误解-2">误解 2</a></h3>
+<p>“RLHF / GRPO 只是多一个 reward model”</p>
+<p>也不对。</p>
+<p>真正难的是：</p>
+<ul>
+<li>样本怎么来</li>
+<li>奖励怎么定义</li>
+<li>训练稳定性怎么保证</li>
+<li>多步任务怎么 credit assignment</li>
+</ul>
+<h3 id="误解-3"><a class="header" href="#误解-3">误解 3</a></h3>
+<p>“agent 只要 prompt 写好就行”</p>
+<p>不对。</p>
+<p>多步 agent 在很多场景下确实会受训练方式影响。</p>
+<hr>
+<h2 id="这条线的完成标准-2"><a class="header" href="#这条线的完成标准-2">这条线的完成标准</a></h2>
+<p>做到下面这些，才算真正入门：</p>
+<ul>
+<li>你能说清 SFT、EI、GRPO 各自在优化什么</li>
+<li>你知道 alignment 的目标不只是“让输出更像人”</li>
+<li>你知道 agent RL 比普通 instruction tuning 多了什么难点</li>
+<li>你能读懂一个最小的 alignment 训练脚本</li>
+</ul>
+<hr>
+<h2 id="建议产出-2"><a class="header" href="#建议产出-2">建议产出</a></h2>
+<p>学完这条线，建议你写一篇自己的短总结：</p>
+<ul>
+<li>pretraining 解决什么问题</li>
+<li>SFT 解决什么问题</li>
+<li>preference / policy optimization 解决什么问题</li>
+<li>agent RL 为什么又是下一层</li>
+</ul>
+<p>这篇总结会强迫你真的把概念区分开。</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="track-4-fastapi--full-stack-web"><a class="header" href="#track-4-fastapi--full-stack-web">Track 4: FastAPI / Full Stack Web</a></h1>
+<p>这条线解决的是：</p>
+<ul>
+<li>怎么把后端 API 真正做出来</li>
+<li>怎么让前端和后端真实联动</li>
+<li>怎么把认证、数据库、CRUD、部署这些基础能力接起来</li>
+</ul>
+<p>如果你想从“会写一点 Python”走到“会做一个完整 Web 应用”，这条线很适合你。</p>
+<hr>
+<h2 id="为什么这条线对你现在很重要"><a class="header" href="#为什么这条线对你现在很重要">为什么这条线对你现在很重要</a></h2>
+<p>你前面学的很多 AI 项目，本质上都需要产品外壳：</p>
+<ul>
+<li>后端 API</li>
+<li>用户系统</li>
+<li>前端页面</li>
+<li>数据存储</li>
+<li>部署</li>
+</ul>
+<p>如果这些不会，你就很容易一直停留在 notebook、脚本、demo。</p>
+<p>而 <code>FastAPI + 前端</code> 这条线，会把你从“会跑 AI”推进到“会做产品”。</p>
+<hr>
+<h2 id="推荐入口"><a class="header" href="#推荐入口">推荐入口</a></h2>
+<p>第一站直接用这个项目：</p>
+<ol>
+<li><a href="#project-guide-full-stack-fastapi-template">full-stack-fastapi-template</a></li>
+</ol>
+<p>原因很直接：</p>
+<ul>
+<li>它不是玩具 demo</li>
+<li>它是 FastAPI 官方组织下的全栈模板</li>
+<li>后端、前端、数据库、认证、Docker 都是完整链路</li>
+</ul>
+<hr>
+<h2 id="这条线最该学的东西"><a class="header" href="#这条线最该学的东西">这条线最该学的东西</a></h2>
+<h3 id="1-后端结构"><a class="header" href="#1-后端结构">1. 后端结构</a></h3>
+<p>你要知道：</p>
+<ul>
+<li>API router 怎么拆</li>
+<li>schema 和 model 怎么分</li>
+<li>service / crud / db session 怎么接</li>
+</ul>
+<h3 id="2-前后端联动"><a class="header" href="#2-前后端联动">2. 前后端联动</a></h3>
+<p>你要知道：</p>
+<ul>
+<li>前端怎么调后端 API</li>
+<li>token 或 session 怎么传</li>
+<li>表单提交以后数据怎么流到数据库</li>
+</ul>
+<h3 id="3-用户系统"><a class="header" href="#3-用户系统">3. 用户系统</a></h3>
+<p>几乎所有真实产品都绕不开：</p>
+<ul>
+<li>登录</li>
+<li>注册</li>
+<li>权限</li>
+<li>用户数据隔离</li>
+</ul>
+<h3 id="4-部署和环境"><a class="header" href="#4-部署和环境">4. 部署和环境</a></h3>
+<p>你要知道：</p>
+<ul>
+<li>本地开发怎么跑</li>
+<li>Docker 为什么存在</li>
+<li>数据库和应用怎么一起启动</li>
+</ul>
+<hr>
+<h2 id="最小能力目标"><a class="header" href="#最小能力目标">最小能力目标</a></h2>
+<p>学完这条线，你至少应该能自己做出一个很小但完整的 Web 应用，例如：</p>
+<ul>
+<li>一个学习计划管理器</li>
+<li>一个刷题笔记系统</li>
+<li>一个文档问答前后端小产品</li>
+</ul>
+<p>最小要求：</p>
+<ul>
+<li>有前端页面</li>
+<li>有 FastAPI 后端</li>
+<li>有数据库</li>
+<li>有至少一个真实的 CRUD 流程</li>
+</ul>
+<hr>
+<h2 id="第一轮不要急着做的事"><a class="header" href="#第一轮不要急着做的事">第一轮不要急着做的事</a></h2>
+<p>先别急着追这些：</p>
+<ul>
+<li>微服务</li>
+<li>很复杂的权限系统</li>
+<li>很重的前端状态管理</li>
+<li>一堆第三方登录接入</li>
+</ul>
+<p>第一轮重点是先把完整链路打通。</p>
+<hr>
+<h2 id="这条线的完成标准-3"><a class="header" href="#这条线的完成标准-3">这条线的完成标准</a></h2>
+<p>做到下面这些，才算真正入门：</p>
+<ul>
+<li>你能解释前端请求是怎么走到数据库的</li>
+<li>你能自己加一个新 API 和对应页面</li>
+<li>你能处理一个最基础的登录态</li>
+<li>你能在本地把全栈系统跑起来</li>
+</ul>
+<hr>
+<h2 id="建议产出-3"><a class="header" href="#建议产出-3">建议产出</a></h2>
+<p>学这条线时，最适合你的最终产出是：</p>
+<ul>
+<li>一个给自己用的小产品</li>
+</ul>
+<p>比如：</p>
+<ul>
+<li>学习任务看板</li>
+<li>AI 学习资料管理器</li>
+<li>做题记录和复盘工具</li>
+</ul>
+<p>这样你学到的不是“模板”，而是完整产品链路。</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="项目导学-1"><a class="header" href="#项目导学-1">项目导学</a></h1>
+<p>从项目视角进入：</p>
+<ul>
+<li><a href="#project-guide-rag-from-scratch">rag-from-scratch</a></li>
+<li><a href="#complex-rag-guide">Complex RAG Guide</a></li>
+<li><a href="#rag-techniques">RAG Techniques</a></li>
+<li><a href="#project-guide-deepsearcher">DeepSearcher</a></li>
+<li><a href="#project-guide-minimind">MiniMind</a></li>
+<li><a href="#project-guide-stanford-cs336">Stanford CS336</a></li>
+<li><a href="#project-guide-modelalignmentfromscratch">ModelAlignmentFromScratch</a></li>
+<li><a href="#project-guide-openpipe-art">OpenPipe ART</a></li>
+<li><a href="#project-guide-full-stack-fastapi-template">full-stack-fastapi-template</a></li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="project-guide-rag-from-scratch"><a class="header" href="#project-guide-rag-from-scratch">Project Guide: rag-from-scratch</a></h1>
+<p>原项目：</p>
+<ul>
+<li>https://github.com/langchain-ai/rag-from-scratch</li>
+</ul>
+<hr>
+<h2 id="这页为什么值得看"><a class="header" href="#这页为什么值得看">这页为什么值得看</a></h2>
+<p><code>rag-from-scratch</code> 不是“RAG 仓库之一”，而是你最适合开始的那个。</p>
+<p>原因很简单：</p>
+<ul>
+<li>它足够轻</li>
+<li>它的主链路清楚</li>
+<li>你能很快把注意力放在真正重要的地方</li>
+</ul>
+<p>如果你一开始就去做复杂 agent RAG，通常会学乱。你会看到很多组件，但不知道哪些才是第一性原理。</p>
+<p>这个项目的价值就在于，它会逼你先把最小 RAG 想清楚。</p>
+<hr>
+<h2 id="你到底应该从它学到什么"><a class="header" href="#你到底应该从它学到什么">你到底应该从它学到什么</a></h2>
+<p>不是“我会调一个 notebook”。</p>
+<p>你真正应该从它学到的是：</p>
+<ol>
+<li>一个最小 RAG 系统到底由哪些步骤组成</li>
+<li>检索结果为什么比最终答案更值得先看</li>
+<li>改 retrieval 参数时，回答为什么会跟着变</li>
+<li>为什么 context grounding 是 RAG 的核心，不是可选项</li>
+</ol>
+<hr>
+<h2 id="最小主链路"><a class="header" href="#最小主链路">最小主链路</a></h2>
+<p>你第一遍必须能自己复述这条链路：</p>
+<pre><code class="language-text">user question
+-&gt; embed / retrieve relevant chunks
+-&gt; select context
+-&gt; build prompt with retrieved context
+-&gt; generate answer
+-&gt; inspect whether answer is actually grounded in context
+</code></pre>
+<p>如果你讲不出这条链路，就说明你还没有真的理解这个项目。</p>
+<hr>
+<h2 id="这项目最适合学的三个观察点"><a class="header" href="#这项目最适合学的三个观察点">这项目最适合学的三个观察点</a></h2>
+<h3 id="1-检索出来了什么"><a class="header" href="#1-检索出来了什么">1. 检索出来了什么</a></h3>
+<p>大多数初学者只看最终回答，这是错的。</p>
+<p>你应该先盯：</p>
+<ul>
+<li>检索到了哪些 chunk</li>
+<li>这些 chunk 和问题是否真的相关</li>
+<li>是不是召回太少或太多</li>
+</ul>
+<h3 id="2-最终-prompt-长什么样"><a class="header" href="#2-最终-prompt-长什么样">2. 最终 prompt 长什么样</a></h3>
+<p>你要知道模型不是“自动懂了”，而是被塞了一个包含上下文的 prompt。</p>
+<p>你应该看：</p>
+<ul>
+<li>原始问题是什么</li>
+<li>被拼进去的 context 是什么</li>
+<li>prompt 是否清楚地区分了“用户问题”和“可参考资料”</li>
+</ul>
+<h3 id="3-改一个参数后发生了什么"><a class="header" href="#3-改一个参数后发生了什么">3. 改一个参数后发生了什么</a></h3>
+<p>真正的学习发生在你改动以后。</p>
+<p>你最适合先改这三个变量：</p>
+<ul>
+<li><code>chunk_size</code></li>
+<li><code>top_k</code></li>
+<li>prompt 里的回答约束</li>
+</ul>
+<hr>
+<h2 id="为什么它适合作为第一站"><a class="header" href="#为什么它适合作为第一站">为什么它适合作为第一站</a></h2>
+<p>因为它把复杂度压低了。</p>
+<p>你在这里不用先处理：</p>
+<ul>
+<li>多步 query planning</li>
+<li>reranker 组合</li>
+<li>agent orchestration</li>
+<li>复杂评估框架</li>
+</ul>
+<p>这不是缺点，反而是优点。第一站就应该先把主链路和观察方法学会。</p>
+<hr>
+<h2 id="第一周不要做什么"><a class="header" href="#第一周不要做什么">第一周不要做什么</a></h2>
+<p>第一周最容易把自己带偏的行为有这些：</p>
+<ul>
+<li>一上来就换成自己的大数据集</li>
+<li>一上来就加 UI</li>
+<li>试图把 notebook 全看完</li>
+<li>看到效果不好就立刻怀疑模型本身</li>
+</ul>
+<p>第一周你只需要做“小而可解释”的实验。</p>
+<hr>
+<h2 id="第一周真正该做什么"><a class="header" href="#第一周真正该做什么">第一周真正该做什么</a></h2>
+<h3 id="day-1"><a class="header" href="#day-1">Day 1</a></h3>
+<ul>
+<li>跑通最基础 notebook</li>
+<li>记录最小输入和最小输出</li>
+</ul>
+<h3 id="day-2"><a class="header" href="#day-2">Day 2</a></h3>
+<ul>
+<li>画出 retrieval -&gt; context -&gt; answer 主链路</li>
+<li>把每一步写成一句人话</li>
+</ul>
+<h3 id="day-3"><a class="header" href="#day-3">Day 3</a></h3>
+<ul>
+<li>看 retrieval 结果，而不是只看 final answer</li>
+<li>记录“召回正确”和“召回错误”的例子</li>
+</ul>
+<h3 id="day-4"><a class="header" href="#day-4">Day 4</a></h3>
+<ul>
+<li>修改 <code>top_k</code></li>
+<li>观察 context 变长之后回答有没有变稳</li>
+</ul>
+<h3 id="day-5"><a class="header" href="#day-5">Day 5</a></h3>
+<ul>
+<li>修改 <code>chunk_size</code></li>
+<li>观察检索粒度变化带来的影响</li>
+</ul>
+<h3 id="day-6"><a class="header" href="#day-6">Day 6</a></h3>
+<ul>
+<li>改 prompt 里的回答约束</li>
+<li>比如要求“只能根据 context 回答”</li>
+</ul>
+<h3 id="day-7"><a class="header" href="#day-7">Day 7</a></h3>
+<ul>
+<li>用自己的话复盘：
+<ul>
+<li>最小 RAG 是什么</li>
+<li>这个仓库最关键的学习价值是什么</li>
+<li>如果自己重写，你先做哪一层</li>
+</ul>
+</li>
+</ul>
+<p>更细的执行版在这里：</p>
+<ul>
+<li><a href="#rag-from-scratch-7-day-plan">rag-from-scratch 7-Day Plan</a></li>
+</ul>
+<hr>
+<h2 id="你真正要产出的东西"><a class="header" href="#你真正要产出的东西">你真正要产出的东西</a></h2>
+<p>别把“跑通 notebook”当成完成。</p>
+<p>这一页最推荐你产出的是下面三样：</p>
+<h3 id="1-一张主链路图"><a class="header" href="#1-一张主链路图">1. 一张主链路图</a></h3>
+<pre><code class="language-text">question -&gt; retrieval -&gt; context assembly -&gt; generation -&gt; inspection
+</code></pre>
+<h3 id="2-一份参数实验记录"><a class="header" href="#2-一份参数实验记录">2. 一份参数实验记录</a></h3>
+<p>至少记两组：</p>
+<ul>
+<li><code>top_k</code> 从小到大怎么变</li>
+<li><code>chunk_size</code> 从小到大怎么变</li>
+</ul>
+<h3 id="3-一段自己的解释"><a class="header" href="#3-一段自己的解释">3. 一段自己的解释</a></h3>
+<p>你要能不看仓库，自己说：</p>
+<p>“RAG 不是把 LLM 和向量库硬拼起来，而是通过检索到的外部上下文来约束回答。”</p>
+<p>如果说不出来，就说明你还在“看”，不是“学会”。</p>
+<hr>
+<h2 id="常见误区"><a class="header" href="#常见误区">常见误区</a></h2>
+<h3 id="误区-1只看最终回答"><a class="header" href="#误区-1只看最终回答">误区 1：只看最终回答</a></h3>
+<p>真正的问题通常出在检索阶段，不在生成阶段。</p>
+<h3 id="误区-2一开始就追求复杂"><a class="header" href="#误区-2一开始就追求复杂">误区 2：一开始就追求复杂</a></h3>
+<p>你现在需要的是可解释性，不是复杂度。</p>
+<h3 id="误区-3不做对照实验"><a class="header" href="#误区-3不做对照实验">误区 3：不做对照实验</a></h3>
+<p>不改参数，你学不到系统行为。</p>
+<hr>
+<h2 id="最小完成标准"><a class="header" href="#最小完成标准">最小完成标准</a></h2>
+<p>你至少要满足下面三条中的两条：</p>
+<ul>
+<li>能自己复述最小 RAG 主链路</li>
+<li>能解释 <code>top_k</code> 或 <code>chunk_size</code> 改动后的结果变化</li>
+<li>能用自己的小文档重跑一次并观察差异</li>
+</ul>
+<hr>
+<h2 id="做完它以后该去哪"><a class="header" href="#做完它以后该去哪">做完它以后该去哪</a></h2>
+<p>下一站建议直接去：</p>
+<ul>
+<li><a href="#complex-rag-guide">Complex RAG Guide</a></li>
+</ul>
+<p>理由是你会立刻看见“一个最小 RAG”和“一个更复杂 RAG”之间到底多出了哪些层：</p>
+<ul>
+<li>query rewriting</li>
+<li>reranking</li>
+<li>routing</li>
+<li>evaluation</li>
+</ul>
+<p>这时你的学习就不是乱看，而是有参照系地升级。</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="complex-rag-guide"><a href="#complex-rag-guide" class="header">Complex RAG Guide</a></h1>
+<h2 id="title-project-guide-complex-rag-guide"><a class="header" href="#title-project-guide-complex-rag-guide">title: “Project Guide: Complex RAG Guide”</a></h2>
+<h1 id="project-guide-complex-rag-guide"><a class="header" href="#project-guide-complex-rag-guide">Project Guide: Complex RAG Guide</a></h1>
+<p>原项目：</p>
+<ul>
+<li>https://github.com/FareedKhan-dev/complex-RAG-guide</li>
+</ul>
+<hr>
+<h2 id="这个项目最适合你学什么"><a class="header" href="#这个项目最适合你学什么">这个项目最适合你学什么</a></h2>
+<p>这个项目适合你在基础 RAG 之后，继续看“复杂 RAG 管线怎么长出来”。</p>
+<p>它比最小 demo 多了很多真实系统里常见的部件，比如：</p>
+<ul>
+<li>cleaning</li>
+<li>chunking</li>
+<li>filtering</li>
+<li>query rewriting</li>
+<li>planning / execution</li>
+<li>evaluation</li>
+</ul>
+<hr>
+<h2 id="为什么应该在这个阶段做它"><a class="header" href="#为什么应该在这个阶段做它">为什么应该在这个阶段做它</a></h2>
+<p>因为很多人学 RAG 会卡在这一步：</p>
+<ul>
+<li>已经知道向量检索和 prompt 拼接</li>
+<li>但不知道为什么真实系统会有那么多额外模块</li>
+</ul>
+<p>这个仓库正好把这些模块串起来。</p>
+<hr>
+<h2 id="前置知识"><a class="header" href="#前置知识">前置知识</a></h2>
+<ul>
+<li>基础 RAG 主链路</li>
+<li>向量检索的基本概念</li>
+<li>Notebook 式实验的习惯</li>
+</ul>
+<hr>
+<h2 id="先看什么"><a class="header" href="#先看什么">先看什么</a></h2>
+<p>建议顺序：</p>
+<ol>
+<li>README 里的 pipeline overview</li>
+<li><code>RAG_pipeline.ipynb</code></li>
+<li>helper functions</li>
+<li>planner / re-planner / task handler 相关部分</li>
+<li>evaluation 相关部分</li>
+</ol>
+<hr>
+<h2 id="第一周最小任务"><a class="header" href="#第一周最小任务">第一周最小任务</a></h2>
+<ol>
+<li>看懂 pipeline 分成哪几层</li>
+<li>跑通最小 notebook</li>
+<li>只挑 1 个增强点认真看</li>
+</ol>
+<p>推荐第一遍只挑下面三个之一：</p>
+<ul>
+<li>query rewriting</li>
+<li>relevance filtering</li>
+<li>evaluation</li>
+</ul>
+<p>不要第一次就想全部吃掉。</p>
+<hr>
+<h2 id="开做指南"><a class="header" href="#开做指南">开做指南</a></h2>
+<h3 id="环境要求"><a class="header" href="#环境要求">环境要求</a></h3>
+<ul>
+<li>Jupyter Notebook</li>
+<li>LangChain / LangGraph / 向量检索相关依赖</li>
+<li>LLM API key</li>
+</ul>
+<h3 id="最小启动动作"><a class="header" href="#最小启动动作">最小启动动作</a></h3>
+<ol>
+<li>安装依赖</li>
+<li>打开 notebook</li>
+<li>跑通一条最小问答流程</li>
+<li>记录每一步输入输出</li>
+</ol>
+<h3 id="第一遍不要改什么"><a class="header" href="#第一遍不要改什么">第一遍不要改什么</a></h3>
+<ul>
+<li>不要先改 planner prompt</li>
+<li>不要先加自己的全部复杂数据</li>
+<li>不要一开始就研究所有 sub-graph</li>
+</ul>
+<h3 id="第二遍建议你改什么"><a class="header" href="#第二遍建议你改什么">第二遍建议你改什么</a></h3>
+<ul>
+<li>自己换一份语料</li>
+<li>对比不同 chunking</li>
+<li>只保留你认为最有用的两个增强模块</li>
+</ul>
+<hr>
+<h2 id="你做完后应该掌握什么"><a class="header" href="#你做完后应该掌握什么">你做完后应该掌握什么</a></h2>
+<ul>
+<li>知道复杂 RAG 为什么会出现 planner / executor</li>
+<li>知道 retrieval 后还会有过滤、重写、校验</li>
+<li>知道 evaluation 不是附属品，而是关键环节</li>
+</ul>
+<hr>
+<h2 id="常见卡点"><a class="header" href="#常见卡点">常见卡点</a></h2>
+<ul>
+<li>过早陷入 LangGraph 结构，而忽略主链路</li>
+<li>同时改太多模块，不知道效果变化来自哪里</li>
+<li>只看回答结果，不看中间状态</li>
+</ul>
+<hr>
+<h2 id="最小完成标准-1"><a class="header" href="#最小完成标准-1">最小完成标准</a></h2>
+<ul>
+<li>你能画出这个 pipeline 的主要节点</li>
+<li>你能解释 planner 和 retriever 分别负责什么</li>
+<li>你能拿一个小实验说明某个增强模块是否值得保留</li>
+</ul>
+<hr>
+<h2 id="下一站"><a class="header" href="#下一站">下一站</a></h2>
+<p>建议下一步去：</p>
+<ul>
+<li><a href="#rag-techniques">RAG Techniques</a></li>
+<li><a href="#project-guide-deepsearcher">DeepSearcher</a></li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="rag-techniques"><a href="#rag-techniques" class="header">RAG Techniques</a></h1>
+<h2 id="title-project-guide-rag-techniques"><a class="header" href="#title-project-guide-rag-techniques">title: “Project Guide: RAG Techniques”</a></h2>
+<h1 id="project-guide-rag-techniques"><a class="header" href="#project-guide-rag-techniques">Project Guide: RAG Techniques</a></h1>
+<p>原项目：</p>
+<ul>
+<li>https://github.com/NirDiamant/rag_techniques</li>
+</ul>
+<hr>
+<h2 id="这个项目最适合你学什么-1"><a class="header" href="#这个项目最适合你学什么-1">这个项目最适合你学什么</a></h2>
+<p>这个仓库更像一套 RAG 技术实验库。</p>
+<p>它非常适合你在已经懂基础 RAG 后，继续回答这类问题：</p>
+<ul>
+<li>除了最基础 pipeline，还有哪些常见变体</li>
+<li>各种技术点分别在优化哪一层</li>
+<li>我应该在什么场景下选哪种方法</li>
+</ul>
+<hr>
+<h2 id="为什么应该在这个阶段做它-1"><a class="header" href="#为什么应该在这个阶段做它-1">为什么应该在这个阶段做它</a></h2>
+<p>你做完基础 RAG 后，最容易出现的假象是：</p>
+<ul>
+<li>以为 RAG 已经学完了</li>
+</ul>
+<p>但其实后面还有很多技术变化：</p>
+<ul>
+<li>retrieval strategy</li>
+<li>reranking</li>
+<li>chunking variations</li>
+<li>query transformation</li>
+<li>hybrid ideas</li>
+</ul>
+<p>这个仓库适合帮你建立“技术地图”。</p>
+<hr>
+<h2 id="前置知识-1"><a class="header" href="#前置知识-1">前置知识</a></h2>
+<ul>
+<li>已跑过一个最小 RAG demo</li>
+<li>最好已看过 <a href="#project-guide-rag-from-scratch">rag-from-scratch</a></li>
+<li>最好已接触过 <a href="#complex-rag-guide">complex-RAG-guide</a></li>
+</ul>
+<hr>
+<h2 id="先看什么-1"><a class="header" href="#先看什么-1">先看什么</a></h2>
+<p>不要打算一次性看完整仓库。</p>
+<p>推荐做法：</p>
+<ol>
+<li>先看目录，按主题分类</li>
+<li>只挑 3 个你最关心的 technique</li>
+<li>每个 technique 都回答“它在优化哪一层”</li>
+</ol>
+<hr>
+<h2 id="第一周最小任务-1"><a class="header" href="#第一周最小任务-1">第一周最小任务</a></h2>
+<p>第一周建议你只选三类：</p>
+<ol>
+<li>chunking 类</li>
+<li>retrieval enhancement 类</li>
+<li>evaluation / reranking 类</li>
+</ol>
+<p>每类只看一个代表性 notebook 或文档。</p>
+<hr>
+<h2 id="开做指南-1"><a class="header" href="#开做指南-1">开做指南</a></h2>
+<h3 id="环境要求-1"><a class="header" href="#环境要求-1">环境要求</a></h3>
+<ul>
+<li>Notebook 环境</li>
+<li>基础 RAG 运行经验</li>
+</ul>
+<h3 id="最小启动动作-1"><a class="header" href="#最小启动动作-1">最小启动动作</a></h3>
+<ol>
+<li>克隆仓库</li>
+<li>浏览整体结构</li>
+<li>选 3 个 technique</li>
+<li>对每个 technique 做一页笔记</li>
+</ol>
+<h3 id="第一遍不要改什么-1"><a class="header" href="#第一遍不要改什么-1">第一遍不要改什么</a></h3>
+<ul>
+<li>不要想“全部学完”</li>
+<li>不要每个 notebook 都跑</li>
+<li>不要在没分类的情况下碎片化吸收</li>
+</ul>
+<h3 id="第二遍建议你改什么-1"><a class="header" href="#第二遍建议你改什么-1">第二遍建议你改什么</a></h3>
+<ul>
+<li>选择一个 technique 拿自己的数据做实验</li>
+<li>和基础 RAG 做一次对照</li>
+</ul>
+<hr>
+<h2 id="你做完后应该掌握什么-1"><a class="header" href="#你做完后应该掌握什么-1">你做完后应该掌握什么</a></h2>
+<ul>
+<li>知道 RAG 不是单一技术，而是一组可组合策略</li>
+<li>知道什么是“问题在哪一层，就改哪一层”</li>
+<li>知道如何系统比较不同 technique</li>
+</ul>
+<hr>
+<h2 id="常见卡点-1"><a class="header" href="#常见卡点-1">常见卡点</a></h2>
+<ul>
+<li>把仓库当成百科全书，结果什么都没真正做</li>
+<li>看了很多 technique，但没有对照实验</li>
+<li>不区分“值得学”和“适合当前阶段”</li>
+</ul>
+<hr>
+<h2 id="最小完成标准-2"><a class="header" href="#最小完成标准-2">最小完成标准</a></h2>
+<ul>
+<li>你能说出 3 到 5 种 RAG enhancement technique</li>
+<li>你能解释它们分别在解决什么问题</li>
+<li>你能选出 1 到 2 个最值得自己复现的技巧</li>
+</ul>
+<hr>
+<h2 id="下一站-1"><a class="header" href="#下一站-1">下一站</a></h2>
+<p>做完后建议去：</p>
+<ul>
+<li><a href="#project-guide-deepsearcher">DeepSearcher</a></li>
+</ul>
+<p>这样你会更容易把 techniques 映射到真实系统里。</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="project-guide-deepsearcher"><a class="header" href="#project-guide-deepsearcher">Project Guide: DeepSearcher</a></h1>
+<p>原项目：</p>
+<ul>
+<li>https://github.com/zilliztech/deep-searcher</li>
+</ul>
+<hr>
+<h2 id="这页为什么重要"><a class="header" href="#这页为什么重要">这页为什么重要</a></h2>
+<p><code>DeepSearcher</code> 不是最小教学 demo，而是更接近“可以拿来搭系统”的那类项目。</p>
+<p>如果 <code>rag-from-scratch</code> 教你的是最小主链路，那么 <code>DeepSearcher</code> 教你的就是：</p>
+<ul>
+<li>一个 RAG 系统怎么开始有工程分层</li>
+<li>provider、数据加载、查询流程怎么拆开</li>
+<li>为什么 deep research / private data search 不只是“再接一个向量库”</li>
+</ul>
+<p>这页的重点不是让你一下子全看懂，而是让你知道第一遍到底该盯哪里。</p>
+<hr>
+<h2 id="你应该从它学到什么"><a class="header" href="#你应该从它学到什么">你应该从它学到什么</a></h2>
+<p>不是“我会跑一个更复杂的 RAG”。</p>
+<p>你真正应该学到的是：</p>
+<ol>
+<li>数据加载和查询不是同一阶段</li>
+<li>可配置 provider 层为什么重要</li>
+<li>从 demo 走向系统时，会多出哪些工程层</li>
+<li>为什么 private data search 更像产品问题，而不只是模型问题</li>
+</ol>
+<hr>
+<h2 id="最小系统链路"><a class="header" href="#最小系统链路">最小系统链路</a></h2>
+<p>第一遍你至少要能自己复述这条链路：</p>
+<pre><code class="language-text">collect documents
+-&gt; ingest / parse / chunk
+-&gt; embed and index
+-&gt; receive user query
+-&gt; retrieve relevant context
+-&gt; generate answer or report
+</code></pre>
+<p>如果连“加载阶段”和“查询阶段”都没分清，你其实还没开始理解这个项目。</p>
+<hr>
+<h2 id="它和基础-rag-的关键差别"><a class="header" href="#它和基础-rag-的关键差别">它和基础 RAG 的关键差别</a></h2>
+<p>你做完 <code>rag-from-scratch</code> 再来看这个项目，应该主动比较：</p>
+<h3 id="1-入口更多了"><a class="header" href="#1-入口更多了">1. 入口更多了</a></h3>
+<p>最小 RAG 一般只有 notebook 或单脚本。</p>
+<p>这里你会开始遇到：</p>
+<ul>
+<li>Python API</li>
+<li>CLI</li>
+<li>多种配置方式</li>
+</ul>
+<h3 id="2-配置面更宽了"><a class="header" href="#2-配置面更宽了">2. 配置面更宽了</a></h3>
+<p>最小 demo 往往默认很多东西。</p>
+<p>这里你要开始面对：</p>
+<ul>
+<li>LLM provider</li>
+<li>embedding provider</li>
+<li>vector store</li>
+<li>data source</li>
+</ul>
+<h3 id="3-工程边界更清楚了"><a class="header" href="#3-工程边界更清楚了">3. 工程边界更清楚了</a></h3>
+<p>你要学会把系统拆成：</p>
+<ul>
+<li>数据准备</li>
+<li>索引构建</li>
+<li>查询执行</li>
+<li>结果组织</li>
+</ul>
+<p>这一步很重要，因为从这里开始，你学的不是“RAG 例子”，而是“RAG 系统”。</p>
+<hr>
+<h2 id="第一遍最该观察的三件事"><a class="header" href="#第一遍最该观察的三件事">第一遍最该观察的三件事</a></h2>
+<h3 id="1-文档是怎么进入系统的"><a class="header" href="#1-文档是怎么进入系统的">1. 文档是怎么进入系统的</a></h3>
+<p>不要先盯最终回答。</p>
+<p>先看：</p>
+<ul>
+<li>输入文档格式是什么</li>
+<li>ingestion 的入口在哪里</li>
+<li>索引建立发生在什么阶段</li>
+</ul>
+<h3 id="2-query-执行路径是什么"><a class="header" href="#2-query-执行路径是什么">2. query 执行路径是什么</a></h3>
+<p>你要知道一个 query 进入后经历了哪些层：</p>
+<ul>
+<li>query 输入</li>
+<li>检索</li>
+<li>上下文组织</li>
+<li>回答或报告生成</li>
+</ul>
+<h3 id="3-配置如何影响行为"><a class="header" href="#3-配置如何影响行为">3. 配置如何影响行为</a></h3>
+<p>第一轮不要换一堆 provider。</p>
+<p>但你至少要看懂：</p>
+<ul>
+<li>哪些参数决定模型侧行为</li>
+<li>哪些参数决定检索侧行为</li>
+<li>哪些参数只是工程接入层</li>
+</ul>
+<hr>
+<h2 id="第一周不要做什么-1"><a class="header" href="#第一周不要做什么-1">第一周不要做什么</a></h2>
+<p>这类项目最容易把人带偏，因为它“看起来很完整”。</p>
+<p>第一周不要做这些事：</p>
+<ul>
+<li>一上来就换三种 provider 对比</li>
+<li>一上来就想部署成服务</li>
+<li>一上来就抓网页、接私有知识库、做报告自动化</li>
+<li>ingestion 还没跑通，就开始讨论 answer quality</li>
+</ul>
+<p>第一周你只需要先跑通最小系统路径。</p>
+<hr>
+<h2 id="第一周真正该做什么-1"><a class="header" href="#第一周真正该做什么-1">第一周真正该做什么</a></h2>
+<h3 id="day-1-1"><a class="header" href="#day-1-1">Day 1</a></h3>
+<ul>
+<li>按 README 跑通最小环境</li>
+<li>确认依赖、provider、配置项都能工作</li>
+</ul>
+<h3 id="day-2-1"><a class="header" href="#day-2-1">Day 2</a></h3>
+<ul>
+<li>只看最小 ingestion 流程</li>
+<li>记录一份文档是怎么被加载进去的</li>
+</ul>
+<h3 id="day-3-1"><a class="header" href="#day-3-1">Day 3</a></h3>
+<ul>
+<li>跑一个最小 query</li>
+<li>画出 query 的执行路径</li>
+</ul>
+<h3 id="day-4-1"><a class="header" href="#day-4-1">Day 4</a></h3>
+<ul>
+<li>换一小份自己的本地文档</li>
+<li>确认不是只会跑示例数据</li>
+</ul>
+<h3 id="day-5-1"><a class="header" href="#day-5-1">Day 5</a></h3>
+<ul>
+<li>看一个 provider 配置点</li>
+<li>解释这个配置改的是“模型层”还是“系统层”</li>
+</ul>
+<h3 id="day-6-1"><a class="header" href="#day-6-1">Day 6</a></h3>
+<ul>
+<li>比较它和基础 RAG demo 的结构差别</li>
+<li>写出多出来的 3 个工程层</li>
+</ul>
+<h3 id="day-7-1"><a class="header" href="#day-7-1">Day 7</a></h3>
+<ul>
+<li>用自己的话复盘：
+<ul>
+<li>这个项目到底在系统上比最小 RAG 多了什么</li>
+<li>如果你自己重写，先保留哪些层</li>
+<li>哪些层先不要做</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="你最该产出的东西"><a class="header" href="#你最该产出的东西">你最该产出的东西</a></h2>
+<h3 id="1-系统分层图"><a class="header" href="#1-系统分层图">1. 系统分层图</a></h3>
+<pre><code class="language-text">data source -&gt; ingestion -&gt; indexing -&gt; query -&gt; retrieval -&gt; answer/report
+</code></pre>
+<h3 id="2-一份最小配置说明"><a class="header" href="#2-一份最小配置说明">2. 一份最小配置说明</a></h3>
+<p>你至少要能写清：</p>
+<ul>
+<li>LLM 用什么</li>
+<li>embedding 用什么</li>
+<li>数据从哪里来</li>
+<li>query 从哪里发起</li>
+</ul>
+<h3 id="3-一个对比结论"><a class="header" href="#3-一个对比结论">3. 一个对比结论</a></h3>
+<p>你要能讲清：</p>
+<p>“这个项目和最小 RAG demo 的差别，不是只是功能更多，而是开始出现系统边界和配置边界。”</p>
+<hr>
+<h2 id="常见误区-1"><a class="header" href="#常见误区-1">常见误区</a></h2>
+<h3 id="误区-1把复杂度误当成学习价值"><a class="header" href="#误区-1把复杂度误当成学习价值">误区 1：把复杂度误当成学习价值</a></h3>
+<p>复杂不等于更适合第一轮。</p>
+<h3 id="误区-2provider-没配通就开始讨论架构"><a class="header" href="#误区-2provider-没配通就开始讨论架构">误区 2：provider 没配通就开始讨论架构</a></h3>
+<p>基础环境没跑通时，所有分析都很虚。</p>
+<h3 id="误区-3只看回答不看-ingestion"><a class="header" href="#误区-3只看回答不看-ingestion">误区 3：只看回答，不看 ingestion</a></h3>
+<p>很多质量问题其实在数据进入系统的时候就已经决定了。</p>
+<hr>
+<h2 id="最小完成标准-3"><a class="header" href="#最小完成标准-3">最小完成标准</a></h2>
+<p>你至少要做到下面三条中的两条：</p>
+<ul>
+<li>能解释数据加载阶段和查询阶段的分工</li>
+<li>能对自己的本地文档跑一条 query</li>
+<li>能说清这个项目比基础 RAG demo 多出来的工程层</li>
+</ul>
+<hr>
+<h2 id="做完它以后该去哪-1"><a class="header" href="#做完它以后该去哪-1">做完它以后该去哪</a></h2>
+<p>如果你想补模型本体理解，下一站去：</p>
+<ul>
+<li><a href="#project-guide-minimind">MiniMind</a></li>
+</ul>
+<p>如果你想继续往更复杂的训练和 agent 方向走，后面再去：</p>
+<ul>
+<li><a href="#project-guide-openpipe-art">OpenPipe ART</a></li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="project-guide-minimind"><a class="header" href="#project-guide-minimind">Project Guide: MiniMind</a></h1>
+<p>原项目：</p>
+<ul>
+<li>https://github.com/jingyaogong/minimind</li>
+</ul>
+<hr>
+<h2 id="这页为什么重要-1"><a class="header" href="#这页为什么重要-1">这页为什么重要</a></h2>
+<p><code>MiniMind</code> 很适合做“模型本体第一站”。</p>
+<p>如果你前面做了不少应用层项目，但总觉得自己对模型内部还是模糊的，这个项目的价值就会非常高。</p>
+<p>它不是为了追求最强结果，而是为了让你第一次把这些东西连起来：</p>
+<ul>
+<li>tokenizer</li>
+<li>model</li>
+<li>training loop</li>
+<li>generation</li>
+</ul>
+<p>这四个环节一旦连起来，你对 LLM 的理解会稳定很多。</p>
+<hr>
+<h2 id="你应该从它学到什么-1"><a class="header" href="#你应该从它学到什么-1">你应该从它学到什么</a></h2>
+<p>不是“我也跑过一个小模型”。</p>
+<p>你真正应该学到的是：</p>
+<ol>
+<li>文本是怎么变成 token 的</li>
+<li>token 是怎么进模型的</li>
+<li>logits 和 loss 是怎么来的</li>
+<li>训练脚本和推理脚本到底有什么不同</li>
+</ol>
+<hr>
+<h2 id="最小模型链路"><a class="header" href="#最小模型链路">最小模型链路</a></h2>
+<p>第一遍你必须能自己复述这条链路：</p>
+<pre><code class="language-text">raw text
+-&gt; tokenizer
+-&gt; token ids
+-&gt; model forward
+-&gt; logits
+-&gt; loss
+-&gt; backward / optimizer step
+</code></pre>
+<p>如果这条链路讲不出来，就说明你还在“看代码”，不是“理解模型”。</p>
+<hr>
+<h2 id="为什么它适合作为第一站-1"><a class="header" href="#为什么它适合作为第一站-1">为什么它适合作为第一站</a></h2>
+<p>它比完整课程项目更轻，但又不是纯概念材料。</p>
+<p>这意味着：</p>
+<ul>
+<li>你能真的跑起来</li>
+<li>你能看到训练和推理的真实代码</li>
+<li>你不会一开始就淹死在大规模系统复杂度里</li>
+</ul>
+<p>对第一次学“LLM from scratch”的人来说，这个平衡非常好。</p>
+<hr>
+<h2 id="第一遍最该观察的四件事"><a class="header" href="#第一遍最该观察的四件事">第一遍最该观察的四件事</a></h2>
+<h3 id="1-tokenizer-在干什么"><a class="header" href="#1-tokenizer-在干什么">1. tokenizer 在干什么</a></h3>
+<p>很多人只盯 attention，这是不够的。</p>
+<p>你要先看：</p>
+<ul>
+<li>文本怎么被切分</li>
+<li>vocab 在哪里定义</li>
+<li>token ids 是怎么送进模型的</li>
+</ul>
+<h3 id="2-model-forward-输入输出是什么"><a class="header" href="#2-model-forward-输入输出是什么">2. model forward 输入输出是什么</a></h3>
+<p>你应该明确：</p>
+<ul>
+<li>输入 tensor 的 shape 是什么</li>
+<li>输出 logits 的 shape 是什么</li>
+<li>为什么最后能算出 loss</li>
+</ul>
+<h3 id="3-training-loop-由哪些部件组成"><a class="header" href="#3-training-loop-由哪些部件组成">3. training loop 由哪些部件组成</a></h3>
+<p>你至少要找出来：</p>
+<ul>
+<li>data loader</li>
+<li>optimizer</li>
+<li>loss calculation</li>
+<li>backward</li>
+<li>parameter update</li>
+</ul>
+<h3 id="4-generation-和-training-的差别"><a class="header" href="#4-generation-和-training-的差别">4. generation 和 training 的差别</a></h3>
+<p>你要分清：</p>
+<ul>
+<li>训练是在学参数</li>
+<li>generation 是在已有参数上做 token 采样</li>
+</ul>
+<p>这是很多初学者一开始最模糊的地方。</p>
+<hr>
+<h2 id="第一周不要做什么-2"><a class="header" href="#第一周不要做什么-2">第一周不要做什么</a></h2>
+<p>这类项目最常见的偏航方式有这些：</p>
+<ul>
+<li>一上来就想训更大模型</li>
+<li>一上来就追求结果好不好看</li>
+<li>一上来就换复杂数据集</li>
+<li>没搞清训练 loop，就直接研究 attention 细节</li>
+</ul>
+<p>第一周重点不是“训得强”，而是“链路讲得清”。</p>
+<hr>
+<h2 id="第一周真正该做什么-2"><a class="header" href="#第一周真正该做什么-2">第一周真正该做什么</a></h2>
+<h3 id="day-1-2"><a class="header" href="#day-1-2">Day 1</a></h3>
+<ul>
+<li>跑通环境</li>
+<li>记录仓库里最小训练或推理入口</li>
+</ul>
+<h3 id="day-2-2"><a class="header" href="#day-2-2">Day 2</a></h3>
+<ul>
+<li>看 tokenizer 流程</li>
+<li>画出 text -&gt; token ids 的过程</li>
+</ul>
+<h3 id="day-3-2"><a class="header" href="#day-3-2">Day 3</a></h3>
+<ul>
+<li>看 model forward</li>
+<li>记录输入输出 tensor 的含义</li>
+</ul>
+<h3 id="day-4-2"><a class="header" href="#day-4-2">Day 4</a></h3>
+<ul>
+<li>看 training loop</li>
+<li>写出 loss、backward、optimizer 的顺序</li>
+</ul>
+<h3 id="day-5-2"><a class="header" href="#day-5-2">Day 5</a></h3>
+<ul>
+<li>跑一次最小训练或最小推理</li>
+<li>确认你不是只看代码</li>
+</ul>
+<h3 id="day-6-2"><a class="header" href="#day-6-2">Day 6</a></h3>
+<ul>
+<li>改一个小超参数</li>
+<li>比如层数、hidden size、context length 或 batch 相关参数</li>
+</ul>
+<h3 id="day-7-2"><a class="header" href="#day-7-2">Day 7</a></h3>
+<ul>
+<li>用自己的话复盘：
+<ul>
+<li>tokenizer、model、loss、generation 的关系</li>
+<li>训练脚本和推理脚本的分工</li>
+<li>如果自己重写，先保留哪几个核心模块</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="你最该产出的东西-1"><a class="header" href="#你最该产出的东西-1">你最该产出的东西</a></h2>
+<h3 id="1-一张训练链路图"><a class="header" href="#1-一张训练链路图">1. 一张训练链路图</a></h3>
+<pre><code class="language-text">text -&gt; tokenizer -&gt; ids -&gt; model -&gt; logits -&gt; loss -&gt; backward -&gt; optimizer
+</code></pre>
+<h3 id="2-一个模块说明表"><a class="header" href="#2-一个模块说明表">2. 一个模块说明表</a></h3>
+<p>至少列清：</p>
+<ul>
+<li>tokenizer</li>
+<li>model</li>
+<li>training script</li>
+<li>inference / generation script</li>
+</ul>
+<h3 id="3-一个小实验记录"><a class="header" href="#3-一个小实验记录">3. 一个小实验记录</a></h3>
+<p>改一个小超参数，然后记：</p>
+<ul>
+<li>改了什么</li>
+<li>结果有什么变化</li>
+<li>你猜为什么</li>
+</ul>
+<hr>
+<h2 id="常见误区-2"><a class="header" href="#常见误区-2">常见误区</a></h2>
+<h3 id="误区-1只盯-attention"><a class="header" href="#误区-1只盯-attention">误区 1：只盯 attention</a></h3>
+<p>attention 很重要，但不是模型链路的全部。</p>
+<h3 id="误区-2会运行就以为看懂了"><a class="header" href="#误区-2会运行就以为看懂了">误区 2：会运行就以为看懂了</a></h3>
+<p>真正的理解标准是你能解释数据怎么流过系统。</p>
+<h3 id="误区-3一开始就想做大训练"><a class="header" href="#误区-3一开始就想做大训练">误区 3：一开始就想做“大训练”</a></h3>
+<p>第一次最重要的是可解释性，不是规模。</p>
+<hr>
+<h2 id="最小完成标准-4"><a class="header" href="#最小完成标准-4">最小完成标准</a></h2>
+<p>你至少要做到下面三条中的两条：</p>
+<ul>
+<li>能自己复述 text -&gt; token -&gt; logits -&gt; loss 的主链路</li>
+<li>能指出训练入口和推理入口分别在哪里</li>
+<li>能改一个小超参数并解释变化</li>
+</ul>
+<hr>
+<h2 id="做完它以后该去哪-2"><a class="header" href="#做完它以后该去哪-2">做完它以后该去哪</a></h2>
+<p>下一站建议去：</p>
+<ul>
+<li><a href="#project-guide-stanford-cs336">Stanford CS336</a></li>
+</ul>
+<p>因为这时你已经有了最小模型训练的直觉，再去看系统课程内容会更稳，不会只剩一堆抽象概念。</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="project-guide-stanford-cs336"><a class="header" href="#project-guide-stanford-cs336">Project Guide: Stanford CS336</a></h1>
+<p>课程主页：</p>
+<ul>
+<li>https://cs336.stanford.edu/spring2025/</li>
+</ul>
+<hr>
+<h2 id="这页为什么重要-2"><a class="header" href="#这页为什么重要-2">这页为什么重要</a></h2>
+<p><code>CS336</code> 不是单个仓库，而是一条真正系统化的 <code>Language Modeling from Scratch</code> 路线。</p>
+<p>如果 <code>MiniMind</code> 给你的是“我第一次把小模型跑起来了”的直觉，那么 <code>CS336</code> 给你的应该是：</p>
+<ul>
+<li>知识结构</li>
+<li>实现边界</li>
+<li>工程脉络</li>
+</ul>
+<p>也就是把“会跑一个项目”升级成“知道整个领域是怎么接起来的”。</p>
+<hr>
+<h2 id="你应该从它学到什么-2"><a class="header" href="#你应该从它学到什么-2">你应该从它学到什么</a></h2>
+<p>不是“我看过一门课”。</p>
+<p>你真正应该学到的是：</p>
+<ol>
+<li>从 tokenizer 到 transformer 到训练系统的完整链路</li>
+<li>哪些部分属于概念层，哪些部分属于实现层</li>
+<li>为什么语言模型训练不只是模型代码，还包括数据、优化、系统和评估</li>
+<li>学完整门课后，你该自己重写哪几个模块</li>
+</ol>
+<hr>
+<h2 id="最小知识链路"><a class="header" href="#最小知识链路">最小知识链路</a></h2>
+<p>第一遍你至少要能自己复述这条链路：</p>
+<pre><code class="language-text">raw text
+-&gt; tokenization
+-&gt; dataset / batching
+-&gt; transformer forward
+-&gt; loss
+-&gt; optimization
+-&gt; evaluation
+-&gt; systems / scaling considerations
+</code></pre>
+<p>如果你学完还只能说“这门课讲 transformer”，那说明你并没有真正建立体系。</p>
+<hr>
+<h2 id="为什么它适合放在-minimind-后面"><a class="header" href="#为什么它适合放在-minimind-后面">为什么它适合放在 MiniMind 后面</a></h2>
+<p>因为这门课最适合在你已经有一点模型直觉之后再进入。</p>
+<p>你先通过 <code>MiniMind</code> 知道：</p>
+<ul>
+<li>一个小模型如何被组织起来</li>
+<li>训练 loop 长什么样</li>
+<li>token 到 logits 的链路是什么</li>
+</ul>
+<p>然后再来 <code>CS336</code>，你才会知道课程里每一块知识落在系统的哪一层。</p>
+<p>否则它很容易变成“收藏了一堆讲义和作业，但脑子里没有图”。</p>
+<hr>
+<h2 id="第一遍最该观察的四件事-1"><a class="header" href="#第一遍最该观察的四件事-1">第一遍最该观察的四件事</a></h2>
+<h3 id="1-课程在分哪些层"><a class="header" href="#1-课程在分哪些层">1. 课程在分哪些层</a></h3>
+<p>第一遍不要急着细读每个 lecture。</p>
+<p>先看课程结构到底把内容拆成了哪些大块，例如：</p>
+<ul>
+<li>tokenization</li>
+<li>model architecture</li>
+<li>optimization / training</li>
+<li>evaluation</li>
+<li>systems / scaling</li>
+</ul>
+<h3 id="2-每个模块是在回答什么问题"><a class="header" href="#2-每个模块是在回答什么问题">2. 每个模块是在回答什么问题</a></h3>
+<p>比如：</p>
+<ul>
+<li>tokenizer 回答“文本怎么变成模型能吃的形式”</li>
+<li>transformer 回答“模型如何建模上下文”</li>
+<li>optimization 回答“参数如何被更新”</li>
+<li>systems 回答“训练如何在现实资源上跑起来”</li>
+</ul>
+<h3 id="3-哪些部分值得你自己重写"><a class="header" href="#3-哪些部分值得你自己重写">3. 哪些部分值得你自己重写</a></h3>
+<p>不是所有内容都要第一轮实现。</p>
+<p>第一遍最值得重写的通常是：</p>
+<ul>
+<li>tokenizer 的一个最小版本</li>
+<li>transformer block 的最小实现</li>
+<li>一个最小训练循环</li>
+</ul>
+<h3 id="4-课程和项目的关系"><a class="header" href="#4-课程和项目的关系">4. 课程和项目的关系</a></h3>
+<p>你要明确：</p>
+<ul>
+<li><code>MiniMind</code> 更像一个落地实现入口</li>
+<li><code>CS336</code> 更像全景地图</li>
+</ul>
+<p>这门课的价值不是替代项目，而是给项目提供结构化坐标。</p>
+<hr>
+<h2 id="第一周不要做什么-3"><a class="header" href="#第一周不要做什么-3">第一周不要做什么</a></h2>
+<p>做课程类内容最常见的错误有这些：</p>
+<ul>
+<li>一上来就想“学完整门课”</li>
+<li>每看到术语就开一堆额外资料</li>
+<li>不做知识图，只做零散摘录</li>
+<li>先做最难的作业或系统部分</li>
+</ul>
+<p>第一周最重要的是先把地图搭起来。</p>
+<hr>
+<h2 id="第一周真正该做什么-3"><a class="header" href="#第一周真正该做什么-3">第一周真正该做什么</a></h2>
+<h3 id="day-1-3"><a class="header" href="#day-1-3">Day 1</a></h3>
+<ul>
+<li>浏览课程主页</li>
+<li>写出课程的 4 到 6 个核心模块</li>
+</ul>
+<h3 id="day-2-3"><a class="header" href="#day-2-3">Day 2</a></h3>
+<ul>
+<li>选 tokenizer / transformer / training 这三块</li>
+<li>每块各写一句“它在回答什么问题”</li>
+</ul>
+<h3 id="day-3-3"><a class="header" href="#day-3-3">Day 3</a></h3>
+<ul>
+<li>把课程结构和 <code>MiniMind</code> 对照</li>
+<li>标出哪些知识你已经碰过，哪些还没有</li>
+</ul>
+<h3 id="day-4-3"><a class="header" href="#day-4-3">Day 4</a></h3>
+<ul>
+<li>选一个最小模块准备自己实现</li>
+<li>推荐优先 tokenizer 或一个最小 transformer block</li>
+</ul>
+<h3 id="day-5-3"><a class="header" href="#day-5-3">Day 5</a></h3>
+<ul>
+<li>看实现相关材料</li>
+<li>记录输入、输出、关键中间量</li>
+</ul>
+<h3 id="day-6-3"><a class="header" href="#day-6-3">Day 6</a></h3>
+<ul>
+<li>写一张自己的知识图</li>
+<li>把整门课压缩成一页结构图</li>
+</ul>
+<h3 id="day-7-3"><a class="header" href="#day-7-3">Day 7</a></h3>
+<ul>
+<li>用自己的话复盘：
+<ul>
+<li>这门课到底比单个项目多给了你什么</li>
+<li>你现在最该先补的 2 到 3 个模块是什么</li>
+<li>哪一个模块你准备自己动手重写</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="你最该产出的东西-2"><a class="header" href="#你最该产出的东西-2">你最该产出的东西</a></h2>
+<h3 id="1-一张课程知识图"><a class="header" href="#1-一张课程知识图">1. 一张课程知识图</a></h3>
+<p>最少要包括：</p>
+<ul>
+<li>tokenizer</li>
+<li>model</li>
+<li>training</li>
+<li>evaluation</li>
+<li>systems</li>
+</ul>
+<h3 id="2-一个先学什么的决策表"><a class="header" href="#2-一个先学什么的决策表">2. 一个“先学什么”的决策表</a></h3>
+<p>你要写清：</p>
+<ul>
+<li>哪些内容你已经有直觉</li>
+<li>哪些内容你还完全空白</li>
+<li>哪些最值得现在补</li>
+</ul>
+<h3 id="3-一个最小实现目标"><a class="header" href="#3-一个最小实现目标">3. 一个最小实现目标</a></h3>
+<p>例如：</p>
+<ul>
+<li>自己写一个最小 tokenizer</li>
+<li>自己写一个 transformer block</li>
+<li>自己写一个最小训练 loop</li>
+</ul>
+<hr>
+<h2 id="常见误区-3"><a class="header" href="#常见误区-3">常见误区</a></h2>
+<h3 id="误区-1把课程当资源收藏页"><a class="header" href="#误区-1把课程当资源收藏页">误区 1：把课程当资源收藏页</a></h3>
+<p>不压成自己的结构图，学完很容易散。</p>
+<h3 id="误区-2只读不做"><a class="header" href="#误区-2只读不做">误区 2：只读不做</a></h3>
+<p>这门课真正有价值的部分，是它能指导你自己实现。</p>
+<h3 id="误区-3顺着网页一直看但没有主线"><a class="header" href="#误区-3顺着网页一直看但没有主线">误区 3：顺着网页一直看，但没有主线</a></h3>
+<p>第一轮先抓主干，不要先钻局部细节。</p>
+<hr>
+<h2 id="最小完成标准-5"><a class="header" href="#最小完成标准-5">最小完成标准</a></h2>
+<p>你至少要做到下面三条中的两条：</p>
+<ul>
+<li>能画出这门课的核心知识图</li>
+<li>能说出自己最该先补的 2 到 3 个模块</li>
+<li>能把其中一个模块变成自己的最小实现任务</li>
+</ul>
+<hr>
+<h2 id="做完它以后该去哪-3"><a class="header" href="#做完它以后该去哪-3">做完它以后该去哪</a></h2>
+<p>如果你完成得比较扎实，下一站建议去：</p>
+<ul>
+<li><a href="#project-guide-modelalignmentfromscratch">ModelAlignmentFromScratch</a></li>
+</ul>
+<p>因为那时你已经有足够稳定的训练基础，能真正理解“预训练之后，为什么还要 alignment”。</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="project-guide-modelalignmentfromscratch"><a class="header" href="#project-guide-modelalignmentfromscratch">Project Guide: ModelAlignmentFromScratch</a></h1>
+<p>原项目：</p>
+<ul>
+<li>https://github.com/Sherlock1956/ModelAlignmentFromScratch</li>
+</ul>
+<hr>
+<h2 id="这页为什么重要-3"><a class="header" href="#这页为什么重要-3">这页为什么重要</a></h2>
+<p>这个项目的价值不在“又一个训练仓库”，而在于它让你第一次真正面对这个问题：</p>
+<p>预训练之后，模型为什么还需要对齐？</p>
+<p>如果你已经学过一点模型训练，但对下面这些词还是有点飘，这页就很重要：</p>
+<ul>
+<li>SFT</li>
+<li>Expert Iteration</li>
+<li>GRPO</li>
+</ul>
+<p>它把这些东西从概念拉回到实现层。</p>
+<hr>
+<h2 id="你应该从它学到什么-3"><a class="header" href="#你应该从它学到什么-3">你应该从它学到什么</a></h2>
+<p>不是“我知道几种 alignment 方法名字”。</p>
+<p>你真正应该学到的是：</p>
+<ol>
+<li>SFT、EI、GRPO 各自在优化什么</li>
+<li>alignment 比 pretraining 多出来哪些部件</li>
+<li>reward / grading / sampling 在训练里分别扮演什么角色</li>
+<li>为什么越往 agent 或 RL 方向走，系统越不稳定</li>
+</ol>
+<hr>
+<h2 id="最小认知链路"><a class="header" href="#最小认知链路">最小认知链路</a></h2>
+<p>第一遍你应该能自己复述这条链路：</p>
+<pre><code class="language-text">prompt
+-&gt; model response
+-&gt; reward / grading / preference signal
+-&gt; objective based on that signal
+-&gt; parameter update
+</code></pre>
+<p>和普通预训练相比，多出来的关键不是“换了个 loss 名字”，而是训练信号来源变了。</p>
+<hr>
+<h2 id="为什么它值得在这个阶段做"><a class="header" href="#为什么它值得在这个阶段做">为什么它值得在这个阶段做</a></h2>
+<p>这类项目最适合放在你已经有模型基础之后。</p>
+<p>因为你必须先知道：</p>
+<ul>
+<li>普通语言模型训练在干什么</li>
+<li>logits 和 loss 是怎么来的</li>
+<li>一个标准 training loop 长什么样</li>
+</ul>
+<p>否则你一看 alignment，只会觉得“它又多了一堆脚本”，但不知道本质差异是什么。</p>
+<hr>
+<h2 id="第一遍最该观察的四件事-2"><a class="header" href="#第一遍最该观察的四件事-2">第一遍最该观察的四件事</a></h2>
+<h3 id="1-先看-sft不要先啃-grpo"><a class="header" href="#1-先看-sft不要先啃-grpo">1. 先看 SFT，不要先啃 GRPO</a></h3>
+<p>顺序很重要。</p>
+<p>第一遍建议：</p>
+<ol>
+<li><code>sft.py</code></li>
+<li><code>expert_iteration.py</code></li>
+<li><code>GRPO.py</code></li>
+<li>reward / grader 相关文件</li>
+</ol>
+<p>如果你一开始直接看 <code>GRPO.py</code>，大概率只会被流程复杂度淹没。</p>
+<h3 id="2-每种方法的训练信号来自哪里"><a class="header" href="#2-每种方法的训练信号来自哪里">2. 每种方法的训练信号来自哪里</a></h3>
+<p>你至少要分清：</p>
+<ul>
+<li>SFT 是监督信号</li>
+<li>EI 是专家迭代式改进</li>
+<li>GRPO 更接近基于组内比较或奖励的优化</li>
+</ul>
+<h3 id="3-response-sampling-在哪里发生"><a class="header" href="#3-response-sampling-在哪里发生">3. response sampling 在哪里发生</a></h3>
+<p>alignment 项目里，一个关键新增复杂度就是：</p>
+<ul>
+<li>不是只算一次 forward 就结束</li>
+<li>可能需要采样多个 response</li>
+<li>然后再打分或比较</li>
+</ul>
+<h3 id="4-reward--grading-逻辑在哪里"><a class="header" href="#4-reward--grading-逻辑在哪里">4. reward / grading 逻辑在哪里</a></h3>
+<p>第一遍必须定位到：</p>
+<ul>
+<li>reward 是怎么来的</li>
+<li>grader 在哪里</li>
+<li>它如何反馈回训练目标</li>
+</ul>
+<hr>
+<h2 id="第一周不要做什么-4"><a class="header" href="#第一周不要做什么-4">第一周不要做什么</a></h2>
+<p>这类项目最容易被“高级名词”带偏。</p>
+<p>第一周不要做这些：</p>
+<ul>
+<li>一上来就改 reward 设计</li>
+<li>一上来就追训练效果</li>
+<li>一上来就把 GRPO 当黑盒神技</li>
+<li>SFT 还没看懂，就硬看 RL 部分</li>
+</ul>
+<p>第一周重点是建立对比框架，不是做优化。</p>
+<hr>
+<h2 id="第一周真正该做什么-4"><a class="header" href="#第一周真正该做什么-4">第一周真正该做什么</a></h2>
+<h3 id="day-1-4"><a class="header" href="#day-1-4">Day 1</a></h3>
+<ul>
+<li>跑通环境</li>
+<li>看 README 和目录结构</li>
+</ul>
+<h3 id="day-2-4"><a class="header" href="#day-2-4">Day 2</a></h3>
+<ul>
+<li>精读 <code>sft.py</code></li>
+<li>写出 SFT 的输入、输出、loss</li>
+</ul>
+<h3 id="day-3-4"><a class="header" href="#day-3-4">Day 3</a></h3>
+<ul>
+<li>看 <code>expert_iteration.py</code></li>
+<li>记录它比 SFT 多了哪一层流程</li>
+</ul>
+<h3 id="day-4-4"><a class="header" href="#day-4-4">Day 4</a></h3>
+<ul>
+<li>看 <code>GRPO.py</code></li>
+<li>先画流程，不急着逐行深挖</li>
+</ul>
+<h3 id="day-5-4"><a class="header" href="#day-5-4">Day 5</a></h3>
+<ul>
+<li>找 reward / grader 相关逻辑</li>
+<li>确认训练信号是怎么回到更新目标里的</li>
+</ul>
+<h3 id="day-6-4"><a class="header" href="#day-6-4">Day 6</a></h3>
+<ul>
+<li>写一张对比表：
+<ul>
+<li>SFT 优化什么</li>
+<li>EI 优化什么</li>
+<li>GRPO 优化什么</li>
+</ul>
+</li>
+</ul>
+<h3 id="day-7-4"><a class="header" href="#day-7-4">Day 7</a></h3>
+<ul>
+<li>用自己的话复盘：
+<ul>
+<li>alignment 比 pretraining 多了什么</li>
+<li>为什么 response sampling 会让系统更复杂</li>
+<li>为什么 agent RL 往往更不稳定</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="你最该产出的东西-3"><a class="header" href="#你最该产出的东西-3">你最该产出的东西</a></h2>
+<h3 id="1-一张方法对比表"><a class="header" href="#1-一张方法对比表">1. 一张方法对比表</a></h3>
+<p>最少包含三列：</p>
+<ul>
+<li>训练信号来源</li>
+<li>目标函数直觉</li>
+<li>比 SFT 多出来的复杂度</li>
+</ul>
+<h3 id="2-一条训练信号链路"><a class="header" href="#2-一条训练信号链路">2. 一条训练信号链路</a></h3>
+<pre><code class="language-text">prompt -&gt; sampled response -&gt; reward / grading -&gt; optimization objective -&gt; update
+</code></pre>
+<h3 id="3-一段自己的解释-1"><a class="header" href="#3-一段自己的解释-1">3. 一段自己的解释</a></h3>
+<p>你要能说清：</p>
+<p>“alignment 的核心不是把模型再训一遍，而是改变模型收到的训练信号，让它朝更符合任务目标或偏好的方向更新。”</p>
+<hr>
+<h2 id="常见误区-4"><a class="header" href="#常见误区-4">常见误区</a></h2>
+<h3 id="误区-1把-grpo-当成高级版-sft"><a class="header" href="#误区-1把-grpo-当成高级版-sft">误区 1：把 GRPO 当成高级版 SFT</a></h3>
+<p>它们的训练信号和优化逻辑不是一回事。</p>
+<h3 id="误区-2只看结果不看-reward-来源"><a class="header" href="#误区-2只看结果不看-reward-来源">误区 2：只看结果，不看 reward 来源</a></h3>
+<p>对齐训练里，reward 来源就是系统灵魂。</p>
+<h3 id="误区-3没理解-baseline-就看高级方法"><a class="header" href="#误区-3没理解-baseline-就看高级方法">误区 3：没理解 baseline 就看高级方法</a></h3>
+<p>如果 SFT 都没讲清，后面的比较基本都不稳。</p>
+<hr>
+<h2 id="最小完成标准-6"><a class="header" href="#最小完成标准-6">最小完成标准</a></h2>
+<p>你至少要做到下面三条中的两条：</p>
+<ul>
+<li>能解释 SFT、EI、GRPO 各自在优化什么</li>
+<li>能指出 reward / grader 相关逻辑的位置</li>
+<li>能说清 alignment 相比 pretraining 多出来的关键部件</li>
+</ul>
+<hr>
+<h2 id="做完它以后该去哪-4"><a class="header" href="#做完它以后该去哪-4">做完它以后该去哪</a></h2>
+<p>下一站建议去：</p>
+<ul>
+<li><a href="#project-guide-openpipe-art">OpenPipe ART</a></li>
+</ul>
+<p>因为这时你已经有单模型 alignment 的基本框架，再去看更偏 agent RL 的训练系统，思路会顺很多。</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="project-guide-openpipe-art"><a class="header" href="#project-guide-openpipe-art">Project Guide: OpenPipe ART</a></h1>
+<p>原项目：</p>
+<ul>
+<li>https://github.com/OpenPipe/ART</li>
+</ul>
+<hr>
+<h2 id="这页为什么重要-4"><a class="header" href="#这页为什么重要-4">这页为什么重要</a></h2>
+<p><code>ART</code> 不是普通微调框架，而是一个更接近 agent reinforcement training 的入口。</p>
+<p>如果前面那些项目教你的是：</p>
+<ul>
+<li>最小 RAG</li>
+<li>小模型训练</li>
+<li>单模型 alignment</li>
+</ul>
+<p>那么这个项目开始逼你面对另外一种复杂度：</p>
+<ul>
+<li>多步任务</li>
+<li>trajectory</li>
+<li>reward over interaction</li>
+<li>rollout-driven training</li>
+</ul>
+<p>这就是它真正值得学的地方。</p>
+<hr>
+<h2 id="你应该从它学到什么-4"><a class="header" href="#你应该从它学到什么-4">你应该从它学到什么</a></h2>
+<p>不是“又一个训练仓库怎么跑”。</p>
+<p>你真正应该学到的是：</p>
+<ol>
+<li>agent RL 和单轮回答训练的本质差别</li>
+<li>rollout / trajectory 为什么会让训练复杂很多</li>
+<li>reward 设计为什么直接决定 agent 行为</li>
+<li>一个框架到底在帮你管理哪些复杂度</li>
+</ol>
+<hr>
+<h2 id="最小-agent-训练链路"><a class="header" href="#最小-agent-训练链路">最小 agent 训练链路</a></h2>
+<p>第一遍你至少要能自己复述这条链路：</p>
+<pre><code class="language-text">task
+-&gt; agent interacts over multiple steps
+-&gt; collect trajectory / rollout
+-&gt; compute reward or success signal
+-&gt; optimize policy based on that signal
+</code></pre>
+<p>和 SFT 最大的不同，不是“loss 名字变了”，而是训练对象从单次回答变成了多步行为。</p>
+<hr>
+<h2 id="为什么它必须放在后面"><a class="header" href="#为什么它必须放在后面">为什么它必须放在后面</a></h2>
+<p>这个项目不适合当第一站。</p>
+<p>因为你至少需要先理解这些东西：</p>
+<ul>
+<li>一个标准语言模型训练 loop</li>
+<li>alignment 的基本训练信号</li>
+<li>reward / rollout / policy update 的基本直觉</li>
+</ul>
+<p>否则你一看 agent RL，只会觉得“多了很多流程”，但抓不到本质。</p>
+<hr>
+<h2 id="第一遍最该观察的四件事-3"><a class="header" href="#第一遍最该观察的四件事-3">第一遍最该观察的四件事</a></h2>
+<h3 id="1-任务是怎么定义的"><a class="header" href="#1-任务是怎么定义的">1. 任务是怎么定义的</a></h3>
+<p>先不要急着看训练结果。</p>
+<p>你要先看：</p>
+<ul>
+<li>agent 在解决什么类型的任务</li>
+<li>一次 episode 包含几步</li>
+<li>成功或失败是怎么定义的</li>
+</ul>
+<h3 id="2-trajectory-是什么样子"><a class="header" href="#2-trajectory-是什么样子">2. trajectory 是什么样子</a></h3>
+<p>这一步很关键。</p>
+<p>你要知道：</p>
+<ul>
+<li>每一步记录了什么</li>
+<li>什么时候结束 rollout</li>
+<li>哪些中间行为会影响最终 reward</li>
+</ul>
+<h3 id="3-reward-是怎么来的"><a class="header" href="#3-reward-是怎么来的">3. reward 是怎么来的</a></h3>
+<p>agent 系统里，reward 不是装饰，它直接塑造行为。</p>
+<p>你至少要定位到：</p>
+<ul>
+<li>reward 定义在哪里</li>
+<li>reward 是 sparse 还是 dense</li>
+<li>reward 和目标行为之间有什么映射</li>
+</ul>
+<h3 id="4-框架帮你省掉了哪些事"><a class="header" href="#4-框架帮你省掉了哪些事">4. 框架帮你省掉了哪些事</a></h3>
+<p>这一类框架最值得学的，不只是 API，而是 abstraction。</p>
+<p>你要看懂：</p>
+<ul>
+<li>哪些是 task 层</li>
+<li>哪些是 rollout 层</li>
+<li>哪些是 optimization 层</li>
+</ul>
+<hr>
+<h2 id="第一周不要做什么-5"><a class="header" href="#第一周不要做什么-5">第一周不要做什么</a></h2>
+<p>这类项目很容易让人误判复杂度。</p>
+<p>第一周不要做这些：</p>
+<ul>
+<li>一上来就追 benchmark</li>
+<li>一上来就魔改 reward</li>
+<li>一上来就扩大任务规模</li>
+<li>还没看懂 trajectory，就开始调超参</li>
+</ul>
+<p>第一周重点不是训出强 agent，而是把多步训练结构讲清楚。</p>
+<hr>
+<h2 id="第一周真正该做什么-5"><a class="header" href="#第一周真正该做什么-5">第一周真正该做什么</a></h2>
+<h3 id="day-1-5"><a class="header" href="#day-1-5">Day 1</a></h3>
+<ul>
+<li>跑通最小环境</li>
+<li>确认最小 example 能工作</li>
+</ul>
+<h3 id="day-2-5"><a class="header" href="#day-2-5">Day 2</a></h3>
+<ul>
+<li>看任务定义</li>
+<li>写出 agent 一次 episode 的开始、过程、结束</li>
+</ul>
+<h3 id="day-3-5"><a class="header" href="#day-3-5">Day 3</a></h3>
+<ul>
+<li>看 rollout / trajectory 结构</li>
+<li>画出 agent 交互路径</li>
+</ul>
+<h3 id="day-4-5"><a class="header" href="#day-4-5">Day 4</a></h3>
+<ul>
+<li>找 reward 定义</li>
+<li>写出 reward 在什么时刻产生、如何反馈</li>
+</ul>
+<h3 id="day-5-5"><a class="header" href="#day-5-5">Day 5</a></h3>
+<ul>
+<li>看 optimization 主流程</li>
+<li>明确训练更新用到了哪些 rollout 信息</li>
+</ul>
+<h3 id="day-6-5"><a class="header" href="#day-6-5">Day 6</a></h3>
+<ul>
+<li>用自己的话比较：
+<ul>
+<li>agent RL 和 SFT 有什么不同</li>
+<li>agent RL 和单模型 alignment 有什么不同</li>
+</ul>
+</li>
+</ul>
+<h3 id="day-7-5"><a class="header" href="#day-7-5">Day 7</a></h3>
+<ul>
+<li>设计一个非常小的实验：
+<ul>
+<li>一个简单任务</li>
+<li>一个朴素 reward</li>
+<li>一个你预期 agent 会改进的行为</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="你最该产出的东西-4"><a class="header" href="#你最该产出的东西-4">你最该产出的东西</a></h2>
+<h3 id="1-一张-agent-训练流程图"><a class="header" href="#1-一张-agent-训练流程图">1. 一张 agent 训练流程图</a></h3>
+<pre><code class="language-text">task -&gt; rollout -&gt; trajectory -&gt; reward -&gt; update
+</code></pre>
+<h3 id="2-一份抽象层说明"><a class="header" href="#2-一份抽象层说明">2. 一份抽象层说明</a></h3>
+<p>你至少要能分清：</p>
+<ul>
+<li>task abstraction</li>
+<li>rollout abstraction</li>
+<li>optimization abstraction</li>
+</ul>
+<h3 id="3-一个小-reward-设计草稿"><a class="header" href="#3-一个小-reward-设计草稿">3. 一个小 reward 设计草稿</a></h3>
+<p>不一定要马上训练，但你要能写出：</p>
+<ul>
+<li>目标行为是什么</li>
+<li>什么信号说明它做对了</li>
+<li>reward 如何编码这个信号</li>
+</ul>
+<hr>
+<h2 id="常见误区-5"><a class="header" href="#常见误区-5">常见误区</a></h2>
+<h3 id="误区-1把它当普通微调框架"><a class="header" href="#误区-1把它当普通微调框架">误区 1：把它当普通微调框架</a></h3>
+<p>多步行为训练的单位不是单条样本，而是 trajectory。</p>
+<h3 id="误区-2只看结果不看-reward"><a class="header" href="#误区-2只看结果不看-reward">误区 2：只看结果，不看 reward</a></h3>
+<p>agent 学成什么样，通常先看 reward 定义，再看模型本身。</p>
+<h3 id="误区-3任务结构都没讲清就开始调参"><a class="header" href="#误区-3任务结构都没讲清就开始调参">误区 3：任务结构都没讲清，就开始调参</a></h3>
+<p>这会让你永远不知道问题出在任务、reward 还是优化。</p>
+<hr>
+<h2 id="最小完成标准-7"><a class="header" href="#最小完成标准-7">最小完成标准</a></h2>
+<p>你至少要做到下面三条中的两条：</p>
+<ul>
+<li>能说清 agent RL 和单步 alignment 的区别</li>
+<li>能解释 rollout / trajectory / reward 的关系</li>
+<li>能指出这个框架最核心的两个到三个抽象层</li>
+</ul>
+<hr>
+<h2 id="做完它以后该做什么"><a class="header" href="#做完它以后该做什么">做完它以后该做什么</a></h2>
+<p>这个项目更像这条线的高阶实践点。</p>
+<p>做完它以后，最值得做的不是继续看更大框架，而是自己做一个极小实验：</p>
+<ul>
+<li>设计一个简单多步任务</li>
+<li>定义一个很朴素的 reward</li>
+<li>看 agent 是否能学到更稳定的行为</li>
+</ul>
+<p>到这一步，你才算真正开始把 agent RL 变成自己的东西。</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="project-guide-full-stack-fastapi-template"><a class="header" href="#project-guide-full-stack-fastapi-template">Project Guide: full-stack-fastapi-template</a></h1>
+<p>原项目：</p>
+<ul>
+<li>https://github.com/fastapi/full-stack-fastapi-template</li>
+</ul>
+<p>补充官方文档：</p>
+<ul>
+<li>https://fastapi.tiangolo.com/fa/tutorial/bigger-applications/</li>
+</ul>
+<hr>
+<h2 id="这页为什么重要-5"><a class="header" href="#这页为什么重要-5">这页为什么重要</a></h2>
+<p>如果你要学 <code>FastAPI + 前端 + 数据库 + 认证 + 部署</code>，这个项目是非常合适的第一站。</p>
+<p>它不是单个 FastAPI demo，而是一个完整的全栈模板。你可以在一个项目里同时看到：</p>
+<ul>
+<li>FastAPI 后端</li>
+<li>前端应用</li>
+<li>数据库</li>
+<li>用户认证</li>
+<li>Docker / 环境配置</li>
+</ul>
+<p>这正好能帮你建立“真实 Web 应用”的整体直觉。</p>
+<hr>
+<h2 id="你应该从它学到什么-5"><a class="header" href="#你应该从它学到什么-5">你应该从它学到什么</a></h2>
+<p>不是“我把一个模板跑起来了”。</p>
+<p>你真正应该学到的是：</p>
+<ol>
+<li>一个完整 Web 产品的最小结构有哪些层</li>
+<li>FastAPI 后端如何组织 router、schema、model、db</li>
+<li>前端如何真正调用后端并展示数据</li>
+<li>登录态、数据库、部署为什么会把项目复杂度拉上来</li>
+</ol>
+<hr>
+<h2 id="最小全栈链路"><a class="header" href="#最小全栈链路">最小全栈链路</a></h2>
+<p>第一遍你至少要能自己复述这条链路：</p>
+<pre><code class="language-text">user action in frontend
+-&gt; frontend sends request
+-&gt; FastAPI route receives request
+-&gt; backend logic talks to database
+-&gt; response returns to frontend
+-&gt; UI updates
+</code></pre>
+<p>如果你不能把这条链路讲清楚，你就还没有真正理解“前后端联动”。</p>
+<hr>
+<h2 id="为什么它适合作为第一站-2"><a class="header" href="#为什么它适合作为第一站-2">为什么它适合作为第一站</a></h2>
+<p>因为它的学习价值很集中：</p>
+<ul>
+<li>不是只有后端</li>
+<li>不是只有前端</li>
+<li>不是只有一个小 CRUD 脚本</li>
+</ul>
+<p>它会让你在同一套代码里看到产品开发最常见的几层结构。</p>
+<p>而且它来自 FastAPI 官方组织，这意味着它更适合拿来建立基础判断，不容易一上来就学到一堆个人风格很重的写法。</p>
+<hr>
+<h2 id="第一遍最该观察的五件事"><a class="header" href="#第一遍最该观察的五件事">第一遍最该观察的五件事</a></h2>
+<h3 id="1-后端目录怎么拆"><a class="header" href="#1-后端目录怎么拆">1. 后端目录怎么拆</a></h3>
+<p>你要先看：</p>
+<ul>
+<li>入口文件在哪里</li>
+<li>router 在哪里</li>
+<li>model / schema / crud 在哪里</li>
+<li>配置和环境变量在哪里</li>
+</ul>
+<h3 id="2-前端目录怎么拆"><a class="header" href="#2-前端目录怎么拆">2. 前端目录怎么拆</a></h3>
+<p>你要知道：</p>
+<ul>
+<li>页面在哪里</li>
+<li>API 调用在哪里</li>
+<li>登录相关逻辑在哪里</li>
+<li>数据如何进入 UI</li>
+</ul>
+<h3 id="3-用户认证怎么走"><a class="header" href="#3-用户认证怎么走">3. 用户认证怎么走</a></h3>
+<p>这是全栈项目里非常关键的一层。</p>
+<p>你至少要搞清：</p>
+<ul>
+<li>登录请求发到哪里</li>
+<li>token 或认证信息怎么保存</li>
+<li>后端怎么识别当前用户</li>
+</ul>
+<h3 id="4-数据库在系统里扮演什么角色"><a class="header" href="#4-数据库在系统里扮演什么角色">4. 数据库在系统里扮演什么角色</a></h3>
+<p>你要分清：</p>
+<ul>
+<li>model 是什么</li>
+<li>migration 或建表逻辑在哪里</li>
+<li>一次新增 / 查询 / 更新是怎么走的</li>
+</ul>
+<h3 id="5-docker-和环境配置为什么存在"><a class="header" href="#5-docker-和环境配置为什么存在">5. Docker 和环境配置为什么存在</a></h3>
+<p>第一遍不需要精通部署，但你至少要知道：</p>
+<ul>
+<li>为什么要有环境变量</li>
+<li>为什么数据库和应用经常一起启动</li>
+<li>Docker 帮你解决了什么问题</li>
+</ul>
+<hr>
+<h2 id="第一周不要做什么-6"><a class="header" href="#第一周不要做什么-6">第一周不要做什么</a></h2>
+<p>第一周最容易带偏自己的做法有这些：</p>
+<ul>
+<li>一上来就换技术栈</li>
+<li>一上来就重构全部目录</li>
+<li>一上来就加很多复杂页面</li>
+<li>登录和数据库还没跑通，就急着做 UI 美化</li>
+</ul>
+<p>第一周重点是先把完整链路跑通。</p>
+<hr>
+<h2 id="第一周真正该做什么-6"><a class="header" href="#第一周真正该做什么-6">第一周真正该做什么</a></h2>
+<h3 id="day-1-6"><a class="header" href="#day-1-6">Day 1</a></h3>
+<ul>
+<li>按项目说明跑通本地环境</li>
+<li>确认前端、后端、数据库都能启动</li>
+</ul>
+<h3 id="day-2-6"><a class="header" href="#day-2-6">Day 2</a></h3>
+<ul>
+<li>画出前端到后端再到数据库的链路</li>
+<li>标记核心目录</li>
+</ul>
+<h3 id="day-3-6"><a class="header" href="#day-3-6">Day 3</a></h3>
+<ul>
+<li>看一个最基础的 API</li>
+<li>记录请求、响应、数据库读写分别发生在哪里</li>
+</ul>
+<h3 id="day-4-6"><a class="header" href="#day-4-6">Day 4</a></h3>
+<ul>
+<li>看登录流程</li>
+<li>记录认证信息在前后端怎么流动</li>
+</ul>
+<h3 id="day-5-6"><a class="header" href="#day-5-6">Day 5</a></h3>
+<ul>
+<li>加一个最小字段或最小资源</li>
+<li>比如新增一个简单的 notes / tasks / tags 字段</li>
+</ul>
+<h3 id="day-6-6"><a class="header" href="#day-6-6">Day 6</a></h3>
+<ul>
+<li>给前端加一个最小页面或表单联动</li>
+<li>让你新增的数据能被看到</li>
+</ul>
+<h3 id="day-7-6"><a class="header" href="#day-7-6">Day 7</a></h3>
+<ul>
+<li>用自己的话复盘：
+<ul>
+<li>这个模板的后端结构是什么</li>
+<li>前后端是怎么联动的</li>
+<li>如果自己做一个小产品，你保留哪几层</li>
+</ul>
+</li>
+</ul>
+<p>更细执行版在这里：</p>
+<ul>
+<li><a href="#7-day-plan-full-stack-fastapi-template">full-stack-fastapi-template 7-Day Plan</a></li>
+</ul>
+<hr>
+<h2 id="你最该产出的东西-5"><a class="header" href="#你最该产出的东西-5">你最该产出的东西</a></h2>
+<h3 id="1-一张全栈数据流图"><a class="header" href="#1-一张全栈数据流图">1. 一张全栈数据流图</a></h3>
+<pre><code class="language-text">frontend event -&gt; API request -&gt; FastAPI route -&gt; db operation -&gt; API response -&gt; UI update
+</code></pre>
+<h3 id="2-一份目录说明"><a class="header" href="#2-一份目录说明">2. 一份目录说明</a></h3>
+<p>你至少要能解释：</p>
+<ul>
+<li>后端入口</li>
+<li>API 路由</li>
+<li>数据模型</li>
+<li>前端页面</li>
+<li>前端 API 调用层</li>
+</ul>
+<h3 id="3-一个小功能改动"><a class="header" href="#3-一个小功能改动">3. 一个小功能改动</a></h3>
+<p>第一轮最推荐的，不是大改，而是：</p>
+<ul>
+<li>增加一个字段</li>
+<li>增加一个简单资源</li>
+<li>新增一个很小的表单流</li>
+</ul>
+<p>只要你做过一次，你就不再只是“跑模板”。</p>
+<hr>
+<h2 id="常见误区-6"><a class="header" href="#常见误区-6">常见误区</a></h2>
+<h3 id="误区-1把它当纯后端项目"><a class="header" href="#误区-1把它当纯后端项目">误区 1：把它当纯后端项目</a></h3>
+<p>这项目最大的价值恰恰是全链路，不是只看 API。</p>
+<h3 id="误区-2前后端都能启动就以为学会了"><a class="header" href="#误区-2前后端都能启动就以为学会了">误区 2：前后端都能启动，就以为学会了</a></h3>
+<p>真正的理解标准是你能加一个小功能并让它贯通。</p>
+<h3 id="误区-3一上来就做复杂业务"><a class="header" href="#误区-3一上来就做复杂业务">误区 3：一上来就做复杂业务</a></h3>
+<p>第一轮先学结构，不先追产品复杂度。</p>
+<hr>
+<h2 id="最小完成标准-8"><a class="header" href="#最小完成标准-8">最小完成标准</a></h2>
+<p>你至少要做到下面三条中的两条：</p>
+<ul>
+<li>能解释前端请求是如何走到数据库再回到页面的</li>
+<li>能自己加一个小 API 或小字段并连到前端</li>
+<li>能说清认证、数据库、前端页面这三层是怎么接起来的</li>
+</ul>
+<hr>
+<h2 id="做完它以后该去哪-5"><a class="header" href="#做完它以后该去哪-5">做完它以后该去哪</a></h2>
+<p>做完这页之后，你最值得做的不是再找第二个模板，而是做一个自己的小产品。</p>
+<p>最适合你的方向：</p>
+<ul>
+<li>学习任务管理器</li>
+<li>AI 学习资料管理器</li>
+<li>刷题复盘系统</li>
+</ul>
+<p>这时模板才真正变成你的能力，而不是你的依赖。</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="7-day-plans-1"><a class="header" href="#7-day-plans-1">7-Day Plans</a></h1>
+<p>如果你已经决定开做，直接进入对应的一周执行页：</p>
+<ul>
+<li><a href="#rag-from-scratch-7-day-plan">rag-from-scratch 7-Day Plan</a></li>
+<li><a href="#complex-rag-guide-7-day-plan">Complex RAG Guide 7-Day Plan</a></li>
+<li><a href="#rag-techniques-7-day-plan">RAG Techniques 7-Day Plan</a></li>
+<li><a href="#deepsearcher-7-day-plan">DeepSearcher 7-Day Plan</a></li>
+<li><a href="#minimind-7-day-plan">MiniMind 7-Day Plan</a></li>
+<li><a href="#stanford-cs336-7-day-plan">Stanford CS336 7-Day Plan</a></li>
+<li><a href="#modelalignmentfromscratch-7-day-plan">ModelAlignmentFromScratch 7-Day Plan</a></li>
+<li><a href="#openpipe-art-7-day-plan">OpenPipe ART 7-Day Plan</a></li>
+<li><a href="#7-day-plan-full-stack-fastapi-template">full-stack-fastapi-template 7-Day Plan</a></li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="rag-from-scratch-7-day-plan"><a href="#rag-from-scratch-7-day-plan" class="header">rag-from-scratch 7-Day Plan</a></h1>
+<h2 id="title-7-day-plan-rag-from-scratch"><a class="header" href="#title-7-day-plan-rag-from-scratch">title: “7-Day Plan: rag-from-scratch”</a></h2>
+<h1 id="7-day-plan-rag-from-scratch"><a class="header" href="#7-day-plan-rag-from-scratch">7-Day Plan: rag-from-scratch</a></h1>
+<p>对应项目：</p>
+<ul>
+<li><a href="#project-guide-rag-from-scratch">项目导学页</a></li>
+<li>原仓库: https://github.com/langchain-ai/rag-from-scratch</li>
+</ul>
+<hr>
+<h2 id="目标"><a class="header" href="#目标">目标</a></h2>
+<p>7 天后你应该能：</p>
+<ul>
+<li>跑通一个最小 RAG notebook</li>
+<li>解释 retrieval -&gt; context -&gt; answer 主链路</li>
+<li>自己改一个小参数并观察结果</li>
+</ul>
+<hr>
+<h2 id="day-1-7"><a class="header" href="#day-1-7">Day 1</a></h2>
+<p>任务：</p>
+<ul>
+<li>读 README</li>
+<li>浏览仓库结构</li>
+<li>记录这个项目在教什么</li>
+</ul>
+<p>产出：</p>
+<ul>
+<li>一段 5 句以内总结</li>
+</ul>
+<hr>
+<h2 id="day-2-7"><a class="header" href="#day-2-7">Day 2</a></h2>
+<p>任务：</p>
+<ul>
+<li>安装依赖</li>
+<li>打开最基础 notebook</li>
+<li>跑通到第一次生成答案</li>
+</ul>
+<p>产出：</p>
+<ul>
+<li>一张截图或一段运行记录</li>
+</ul>
+<hr>
+<h2 id="day-3-7"><a class="header" href="#day-3-7">Day 3</a></h2>
+<p>任务：</p>
+<ul>
+<li>只盯 retrieval 部分</li>
+<li>看输入 query 如何变成检索结果</li>
+<li>记录 top-k、chunk、embedding 的角色</li>
+</ul>
+<p>产出：</p>
+<ul>
+<li>一张最小流程图</li>
+</ul>
+<hr>
+<h2 id="day-4-7"><a class="header" href="#day-4-7">Day 4</a></h2>
+<p>任务：</p>
+<ul>
+<li>只盯 generation 部分</li>
+<li>看上下文如何进 prompt</li>
+<li>看回答为什么依赖检索结果</li>
+</ul>
+<p>产出：</p>
+<ul>
+<li>一段自己的中文解释</li>
+</ul>
+<hr>
+<h2 id="day-5-7"><a class="header" href="#day-5-7">Day 5</a></h2>
+<p>任务：</p>
+<ul>
+<li>改一个小参数</li>
+<li>比如 chunk 大小、top-k、prompt 模板中的一句话</li>
+<li>重新运行并比较变化</li>
+</ul>
+<p>产出：</p>
+<ul>
+<li>一张“改动前后对比表”</li>
+</ul>
+<hr>
+<h2 id="day-6-7"><a class="header" href="#day-6-7">Day 6</a></h2>
+<p>任务：</p>
+<ul>
+<li>换成你自己的一个小文档</li>
+<li>跑一个最小自定义例子</li>
+</ul>
+<p>产出：</p>
+<ul>
+<li>一个你自己的 query + answer 示例</li>
+</ul>
+<hr>
+<h2 id="day-7-7"><a class="header" href="#day-7-7">Day 7</a></h2>
+<p>任务：</p>
+<ul>
+<li>回头总结整个项目</li>
+<li>写出这个仓库最值得你保留的 3 个点</li>
+<li>写出你下一步最想补的一层</li>
+</ul>
+<p>产出：</p>
+<ul>
+<li>一页复盘笔记</li>
+</ul>
+<hr>
+<h2 id="完成标准"><a class="header" href="#完成标准">完成标准</a></h2>
+<ul>
+<li>你不再把 RAG 理解成黑盒</li>
+<li>你能解释最小链路</li>
+<li>你手上已经有一个自己的最小例子</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="complex-rag-guide-7-day-plan"><a href="#complex-rag-guide-7-day-plan" class="header">Complex RAG Guide 7-Day Plan</a></h1>
+<h2 id="title-7-day-plan-complex-rag-guide"><a class="header" href="#title-7-day-plan-complex-rag-guide">title: “7-Day Plan: Complex RAG Guide”</a></h2>
+<h1 id="7-day-plan-complex-rag-guide"><a class="header" href="#7-day-plan-complex-rag-guide">7-Day Plan: Complex RAG Guide</a></h1>
+<p>对应项目：</p>
+<ul>
+<li><a href="#complex-rag-guide">项目导学页</a></li>
+<li>原仓库: https://github.com/FareedKhan-dev/complex-RAG-guide</li>
+</ul>
+<hr>
+<h2 id="目标-1"><a class="header" href="#目标-1">目标</a></h2>
+<p>7 天后你应该能：</p>
+<ul>
+<li>说清复杂 RAG 比基础 RAG 多了哪些层</li>
+<li>理解 planner / filter / evaluation 的作用</li>
+<li>选出最值得自己复现的 1 到 2 个增强模块</li>
+</ul>
+<hr>
+<h2 id="day-1-8"><a class="header" href="#day-1-8">Day 1</a></h2>
+<p>任务：</p>
+<ul>
+<li>重读 README</li>
+<li>只整理 pipeline 目录</li>
+<li>把出现的模块列成清单</li>
+</ul>
+<p>产出：</p>
+<ul>
+<li>一张模块清单</li>
+</ul>
+<hr>
+<h2 id="day-2-8"><a class="header" href="#day-2-8">Day 2</a></h2>
+<p>任务：</p>
+<ul>
+<li>跑通 notebook 或最小流程</li>
+<li>不求全懂，先看整体跑起来</li>
+</ul>
+<p>产出：</p>
+<ul>
+<li>一段运行成功记录</li>
+</ul>
+<hr>
+<h2 id="day-3-8"><a class="header" href="#day-3-8">Day 3</a></h2>
+<p>任务：</p>
+<ul>
+<li>重点看 chunking / cleaning / restructuring</li>
+<li>思考这些步骤为什么不属于“可有可无”</li>
+</ul>
+<p>产出：</p>
+<ul>
+<li>一页关于“数据准备为什么重要”的笔记</li>
+</ul>
+<hr>
+<h2 id="day-4-8"><a class="header" href="#day-4-8">Day 4</a></h2>
+<p>任务：</p>
+<ul>
+<li>重点看 filtering / relevance check / query rewrite</li>
+<li>记录每一层在修什么问题</li>
+</ul>
+<p>产出：</p>
+<ul>
+<li>一个三列表：模块 / 解决的问题 / 代价</li>
+</ul>
+<hr>
+<h2 id="day-5-8"><a class="header" href="#day-5-8">Day 5</a></h2>
+<p>任务：</p>
+<ul>
+<li>重点看 planner / re-planner / task handler</li>
+<li>不用先研究 prompt 细节</li>
+<li>先理解状态机或图结构</li>
+</ul>
+<p>产出：</p>
+<ul>
+<li>一张主流程图</li>
+</ul>
+<hr>
+<h2 id="day-6-8"><a class="header" href="#day-6-8">Day 6</a></h2>
+<p>任务：</p>
+<ul>
+<li>重点看 evaluation</li>
+<li>看系统如何判断 answer 是否 grounded / useful</li>
+</ul>
+<p>产出：</p>
+<ul>
+<li>一段你自己的 evaluation 理解</li>
+</ul>
+<hr>
+<h2 id="day-7-8"><a class="header" href="#day-7-8">Day 7</a></h2>
+<p>任务：</p>
+<ul>
+<li>选 1 到 2 个你最想保留的增强模块</li>
+<li>写出如果你自己做一个 RAG，会保留什么</li>
+</ul>
+<p>产出：</p>
+<ul>
+<li>一页“我的复杂 RAG v1 方案”</li>
+</ul>
+<hr>
+<h2 id="完成标准-1"><a class="header" href="#完成标准-1">完成标准</a></h2>
+<ul>
+<li>你知道复杂 RAG 不是堆功能，而是逐层补漏洞</li>
+<li>你能说清 2 个以上增强模块的意义</li>
+<li>你能把复杂 RAG 缩成自己的版本</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="rag-techniques-7-day-plan"><a href="#rag-techniques-7-day-plan" class="header">RAG Techniques 7-Day Plan</a></h1>
+<h2 id="title-7-day-plan-rag-techniques"><a class="header" href="#title-7-day-plan-rag-techniques">title: “7-Day Plan: RAG Techniques”</a></h2>
+<h1 id="7-day-plan-rag-techniques"><a class="header" href="#7-day-plan-rag-techniques">7-Day Plan: RAG Techniques</a></h1>
+<p>对应项目：</p>
+<ul>
+<li><a href="#rag-techniques">项目导学页</a></li>
+<li>原仓库: https://github.com/NirDiamant/rag_techniques</li>
+</ul>
+<hr>
+<h2 id="目标-2"><a class="header" href="#目标-2">目标</a></h2>
+<p>7 天后你应该能：</p>
+<ul>
+<li>说出多个 RAG enhancement technique</li>
+<li>区分它们分别在改哪一层</li>
+<li>选出最值得自己实验的方向</li>
+</ul>
+<hr>
+<h2 id="day-1-9"><a class="header" href="#day-1-9">Day 1</a></h2>
+<p>任务：</p>
+<ul>
+<li>看仓库整体结构</li>
+<li>按主题给 techniques 分组</li>
+</ul>
+<p>产出：</p>
+<ul>
+<li>你的分组表</li>
+</ul>
+<hr>
+<h2 id="day-2-9"><a class="header" href="#day-2-9">Day 2</a></h2>
+<p>任务：</p>
+<ul>
+<li>选一个 chunking / indexing 类 technique</li>
+<li>只理解它在改什么</li>
+</ul>
+<p>产出：</p>
+<ul>
+<li>一段中文摘要</li>
+</ul>
+<hr>
+<h2 id="day-3-9"><a class="header" href="#day-3-9">Day 3</a></h2>
+<p>任务：</p>
+<ul>
+<li>选一个 retrieval enhancement 类 technique</li>
+<li>记录适用场景</li>
+</ul>
+<p>产出：</p>
+<ul>
+<li>一张“什么时候用它”的卡片</li>
+</ul>
+<hr>
+<h2 id="day-4-9"><a class="header" href="#day-4-9">Day 4</a></h2>
+<p>任务：</p>
+<ul>
+<li>选一个 reranking / filtering 类 technique</li>
+<li>比较它和基础 retrieval 的差别</li>
+</ul>
+<p>产出：</p>
+<ul>
+<li>一张对比表</li>
+</ul>
+<hr>
+<h2 id="day-5-9"><a class="header" href="#day-5-9">Day 5</a></h2>
+<p>任务：</p>
+<ul>
+<li>选一个 query transformation 类 technique</li>
+<li>思考它到底在弥补什么弱点</li>
+</ul>
+<p>产出：</p>
+<ul>
+<li>一段你的判断</li>
+</ul>
+<hr>
+<h2 id="day-6-9"><a class="header" href="#day-6-9">Day 6</a></h2>
+<p>任务：</p>
+<ul>
+<li>从前 4 天看过的内容里选 3 个 technique</li>
+<li>做一个横向对比</li>
+</ul>
+<p>产出：</p>
+<ul>
+<li>一个三选三对比表</li>
+</ul>
+<hr>
+<h2 id="day-7-9"><a class="header" href="#day-7-9">Day 7</a></h2>
+<p>任务：</p>
+<ul>
+<li>选 1 个你要真正复现的 technique</li>
+<li>写出你自己的最小实验计划</li>
+</ul>
+<p>产出：</p>
+<ul>
+<li>一页实验计划</li>
+</ul>
+<hr>
+<h2 id="完成标准-2"><a class="header" href="#完成标准-2">完成标准</a></h2>
+<ul>
+<li>你不再把 RAG technique 看成杂乱点子</li>
+<li>你能知道问题出在哪一层</li>
+<li>你有一个明确的下一个实验方向</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="deepsearcher-7-day-plan"><a href="#deepsearcher-7-day-plan" class="header">DeepSearcher 7-Day Plan</a></h1>
+<h2 id="title-7-day-plan-deepsearcher"><a class="header" href="#title-7-day-plan-deepsearcher">title: “7-Day Plan: DeepSearcher”</a></h2>
+<h1 id="7-day-plan-deepsearcher"><a class="header" href="#7-day-plan-deepsearcher">7-Day Plan: DeepSearcher</a></h1>
+<p>对应项目：</p>
+<ul>
+<li><a href="#project-guide-deepsearcher">项目导学页</a></li>
+<li>原仓库: https://github.com/zilliztech/deep-searcher</li>
+</ul>
+<hr>
+<h2 id="目标-3"><a class="header" href="#目标-3">目标</a></h2>
+<p>7 天后你应该能：</p>
+<ul>
+<li>跑通一次本地文档加载和查询</li>
+<li>理解 provider 配置和模块化结构</li>
+<li>说清它为什么更像系统而不是 demo</li>
+</ul>
+<hr>
+<h2 id="day-1-10"><a class="header" href="#day-1-10">Day 1</a></h2>
+<p>任务：</p>
+<ul>
+<li>读 README 的 quick start 和 feature 部分</li>
+<li>标出它支持的模块</li>
+</ul>
+<p>产出：</p>
+<ul>
+<li>一张模块地图</li>
+</ul>
+<hr>
+<h2 id="day-2-10"><a class="header" href="#day-2-10">Day 2</a></h2>
+<p>任务：</p>
+<ul>
+<li>搭环境</li>
+<li>选择一个最简单 provider 组合</li>
+</ul>
+<p>产出：</p>
+<ul>
+<li>环境准备记录</li>
+</ul>
+<hr>
+<h2 id="day-3-10"><a class="header" href="#day-3-10">Day 3</a></h2>
+<p>任务：</p>
+<ul>
+<li>用一份最小本地文件做 loading</li>
+<li>理解 data ingestion 在哪里发生</li>
+</ul>
+<p>产出：</p>
+<ul>
+<li>你自己的数据加载说明</li>
+</ul>
+<hr>
+<h2 id="day-4-10"><a class="header" href="#day-4-10">Day 4</a></h2>
+<p>任务：</p>
+<ul>
+<li>跑一次 query</li>
+<li>观察系统输出和配置关系</li>
+</ul>
+<p>产出：</p>
+<ul>
+<li>一个最小 query 示例</li>
+</ul>
+<hr>
+<h2 id="day-5-10"><a class="header" href="#day-5-10">Day 5</a></h2>
+<p>任务：</p>
+<ul>
+<li>重点看 config / provider 配置方式</li>
+<li>记录 LLM、embedding、vector DB 怎么解耦</li>
+</ul>
+<p>产出：</p>
+<ul>
+<li>一张配置结构图</li>
+</ul>
+<hr>
+<h2 id="day-6-10"><a class="header" href="#day-6-10">Day 6</a></h2>
+<p>任务：</p>
+<ul>
+<li>看 CLI 和 Python API 两种用法</li>
+<li>比较它们的适用场景</li>
+</ul>
+<p>产出：</p>
+<ul>
+<li>一张 CLI vs API 对比表</li>
+</ul>
+<hr>
+<h2 id="day-7-10"><a class="header" href="#day-7-10">Day 7</a></h2>
+<p>任务：</p>
+<ul>
+<li>用自己的语言总结这个系统</li>
+<li>写出它和 notebook 式 RAG 的差别</li>
+</ul>
+<p>产出：</p>
+<ul>
+<li>一页复盘</li>
+</ul>
+<hr>
+<h2 id="完成标准-3"><a class="header" href="#完成标准-3">完成标准</a></h2>
+<ul>
+<li>你能加载自己的数据并提问</li>
+<li>你能解释模块化 provider 的意义</li>
+<li>你能识别系统级 RAG 的工程结构</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="minimind-7-day-plan"><a href="#minimind-7-day-plan" class="header">MiniMind 7-Day Plan</a></h1>
+<h2 id="title-7-day-plan-minimind"><a class="header" href="#title-7-day-plan-minimind">title: “7-Day Plan: MiniMind”</a></h2>
+<h1 id="7-day-plan-minimind"><a class="header" href="#7-day-plan-minimind">7-Day Plan: MiniMind</a></h1>
+<p>对应项目：</p>
+<ul>
+<li><a href="#project-guide-minimind">项目导学页</a></li>
+<li>原仓库: https://github.com/jingyaogong/minimind</li>
+</ul>
+<hr>
+<h2 id="目标-4"><a class="header" href="#目标-4">目标</a></h2>
+<p>7 天后你应该能：</p>
+<ul>
+<li>理解一个超小语言模型的基本部件</li>
+<li>跑通一次最小训练或推理</li>
+<li>画出 tokenizer -&gt; model -&gt; loss -&gt; generation 主链路</li>
+</ul>
+<hr>
+<h2 id="day-1-11"><a class="header" href="#day-1-11">Day 1</a></h2>
+<p>任务：</p>
+<ul>
+<li>读 README</li>
+<li>写下项目的目标和定位</li>
+</ul>
+<p>产出：</p>
+<ul>
+<li>一段项目摘要</li>
+</ul>
+<hr>
+<h2 id="day-2-11"><a class="header" href="#day-2-11">Day 2</a></h2>
+<p>任务：</p>
+<ul>
+<li>看仓库结构</li>
+<li>找 tokenizer、model、train、infer 分别在哪里</li>
+</ul>
+<p>产出：</p>
+<ul>
+<li>一张目录功能表</li>
+</ul>
+<hr>
+<h2 id="day-3-11"><a class="header" href="#day-3-11">Day 3</a></h2>
+<p>任务：</p>
+<ul>
+<li>重点看 tokenizer 或数据处理部分</li>
+<li>记录文本怎样变成模型输入</li>
+</ul>
+<p>产出：</p>
+<ul>
+<li>一张输入流转图</li>
+</ul>
+<hr>
+<h2 id="day-4-11"><a class="header" href="#day-4-11">Day 4</a></h2>
+<p>任务：</p>
+<ul>
+<li>重点看模型结构</li>
+<li>记录主要模块</li>
+</ul>
+<p>产出：</p>
+<ul>
+<li>一张模型结构草图</li>
+</ul>
+<hr>
+<h2 id="day-5-11"><a class="header" href="#day-5-11">Day 5</a></h2>
+<p>任务：</p>
+<ul>
+<li>重点看训练脚本</li>
+<li>关注 loss、optimizer、batch 流程</li>
+</ul>
+<p>产出：</p>
+<ul>
+<li>一段训练流程说明</li>
+</ul>
+<hr>
+<h2 id="day-6-11"><a class="header" href="#day-6-11">Day 6</a></h2>
+<p>任务：</p>
+<ul>
+<li>跑最小推理或训练示例</li>
+<li>记录输入输出</li>
+</ul>
+<p>产出：</p>
+<ul>
+<li>一个最小运行记录</li>
+</ul>
+<hr>
+<h2 id="day-7-11"><a class="header" href="#day-7-11">Day 7</a></h2>
+<p>任务：</p>
+<ul>
+<li>总结整个项目</li>
+<li>写出你现在终于理解了什么</li>
+</ul>
+<p>产出：</p>
+<ul>
+<li>一页复盘</li>
+</ul>
+<hr>
+<h2 id="完成标准-4"><a class="header" href="#完成标准-4">完成标准</a></h2>
+<ul>
+<li>你能说清一个小语言模型主链路</li>
+<li>你能找到训练与推理入口</li>
+<li>你能继续进入更系统的课程内容</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="stanford-cs336-7-day-plan"><a href="#stanford-cs336-7-day-plan" class="header">Stanford CS336 7-Day Plan</a></h1>
+<h2 id="title-7-day-plan-stanford-cs336"><a class="header" href="#title-7-day-plan-stanford-cs336">title: “7-Day Plan: Stanford CS336”</a></h2>
+<h1 id="7-day-plan-stanford-cs336"><a class="header" href="#7-day-plan-stanford-cs336">7-Day Plan: Stanford CS336</a></h1>
+<p>对应项目：</p>
+<ul>
+<li><a href="#project-guide-stanford-cs336">项目导学页</a></li>
+<li>课程主页: https://cs336.stanford.edu/spring2025/</li>
+</ul>
+<hr>
+<h2 id="目标-5"><a class="header" href="#目标-5">目标</a></h2>
+<p>7 天后你应该能：</p>
+<ul>
+<li>建立课程级知识地图</li>
+<li>明确你最该先补的模块</li>
+<li>把课程变成你自己的实现清单</li>
+</ul>
+<hr>
+<h2 id="day-1-12"><a class="header" href="#day-1-12">Day 1</a></h2>
+<p>任务：</p>
+<ul>
+<li>浏览课程主页</li>
+<li>记录课程主题结构</li>
+</ul>
+<p>产出：</p>
+<ul>
+<li>一张课程主题表</li>
+</ul>
+<hr>
+<h2 id="day-2-12"><a class="header" href="#day-2-12">Day 2</a></h2>
+<p>任务：</p>
+<ul>
+<li>只看 tokenizer 相关内容</li>
+<li>记录它在整门课里的位置</li>
+</ul>
+<p>产出：</p>
+<ul>
+<li>一页 tokenizer 笔记</li>
+</ul>
+<hr>
+<h2 id="day-3-12"><a class="header" href="#day-3-12">Day 3</a></h2>
+<p>任务：</p>
+<ul>
+<li>只看 transformer / attention 相关内容</li>
+</ul>
+<p>产出：</p>
+<ul>
+<li>一页结构理解笔记</li>
+</ul>
+<hr>
+<h2 id="day-4-12"><a class="header" href="#day-4-12">Day 4</a></h2>
+<p>任务：</p>
+<ul>
+<li>看 training / optimization 相关内容</li>
+</ul>
+<p>产出：</p>
+<ul>
+<li>一段训练链路总结</li>
+</ul>
+<hr>
+<h2 id="day-5-12"><a class="header" href="#day-5-12">Day 5</a></h2>
+<p>任务：</p>
+<ul>
+<li>看 systems / scaling / efficiency 相关内容</li>
+<li>先抓大意，不要求吃透</li>
+</ul>
+<p>产出：</p>
+<ul>
+<li>一张“系统层问题”清单</li>
+</ul>
+<hr>
+<h2 id="day-6-12"><a class="header" href="#day-6-12">Day 6</a></h2>
+<p>任务：</p>
+<ul>
+<li>把前 5 天内容整理成一张知识图</li>
+</ul>
+<p>产出：</p>
+<ul>
+<li>一张总图</li>
+</ul>
+<hr>
+<h2 id="day-7-12"><a class="header" href="#day-7-12">Day 7</a></h2>
+<p>任务：</p>
+<ul>
+<li>写出你自己的实现优先级</li>
+<li>决定哪些部分你要自己真正实现</li>
+</ul>
+<p>产出：</p>
+<ul>
+<li>一页“我的 CS336 执行计划”</li>
+</ul>
+<hr>
+<h2 id="完成标准-5"><a class="header" href="#完成标准-5">完成标准</a></h2>
+<ul>
+<li>你不再把课程当资源堆</li>
+<li>你知道自己先补什么</li>
+<li>你能把课程内容落成行动计划</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="modelalignmentfromscratch-7-day-plan"><a href="#modelalignmentfromscratch-7-day-plan" class="header">ModelAlignmentFromScratch 7-Day Plan</a></h1>
+<h2 id="title-7-day-plan-modelalignmentfromscratch"><a class="header" href="#title-7-day-plan-modelalignmentfromscratch">title: “7-Day Plan: ModelAlignmentFromScratch”</a></h2>
+<h1 id="7-day-plan-modelalignmentfromscratch"><a class="header" href="#7-day-plan-modelalignmentfromscratch">7-Day Plan: ModelAlignmentFromScratch</a></h1>
+<p>对应项目：</p>
+<ul>
+<li><a href="#project-guide-modelalignmentfromscratch">项目导学页</a></li>
+<li>原仓库: https://github.com/Sherlock1956/ModelAlignmentFromScratch</li>
+</ul>
+<hr>
+<h2 id="目标-6"><a class="header" href="#目标-6">目标</a></h2>
+<p>7 天后你应该能：</p>
+<ul>
+<li>说清 SFT、EI、GRPO 的差别</li>
+<li>找到仓库里对应实现</li>
+<li>跑通至少一种方法的最小流程</li>
+</ul>
+<hr>
+<h2 id="day-1-13"><a class="header" href="#day-1-13">Day 1</a></h2>
+<p>任务：</p>
+<ul>
+<li>读 README</li>
+<li>记录三种方法分别是什么</li>
+</ul>
+<p>产出：</p>
+<ul>
+<li>一张三方法总览表</li>
+</ul>
+<hr>
+<h2 id="day-2-13"><a class="header" href="#day-2-13">Day 2</a></h2>
+<p>任务：</p>
+<ul>
+<li>浏览 <code>cs336_alignment/</code> 目录</li>
+<li>定位各脚本职责</li>
+</ul>
+<p>产出：</p>
+<ul>
+<li>一张文件职责表</li>
+</ul>
+<hr>
+<h2 id="day-3-13"><a class="header" href="#day-3-13">Day 3</a></h2>
+<p>任务：</p>
+<ul>
+<li>精读 <code>sft.py</code></li>
+<li>把它看成 baseline</li>
+</ul>
+<p>产出：</p>
+<ul>
+<li>一页 SFT 流程笔记</li>
+</ul>
+<hr>
+<h2 id="day-4-13"><a class="header" href="#day-4-13">Day 4</a></h2>
+<p>任务：</p>
+<ul>
+<li>看 <code>expert_iteration.py</code></li>
+<li>记录它比 SFT 多出的循环逻辑</li>
+</ul>
+<p>产出：</p>
+<ul>
+<li>一张 SFT vs EI 对比表</li>
+</ul>
+<hr>
+<h2 id="day-5-13"><a class="header" href="#day-5-13">Day 5</a></h2>
+<p>任务：</p>
+<ul>
+<li>看 <code>GRPO.py</code></li>
+<li>重点理解 reward 和组内比较</li>
+</ul>
+<p>产出：</p>
+<ul>
+<li>一页 GRPO 笔记</li>
+</ul>
+<hr>
+<h2 id="day-6-13"><a class="header" href="#day-6-13">Day 6</a></h2>
+<p>任务：</p>
+<ul>
+<li>看 grader / reward 相关代码</li>
+<li>记录回答是怎么被评估的</li>
+</ul>
+<p>产出：</p>
+<ul>
+<li>一张 reward 流程图</li>
+</ul>
+<hr>
+<h2 id="day-7-13"><a class="header" href="#day-7-13">Day 7</a></h2>
+<p>任务：</p>
+<ul>
+<li>做整体复盘</li>
+<li>写出这三种方法在你心里的分工</li>
+</ul>
+<p>产出：</p>
+<ul>
+<li>一页 alignment 总结</li>
+</ul>
+<hr>
+<h2 id="完成标准-6"><a class="header" href="#完成标准-6">完成标准</a></h2>
+<ul>
+<li>你能区分三种训练方式</li>
+<li>你能指出核心实现位置</li>
+<li>你能继续进入 agent RL 方向</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="openpipe-art-7-day-plan"><a href="#openpipe-art-7-day-plan" class="header">OpenPipe ART 7-Day Plan</a></h1>
+<h2 id="title-7-day-plan-openpipe-art"><a class="header" href="#title-7-day-plan-openpipe-art">title: “7-Day Plan: OpenPipe ART”</a></h2>
+<h1 id="7-day-plan-openpipe-art"><a class="header" href="#7-day-plan-openpipe-art">7-Day Plan: OpenPipe ART</a></h1>
+<p>对应项目：</p>
+<ul>
+<li><a href="#project-guide-openpipe-art">项目导学页</a></li>
+<li>原仓库: https://github.com/OpenPipe/ART</li>
+</ul>
+<hr>
+<h2 id="目标-7"><a class="header" href="#目标-7">目标</a></h2>
+<p>7 天后你应该能：</p>
+<ul>
+<li>说清 agent RL 在训练什么</li>
+<li>理解任务、轨迹、奖励、优化的关系</li>
+<li>跑一个最小示例或至少看懂其主流程</li>
+</ul>
+<hr>
+<h2 id="day-1-14"><a class="header" href="#day-1-14">Day 1</a></h2>
+<p>任务：</p>
+<ul>
+<li>读 README</li>
+<li>写下 agent reinforcement training 的一句话解释</li>
+</ul>
+<p>产出：</p>
+<ul>
+<li>一段项目定位总结</li>
+</ul>
+<hr>
+<h2 id="day-2-14"><a class="header" href="#day-2-14">Day 2</a></h2>
+<p>任务：</p>
+<ul>
+<li>浏览项目结构</li>
+<li>找 example、task、trainer、reward 相关部分</li>
+</ul>
+<p>产出：</p>
+<ul>
+<li>一张目录功能图</li>
+</ul>
+<hr>
+<h2 id="day-3-14"><a class="header" href="#day-3-14">Day 3</a></h2>
+<p>任务：</p>
+<ul>
+<li>看最小示例</li>
+<li>理解一个任务是怎么定义的</li>
+</ul>
+<p>产出：</p>
+<ul>
+<li>一页任务定义笔记</li>
+</ul>
+<hr>
+<h2 id="day-4-14"><a class="header" href="#day-4-14">Day 4</a></h2>
+<p>任务：</p>
+<ul>
+<li>看 rollout 或 trajectory 相关流程</li>
+</ul>
+<p>产出：</p>
+<ul>
+<li>一张 agent interaction 流程图</li>
+</ul>
+<hr>
+<h2 id="day-5-14"><a class="header" href="#day-5-14">Day 5</a></h2>
+<p>任务：</p>
+<ul>
+<li>看 reward / optimization 部分</li>
+<li>只抓主逻辑</li>
+</ul>
+<p>产出：</p>
+<ul>
+<li>一张 reward -&gt; update 关系图</li>
+</ul>
+<hr>
+<h2 id="day-6-14"><a class="header" href="#day-6-14">Day 6</a></h2>
+<p>任务：</p>
+<ul>
+<li>跑一个最小 demo 或至少跑最小配置</li>
+<li>记录结果</li>
+</ul>
+<p>产出：</p>
+<ul>
+<li>一条运行记录</li>
+</ul>
+<hr>
+<h2 id="day-7-14"><a class="header" href="#day-7-14">Day 7</a></h2>
+<p>任务：</p>
+<ul>
+<li>总结 ART 和普通 alignment 的差别</li>
+<li>写出你想尝试的一个简单 agent 任务</li>
+</ul>
+<p>产出：</p>
+<ul>
+<li>一页复盘</li>
+</ul>
+<hr>
+<h2 id="完成标准-7"><a class="header" href="#完成标准-7">完成标准</a></h2>
+<ul>
+<li>你能解释 agent RL 的核心对象</li>
+<li>你能指出任务和 reward 的关键位置</li>
+<li>你有一个自己的小实验想法</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="7-day-plan-full-stack-fastapi-template"><a class="header" href="#7-day-plan-full-stack-fastapi-template">7-Day Plan: full-stack-fastapi-template</a></h1>
+<p>原项目：</p>
+<ul>
+<li>https://github.com/fastapi/full-stack-fastapi-template</li>
+</ul>
+<p>目标：</p>
+<ul>
+<li>用 7 天建立你对全栈 Web 应用的最小直觉</li>
+<li>不只会启动项目，还能加一个很小的真实功能</li>
+</ul>
+<hr>
+<h2 id="day-1-跑通全栈环境"><a class="header" href="#day-1-跑通全栈环境">Day 1: 跑通全栈环境</a></h2>
+<p>今天只做一件事：</p>
+<ul>
+<li>把前端、后端、数据库都跑起来</li>
+</ul>
+<p>完成标准：</p>
+<ul>
+<li>你能看到前端页面</li>
+<li>你能打开 FastAPI docs</li>
+<li>你知道数据库服务也在运行</li>
+</ul>
+<hr>
+<h2 id="day-2-认目录不乱看"><a class="header" href="#day-2-认目录不乱看">Day 2: 认目录，不乱看</a></h2>
+<p>今天目标：</p>
+<ul>
+<li>只认核心目录结构</li>
+</ul>
+<p>至少标出来：</p>
+<ul>
+<li>后端入口</li>
+<li>API routes</li>
+<li>models / schemas</li>
+<li>前端 pages / components</li>
+<li>前端 API 调用层</li>
+</ul>
+<p>完成标准：</p>
+<ul>
+<li>你能画出项目目录图</li>
+</ul>
+<hr>
+<h2 id="day-3-跟一条-api-请求"><a class="header" href="#day-3-跟一条-api-请求">Day 3: 跟一条 API 请求</a></h2>
+<p>今天目标：</p>
+<ul>
+<li>从前端操作跟踪一条真实请求</li>
+</ul>
+<p>记录：</p>
+<ul>
+<li>请求从哪个页面发出</li>
+<li>后端哪个 route 接收</li>
+<li>哪个数据库操作被调用</li>
+<li>响应怎么回到 UI</li>
+</ul>
+<p>完成标准：</p>
+<ul>
+<li>你能口头讲清一条请求链路</li>
+</ul>
+<hr>
+<h2 id="day-4-看认证"><a class="header" href="#day-4-看认证">Day 4: 看认证</a></h2>
+<p>今天目标：</p>
+<ul>
+<li>搞清登录态怎么工作</li>
+</ul>
+<p>你要回答：</p>
+<ul>
+<li>登录请求发到哪里</li>
+<li>认证信息存在哪里</li>
+<li>后端怎么知道当前用户是谁</li>
+</ul>
+<p>完成标准：</p>
+<ul>
+<li>你能解释认证链路</li>
+</ul>
+<hr>
+<h2 id="day-5-加一个小字段"><a class="header" href="#day-5-加一个小字段">Day 5: 加一个小字段</a></h2>
+<p>今天目标：</p>
+<ul>
+<li>对已有资源加一个很小的字段</li>
+</ul>
+<p>例如：</p>
+<ul>
+<li>note 的 <code>summary</code></li>
+<li>task 的 <code>priority</code></li>
+<li>item 的 <code>tag</code></li>
+</ul>
+<p>完成标准：</p>
+<ul>
+<li>后端能处理这个字段</li>
+<li>数据库能保存这个字段</li>
+</ul>
+<hr>
+<h2 id="day-6-把新字段连到前端"><a class="header" href="#day-6-把新字段连到前端">Day 6: 把新字段连到前端</a></h2>
+<p>今天目标：</p>
+<ul>
+<li>让前端页面能新增或展示这个字段</li>
+</ul>
+<p>完成标准：</p>
+<ul>
+<li>你能在 UI 上看到 Day 5 的改动</li>
+</ul>
+<hr>
+<h2 id="day-7-做一次自己的复盘"><a class="header" href="#day-7-做一次自己的复盘">Day 7: 做一次自己的复盘</a></h2>
+<p>今天目标：</p>
+<ul>
+<li>不看代码，自己讲清完整链路</li>
+</ul>
+<p>至少回答这四个问题：</p>
+<ol>
+<li>前后端请求是怎么流动的</li>
+<li>数据库在这个系统里的位置是什么</li>
+<li>认证层起什么作用</li>
+<li>如果自己做一个小产品，你会保留哪些层</li>
+</ol>
+<p>完成标准：</p>
+<ul>
+<li>写一页自己的总结</li>
+</ul>
+<hr>
+<h2 id="这一周结束后你应该会什么"><a class="header" href="#这一周结束后你应该会什么">这一周结束后你应该会什么</a></h2>
+<ul>
+<li>知道一个真实全栈项目最小结构</li>
+<li>知道前后端和数据库如何联动</li>
+<li>做过一次从后端到前端的最小改动</li>
+</ul>
+<p>如果这些都没做到，就不要急着换第二个项目。</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="自测题-1"><a class="header" href="#自测题-1">自测题</a></h1>
+<p>不看原文档，先自己答：</p>
+<ul>
+<li><a href="#rag-自测">RAG 自测</a></li>
+<li><a href="#llm-from-scratch-自测">LLM From Scratch 自测</a></li>
+<li><a href="#alignment--agent-rl-自测">Alignment / Agent RL 自测</a></li>
+<li><a href="#自测题fastapi--full-stack-web">FastAPI / Full Stack Web 自测</a></li>
+<li><a href="#综合项目自测-1">综合项目自测</a></li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="rag-自测"><a href="#rag-自测" class="header">RAG 自测</a></h1>
+<h2 id="title-自测题rag-systems"><a class="header" href="#title-自测题rag-systems">title: “自测题：RAG Systems”</a></h2>
+<h1 id="自测题rag-systems"><a class="header" href="#自测题rag-systems">自测题：RAG Systems</a></h1>
+<p>这份题不是面试题库，而是检查你自己有没有真的学会。</p>
+<p>建议规则：</p>
+<ul>
+<li>先闭卷做</li>
+<li>每题先口头讲，再写</li>
+<li>如果一题只能写定义，说明还没学会</li>
+</ul>
+<hr>
+<h2 id="part-1-基础判断"><a class="header" href="#part-1-基础判断">Part 1: 基础判断</a></h2>
+<h3 id="1"><a class="header" href="#1">1.</a></h3>
+<p>不用术语，直接用自己的话解释：</p>
+<ul>
+<li>什么是 RAG</li>
+<li>它和“把问题直接发给大模型”有什么本质区别</li>
+</ul>
+<h3 id="2"><a class="header" href="#2">2.</a></h3>
+<p>最小 RAG 主链路里，至少有哪些步骤？</p>
+<p>要求：</p>
+<ul>
+<li>不要写成“调用 API”</li>
+<li>要写出信息流怎么走</li>
+</ul>
+<h3 id="3"><a class="header" href="#3">3.</a></h3>
+<p>为什么检索质量差时，模型回答也容易差？</p>
+<h3 id="4"><a class="header" href="#4">4.</a></h3>
+<p>chunking 为什么会影响最终效果？</p>
+<p>至少回答：</p>
+<ul>
+<li>chunk 太大有什么问题</li>
+<li>chunk 太小有什么问题</li>
+</ul>
+<h3 id="5"><a class="header" href="#5">5.</a></h3>
+<p><code>retrieval</code> 和 <code>generation</code> 分别在解决什么问题？</p>
+<hr>
+<h2 id="part-2-结构理解"><a class="header" href="#part-2-结构理解">Part 2: 结构理解</a></h2>
+<h3 id="6"><a class="header" href="#6">6.</a></h3>
+<p>如果一个 RAG 系统回答不准，你会先检查哪三层？</p>
+<p>要求：</p>
+<ul>
+<li>不要回答“换更强模型”</li>
+</ul>
+<h3 id="7"><a class="header" href="#7">7.</a></h3>
+<p><code>query rewriting</code> 在什么情况下有帮助？</p>
+<h3 id="8"><a class="header" href="#8">8.</a></h3>
+<p><code>filtering</code> 或 <code>reranking</code> 为什么值得加？</p>
+<h3 id="9"><a class="header" href="#9">9.</a></h3>
+<p>为什么复杂 RAG 里会出现 planner / executor 这种结构？</p>
+<h3 id="10"><a class="header" href="#10">10.</a></h3>
+<p><code>source attribution</code> 或引用来源，除了“好看”，还有什么实际意义？</p>
+<hr>
+<h2 id="part-3-项目对应题"><a class="header" href="#part-3-项目对应题">Part 3: 项目对应题</a></h2>
+<h3 id="11"><a class="header" href="#11">11.</a></h3>
+<p><code>rag-from-scratch</code> 最适合帮你学会什么？</p>
+<h3 id="12"><a class="header" href="#12">12.</a></h3>
+<p><code>complex-RAG-guide</code> 相比基础 RAG，多补了哪些关键层？</p>
+<h3 id="13"><a class="header" href="#13">13.</a></h3>
+<p><code>rag_techniques</code> 这类仓库最适合怎么学，才不会变成“看了很多但没学会”？</p>
+<h3 id="14"><a class="header" href="#14">14.</a></h3>
+<p><code>deep-searcher</code> 和 notebook 式 RAG demo 的差别是什么？</p>
+<hr>
+<h2 id="part-4-动手题"><a class="header" href="#part-4-动手题">Part 4: 动手题</a></h2>
+<h3 id="15"><a class="header" href="#15">15.</a></h3>
+<p>请你自己画一个最小 RAG 架构图。</p>
+<p>至少要包含：</p>
+<ul>
+<li>文档</li>
+<li>embedding / index</li>
+<li>retrieval</li>
+<li>prompt / context</li>
+<li>answer</li>
+</ul>
+<h3 id="16"><a class="header" href="#16">16.</a></h3>
+<p>请你设计一个最小实验，验证下面这个问题：</p>
+<p><code>top-k</code> 从 3 改成 8，会不会让回答更好？</p>
+<p>你需要写：</p>
+<ul>
+<li>实验输入</li>
+<li>对照方式</li>
+<li>观察指标</li>
+</ul>
+<h3 id="17"><a class="header" href="#17">17.</a></h3>
+<p>如果让你自己做一个课程笔记问答器，你会保留哪 3 个模块，为什么？</p>
+<h3 id="18"><a class="header" href="#18">18.</a></h3>
+<p>如果让你删掉复杂 RAG 里的 2 个模块做 v1，你会删什么，为什么？</p>
+<hr>
+<h2 id="自评分标准"><a class="header" href="#自评分标准">自评分标准</a></h2>
+<h3 id="18-分以上"><a class="header" href="#18-分以上">18 分以上</a></h3>
+<p>说明你已经不只是“看过”，而是理解了大部分主线。</p>
+<h3 id="12-到-17-分"><a class="header" href="#12-到-17-分">12 到 17 分</a></h3>
+<p>说明你有框架，但还不够稳，需要做一次自己的最小项目。</p>
+<h3 id="11-分及以下"><a class="header" href="#11-分及以下">11 分及以下</a></h3>
+<p>说明你大概率还是在“识别术语”，没有真正内化。</p>
+<hr>
+<h2 id="打分方式"><a class="header" href="#打分方式">打分方式</a></h2>
+<p>每题按下面标准给自己打分：</p>
+<ul>
+<li><code>2 分</code>：能清楚解释，还能举例</li>
+<li><code>1 分</code>：知道大概，但讲不清</li>
+<li><code>0 分</code>：不会，或者只能复读术语</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="llm-from-scratch-自测"><a href="#llm-from-scratch-自测" class="header">LLM From Scratch 自测</a></h1>
+<h2 id="title-自测题llm-from-scratch"><a class="header" href="#title-自测题llm-from-scratch">title: “自测题：LLM From Scratch”</a></h2>
+<h1 id="自测题llm-from-scratch"><a class="header" href="#自测题llm-from-scratch">自测题：LLM From Scratch</a></h1>
+<p>这份题是检查你有没有真正开始理解“模型本体”。</p>
+<hr>
+<h2 id="part-1-主链路理解"><a class="header" href="#part-1-主链路理解">Part 1: 主链路理解</a></h2>
+<h3 id="1-1"><a class="header" href="#1-1">1.</a></h3>
+<p>一个 decoder-only language model，从输入文本到输出下一个 token，中间大致发生了什么？</p>
+<h3 id="2-1"><a class="header" href="#2-1">2.</a></h3>
+<p>tokenizer 在整个系统里到底负责什么？</p>
+<h3 id="3-1"><a class="header" href="#3-1">3.</a></h3>
+<p>为什么 tokenizer 不是“可有可无的小细节”？</p>
+<h3 id="4-1"><a class="header" href="#4-1">4.</a></h3>
+<p>embedding 层在做什么？</p>
+<h3 id="5-1"><a class="header" href="#5-1">5.</a></h3>
+<p>self-attention 为什么是 transformer 的核心？</p>
+<hr>
+<h2 id="part-2-训练理解"><a class="header" href="#part-2-训练理解">Part 2: 训练理解</a></h2>
+<h3 id="6-1"><a class="header" href="#6-1">6.</a></h3>
+<p>language model training 里的训练目标是什么？</p>
+<h3 id="7-1"><a class="header" href="#7-1">7.</a></h3>
+<p>为什么 pretraining 本质上是一个“预测下一个 token”的问题？</p>
+<h3 id="8-1"><a class="header" href="#8-1">8.</a></h3>
+<p>训练脚本里通常至少会有哪几个核心部件？</p>
+<h3 id="9-1"><a class="header" href="#9-1">9.</a></h3>
+<p>为什么 batch size、sequence length、learning rate 都会影响训练？</p>
+<h3 id="10-1"><a class="header" href="#10-1">10.</a></h3>
+<p>训练和推理的代码入口，通常有什么不同？</p>
+<hr>
+<h2 id="part-3-项目对应题-1"><a class="header" href="#part-3-项目对应题-1">Part 3: 项目对应题</a></h2>
+<h3 id="11-1"><a class="header" href="#11-1">11.</a></h3>
+<p><code>MiniMind</code> 最适合帮你建立什么直觉？</p>
+<h3 id="12-1"><a class="header" href="#12-1">12.</a></h3>
+<p><code>CS336</code> 和一个普通教程最大的区别是什么？</p>
+<h3 id="13-1"><a class="header" href="#13-1">13.</a></h3>
+<p>如果你已经跑通 <code>MiniMind</code>，为什么接着看 <code>CS336</code> 会更稳？</p>
+<hr>
+<h2 id="part-4-动手题-1"><a class="header" href="#part-4-动手题-1">Part 4: 动手题</a></h2>
+<h3 id="14-1"><a class="header" href="#14-1">14.</a></h3>
+<p>请你画一个最小 decoder-only LM 的结构图。</p>
+<p>至少要有：</p>
+<ul>
+<li>tokenizer</li>
+<li>embeddings</li>
+<li>transformer blocks</li>
+<li>logits</li>
+<li>sampling / generation</li>
+</ul>
+<h3 id="15-1"><a class="header" href="#15-1">15.</a></h3>
+<p>如果让你自己写一个极小语言模型实验，你会按什么顺序实现？</p>
+<h3 id="16-1"><a class="header" href="#16-1">16.</a></h3>
+<p>如果模型训练不收敛，你会优先检查哪三类问题？</p>
+<h3 id="17-1"><a class="header" href="#17-1">17.</a></h3>
+<p>请你解释：</p>
+<ul>
+<li>pretraining 学到了什么</li>
+<li>它没有解决什么</li>
+</ul>
+<hr>
+<h2 id="自评分标准-1"><a class="header" href="#自评分标准-1">自评分标准</a></h2>
+<p>每题：</p>
+<ul>
+<li><code>2 分</code>：能自己解释，还能连接到代码</li>
+<li><code>1 分</code>：知道概念，但和代码连不起来</li>
+<li><code>0 分</code>：不会</li>
+</ul>
+<p>总分：</p>
+<ul>
+<li><code>14 分以上</code>：说明你已经有模型主链路意识</li>
+<li><code>9 到 13 分</code>：说明概念有了，但实现层还不够稳</li>
+<li><code>8 分以下</code>：建议回到 <code>MiniMind</code> 和 <code>CS336</code> 的基础部分</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="alignment--agent-rl-自测"><a href="#alignment--agent-rl-自测" class="header">Alignment / Agent RL 自测</a></h1>
+<h2 id="title-自测题alignment--agent-rl"><a class="header" href="#title-自测题alignment--agent-rl">title: “自测题：Alignment / Agent RL”</a></h2>
+<h1 id="自测题alignment--agent-rl"><a class="header" href="#自测题alignment--agent-rl">自测题：Alignment / Agent RL</a></h1>
+<p>这份题主要检查你有没有把：</p>
+<ul>
+<li>pretraining</li>
+<li>SFT</li>
+<li>preference optimization</li>
+<li>agent RL</li>
+</ul>
+<p>区分开。</p>
+<hr>
+<h2 id="part-1-基础区分"><a class="header" href="#part-1-基础区分">Part 1: 基础区分</a></h2>
+<h3 id="1-2"><a class="header" href="#1-2">1.</a></h3>
+<p>为什么模型完成 pretraining 后，通常还不够“好用”？</p>
+<h3 id="2-2"><a class="header" href="#2-2">2.</a></h3>
+<p>SFT 在解决什么问题？</p>
+<h3 id="3-2"><a class="header" href="#3-2">3.</a></h3>
+<p>SFT 没有解决什么问题？</p>
+<h3 id="4-2"><a class="header" href="#4-2">4.</a></h3>
+<p>为什么 alignment 不能简单理解成“让模型更像人说话”？</p>
+<hr>
+<h2 id="part-2-方法理解"><a class="header" href="#part-2-方法理解">Part 2: 方法理解</a></h2>
+<h3 id="5-2"><a class="header" href="#5-2">5.</a></h3>
+<p><code>Expert Iteration</code> 的核心想法是什么？</p>
+<h3 id="6-2"><a class="header" href="#6-2">6.</a></h3>
+<p><code>GRPO</code> 和普通 supervised fine-tuning 的区别是什么？</p>
+<h3 id="7-2"><a class="header" href="#7-2">7.</a></h3>
+<p>reward 在 alignment 里扮演什么角色？</p>
+<h3 id="8-2"><a class="header" href="#8-2">8.</a></h3>
+<p>为什么 sampling 会影响 alignment 的训练结果？</p>
+<h3 id="9-2"><a class="header" href="#9-2">9.</a></h3>
+<p>为什么多步 agent 任务会比单步问答更难训练？</p>
+<h3 id="10-2"><a class="header" href="#10-2">10.</a></h3>
+<p>trajectory 在 agent RL 里为什么重要？</p>
+<hr>
+<h2 id="part-3-项目对应题-2"><a class="header" href="#part-3-项目对应题-2">Part 3: 项目对应题</a></h2>
+<h3 id="11-2"><a class="header" href="#11-2">11.</a></h3>
+<p><code>ModelAlignmentFromScratch</code> 最值得你学的是什么？</p>
+<h3 id="12-2"><a class="header" href="#12-2">12.</a></h3>
+<p>这个项目里为什么建议先读 <code>sft.py</code>，不要一开始就冲 <code>GRPO.py</code>？</p>
+<h3 id="13-2"><a class="header" href="#13-2">13.</a></h3>
+<p><code>OpenPipe ART</code> 和普通对齐项目相比，更强调什么？</p>
+<hr>
+<h2 id="part-4-动手题-2"><a class="header" href="#part-4-动手题-2">Part 4: 动手题</a></h2>
+<h3 id="14-2"><a class="header" href="#14-2">14.</a></h3>
+<p>请你自己写一张表，对比：</p>
+<ul>
+<li>pretraining</li>
+<li>SFT</li>
+<li>EI</li>
+<li>GRPO</li>
+<li>agent RL</li>
+</ul>
+<p>字段至少包含：</p>
+<ul>
+<li>输入数据</li>
+<li>优化目标</li>
+<li>输出能力</li>
+</ul>
+<h3 id="15-2"><a class="header" href="#15-2">15.</a></h3>
+<p>如果一个 agent 在多步任务里表现不稳定，你会怀疑哪几类问题？</p>
+<h3 id="16-2"><a class="header" href="#16-2">16.</a></h3>
+<p>如果让你自己设计一个最小 agent RL 任务，你会怎么定义：</p>
+<ul>
+<li>task</li>
+<li>reward</li>
+<li>success criterion</li>
+</ul>
+<hr>
+<h2 id="自评分标准-2"><a class="header" href="#自评分标准-2">自评分标准</a></h2>
+<p>每题：</p>
+<ul>
+<li><code>2 分</code>：能说清楚，还能和项目代码联系起来</li>
+<li><code>1 分</code>：概念知道，但边界模糊</li>
+<li><code>0 分</code>：不会</li>
+</ul>
+<p>总分：</p>
+<ul>
+<li><code>13 分以上</code>：说明你已经开始真正理解 alignment</li>
+<li><code>8 到 12 分</code>：说明概念初步建立，但还需要再看实现</li>
+<li><code>7 分以下</code>：建议先回到 <code>ModelAlignmentFromScratch</code></li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="自测题fastapi--full-stack-web"><a class="header" href="#自测题fastapi--full-stack-web">自测题：FastAPI / Full Stack Web</a></h1>
+<p>这份题不是背概念，而是检查你有没有真的理解一个全栈 Web 应用是怎么工作的。</p>
+<p>建议规则：</p>
+<ul>
+<li>先闭卷做</li>
+<li>每题先口头讲，再写</li>
+<li>如果只能写术语，说明还没真正掌握</li>
+</ul>
+<hr>
+<h2 id="part-1-基础判断-1"><a class="header" href="#part-1-基础判断-1">Part 1: 基础判断</a></h2>
+<h3 id="1-3"><a class="header" href="#1-3">1.</a></h3>
+<p>不用术语，直接用自己的话解释：</p>
+<ul>
+<li>什么叫前后端分离</li>
+<li>前端和后端分别负责什么</li>
+</ul>
+<h3 id="2-3"><a class="header" href="#2-3">2.</a></h3>
+<p>一个最小全栈 Web 应用至少包括哪些层？</p>
+<p>要求：</p>
+<ul>
+<li>不要只写“前端后端数据库”</li>
+<li>要写出信息怎么流动</li>
+</ul>
+<h3 id="3-3"><a class="header" href="#3-3">3.</a></h3>
+<p>为什么 FastAPI 这种后端框架在全栈应用里有价值？</p>
+<h3 id="4-3"><a class="header" href="#4-3">4.</a></h3>
+<p>前端点一次按钮，到页面显示最新数据，中间最少经过哪些步骤？</p>
+<h3 id="5-3"><a class="header" href="#5-3">5.</a></h3>
+<p>为什么“前端能打开页面”不等于“前后端已经打通”？</p>
+<hr>
+<h2 id="part-2-结构理解-1"><a class="header" href="#part-2-结构理解-1">Part 2: 结构理解</a></h2>
+<h3 id="6-3"><a class="header" href="#6-3">6.</a></h3>
+<p>如果你打开一个 FastAPI 全栈模板，你会先看哪四个位置？</p>
+<h3 id="7-3"><a class="header" href="#7-3">7.</a></h3>
+<p><code>route</code>、<code>schema</code>、<code>model</code>、<code>database</code> 分别在解决什么问题？</p>
+<h3 id="8-3"><a class="header" href="#8-3">8.</a></h3>
+<p>为什么认证是全栈项目里非常关键的一层？</p>
+<h3 id="9-3"><a class="header" href="#9-3">9.</a></h3>
+<p>前端拿到 token 以后，通常还要解决什么问题？</p>
+<h3 id="10-3"><a class="header" href="#10-3">10.</a></h3>
+<p>为什么 Docker 和环境变量在全栈项目里经常出现？</p>
+<hr>
+<h2 id="part-3-项目对应题-3"><a class="header" href="#part-3-项目对应题-3">Part 3: 项目对应题</a></h2>
+<h3 id="11-3"><a class="header" href="#11-3">11.</a></h3>
+<p><code>full-stack-fastapi-template</code> 最适合帮你学会什么？</p>
+<h3 id="12-3"><a class="header" href="#12-3">12.</a></h3>
+<p>它和“只写一个 FastAPI hello world”最大的差别是什么？</p>
+<h3 id="13-3"><a class="header" href="#13-3">13.</a></h3>
+<p>如果你看这个模板时只盯后端，不看前端，你会漏掉什么？</p>
+<h3 id="14-3"><a class="header" href="#14-3">14.</a></h3>
+<p>如果你只会跑通模板，但不会加一个小字段或小页面，说明你还差哪一步？</p>
+<hr>
+<h2 id="part-4-动手题-3"><a class="header" href="#part-4-动手题-3">Part 4: 动手题</a></h2>
+<h3 id="15-3"><a class="header" href="#15-3">15.</a></h3>
+<p>请你自己画一个最小全栈数据流图。</p>
+<p>至少包含：</p>
+<ul>
+<li>前端事件</li>
+<li>API 请求</li>
+<li>FastAPI route</li>
+<li>数据库操作</li>
+<li>页面更新</li>
+</ul>
+<h3 id="16-3"><a class="header" href="#16-3">16.</a></h3>
+<p>如果让你给一个现有资源加一个新字段，你最少需要检查哪几层？</p>
+<h3 id="17-2"><a class="header" href="#17-2">17.</a></h3>
+<p>如果让你做一个“学习任务管理器”，你会保留哪 4 个模块，为什么？</p>
+<h3 id="18-1"><a class="header" href="#18-1">18.</a></h3>
+<p>如果你要做 v1，你会刻意先不做哪 2 件事，为什么？</p>
+<hr>
+<h2 id="自评分标准-3"><a class="header" href="#自评分标准-3">自评分标准</a></h2>
+<h3 id="18-分以上-1"><a class="header" href="#18-分以上-1">18 分以上</a></h3>
+<p>说明你已经不只是“知道目录里有什么”，而是理解了整条链路。</p>
+<h3 id="12-到-17-分-1"><a class="header" href="#12-到-17-分-1">12 到 17 分</a></h3>
+<p>说明你知道结构，但还缺少一次自己动手改功能的经验。</p>
+<h3 id="11-分及以下-1"><a class="header" href="#11-分及以下-1">11 分及以下</a></h3>
+<p>说明你大概率还停留在“会启动项目”，没有真正理解全栈联动。</p>
+<hr>
+<h2 id="打分方式-1"><a class="header" href="#打分方式-1">打分方式</a></h2>
+<p>每题按下面标准给自己打分：</p>
+<ul>
+<li><code>2 分</code>：能清楚解释，还能举例</li>
+<li><code>1 分</code>：知道大概，但讲不清</li>
+<li><code>0 分</code>：不会，或者只能复读术语</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="综合项目自测-1"><a href="#综合项目自测-1" class="header">综合项目自测</a></h1>
+<h2 id="title-综合项目自测"><a class="header" href="#title-综合项目自测">title: “综合项目自测”</a></h2>
+<h1 id="综合项目自测"><a class="header" href="#综合项目自测">综合项目自测</a></h1>
+<p>这份是最后做的。</p>
+<p>如果你能把这份答得比较完整，说明你已经不是“看过项目”，而是真的在形成自己的体系。</p>
+<hr>
+<h2 id="综合题-1"><a class="header" href="#综合题-1">综合题 1</a></h2>
+<p>如果现在让你自己做一个 AI 学习项目，你会在下面三条线里先选哪一条，为什么？</p>
+<ul>
+<li>RAG</li>
+<li>LLM from scratch</li>
+<li>Alignment / Agent RL</li>
+</ul>
+<p>要求：</p>
+<ul>
+<li>结合你当前基础</li>
+<li>结合投入成本</li>
+<li>结合可见产出</li>
+</ul>
+<hr>
+<h2 id="综合题-2"><a class="header" href="#综合题-2">综合题 2</a></h2>
+<p>请你解释这三条线之间的关系：</p>
+<ul>
+<li>为什么很多人先从 RAG 做起</li>
+<li>为什么只会 RAG 还不够</li>
+<li>为什么理解模型本体后再学 alignment 会更顺</li>
+</ul>
+<hr>
+<h2 id="综合题-3"><a class="header" href="#综合题-3">综合题 3</a></h2>
+<p>如果让你在 4 周内做一个自学计划，你会怎么排？</p>
+<p>要求：</p>
+<ul>
+<li>每周有主任务</li>
+<li>每周有一个明确产出</li>
+</ul>
+<hr>
+<h2 id="综合题-4"><a class="header" href="#综合题-4">综合题 4</a></h2>
+<p>如果让你做一个最小 capstone，你会选哪种？</p>
+<ul>
+<li>本地文档 RAG</li>
+<li>极小语言模型训练 demo</li>
+<li>最小 alignment 实验</li>
+</ul>
+<p>并说明：</p>
+<ul>
+<li>为什么选它</li>
+<li>你预计最难的点是什么</li>
+<li>你的验收标准是什么</li>
+</ul>
+<hr>
+<h2 id="综合题-5"><a class="header" href="#综合题-5">综合题 5</a></h2>
+<p>请你写一段自己的学习原则，至少回答：</p>
+<ul>
+<li>你以后怎么避免“收藏一堆 repo 但不动手”</li>
+<li>你准备怎么记录项目笔记</li>
+<li>你怎么判断自己是真的学会，而不是只会复述</li>
+</ul>
+<hr>
+<h2 id="完成标准-8"><a class="header" href="#完成标准-8">完成标准</a></h2>
+<p>如果你能把这份写完整，并且不是空话，说明你已经开始进入“自己驱动项目学习”的状态了。</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="参考答案"><a class="header" href="#参考答案">参考答案</a></h1>
+<p>做完题再看：</p>
+<ul>
+<li><a href="#rag-参考答案">RAG 参考答案</a></li>
+<li><a href="#llm-from-scratch-参考答案">LLM From Scratch 参考答案</a></li>
+<li><a href="#alignment--agent-rl-参考答案">Alignment / Agent RL 参考答案</a></li>
+<li><a href="#参考答案fastapi--full-stack-web">FastAPI / Full Stack Web 参考答案</a></li>
+<li><a href="#综合项目参考答案">综合项目参考答案</a></li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="rag-参考答案"><a href="#rag-参考答案" class="header">RAG 参考答案</a></h1>
+<h2 id="title-参考答案rag-systems"><a class="header" href="#title-参考答案rag-systems">title: “参考答案：RAG Systems”</a></h2>
+<h1 id="参考答案rag-systems"><a class="header" href="#参考答案rag-systems">参考答案：RAG Systems</a></h1>
+<p>对应题目：</p>
+<ul>
+<li><a href="#rag-自测">RAG 自测题</a></li>
+</ul>
+<p>这不是标准唯一答案，而是“合格答案长什么样”。</p>
+<hr>
+<h2 id="1-4"><a class="header" href="#1-4">1.</a></h2>
+<p>RAG 可以理解成：</p>
+<ul>
+<li>先去外部知识里找相关材料</li>
+<li>再把找到的材料一起给模型</li>
+<li>让模型基于这些材料回答</li>
+</ul>
+<p>它和直接问大模型的区别是：</p>
+<ul>
+<li>直接问更依赖模型参数里原本记住的知识</li>
+<li>RAG 更依赖当前检索到的上下文</li>
+<li>所以 RAG 更适合接私有知识、最新知识、特定文档</li>
+</ul>
+<hr>
+<h2 id="2-4"><a class="header" href="#2-4">2.</a></h2>
+<p>最小 RAG 主链路通常是：</p>
+<ol>
+<li>准备文档</li>
+<li>把文档切块</li>
+<li>为每个 chunk 建 embedding / index</li>
+<li>用户提问</li>
+<li>用 query 去检索相关 chunk</li>
+<li>把检索结果拼进 prompt</li>
+<li>让模型基于这些上下文回答</li>
+</ol>
+<hr>
+<h2 id="3-4"><a class="header" href="#3-4">3.</a></h2>
+<p>因为生成阶段依赖检索阶段给的材料。</p>
+<p>如果检索错了、漏了、噪声太大：</p>
+<ul>
+<li>模型就可能缺少关键事实</li>
+<li>或被无关内容干扰</li>
+<li>最后即使语言流畅，答案也可能不准</li>
+</ul>
+<hr>
+<h2 id="4-4"><a class="header" href="#4-4">4.</a></h2>
+<p>chunk 太大：</p>
+<ul>
+<li>一次塞入的信息太杂</li>
+<li>检索粒度太粗</li>
+<li>容易检到包含目标但噪声很多的内容</li>
+</ul>
+<p>chunk 太小：</p>
+<ul>
+<li>上下文被切碎</li>
+<li>检索到的片段可能缺少完整语义</li>
+<li>需要更多拼接才能回答</li>
+</ul>
+<hr>
+<h2 id="5-4"><a class="header" href="#5-4">5.</a></h2>
+<p><code>retrieval</code> 负责：</p>
+<ul>
+<li>找相关材料</li>
+</ul>
+<p><code>generation</code> 负责：</p>
+<ul>
+<li>基于材料组织成自然语言回答</li>
+</ul>
+<hr>
+<h2 id="6-4"><a class="header" href="#6-4">6.</a></h2>
+<p>优先检查三层：</p>
+<ol>
+<li>数据和 chunk 层</li>
+<li>retrieval 层</li>
+<li>prompt / answer synthesis 层</li>
+</ol>
+<p>如果这三层都没问题，再去看模型选择和更复杂增强。</p>
+<hr>
+<h2 id="7-4"><a class="header" href="#7-4">7.</a></h2>
+<p>当用户问题本身不够适合检索时，query rewriting 有帮助。</p>
+<p>比如：</p>
+<ul>
+<li>问题太模糊</li>
+<li>关键词不完整</li>
+<li>用户表达方式和文档表达方式不一致</li>
+</ul>
+<hr>
+<h2 id="8-4"><a class="header" href="#8-4">8.</a></h2>
+<p>因为初始检索经常会带来噪声。</p>
+<p><code>filtering</code> / <code>reranking</code> 的价值是：</p>
+<ul>
+<li>留下更相关内容</li>
+<li>去掉明显无关的 chunk</li>
+<li>提高最终上下文质量</li>
+</ul>
+<hr>
+<h2 id="9-4"><a class="header" href="#9-4">9.</a></h2>
+<p>因为复杂问题不一定一次检索就能回答。</p>
+<p>planner / executor 结构适合：</p>
+<ul>
+<li>先拆问题</li>
+<li>再按步骤查</li>
+<li>中间根据结果调整下一步</li>
+</ul>
+<p>这更像多步搜索，而不是一次性问答。</p>
+<hr>
+<h2 id="10-4"><a class="header" href="#10-4">10.</a></h2>
+<p>source attribution 的意义包括：</p>
+<ul>
+<li>方便人工核验</li>
+<li>增强用户信任</li>
+<li>帮助定位错误来源</li>
+<li>让系统更适合知识工作流</li>
+</ul>
+<hr>
+<h2 id="11-4"><a class="header" href="#11-4">11.</a></h2>
+<p><code>rag-from-scratch</code> 最适合帮你学：</p>
+<ul>
+<li>最小 RAG 主链路</li>
+<li>notebook 式实验</li>
+<li>检索和生成是如何连起来的</li>
+</ul>
+<hr>
+<h2 id="12-4"><a class="header" href="#12-4">12.</a></h2>
+<p><code>complex-RAG-guide</code> 相比基础 RAG，多补了这些关键层：</p>
+<ul>
+<li>cleaning</li>
+<li>filtering</li>
+<li>query rewriting</li>
+<li>planner / re-planner</li>
+<li>evaluation</li>
+</ul>
+<hr>
+<h2 id="13-4"><a class="header" href="#13-4">13.</a></h2>
+<p>正确学法不是全看，而是：</p>
+<ol>
+<li>按 technique 分类</li>
+<li>每次只挑少量技术点</li>
+<li>问“它在优化哪一层”</li>
+<li>最后做对照实验</li>
+</ol>
+<hr>
+<h2 id="14-4"><a class="header" href="#14-4">14.</a></h2>
+<p><code>deep-searcher</code> 更像系统：</p>
+<ul>
+<li>支持更多 provider 组合</li>
+<li>有更完整配置层</li>
+<li>有数据加载、查询、CLI、服务化思路</li>
+</ul>
+<p>而 notebook demo 更偏教学和原型验证。</p>
+<hr>
+<h2 id="15-4"><a class="header" href="#15-4">15.</a></h2>
+<p>合格答案应该能画出：</p>
+<ul>
+<li>文档</li>
+<li>chunk / index</li>
+<li>query</li>
+<li>retrieval</li>
+<li>context assembly</li>
+<li>generation</li>
+<li>answer</li>
+</ul>
+<hr>
+<h2 id="16-4"><a class="header" href="#16-4">16.</a></h2>
+<p>一个合格实验应该包含：</p>
+<ul>
+<li>固定问题集</li>
+<li>只改 <code>top-k</code></li>
+<li>比较回答准确性、相关性、噪声</li>
+<li>最好记录 source 质量变化</li>
+</ul>
+<hr>
+<h2 id="17-3"><a class="header" href="#17-3">17.</a></h2>
+<p>合理答案示例：</p>
+<ul>
+<li>文档切块</li>
+<li>检索</li>
+<li>带来源的回答生成</li>
+</ul>
+<p>理由：</p>
+<ul>
+<li>这是最小可用系统</li>
+<li>先把主链路做稳，比一开始上 planner 更重要</li>
+</ul>
+<hr>
+<h2 id="18-2"><a class="header" href="#18-2">18.</a></h2>
+<p>合理删法示例：</p>
+<ul>
+<li>先删 planner</li>
+<li>先删复杂 evaluation</li>
+</ul>
+<p>原因：</p>
+<ul>
+<li>v1 最重要的是跑通主链路</li>
+<li>复杂模块应该在问题真实存在后再引入</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="llm-from-scratch-参考答案"><a href="#llm-from-scratch-参考答案" class="header">LLM From Scratch 参考答案</a></h1>
+<h2 id="title-参考答案llm-from-scratch"><a class="header" href="#title-参考答案llm-from-scratch">title: “参考答案：LLM From Scratch”</a></h2>
+<h1 id="参考答案llm-from-scratch"><a class="header" href="#参考答案llm-from-scratch">参考答案：LLM From Scratch</a></h1>
+<p>对应题目：</p>
+<ul>
+<li><a href="#llm-from-scratch-自测">LLM From Scratch 自测题</a></li>
+</ul>
+<hr>
+<h2 id="1-5"><a class="header" href="#1-5">1.</a></h2>
+<p>最粗的主链路是：</p>
+<ul>
+<li>文本先被 tokenizer 切成 token</li>
+<li>token 变成 embedding</li>
+<li>embedding 经过多层 transformer block</li>
+<li>输出每个位置对应的 logits</li>
+<li>根据 logits 预测下一个 token</li>
+</ul>
+<hr>
+<h2 id="2-5"><a class="header" href="#2-5">2.</a></h2>
+<p>tokenizer 负责把原始文本变成模型可处理的离散 token 序列。</p>
+<p>它本质上定义了：</p>
+<ul>
+<li>模型看世界的最小单位是什么</li>
+</ul>
+<hr>
+<h2 id="3-5"><a class="header" href="#3-5">3.</a></h2>
+<p>因为 tokenizer 会影响：</p>
+<ul>
+<li>序列长度</li>
+<li>词片切分方式</li>
+<li>稀有词处理</li>
+<li>训练和推理效率</li>
+</ul>
+<p>它不是边角料，而是输入表示的一部分。</p>
+<hr>
+<h2 id="4-5"><a class="header" href="#4-5">4.</a></h2>
+<p>embedding 层负责把离散 token id 映射到连续向量空间。</p>
+<p>这样模型才能在向量空间里学习模式。</p>
+<hr>
+<h2 id="5-5"><a class="header" href="#5-5">5.</a></h2>
+<p>self-attention 的核心价值是：</p>
+<ul>
+<li>每个 token 在计算表示时，可以动态参考其他 token</li>
+</ul>
+<p>这让模型能建模长距离依赖。</p>
+<hr>
+<h2 id="6-5"><a class="header" href="#6-5">6.</a></h2>
+<p>训练目标通常是：</p>
+<ul>
+<li>根据前面的 token，预测下一个 token</li>
+</ul>
+<hr>
+<h2 id="7-5"><a class="header" href="#7-5">7.</a></h2>
+<p>因为 language model 的训练数据天然可以转成：</p>
+<ul>
+<li>输入前缀</li>
+<li>目标下一个 token</li>
+</ul>
+<p>这使得预训练能在海量文本上自监督进行。</p>
+<hr>
+<h2 id="8-5"><a class="header" href="#8-5">8.</a></h2>
+<p>核心部件通常包括：</p>
+<ul>
+<li>数据加载</li>
+<li>tokenizer</li>
+<li>model</li>
+<li>loss</li>
+<li>optimizer</li>
+<li>training loop</li>
+<li>checkpoint / logging</li>
+</ul>
+<hr>
+<h2 id="9-5"><a class="header" href="#9-5">9.</a></h2>
+<p>因为这些超参会影响：</p>
+<ul>
+<li>梯度估计稳定性</li>
+<li>有效上下文长度</li>
+<li>收敛速度</li>
+<li>显存消耗</li>
+</ul>
+<hr>
+<h2 id="10-5"><a class="header" href="#10-5">10.</a></h2>
+<p>训练入口更关注：</p>
+<ul>
+<li>前向</li>
+<li>loss</li>
+<li>反向传播</li>
+<li>参数更新</li>
+</ul>
+<p>推理入口更关注：</p>
+<ul>
+<li>给定 prompt</li>
+<li>逐步采样生成 token</li>
+</ul>
+<hr>
+<h2 id="11-5"><a class="header" href="#11-5">11.</a></h2>
+<p><code>MiniMind</code> 最适合帮你建立：</p>
+<ul>
+<li>小模型完整链路的直觉</li>
+</ul>
+<hr>
+<h2 id="12-5"><a class="header" href="#12-5">12.</a></h2>
+<p><code>CS336</code> 和普通教程的区别是：</p>
+<ul>
+<li>它更系统</li>
+<li>更接近课程和作业驱动</li>
+<li>不只讲概念，也强调实现和工程视角</li>
+</ul>
+<hr>
+<h2 id="13-5"><a class="header" href="#13-5">13.</a></h2>
+<p>因为你先有了一个小模型的整体感，再去看系统课程时，不会只剩抽象名词。</p>
+<hr>
+<h2 id="14-5"><a class="header" href="#14-5">14.</a></h2>
+<p>合格图里至少要包括：</p>
+<ul>
+<li>tokenizer</li>
+<li>embeddings</li>
+<li>transformer blocks</li>
+<li>logits</li>
+<li>sampling</li>
+</ul>
+<hr>
+<h2 id="15-5"><a class="header" href="#15-5">15.</a></h2>
+<p>一个合理实现顺序可以是：</p>
+<ol>
+<li>tokenizer</li>
+<li>dataset / dataloader</li>
+<li>embeddings</li>
+<li>transformer block</li>
+<li>LM head</li>
+<li>loss</li>
+<li>training loop</li>
+<li>generation</li>
+</ol>
+<hr>
+<h2 id="16-5"><a class="header" href="#16-5">16.</a></h2>
+<p>训练不收敛时，优先怀疑：</p>
+<ul>
+<li>数据 / tokenizer 问题</li>
+<li>学习率 / optimizer / batch 问题</li>
+<li>实现 bug</li>
+</ul>
+<hr>
+<h2 id="17-4"><a class="header" href="#17-4">17.</a></h2>
+<p>pretraining 学到的是：</p>
+<ul>
+<li>语言模式</li>
+<li>统计共现</li>
+<li>一般性的文本建模能力</li>
+</ul>
+<p>它没有直接解决：</p>
+<ul>
+<li>指令服从</li>
+<li>人类偏好</li>
+<li>多步 agent 行为稳定性</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="alignment--agent-rl-参考答案"><a href="#alignment--agent-rl-参考答案" class="header">Alignment / Agent RL 参考答案</a></h1>
+<h2 id="title-参考答案alignment--agent-rl"><a class="header" href="#title-参考答案alignment--agent-rl">title: “参考答案：Alignment / Agent RL”</a></h2>
+<h1 id="参考答案alignment--agent-rl"><a class="header" href="#参考答案alignment--agent-rl">参考答案：Alignment / Agent RL</a></h1>
+<p>对应题目：</p>
+<ul>
+<li><a href="#alignment--agent-rl-自测">Alignment / Agent RL 自测题</a></li>
+</ul>
+<hr>
+<h2 id="1-6"><a class="header" href="#1-6">1.</a></h2>
+<p>因为 pretraining 主要学的是：</p>
+<ul>
+<li>语言模式</li>
+<li>下一个 token 预测</li>
+</ul>
+<p>但这不自动等于：</p>
+<ul>
+<li>听话</li>
+<li>符合偏好</li>
+<li>稳定完成多步任务</li>
+</ul>
+<hr>
+<h2 id="2-6"><a class="header" href="#2-6">2.</a></h2>
+<p>SFT 主要解决：</p>
+<ul>
+<li>让模型学会按示例格式和目标行为输出</li>
+</ul>
+<hr>
+<h2 id="3-6"><a class="header" href="#3-6">3.</a></h2>
+<p>SFT 没完全解决：</p>
+<ul>
+<li>长期偏好优化</li>
+<li>多候选之间的相对优劣</li>
+<li>多步行为稳定性</li>
+</ul>
+<hr>
+<h2 id="4-6"><a class="header" href="#4-6">4.</a></h2>
+<p>因为 alignment 不只是“更像人类说话”。</p>
+<p>它更关心：</p>
+<ul>
+<li>是否符合任务目标</li>
+<li>是否更符合偏好</li>
+<li>是否减少不想要的行为</li>
+</ul>
+<hr>
+<h2 id="5-6"><a class="header" href="#5-6">5.</a></h2>
+<p>Expert Iteration 的核心想法是：</p>
+<ul>
+<li>先生成候选</li>
+<li>筛掉高质量样本</li>
+<li>再用这些更好的样本继续训练</li>
+</ul>
+<hr>
+<h2 id="6-6"><a class="header" href="#6-6">6.</a></h2>
+<p>GRPO 和 SFT 的区别在于：</p>
+<ul>
+<li>SFT 直接在给定 target 上监督学习</li>
+<li>GRPO 更强调基于奖励或相对优劣来优化策略</li>
+</ul>
+<hr>
+<h2 id="7-6"><a class="header" href="#7-6">7.</a></h2>
+<p>reward 负责把“什么更好”变成可优化的训练信号。</p>
+<hr>
+<h2 id="8-6"><a class="header" href="#8-6">8.</a></h2>
+<p>因为训练要基于采样到的响应来估计好坏。</p>
+<p>如果采样分布变了：</p>
+<ul>
+<li>奖励分布会变</li>
+<li>更新方向也会变</li>
+</ul>
+<hr>
+<h2 id="9-6"><a class="header" href="#9-6">9.</a></h2>
+<p>多步 agent 更难，因为它涉及：</p>
+<ul>
+<li>长轨迹</li>
+<li>中间步骤误差累积</li>
+<li>奖励分配更复杂</li>
+</ul>
+<hr>
+<h2 id="10-6"><a class="header" href="#10-6">10.</a></h2>
+<p>trajectory 重要，因为 agent 的质量不只在最后一句话，而在整段交互过程。</p>
+<hr>
+<h2 id="11-6"><a class="header" href="#11-6">11.</a></h2>
+<p><code>ModelAlignmentFromScratch</code> 最值得学的是：</p>
+<ul>
+<li>把 SFT、EI、GRPO 具体落到实现层</li>
+</ul>
+<hr>
+<h2 id="12-6"><a class="header" href="#12-6">12.</a></h2>
+<p>因为 SFT 是最基础 baseline。</p>
+<p>先看它，才能看懂后面的高级方法到底多了什么。</p>
+<hr>
+<h2 id="13-6"><a class="header" href="#13-6">13.</a></h2>
+<p><code>OpenPipe ART</code> 更强调：</p>
+<ul>
+<li>agent task</li>
+<li>多步 interaction</li>
+<li>rollout / reward / training 的结合</li>
+</ul>
+<hr>
+<h2 id="14-6"><a class="header" href="#14-6">14.</a></h2>
+<p>合格表至少能区分：</p>
+<ul>
+<li>pretraining：学语言模式</li>
+<li>SFT：学示例行为</li>
+<li>EI：筛高质量样本后迭代提升</li>
+<li>GRPO：基于相对奖励优化策略</li>
+<li>agent RL：优化多步任务行为</li>
+</ul>
+<hr>
+<h2 id="15-6"><a class="header" href="#15-6">15.</a></h2>
+<p>优先怀疑：</p>
+<ul>
+<li>reward 设计不合理</li>
+<li>任务定义不清</li>
+<li>rollout 质量差</li>
+<li>credit assignment 难</li>
+</ul>
+<hr>
+<h2 id="16-6"><a class="header" href="#16-6">16.</a></h2>
+<p>一个最小 agent RL 任务可以这样定义：</p>
+<ul>
+<li>task：完成一个简单多步查询或工具调用</li>
+<li>reward：任务是否成功、步骤是否合理</li>
+<li>success criterion：成功率是否提升、轨迹是否更稳定</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="参考答案fastapi--full-stack-web"><a class="header" href="#参考答案fastapi--full-stack-web">参考答案：FastAPI / Full Stack Web</a></h1>
+<p>对应题目：</p>
+<ul>
+<li><a href="#自测题fastapi--full-stack-web">FastAPI / Full Stack Web 自测题</a></li>
+</ul>
+<p>这不是唯一标准答案，而是“合格答案至少应该讲到什么”。</p>
+<hr>
+<h2 id="1-7"><a class="header" href="#1-7">1.</a></h2>
+<p>前后端分离可以理解成：</p>
+<ul>
+<li>前端负责页面、交互、展示</li>
+<li>后端负责数据、业务逻辑、权限、数据库访问</li>
+</ul>
+<p>它们通过 API 通信，而不是把所有逻辑都塞在一个页面里。</p>
+<hr>
+<h2 id="2-7"><a class="header" href="#2-7">2.</a></h2>
+<p>一个最小全栈 Web 应用通常至少有：</p>
+<ol>
+<li>前端页面</li>
+<li>用户操作触发请求</li>
+<li>后端 API 接收请求</li>
+<li>后端逻辑读写数据库</li>
+<li>返回响应给前端</li>
+<li>前端更新 UI</li>
+</ol>
+<hr>
+<h2 id="3-7"><a class="header" href="#3-7">3.</a></h2>
+<p>FastAPI 的价值包括：</p>
+<ul>
+<li>定义 API 很直接</li>
+<li>请求 / 响应结构清楚</li>
+<li>自动文档很适合调试</li>
+<li>很适合做现代 Web 产品后端</li>
+</ul>
+<hr>
+<h2 id="4-7"><a class="header" href="#4-7">4.</a></h2>
+<p>最小流程通常是：</p>
+<ol>
+<li>用户点击按钮</li>
+<li>前端发送请求</li>
+<li>FastAPI route 接收请求</li>
+<li>后端执行业务逻辑</li>
+<li>数据库被查询或更新</li>
+<li>后端返回响应</li>
+<li>前端根据响应更新页面</li>
+</ol>
+<hr>
+<h2 id="5-7"><a class="header" href="#5-7">5.</a></h2>
+<p>因为页面能打开只说明前端资源加载成功。</p>
+<p>不代表：</p>
+<ul>
+<li>API 可用</li>
+<li>认证正常</li>
+<li>数据库连通</li>
+<li>页面展示的是实时数据</li>
+</ul>
+<hr>
+<h2 id="6-7"><a class="header" href="#6-7">6.</a></h2>
+<p>建议先看四个位置：</p>
+<ol>
+<li>后端入口和 router</li>
+<li>schema / model</li>
+<li>数据库配置或 CRUD 逻辑</li>
+<li>前端页面和 API 调用层</li>
+</ol>
+<hr>
+<h2 id="7-7"><a class="header" href="#7-7">7.</a></h2>
+<p><code>route</code>：</p>
+<ul>
+<li>接收请求、返回响应</li>
+</ul>
+<p><code>schema</code>：</p>
+<ul>
+<li>定义请求和响应的数据结构</li>
+</ul>
+<p><code>model</code>：</p>
+<ul>
+<li>定义数据库里的数据对象</li>
+</ul>
+<p><code>database</code>：</p>
+<ul>
+<li>真正存取数据</li>
+</ul>
+<hr>
+<h2 id="8-7"><a class="header" href="#8-7">8.</a></h2>
+<p>因为认证决定：</p>
+<ul>
+<li>谁能访问接口</li>
+<li>谁能看到哪些数据</li>
+<li>系统怎么识别当前用户</li>
+</ul>
+<p>没有认证，大多数真实产品都不完整。</p>
+<hr>
+<h2 id="9-7"><a class="header" href="#9-7">9.</a></h2>
+<p>前端拿到 token 后，通常还要处理：</p>
+<ul>
+<li>token 存在哪里</li>
+<li>请求时怎么带上 token</li>
+<li>token 失效后怎么办</li>
+<li>用户刷新页面后登录态是否保留</li>
+</ul>
+<hr>
+<h2 id="10-7"><a class="header" href="#10-7">10.</a></h2>
+<p>因为全栈项目通常不只一个进程或服务。</p>
+<p>Docker 和环境变量主要解决：</p>
+<ul>
+<li>服务一起启动</li>
+<li>环境配置隔离</li>
+<li>数据库地址、密钥等配置管理</li>
+</ul>
+<hr>
+<h2 id="11-7"><a class="header" href="#11-7">11.</a></h2>
+<p><code>full-stack-fastapi-template</code> 最适合帮你学：</p>
+<ul>
+<li>FastAPI 后端结构</li>
+<li>前后端联动</li>
+<li>认证</li>
+<li>数据库 CRUD</li>
+<li>一个真实全栈模板如何组织</li>
+</ul>
+<hr>
+<h2 id="12-7"><a class="header" href="#12-7">12.</a></h2>
+<p>和 hello world 的最大差别是：</p>
+<ul>
+<li>不只是一个接口能返回字符串</li>
+<li>而是有真实的前端、数据库、认证和应用结构</li>
+</ul>
+<p>也就是从“单点演示”变成“完整系统骨架”。</p>
+<hr>
+<h2 id="13-7"><a class="header" href="#13-7">13.</a></h2>
+<p>你会漏掉：</p>
+<ul>
+<li>前端如何发请求</li>
+<li>登录态如何在 UI 侧处理</li>
+<li>数据返回后怎么展示</li>
+<li>一个功能怎样真正贯通到用户界面</li>
+</ul>
+<hr>
+<h2 id="14-7"><a class="header" href="#14-7">14.</a></h2>
+<p>说明你还缺“贯通一次真实改动”的经验。</p>
+<p>也就是：</p>
+<ul>
+<li>从后端到数据库</li>
+<li>从数据库到 API</li>
+<li>从 API 到前端页面</li>
+</ul>
+<p>这条链路还没真正走过。</p>
+<hr>
+<h2 id="15-7"><a class="header" href="#15-7">15.</a></h2>
+<p>合格图至少要包括：</p>
+<ul>
+<li>frontend event</li>
+<li>API request</li>
+<li>FastAPI route</li>
+<li>backend logic</li>
+<li>db operation</li>
+<li>API response</li>
+<li>UI update</li>
+</ul>
+<hr>
+<h2 id="16-7"><a class="header" href="#16-7">16.</a></h2>
+<p>最少要检查这些层：</p>
+<ol>
+<li>数据模型</li>
+<li>schema</li>
+<li>route 或业务逻辑</li>
+<li>数据库存储</li>
+<li>前端展示或表单提交</li>
+</ol>
+<hr>
+<h2 id="17-5"><a class="header" href="#17-5">17.</a></h2>
+<p>合理答案示例：</p>
+<ul>
+<li>用户登录</li>
+<li>任务列表</li>
+<li>创建 / 更新任务</li>
+<li>数据库存储</li>
+</ul>
+<p>理由：</p>
+<ul>
+<li>这是最小可用产品链路</li>
+<li>能把前端、后端、认证、数据库一起练到</li>
+</ul>
+<hr>
+<h2 id="18-3"><a class="header" href="#18-3">18.</a></h2>
+<p>合理不做的事情示例：</p>
+<ul>
+<li>先不做复杂权限系统</li>
+<li>先不做很重的 UI 美化</li>
+</ul>
+<p>原因：</p>
+<ul>
+<li>v1 最重要的是主链路打通</li>
+<li>复杂度应该在真实需求出现后再加</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="综合项目参考答案"><a href="#综合项目参考答案" class="header">综合项目参考答案</a></h1>
+<h2 id="title-参考答案综合项目自测"><a class="header" href="#title-参考答案综合项目自测">title: “参考答案：综合项目自测”</a></h2>
+<h1 id="参考答案综合项目自测"><a class="header" href="#参考答案综合项目自测">参考答案：综合项目自测</a></h1>
+<p>对应题目：</p>
+<ul>
+<li><a href="#综合项目自测-1">综合项目自测</a></li>
+</ul>
+<p>这份答案更像参考思路，不是唯一答案。</p>
+<hr>
+<h2 id="综合题-1-1"><a class="header" href="#综合题-1-1">综合题 1</a></h2>
+<p>一个合理回答通常会体现：</p>
+<ul>
+<li>先看自己当前基础</li>
+<li>再看投入成本</li>
+<li>再看可见产出</li>
+</ul>
+<p>比如：</p>
+<ul>
+<li>想快速做出作品，先选 RAG</li>
+<li>想补根基，先选 LLM from scratch</li>
+<li>已经有训练基础，再选 alignment</li>
+</ul>
+<hr>
+<h2 id="综合题-2-1"><a class="header" href="#综合题-2-1">综合题 2</a></h2>
+<p>合理逻辑是：</p>
+<ul>
+<li>很多人先做 RAG，因为更容易出应用成果</li>
+<li>但只会 RAG，不代表理解模型内部</li>
+<li>理解模型本体后，再学 alignment 才知道“后训练”在补什么</li>
+</ul>
+<hr>
+<h2 id="综合题-3-1"><a class="header" href="#综合题-3-1">综合题 3</a></h2>
+<p>一个合格的 4 周计划，应该做到：</p>
+<ul>
+<li>每周只有一个主轴</li>
+<li>每周有明确产出</li>
+<li>不是“看很多”，而是“做成一点”</li>
+</ul>
+<p>例如：</p>
+<ol>
+<li>第 1 周：最小 RAG</li>
+<li>第 2 周：复杂 RAG 增强</li>
+<li>第 3 周：小模型主链路</li>
+<li>第 4 周：alignment 入门</li>
+</ol>
+<hr>
+<h2 id="综合题-4-1"><a class="header" href="#综合题-4-1">综合题 4</a></h2>
+<p>一个合理选择通常取决于你的当前阶段：</p>
+<ul>
+<li>初学者最适合本地文档 RAG</li>
+<li>对模型内部有兴趣的人适合小模型训练 demo</li>
+<li>已有训练基础的人适合最小 alignment 实验</li>
+</ul>
+<p>关键是你要写清：</p>
+<ul>
+<li>为什么选</li>
+<li>最难点是什么</li>
+<li>什么算完成</li>
+</ul>
+<hr>
+<h2 id="综合题-5-1"><a class="header" href="#综合题-5-1">综合题 5</a></h2>
+<p>合格答案通常会包含这些学习原则：</p>
+<ul>
+<li>每次只推进一个 repo</li>
+<li>每个项目必须有运行结果或笔记产出</li>
+<li>先最小复现，再做改动</li>
+<li>用“能否解释 + 能否修改 + 能否设计实验”判断自己是否学会</li>
+</ul>
+<hr>
+<h2 id="最重要的一点"><a class="header" href="#最重要的一点">最重要的一点</a></h2>
+<p>如果你的回答越来越具体，说明你真的在学习。</p>
+<p>如果你的回答总是停留在“多看、多练、多理解”，说明你还没有把项目变成行动。</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr-ef4e11c1.min.js"></script>
+        <script src="mark-09e88c2c.min.js"></script>
+        <script src="searcher-c2a407aa.js"></script>
+
+        <script src="clipboard-1626706a.min.js"></script>
+        <script src="highlight-abc7f01d.js"></script>
+        <script src="book-a0b12cfe.js"></script>
+
+        <!-- Custom JS scripts -->
+
+        <script>
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+
+
+    </div>
+    </body>
+</html>

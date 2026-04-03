@@ -8,6 +8,8 @@ title: "Algorithms"
 
 - [LeetCode 100 Pattern Roadmap](./leetcode_100_pattern_roadmap.md)
 - [LeetCode 100 Pattern Roadmap CN](./leetcode_100_pattern_roadmap_cn.md)
+- [Extended Problem Patterns CN](./extended_problem_patterns_cn.md)
+- [Extended Problem Patterns EN](./extended_problem_patterns_en.md)
 - [Algorithm Notes](./read.md)
 
 ## 专题讲义
@@ -20,3 +22,5 @@ title: "Algorithms"
 ## 详细刷题讲义
 
 - [LeetCode 100 Detailed](./leetcode_100_detailed/)
+- [Extended Problems Detailed](./extended_problem_detailed/)
+- [Extended Problems Full Solutions](./extended_problem_full_solutions/)

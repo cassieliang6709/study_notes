@@ -1,4 +1,5 @@
 .DS_Store
+.obsidian/
 .claude/
 .jekyll-cache/
 .sass-cache/
