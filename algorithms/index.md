@@ -24,3 +24,7 @@ title: "Algorithms"
 - [LeetCode 100 Detailed](./leetcode_100_detailed/)
 - [Extended Problems Detailed](./extended_problem_detailed/)
 - [Extended Problems Full Solutions](./extended_problem_full_solutions/)
+
+## 高频独立题解
+
+- [Company Hot Questions](./company_hot_questions/)
