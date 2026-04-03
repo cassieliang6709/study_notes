@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>
+      {% if page.title %}{{ page.title | escape }} | {% endif %}{{ site.title | escape }}
+    </title>
+    <meta name="description" content="{{ page.excerpt | default: site.description | strip_html | normalize_whitespace | escape }}" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="site-header">
+        <a class="brand" href="{{ '/' | relative_url }}">
+          <span class="brand-kicker">Cassie Liang</span>
+          <span class="brand-title">{{ site.title }}</span>
+        </a>
+        <p class="site-tagline">{{ site.description }}</p>
+        <nav class="site-nav" aria-label="Primary">
+          <a href="{{ '/' | relative_url }}" class="{% if page.url == '/' %}is-active{% endif %}">Home</a>
+          <a href="{{ '/algorithms/' | relative_url }}" class="{% if page.url contains '/algorithms/' %}is-active{% endif %}">Algorithms</a>
+          <a href="{{ '/extended_problem_detailed/' | relative_url }}" class="{% if page.url contains '/extended_problem_detailed/' or page.url contains '/extended_problem_patterns_cn' %}is-active{% endif %}">Extended</a>
+          <a href="{{ '/python/' | relative_url }}" class="{% if page.url contains '/python/' %}is-active{% endif %}">Python</a>
+          <a href="{{ '/ood/' | relative_url }}" class="{% if page.url contains '/ood/' or page.url contains '/from_oop_to_ood_cn' %}is-active{% endif %}">OOD</a>
+          <a href="{{ '/code/' | relative_url }}" class="{% if page.url contains '/code/' %}is-active{% endif %}">Code</a>
+          <a href="{{ '/datasets/' | relative_url }}" class="{% if page.url contains '/datasets/' %}is-active{% endif %}">Datasets</a>
+        </nav>
+      </header>
+
+      <main class="content-frame">
+        <div class="content-glow content-glow-a"></div>
+        <div class="content-glow content-glow-b"></div>
+        <article class="content-card">
+          {{ content }}
+        </article>
+      </main>
+
+      <footer class="site-footer">
+        <span>Published with GitHub Pages</span>
+        <a href="https://github.com/cassieliang6709/study_notes">View Repository</a>
+      </footer>
+    </div>
+  </body>
+</html>

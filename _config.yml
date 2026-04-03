@@ -1,6 +1,5 @@
 title: Study Notes
-description: Personal study notes for algorithms, Python, OOD, and code practice
-theme: minima
+description: Personal study notes for algorithms, Python, OOD, and interview practice
 markdown: kramdown
 
 defaults:
