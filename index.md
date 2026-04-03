@@ -1,17 +1,51 @@
 # Study Notes
 
-这个站点用于在 GitHub Pages 上按分类阅读学习笔记。
+<div class="home-hero">
+  <p class="hero-kicker">Focused Reading Space</p>
+  <p class="hero-copy">把算法、Python、OOD 和扩展题单整理成按主题可跳转的学习站点。首页直接进入你当前最想学的区域，减少来回找文件的成本。</p>
+</div>
 
-## 导航
+<div class="home-grid">
+  <a class="home-card card-algorithms" href="./algorithms/">
+    <strong>Algorithms</strong>
+    <span>LeetCode 路线、二叉树、图、堆、链表讲义</span>
+  </a>
+  <a class="home-card card-extended" href="./extended_problem_detailed/">
+    <strong>Extended Problems</strong>
+    <span>更大题单的详细教学版，适合按 pattern 继续刷</span>
+  </a>
+  <a class="home-card card-patterns" href="./extended_problem_patterns_cn.md">
+    <strong>Pattern Roadmap</strong>
+    <span>按题型整理的扩展题单总览，先判断题型再刷题</span>
+  </a>
+  <a class="home-card card-python" href="./python/">
+    <strong>Python</strong>
+    <span>OOP prerequisites 与概念笔记，适合系统回顾</span>
+  </a>
+  <a class="home-card card-ood" href="./ood/">
+    <strong>OOD</strong>
+    <span>面向对象设计总结和案例，适合面试复盘</span>
+  </a>
+  <a class="home-card card-code" href="./code/">
+    <strong>Code</strong>
+    <span>练习代码、作业代码和测试文件入口</span>
+  </a>
+  <a class="home-card card-datasets" href="./datasets/">
+    <strong>Datasets</strong>
+    <span>训练数据和语料，单独归档方便管理</span>
+  </a>
+  <a class="home-card card-models" href="./models/">
+    <strong>Models</strong>
+    <span>训练产物统一放在这里，避免和文档混在一起</span>
+  </a>
+</div>
 
-- [Algorithms](./algorithms/)
-- [Extended Problems](./extended_problem_detailed/)
-- [Extended Pattern Roadmap CN](./extended_problem_patterns_cn.md)
-- [Python](./python/)
-- [OOD](./ood/)
-- [Code](./code/)
-- [Datasets](./datasets/)
-- [Models](./models/)
+## Start Here
+
+- 想快速进入刷题主线：看 [Algorithms](./algorithms/)
+- 想继续扩展题型：看 [Extended Problems](./extended_problem_detailed/)
+- 想先建立题型识别：看 [Extended Pattern Roadmap CN](./extended_problem_patterns_cn.md)
+- 想补语言和设计基础：看 [Python](./python/) 和 [OOD](./ood/)
 
 ## 使用建议
 

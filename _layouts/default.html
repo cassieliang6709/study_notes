@@ -12,7 +12,8 @@
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}" />
   </head>
-  <body>
+  <body class="{% if page.url == '/' %}page-home{% else %}page-doc{% endif %}">
+    <a id="top"></a>
     <div class="page-shell">
       <header class="site-header">
         <a class="brand" href="{{ '/' | relative_url }}">
@@ -34,9 +35,17 @@
       <main class="content-frame">
         <div class="content-glow content-glow-a"></div>
         <div class="content-glow content-glow-b"></div>
-        <article class="content-card">
-          {{ content }}
-        </article>
+        <div class="reading-layout">
+          <aside class="toc-panel" id="toc-panel" hidden>
+            <div class="toc-card">
+              <p class="toc-kicker">Quick Map</p>
+              <nav id="toc-nav" aria-label="Table of contents"></nav>
+            </div>
+          </aside>
+          <article class="content-card" id="article-content">
+            {{ content }}
+          </article>
+        </div>
       </main>
 
       <footer class="site-footer">
@@ -44,5 +53,7 @@
         <a href="https://github.com/cassieliang6709/study_notes">View Repository</a>
       </footer>
     </div>
+    <a class="back-to-top" href="#top" aria-label="Back to top">Top</a>
+    <script src="{{ '/assets/js/site.js' | relative_url }}"></script>
   </body>
 </html>
