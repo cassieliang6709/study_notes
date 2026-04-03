@@ -9,6 +9,60 @@ title: "Python OOP 概念讲解（中文版）"
 
 ---
 
+## 学习重点总结
+
+这篇文档讲的是 OOP 最核心的概念：类、对象、属性、方法、`self`、`__init__`，以及为什么 OOP 不只是“把函数塞进 class”。
+
+## 这篇文档的题目含义
+
+很多人会写基本 class，但不知道这些语法和设计之间有什么关系。这篇文档的任务是把“语法动作”和“对象思维”连起来。
+
+## Python 代码
+
+```python
+class Dog:
+    def __init__(self, name: str, age: int) -> None:
+        self.name = name
+        self.age = age
+
+    def bark(self) -> str:
+        return f"{self.name} says woof"
+
+
+def main() -> None:
+    dog = Dog("Coco", 3)
+    print(dog.name)
+    print(dog.bark())
+
+
+if __name__ == "__main__":
+    main()
+```
+
+## 时间复杂度
+
+本篇主要讲对象建模概念，不以复杂度为重点。
+
+## 空间复杂度
+
+本篇主要讲对象建模概念，不以复杂度为重点。
+
+## 怎么想到
+
+理解 OOP 时，最稳的方式不是背定义，而是一直抓住一句话：对象 = 状态 + 行为。只要这句话想清楚，后面的类、属性、方法都会更自然。
+
+## 示例 case
+
+- 输入：创建一个 `Dog("Coco", 3)`
+- 输出：对象里有自己的状态 `name/age`，也有自己的行为 `bark()`
+- 为什么：这就是 OOP 的最小例子，能帮你区分“数据”和“对象行为”
+
+## 常见 follow-up
+
+- 封装、继承、多态分别什么时候最值得用？
+- `self` 为什么必须写？
+- OOP 和 OOD 最大区别是什么？
+
 ## 一、OOP 到底是什么
 
 OOP = `Object-Oriented Programming`，面向对象编程。

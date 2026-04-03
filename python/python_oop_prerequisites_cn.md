@@ -9,6 +9,58 @@ title: "Python OOP 入门前置知识清单（中文版）"
 
 ---
 
+## 学习重点总结
+
+这篇文档解决的问题不是“教完所有 Python”，而是帮你补齐学 OOP / OOD 前真正必须会的基础：变量、函数、数据结构、模块导入、最小 class 语法。
+
+## 这篇文档的题目含义
+
+如果你现在一看到面向对象代码就卡住，通常不是因为 OOD 太难，而是因为 Python 基础还没有形成稳定的最小工作集。这篇文档就是把这个最小工作集拆出来。
+
+## Python 代码
+
+```python
+class Dog:
+    def __init__(self, name: str) -> None:
+        self.name = name
+
+    def bark(self) -> str:
+        return f"{self.name} says woof"
+
+
+def main() -> None:
+    dog = Dog("Milo")
+    print(dog.bark())
+
+
+if __name__ == "__main__":
+    main()
+```
+
+## 时间复杂度
+
+本篇主要是语言基础与代码组织，不以复杂度为重点。
+
+## 空间复杂度
+
+本篇主要是语言基础与代码组织，不以复杂度为重点。
+
+## 怎么想到
+
+很多 beginner 一上来就学 OOD，会把“不会设计”误判成“不会 Python”。更稳的做法是先确认自己已经会写最小可运行的类、方法、属性和导入。
+
+## 示例 case
+
+- 输入：运行上面的脚本
+- 输出：`Milo says woof`
+- 为什么：这说明你已经能定义类、初始化对象、调用实例方法，这是进入 OOP / OOD 的最小起点
+
+## 常见 follow-up
+
+- 学 OOP 前，`list` / `dict` / `set` 到底要熟到什么程度？
+- `class` 和函数式写法的边界应该怎么理解？
+- 什么时候该开始看 `dataclass`、`Enum`、`typing`？
+
 ## 一、先说结论
 
 如果你想学 Python 的 OOP，你**不需要先把 Python 全部学完**。

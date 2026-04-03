@@ -4,6 +4,10 @@ title: "Word Ladder"
 
 # Word Ladder
 
+## 这个题型 / 算法点的总结
+
+这题本质是“无权图最短路”。只要题目问最少转换步数、每一步代价相同，就应该优先想到 BFS。
+
 ## 题目含义
 
 给 `beginWord`、`endWord` 和字典。每次只能改一个字符，且改后的单词必须在字典中，问最短转换序列长度。
@@ -52,6 +56,12 @@ class Solution:
 ## 怎么想到这个方法
 
 题目不是问“有没有路径”，而是问“最短转换长度”。只要是无权图最短路，标准答案就是 BFS。
+
+## 示例 case
+
+- 输入：`beginWord = "hit"`, `endWord = "cog"`, `wordList = ["hot","dot","dog","lot","log","cog"]`
+- 输出：`5`
+- 为什么：最短路径是 `hit -> hot -> dot -> dog -> cog`
 
 ## 常见 Follow-up
 

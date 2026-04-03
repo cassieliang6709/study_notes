@@ -10,6 +10,89 @@ This guide covers the most common linked list problem patterns. The goal is to b
 
 ---
 
+## Pattern Summary
+
+Linked list problems are mostly about reusing a few pointer patterns well: `dummy` head nodes, fast/slow pointers, local reversal, and reconnecting segments. If you can explain what each pointer means and which link changes next, most linked list questions stop feeling random.
+
+## Problem Meaning
+
+This guide is not one single LeetCode problem. It teaches you how linked list interview questions collapse into a small set of reusable templates. As a representative example, start with `Reverse Linked List`. Once that one is truly clear, harder problems like `Reorder List` and `Reverse Nodes in k-Group` become much more manageable.
+
+## Python Code
+
+```python
+from __future__ import annotations
+from dataclasses import dataclass
+from typing import Optional
+
+
+@dataclass
+class ListNode:
+    val: int
+    next: Optional['ListNode'] = None
+
+
+class Solution:
+    def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        prev = None
+        curr = head
+
+        while curr:
+            nxt = curr.next
+            curr.next = prev
+            prev = curr
+            curr = nxt
+
+        return prev
+
+
+def build_list(values: list[int]) -> Optional[ListNode]:
+    dummy = ListNode(0)
+    tail = dummy
+    for value in values:
+        tail.next = ListNode(value)
+        tail = tail.next
+    return dummy.next
+
+
+def to_list(head: Optional[ListNode]) -> list[int]:
+    values = []
+    while head:
+        values.append(head.val)
+        head = head.next
+    return values
+
+
+head = build_list([1, 2, 3, 4])
+print(to_list(Solution().reverseList(head)))
+```
+
+## Time Complexity
+
+The representative solution walks through the list once, so the time complexity is `O(n)`.
+
+## Space Complexity
+
+It only uses a few pointers, so the extra space complexity is `O(1)`.
+
+## How To Think About It
+
+Do not start from “what is the final head?” Start from a smaller invariant: at each step, make `curr` point backward to `prev`. If that local pointer flip is correct every round, the whole list becomes reversed by the end. That same mindset helps on many linked list problems.
+
+## Example Case
+
+Input list: `1 -> 2 -> 3 -> 4`
+Output list: `4 -> 3 -> 2 -> 1`
+Explanation: each step moves the current node to the front of the already-reversed part.
+
+Edge case: `[]` stays empty, and `[7]` stays unchanged because there is nothing to reconnect.
+
+## Common Follow-up Questions
+
+- How would you reverse only positions `m` through `n`?
+- How would you reverse every `k` nodes and leave the rest unchanged?
+- Why do palindrome linked list solutions often find the middle first and reverse the second half?
+
 ## Part 1: Problem Categories
 
 ### 1. Basic Pointer Operations / Dummy Head

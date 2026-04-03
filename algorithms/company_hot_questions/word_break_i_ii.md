@@ -4,6 +4,13 @@ title: "Word Break I II"
 
 # Word Break I / II
 
+## 这个题型 / 算法点的总结
+
+这组题的关键是区分“判断能不能拆”和“输出所有拆法”：
+
+- `Word Break I` 更像 DP
+- `Word Break II` 更像 DFS + memo
+
 ## 题目含义
 
 这一组题经常一起出现：
@@ -50,6 +57,12 @@ class Solution:
 
 - `dp[i]` 表示前 `i` 个字符是否可拆分
 
+### 示例 case
+
+- 输入：`s = "leetcode"`, `wordDict = ["leet", "code"]`
+- 输出：`True`
+- 为什么：前缀 `leet` 可拆，剩余 `code` 也可拆
+
 ## Word Break II
 
 ### Python 代码
@@ -94,6 +107,12 @@ class Solution:
 
 - DFS 枚举切分点
 - `memo` 记住某个起点后面的所有答案
+
+### 示例 case
+
+- 输入：`s = "catsanddog"`, `wordDict = ["cat","cats","and","sand","dog"]`
+- 输出：`["cat sand dog", "cats and dog"]`
+- 为什么：从同一个起点往后可能有多种合法切分，所以需要返回全部方案
 
 ## 常见 Follow-up
 

@@ -2,42 +2,52 @@
 title: Study Notes
 ---
 
-<div class="home-hero">
-  <h2>Cassie's Study Notes</h2>
-  <p>算法、Python、OOD、BQ 面试准备，按主题整理的学习笔记。</p>
-</div>
+# Study Notes
 
-<div class="home-grid">
-  <a class="home-card" href="./algorithms/">
-    <strong>Algorithms</strong>
-    <span>LeetCode 路线、二叉树、图、堆、链表讲义</span>
-  </a>
-  <a class="home-card" href="./algorithms/extended_problem_detailed/">
-    <strong>Extended Problems</strong>
-    <span>更大题单的详细教学版，按 pattern 继续刷</span>
-  </a>
-  <a class="home-card" href="./algorithms/extended_problem_patterns_cn">
-    <strong>Pattern Roadmap</strong>
-    <span>按题型整理的扩展题单总览</span>
-  </a>
-  <a class="home-card" href="./bq_prep/">
-    <strong>BQ Prep</strong>
-    <span>STAR 方法、核心题型分类、Amazon LP 映射</span>
-  </a>
-  <a class="home-card" href="./python/">
-    <strong>Python</strong>
-    <span>OOP prerequisites 与概念笔记</span>
-  </a>
-  <a class="home-card" href="./ood/">
-    <strong>OOD</strong>
-    <span>面向对象设计总结和案例</span>
-  </a>
-  <a class="home-card" href="./books/">
-    <strong>Books</strong>
-    <span>独立 mdBook 项目与网页版学习手册</span>
-  </a>
-  <a class="home-card" href="./resources/">
-    <strong>Resources</strong>
-    <span>代码、数据集、模型与实验资源</span>
-  </a>
-</div>
+这是网页版首页版学习地图。它的职责和 `README.md` 一样：带你找到正确入口，而不是把所有题解正文都展开在首页。
+
+## 先判断你的目标
+
+### 想系统刷题
+
+- [Algorithms](./algorithms/)
+
+### 想补 Python / OOP / OOD
+
+- [Python](./python/)
+- [OOD](./ood/)
+
+### 想准备行为面试 / Amazon
+
+- [BQ Prep](./bq_prep/)
+- [Company Hot Questions](./algorithms/company_hot_questions/)
+- [Amazon VO Coding Book](./books/amazon_vo_coding_book/book/)
+
+### 想读成体系的专题书
+
+- [Books](./books/)
+
+## 六个主入口分别负责什么
+
+- [Algorithms](./algorithms/)
+  刷题路线、专题讲义、详细题解、完整答案、高频单题页
+- [Python](./python/)
+  Python OOP 前置知识和核心概念
+- [OOD](./ood/)
+  从会写 class 到会做设计题
+- [BQ Prep](./bq_prep/)
+  STAR、BQ 分类、Amazon LP 映射
+- [Books](./books/)
+  独立成册专题书
+- [Resources](./resources/)
+  代码、数据、模型等实验资源
+
+## 读 coding 文档时建议的顺序
+
+1. 看“这个题型 / 算法点的总结”
+2. 看“题目含义”
+3. 先自己判断方法
+4. 再看 Python 代码
+5. 看复杂度
+6. 看“怎么想到”
+7. 看示例 case 和常见 follow-up

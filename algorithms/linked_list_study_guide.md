@@ -13,6 +13,89 @@ title: "Linked List 题目分类讲义"
 
 ---
 
+## 这个题型 / 算法点的总结
+
+链表题的核心不是背题，而是把指针动作拆成几个固定模块：`dummy` 虚拟头结点、快慢指针、局部反转、重新接回链表。只要你能说清楚“当前指针指向谁、下一步要改哪条边、改完后链表是否还连着”，大部分链表题都能落到同一套模板上。
+
+## 题目含义
+
+这份讲义不是单独讲一道题，而是帮助你理解链表题为什么常常会重复出现同几种写法。下面先放一个最基础、也最值得先吃透的代表题：`Reverse Linked List`。把这题真正看懂以后，`Reorder List`、`Reverse Nodes in k-Group`、`Palindrome Linked List` 这些题都会容易很多。
+
+## Python 代码
+
+```python
+from __future__ import annotations
+from dataclasses import dataclass
+from typing import Optional
+
+
+@dataclass
+class ListNode:
+    val: int
+    next: Optional['ListNode'] = None
+
+
+class Solution:
+    def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        prev = None
+        curr = head
+
+        while curr:
+            nxt = curr.next
+            curr.next = prev
+            prev = curr
+            curr = nxt
+
+        return prev
+
+
+def build_list(values: list[int]) -> Optional[ListNode]:
+    dummy = ListNode(0)
+    tail = dummy
+    for value in values:
+        tail.next = ListNode(value)
+        tail = tail.next
+    return dummy.next
+
+
+def to_list(head: Optional[ListNode]) -> list[int]:
+    values = []
+    while head:
+        values.append(head.val)
+        head = head.next
+    return values
+
+
+head = build_list([1, 2, 3, 4])
+print(to_list(Solution().reverseList(head)))
+```
+
+## 时间复杂度
+
+上面这个代表题会把链表完整走一遍，所以时间复杂度是 `O(n)`。
+
+## 空间复杂度
+
+只用了几个指针变量，空间复杂度是 `O(1)`。
+
+## 怎么想到
+
+如果你一开始就去想“反转后的头结点是谁”，会很容易乱。更稳的想法是先盯住一个局部动作：把当前节点 `curr` 的箭头翻过去，让它指向前一个节点 `prev`。只要这个动作每轮都成立，整个链表最终就会被反转。链表题很多时候都可以这样做：先找到一个局部不变量，再让整题自然成立。
+
+## 示例 case
+
+输入链表：`1 -> 2 -> 3 -> 4`
+输出链表：`4 -> 3 -> 2 -> 1`
+解释：每一步都把当前节点接到已经反转好的前半段前面，所以最后方向全部翻转。
+
+边界 case：输入 `[]` 或 `[7]` 时，结果分别还是空链表和单节点链表，因为没有需要重新连接的边。
+
+## 常见 Follow-up
+
+- 如果只能反转第 `m` 到第 `n` 个节点，怎么先切出来再接回去？
+- 如果每 `k` 个节点反转一次，什么时候应该停止？
+- 如果要判断链表是否回文，为什么常常先找中点再反转后半段？
+
 ## 一、分类总表
 
 ### 1. 基础指针操作 / 虚拟头结点

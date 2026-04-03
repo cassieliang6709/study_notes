@@ -4,6 +4,10 @@ title: "Insert Delete GetRandom O1"
 
 # Insert Delete GetRandom O(1)
 
+## 这个题型 / 算法点的总结
+
+这题本质是“设计类 + 数组 + 哈希表”的组合。数组负责 `getRandom`，哈希表负责快速定位元素位置。
+
 ## 题目含义
 
 设计一个数据结构，支持：
@@ -71,6 +75,12 @@ class RandomizedSet:
 - 哈希表负责 `value -> index`
 
 删除时的关键是“和末尾交换再 pop”，这样就不用在数组中间删元素。
+
+## 示例 case
+
+- 输入操作：`insert(1)`, `insert(2)`, `remove(1)`, `getRandom()`
+- 输出行为：`getRandom()` 只可能返回 `2`
+- 为什么：删除时通过和末尾交换再弹出，数组仍然保持连续可随机访问
 
 ## 常见 Follow-up
 

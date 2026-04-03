@@ -99,6 +99,10 @@ for right in range(n):
 
 ### 1. Longest Substring Without Repeating Characters
 
+**这个题型 / 算法点的总结**
+
+`Longest Substring Without Repeating Characters` 属于滑动窗口类问题，关键是想清楚窗口什么时候合法、什么时候需要收缩。
+
 **题目含义**
 
 维护一个无重复字符的窗口。  
@@ -135,12 +139,21 @@ class Solution:
 
 题目是典型的“最长 + 子串 + 无重复”，三个关键词凑在一起几乎就是可变滑窗。
 
+**示例 case**
+
+- 输入：`s = "abcabcbb"`
+- 输出：`3`。最长无重复子串是 `abc`。
+
 **常见 Follow-up**
 
 - 如果字符集固定，能不能用数组替代哈希表？
 - 如果允许最多重复一次，窗口条件怎么改？
 
 ### 2. Find All Anagrams in a String
+
+**这个题型 / 算法点的总结**
+
+`Find All Anagrams in a String` 的核心是先识别它最像哪种经典题型，再把题目翻译成那个模板。
 
 **题目含义**
 
@@ -188,12 +201,21 @@ class Solution:
 
 因为窗口长度固定为 `len(p)`，所以它不是可变滑窗，而是固定滑窗加频次比较。
 
+**示例 case**
+
+- 输入：`s = "cbaebabacd"`, `p = "abc"`
+- 输出：`[0,6]`。这两个起点对应的窗口都是 `abc` 的异位词。
+
 **常见 Follow-up**
 
 - 如果字符集特别大，频次数组还合适吗？
 - 能不能维护一个 `matches` 计数避免整张表比较？
 
 ### 3. Minimum Window Substring
+
+**这个题型 / 算法点的总结**
+
+`Minimum Window Substring` 属于滑动窗口类问题，关键是想清楚窗口什么时候合法、什么时候需要收缩。
 
 **题目含义**
 
@@ -258,12 +280,21 @@ class Solution:
 
 题目要最短合法窗口，固定窗口不适合，应该想到可变滑窗。关键是先定义什么叫“窗口已经覆盖了 t”。
 
+**示例 case**
+
+- 输入：`s = "ADOBECODEBANC"`, `t = "ABC"`
+- 输出：`"BANC"`。它是覆盖 `ABC` 的最短窗口。
+
 **常见 Follow-up**
 
 - 如果 `t` 中有重复字符，为什么需要计数而不是集合？
 - 如果要返回长度而不是子串，代码怎么简化？
 
 ### 4. Sliding Window Maximum
+
+**这个题型 / 算法点的总结**
+
+`Sliding Window Maximum` 属于滑动窗口类问题，关键是想清楚窗口什么时候合法、什么时候需要收缩。
 
 **题目含义**
 
@@ -312,6 +343,11 @@ class Solution:
 **怎么想到这个方法**
 
 窗口里既要滑动，又要随时拿最大值，这类题最常见的组合就是单调队列。
+
+**示例 case**
+
+- 输入：`nums = [1,3,-1,-3,5,3,6,7]`, `k = 3`
+- 输出：`[3,3,5,5,6,7]`。每个长度为 3 的窗口都要取最大值。
 
 **常见 Follow-up**
 

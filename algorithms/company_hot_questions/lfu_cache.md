@@ -4,6 +4,10 @@ title: "LFU Cache"
 
 # LFU Cache
 
+## 这个题型 / 算法点的总结
+
+这题本质是“设计类 + 频率分桶 + 同频下再按 LRU 处理”。和 LRU 相比，它多了一层频率维度，所以要维护 `freq -> keys` 这层结构。
+
 ## 题目含义
 
 设计一个缓存，支持 `get` / `put`，容量满时淘汰访问频次最低的元素；如果多个元素频次相同，淘汰其中最久未使用的。
@@ -83,6 +87,12 @@ class LFUCache:
 - `key -> (value, freq)`
 - `freq -> ordered keys`
 - `min_freq` 记录当前最小频次
+
+## 示例 case
+
+- 输入操作：`put(1,1)`, `put(2,2)`, `get(1)`, `put(3,3)`
+- 输出行为：插入 `3` 时会淘汰 key `2`
+- 为什么：key `1` 被访问后频次更高，key `2` 仍处于最低频次
 
 ## 常见 Follow-up
 

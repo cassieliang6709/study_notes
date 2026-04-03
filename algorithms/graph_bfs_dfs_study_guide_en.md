@@ -10,6 +10,87 @@ This guide covers graph traversal patterns for interviews: DFS flood fill, BFS s
 
 ---
 
+## Pattern Summary
+
+Graph search problems become much easier once you separate three roles clearly: DFS for exploring an entire connected component, BFS for shortest distance by layers, and topological sort for dependency order. A lot of interview graph problems are just variations of those three patterns.
+
+## Problem Meaning
+
+This guide is a graph-pattern overview, not one single problem. The representative example below uses `Number of Islands`, because it is one of the best starter problems for learning how to treat a grid as a graph and flood-fill one connected component at a time.
+
+## Python Code
+
+```python
+from typing import List
+
+
+class Solution:
+    def numIslands(self, grid: List[List[str]]) -> int:
+        rows, cols = len(grid), len(grid[0])
+
+        def dfs(r: int, c: int) -> None:
+            if r < 0 or r >= rows or c < 0 or c >= cols:
+                return
+            if grid[r][c] != '1':
+                return
+
+            grid[r][c] = '0'
+            dfs(r + 1, c)
+            dfs(r - 1, c)
+            dfs(r, c + 1)
+            dfs(r, c - 1)
+
+        islands = 0
+        for r in range(rows):
+            for c in range(cols):
+                if grid[r][c] == '1':
+                    islands += 1
+                    dfs(r, c)
+
+        return islands
+
+
+sample = [
+    ['1', '1', '0', '0'],
+    ['1', '0', '0', '1'],
+    ['0', '0', '1', '1'],
+]
+print(Solution().numIslands(sample))
+```
+
+## Time Complexity
+
+Each cell is visited at most once, so the time complexity is `O(rows * cols)`.
+
+## Space Complexity
+
+The recursion stack can grow as large as a connected region, so the worst-case space complexity is `O(rows * cols)`.
+
+## How To Think About It
+
+When you see words like island, region, component, or spread, first translate the problem into a simpler sentence: if I start from one valid cell, can I visit the whole connected region from there? Once that is true, the problem becomes “scan the grid; every time you discover new land, count it and flood-fill it.” That is the parent template for many graph/grid questions.
+
+## Example Case
+
+Input grid:
+
+```text
+1 1 0 0
+1 0 0 1
+0 0 1 1
+```
+
+Output: `2`
+Explanation: the top-left land is one island, and the connected land on the right is the second island.
+
+Edge case: an all-water grid returns `0`, and a single land cell returns `1`.
+
+## Common Follow-up Questions
+
+- Why is BFS usually the safer choice when the question asks for the minimum number of steps?
+- Why should simultaneous spread problems use multi-source BFS?
+- When the input represents prerequisites, why do we switch to topological sort instead of plain DFS/BFS?
+
 ## Part 1: Signals That Point to a Graph Problem
 
 - Counting islands, connected regions, or components

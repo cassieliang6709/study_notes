@@ -9,6 +9,61 @@ title: "扩展题单 Pattern 分类汇总（中文版）"
 
 ---
 
+## 这个题型 / 算法点的总结
+
+这份扩展题单的重点，是让你面对更大的题库时，依然按“题型”而不是按“题名”去组织知识。真正需要记住的不是长长的问题清单，而是每道题背后的识别信号：哈希、双指针、滑动窗口、二分、递归、图搜索、堆、动态规划。
+
+## 题目含义
+
+这页不是单独一道题，而是一个更大的 pattern 分类入口。为了让这页本身也能直接学习，下面用代表题 `Longest Substring Without Repeating Characters` 演示：怎么从“连续子串 + 不能重复”立刻想到滑动窗口。
+
+## Python 代码
+
+```python
+class Solution:
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        left = 0
+        seen: dict[str, int] = {}
+        best = 0
+
+        for right, ch in enumerate(s):
+            if ch in seen and seen[ch] >= left:
+                left = seen[ch] + 1
+            seen[ch] = right
+            best = max(best, right - left + 1)
+
+        return best
+
+
+print(Solution().lengthOfLongestSubstring('abcabcbb'))
+```
+
+## 时间复杂度
+
+每个字符最多被窗口左右边界处理常数次，所以时间复杂度是 `O(n)`。
+
+## 空间复杂度
+
+哈希表要记录字符最后一次出现位置，所以空间复杂度是 `O(min(n, 字符集大小))`。
+
+## 怎么想到
+
+看到“最长子串”“连续区间”“满足某个限制条件”这几个词时，就要先警觉滑动窗口。因为题目要的不是离散选择，而是一段连续范围，并且这段范围的合法性会随着左右边界变化。这时最自然的做法就是：右边界不断扩张，窗口不合法时左边界再收缩。
+
+## 示例 case
+
+输入：`s = "abcabcbb"`
+输出：`3`
+解释：最长的不重复子串可以是 `"abc"`、`"bca"` 或 `"cab"`。
+
+边界 case：如果输入是 `"bbbbb"`，答案是 `1`，因为窗口里不能同时保留两个相同字符。
+
+## 常见 Follow-up
+
+- 如果题目改成“最多包含 k 个不同字符”，窗口里该维护什么状态？
+- 哪些连续区间题适合滑动窗口，哪些反而更适合前缀和或动态规划？
+- 如果题目不再要求连续子串，而是子序列，为什么通常要换思路？
+
 ## 一、总学习顺序
 
 建议按这个顺序刷：

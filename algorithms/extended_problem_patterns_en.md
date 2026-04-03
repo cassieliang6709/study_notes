@@ -11,6 +11,61 @@ lang_pair: /algorithms/extended_problem_patterns_cn
 
 ---
 
+## Pattern Summary
+
+This document groups a larger interview problem set by approach instead of by title. The main learning goal is to notice pattern signals early, then choose a matching template: hash map, two pointers, sliding window, binary search, recursion, graph traversal, heap, or dynamic programming.
+
+## Problem Meaning
+
+This page is a pattern index, not one standalone LeetCode prompt. To make the classification idea concrete, the representative example below uses `Longest Substring Without Repeating Characters`, because it is one of the cleanest sliding-window patterns in the larger practice set.
+
+## Python Code
+
+```python
+class Solution:
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        left = 0
+        seen: dict[str, int] = {}
+        best = 0
+
+        for right, ch in enumerate(s):
+            if ch in seen and seen[ch] >= left:
+                left = seen[ch] + 1
+            seen[ch] = right
+            best = max(best, right - left + 1)
+
+        return best
+
+
+print(Solution().lengthOfLongestSubstring('abcabcbb'))
+```
+
+## Time Complexity
+
+Each character is processed at most a constant number of times, so the time complexity is `O(n)`.
+
+## Space Complexity
+
+The hash map stores the latest index of characters in the current history, so the extra space complexity is `O(min(n, charset))`.
+
+## How To Think About It
+
+The wording “longest substring without repeating characters” should trigger a sliding-window signal: a continuous range with a validity rule. Once you recognize that, the question becomes “expand the window, and when it becomes invalid, move the left boundary until it is valid again.” This is the exact recognition habit the whole extended pattern list is trying to build.
+
+## Example Case
+
+Input: `s = "abcabcbb"`
+Output: `3`
+Explanation: the longest valid substrings are `"abc"`, `"bca"`, and `"cab"`, all of length `3`.
+
+Edge case: for `s = "bbbbb"`, the answer is `1` because every valid window can contain only one `b`.
+
+## Common Follow-up Questions
+
+- If the validity rule changes from “no repeated characters” to “at most k distinct characters,” what changes in the window state?
+- When should a substring problem use sliding window, and when should it use dynamic programming instead?
+- If the input is not continuous-subarray based, what signal tells you to leave the sliding-window pattern?
+
 ## Overall Learning Sequence
 
 Work through topics in this order:

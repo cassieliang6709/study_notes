@@ -10,6 +10,62 @@ title: "LeetCode Top 100 Pattern Roadmap"
 
 ---
 
+## Pattern Summary
+
+This roadmap teaches one core interview skill: classify first, code second. The goal is not to memorize 100 separate solutions, but to learn the recognition signals behind common patterns such as hashing, two pointers, sliding window, recursion, BFS/DFS, heap, and dynamic programming.
+
+## Problem Meaning
+
+This page is a learning roadmap rather than a single problem statement. To make the roadmap concrete, the representative code below uses `Two Sum`, because it is one of the cleanest examples of “see a signal, pick a pattern, apply a template.”
+
+## Python Code
+
+```python
+from typing import List
+
+
+class Solution:
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        seen: dict[int, int] = {}
+
+        for index, value in enumerate(nums):
+            need = target - value
+            if need in seen:
+                return [seen[need], index]
+            seen[value] = index
+
+        return []
+
+
+print(Solution().twoSum([2, 7, 11, 15], 9))
+```
+
+## Time Complexity
+
+The representative solution scans the array once and uses constant-time hash lookups on average, so the time complexity is `O(n)`.
+
+## Space Complexity
+
+The hash map may store up to `n` elements, so the space complexity is `O(n)`.
+
+## How To Think About It
+
+The most important habit is to translate the wording into a pattern signal. `Two Sum` says “find a complement quickly,” which is a hash map signal. Once you notice that, the code is almost predetermined: for each number, check whether its complement has appeared before. This roadmap tries to build that recognition habit across the whole interview set.
+
+## Example Case
+
+Input: `nums = [2, 7, 11, 15], target = 9`
+Output: `[0, 1]`
+Explanation: when we reach `7`, we already saw `2`, and `2 + 7 = 9`.
+
+Edge case: if no pair exists, the sample implementation returns `[]`; some interview versions guarantee that one answer always exists.
+
+## Common Follow-up Questions
+
+- If the array is sorted, when should you switch from hash map to two pointers?
+- If the question asks for all triplets summing to zero, how does the pattern change into `3Sum`?
+- If the target involves a continuous subarray instead of two values, when should you think about prefix sum or sliding window?
+
 ## How To Use This Document
 
 For every problem, do this in order:

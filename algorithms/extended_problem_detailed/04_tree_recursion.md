@@ -23,6 +23,10 @@ title: "04 树与递归详细教学"
 
 ### Binary Tree Level Order Traversal
 
+**这个题型 / 算法点的总结**
+
+`Binary Tree Level Order Traversal` 主要在练树的递归返回值设计。做这类题时先决定遍历方式，再决定递归函数返回什么。
+
 **题目含义**
 
 这是最标准的树 BFS 题。  
@@ -31,6 +35,13 @@ title: "04 树与递归详细教学"
 **代表 Python 代码**
 
 ```python
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+
 from collections import deque
 from typing import List, Optional
 
@@ -68,12 +79,21 @@ class Solution:
 
 先看题型识别里的信号：这题本质上就是 `层序遍历 / Level Order BFS`。把题目翻译成这个模板后，再去套对应的不变量、状态定义或数据结构，就会更容易写出来。
 
+**示例 case**
+
+- 输入：普通二叉树
+- 输出：按层分组的节点值数组，例如 `[[3],[9,20],[15,7]]`。
+
 **常见 Follow-up**
 
 - 如果要返回具体路径而不是只判断可行性，额外记录什么？
 - DFS、BFS、并查集三种解法分别适合什么场景？
 
 ### Binary Tree Right Side View
+
+**这个题型 / 算法点的总结**
+
+`Binary Tree Right Side View` 主要在练树的递归返回值设计。做这类题时先决定遍历方式，再决定递归函数返回什么。
 
 **题目含义**
 
@@ -83,6 +103,13 @@ class Solution:
 **代表 Python 代码**
 
 ```python
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+
 from collections import deque
 from typing import List, Optional
 
@@ -120,12 +147,21 @@ class Solution:
 
 先看题型识别里的信号：这题本质上就是 `层序视图 / Level View`。把题目翻译成这个模板后，再去套对应的不变量、状态定义或数据结构，就会更容易写出来。
 
+**示例 case**
+
+- 输入：二叉树
+- 输出：从右侧看到的节点列表，例如 `[1,3,4]`。
+
 **常见 Follow-up**
 
 - 如果要返回具体路径而不是只判断可行性，额外记录什么？
 - DFS、BFS、并查集三种解法分别适合什么场景？
 
 ### Symmetric Tree
+
+**这个题型 / 算法点的总结**
+
+`Symmetric Tree` 主要在练树的递归返回值设计。做这类题时先决定遍历方式，再决定递归函数返回什么。
 
 **题目含义**
 
@@ -137,6 +173,13 @@ class Solution:
 **代表 Python 代码**
 
 ```python
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+
 from typing import Optional
 
 class Solution:
@@ -163,12 +206,21 @@ class Solution:
 
 先看题型识别里的信号：这题本质上就是 `镜像递归 / Mirror Recursion`。把题目翻译成这个模板后，再去套对应的不变量、状态定义或数据结构，就会更容易写出来。
 
+**示例 case**
+
+- 输入：左右镜像的二叉树
+- 输出：`True`。镜像比较要同时看左左对右右、左右对右左。
+
 **常见 Follow-up**
 
 - 能不能把空间复杂度再压缩一层？
 - 有没有另一种常见模板也能解决这题？
 
 ### Diameter of Binary Tree
+
+**这个题型 / 算法点的总结**
+
+`Diameter of Binary Tree` 主要在练树的递归返回值设计。做这类题时先决定遍历方式，再决定递归函数返回什么。
 
 **题目含义**
 
@@ -182,6 +234,13 @@ class Solution:
 **代表 Python 代码**
 
 ```python
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+
 from typing import Optional
 
 class Solution:
@@ -215,12 +274,21 @@ class Solution:
 
 先看题型识别里的信号：这题本质上就是 `后序 DFS 求高度 / Postorder Height Computation`。把题目翻译成这个模板后，再去套对应的不变量、状态定义或数据结构，就会更容易写出来。
 
+**示例 case**
+
+- 输入：二叉树
+- 输出：任意两节点间最长路径长度。答案不一定经过根。
+
 **常见 Follow-up**
 
 - 如果要返回具体路径而不是只判断可行性，额外记录什么？
 - DFS、BFS、并查集三种解法分别适合什么场景？
 
 ### Path Sum / Path Sum II / Path Sum III
+
+**这个题型 / 算法点的总结**
+
+`Path Sum / Path Sum II / Path Sum III` 的核心是先识别它最像哪种经典题型，再把题目翻译成那个模板。
 
 **题目含义**
 
@@ -229,6 +297,13 @@ class Solution:
 **代表 Python 代码**
 
 ```python
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+
 from collections import defaultdict
 from typing import Optional
 
@@ -266,12 +341,21 @@ class Solution:
 
 如果只是根到叶，普通 DFS 就够了；一旦题目允许路径从中间开始，就该联想到“路径和 = 两个前缀和之差”。
 
+**示例 case**
+
+- 输入：一个最小可手算的样例
+- 输出：先手推一遍算法流程，再对照代码中的循环、状态或数据结构变化。
+
 **常见 Follow-up**
 
 - `Path Sum I / II / III` 的状态传递分别有什么不同？
 - 如果树节点值可能是负数，为什么不能直接剪枝？
 
 ### Flatten Binary Tree to Linked List
+
+**这个题型 / 算法点的总结**
+
+`Flatten Binary Tree to Linked List` 主要在练链表指针操作，重点是想清楚节点之间该怎么断开、反转和接回去。
 
 **题目含义**
 
@@ -285,6 +369,13 @@ class Solution:
 **代表 Python 代码**
 
 ```python
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+
 from typing import Optional
 
 class Solution:
@@ -318,12 +409,21 @@ class Solution:
 
 先看题型识别里的信号：这题本质上就是 `树结构重连 / Tree Rewiring`。把题目翻译成这个模板后，再去套对应的不变量、状态定义或数据结构，就会更容易写出来。
 
+**示例 case**
+
+- 输入：二叉树
+- 输出：原地拉平成先序遍历顺序的右链表。
+
 **常见 Follow-up**
 
 - 能不能把空间复杂度再压缩一层？
 - 有没有另一种常见模板也能解决这题？
 
 ### Construct Binary Tree from Preorder and Inorder
+
+**这个题型 / 算法点的总结**
+
+`Construct Binary Tree from Preorder and Inorder` 主要在练树的递归返回值设计。做这类题时先决定遍历方式，再决定递归函数返回什么。
 
 **题目含义**
 
@@ -341,6 +441,13 @@ class Solution:
 **代表 Python 代码**
 
 ```python
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+
 from typing import List, Optional
 
 class Solution:
@@ -379,12 +486,21 @@ class Solution:
 
 先看题型识别里的信号：这题本质上就是 `递归构造 / Recursive Tree Construction`。把题目翻译成这个模板后，再去套对应的不变量、状态定义或数据结构，就会更容易写出来。
 
+**示例 case**
+
+- 输入：前序和中序遍历数组
+- 输出：还原出的原始二叉树。
+
 **常见 Follow-up**
 
 - 能不能把空间复杂度再压缩一层？
 - 有没有另一种常见模板也能解决这题？
 
 ### Lowest Common Ancestor
+
+**这个题型 / 算法点的总结**
+
+`Lowest Common Ancestor` 的核心是先识别它最像哪种经典题型，再把题目翻译成那个模板。
 
 **题目含义**
 
@@ -399,6 +515,13 @@ class Solution:
 **代表 Python 代码**
 
 ```python
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+
 class Solution:
     def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
         if not root or root == p or root == q:
@@ -425,12 +548,21 @@ class Solution:
 
 先看题型识别里的信号：这题本质上就是 `后序递归判断 / Postorder Recursive Search`。把题目翻译成这个模板后，再去套对应的不变量、状态定义或数据结构，就会更容易写出来。
 
+**示例 case**
+
+- 输入：一个最小可手算的样例
+- 输出：先手推一遍算法流程，再对照代码中的循环、状态或数据结构变化。
+
 **常见 Follow-up**
 
 - 能不能把空间复杂度再压缩一层？
 - 有没有另一种常见模板也能解决这题？
 
 ### Validate Binary Search Tree
+
+**这个题型 / 算法点的总结**
+
+`Validate Binary Search Tree` 主要在练树的递归返回值设计。做这类题时先决定遍历方式，再决定递归函数返回什么。
 
 **题目含义**
 
@@ -446,6 +578,13 @@ node.left < node < node.right
 **代表 Python 代码**
 
 ```python
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+
 from typing import Optional
 
 class Solution:
@@ -472,12 +611,21 @@ class Solution:
 
 先看题型识别里的信号：这题本质上就是 `BST 上下界检查 / BST Range Validation`。把题目翻译成这个模板后，再去套对应的不变量、状态定义或数据结构，就会更容易写出来。
 
+**示例 case**
+
+- 输入：一棵二叉树
+- 输出：判断是否满足 BST 全局有序约束，而不是只比较父子节点。
+
 **常见 Follow-up**
 
 - 能不能把空间复杂度再压缩一层？
 - 有没有另一种常见模板也能解决这题？
 
 ### Kth Smallest Element in a BST
+
+**这个题型 / 算法点的总结**
+
+`Kth Smallest Element in a BST` 主要在练树的递归返回值设计。做这类题时先决定遍历方式，再决定递归函数返回什么。
 
 **题目含义**
 
@@ -487,6 +635,13 @@ BST 中序遍历结果是递增的。
 **代表 Python 代码**
 
 ```python
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+
 from typing import Optional
 
 class Solution:
@@ -518,12 +673,21 @@ class Solution:
 
 先看题型识别里的信号：这题本质上就是 `BST 中序遍历 / Inorder Traversal of BST`。把题目翻译成这个模板后，再去套对应的不变量、状态定义或数据结构，就会更容易写出来。
 
+**示例 case**
+
+- 输入：BST 和 `k = 3`
+- 输出：中序遍历第 3 个节点值。
+
 **常见 Follow-up**
 
 - 能不能把空间复杂度再压缩一层？
 - 有没有另一种常见模板也能解决这题？
 
 ### Serialize / Deserialize
+
+**这个题型 / 算法点的总结**
+
+`Serialize / Deserialize` 的核心是先识别它最像哪种经典题型，再把题目翻译成那个模板。
 
 **题目含义**
 
@@ -573,6 +737,11 @@ class Codec:
 **怎么想到这个方法**
 
 先别急着写代码，先想清楚“我打算按什么遍历顺序编码，空节点怎么表示，解码时怎样唯一还原”。
+
+**示例 case**
+
+- 输入：一个最小可手算的样例
+- 输出：先手推一遍算法流程，再对照代码中的循环、状态或数据结构变化。
 
 **常见 Follow-up**
 

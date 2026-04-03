@@ -10,6 +10,62 @@ This guide covers when to use heaps, the key patterns, and the most important pr
 
 ---
 
+## Pattern Summary
+
+The main heap insight is simple: if the problem needs you to repeatedly extract the current best element, not fully sort everything once, a heap is usually a strong fit. Top K, streaming data, and merging sorted structures all reuse that same idea.
+
+## Problem Meaning
+
+This guide is a heap and priority-queue overview. As a representative starter pattern, the code below uses `Kth Largest Element in an Array` to show why a min-heap of size `k` is enough to keep track of the kth largest number.
+
+## Python Code
+
+```python
+import heapq
+from typing import List
+
+
+class Solution:
+    def findKthLargest(self, nums: List[int], k: int) -> int:
+        heap: list[int] = []
+
+        for num in nums:
+            heapq.heappush(heap, num)
+            if len(heap) > k:
+                heapq.heappop(heap)
+
+        return heap[0]
+
+
+print(Solution().findKthLargest([3, 2, 1, 5, 6, 4], 2))
+```
+
+## Time Complexity
+
+You process `n` numbers, and each heap operation costs at most `O(log k)`, so the time complexity is `O(n log k)`.
+
+## Space Complexity
+
+The heap stores at most `k` elements, so the extra space complexity is `O(k)`.
+
+## How To Think About It
+
+Sorting is often the first instinct for “kth largest,” but full sorting solves a bigger problem than the question asks. You do not need the entire order. You only need to know which `k` elements are currently the largest, and among them which one is the smallest. That naturally leads to a size-`k` min-heap.
+
+## Example Case
+
+Input: `nums = [3, 2, 1, 5, 6, 4], k = 2`
+Output: `5`
+Explanation: the two largest numbers are `6` and `5`, so the smaller of those two is the answer.
+
+Edge case: if `k = 1`, the problem becomes finding the maximum; if `k = len(nums)`, the answer is the minimum value in the array.
+
+## Common Follow-up Questions
+
+- For top-k frequency problems, what should the heap key be?
+- For streaming input, why is re-sorting every time too expensive?
+- For merge-k-sorted-lists, why do we only push the current front node from each list?
+
 ## Part 1: When to Reach for a Heap
 
 Reach for a heap when you see:

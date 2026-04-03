@@ -74,6 +74,10 @@ tail.next = l1 or l2
 
 ### 1. Reverse Linked List
 
+**这个题型 / 算法点的总结**
+
+`Reverse Linked List`` 主要在练链表指针操作，重点是想清楚节点之间该怎么断开、反转和接回去。
+
 **题目含义**
 
 反转链表的标准做法是维护两个指针：
@@ -86,6 +90,12 @@ tail.next = l1 or l2
 **Python 代码**
 
 ```python
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+
 from typing import Optional
 
 
@@ -115,12 +125,21 @@ class Solution:
 
 链表反转的核心不是背代码，而是每次改指针前先保住 `next`。面试里只要能稳定说清 `prev / cur / nxt` 三个角色就够了。
 
+**示例 case**
+
+- 输入链表：`1 -> 2 -> 3 -> 4 -> 5`
+- 输出链表：`5 -> 4 -> 3 -> 2 -> 1`。整个链表方向被反过来。
+
 **常见 Follow-up**
 
 - 递归版怎么写？
 - 如果只反转区间 `[left, right]` 呢？
 
 ### 2. Merge Two Sorted Lists
+
+**这个题型 / 算法点的总结**
+
+`Merge Two Sorted Lists`` 主要在练链表指针操作，重点是想清楚节点之间该怎么断开、反转和接回去。
 
 **题目含义**
 
@@ -130,6 +149,12 @@ class Solution:
 **Python 代码**
 
 ```python
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+
 from typing import Optional
 
 
@@ -163,12 +188,21 @@ class Solution:
 
 两个有序结构合并时，几乎总是双指针。链表版再加一个 `dummy` 节点，就能少掉大量头节点特判。
 
+**示例 case**
+
+- 输入：`1 -> 2 -> 4` 和 `1 -> 3 -> 4`
+- 输出：`1 -> 1 -> 2 -> 3 -> 4 -> 4`。每次接较小节点。
+
 **常见 Follow-up**
 
 - 如果是数组合并为什么常从后往前？
 - 如果是 `k` 个有序链表怎么办？
 
 ### 3. Remove Nth Node From End of List
+
+**这个题型 / 算法点的总结**
+
+`Remove Nth Node From End of List`` 主要在练链表指针操作，重点是想清楚节点之间该怎么断开、反转和接回去。
 
 **题目含义**
 
@@ -182,6 +216,12 @@ class Solution:
 **Python 代码**
 
 ```python
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+
 from typing import Optional
 
 
@@ -213,12 +253,21 @@ class Solution:
 
 “倒数第 n 个”是快慢指针的经典信号，让 `fast` 先走 `n` 步，就把“倒数”翻译成了“相隔固定距离的同向移动”。
 
+**示例 case**
+
+- 输入：`head = [1,2,3,4,5]`, `n = 2`
+- 输出：`[1,2,3,5]`。倒数第二个节点 `4` 被删除。
+
 **常见 Follow-up**
 
 - 如果要求只遍历一遍，为什么快慢指针正合适？
 - 为什么最好总是加 `dummy`？
 
 ### 4. Add Two Numbers
+
+**这个题型 / 算法点的总结**
+
+`Add Two Numbers` 的核心是先识别它最像哪种经典题型，再把题目翻译成那个模板。
 
 **题目含义**
 
@@ -233,6 +282,12 @@ class Solution:
 **Python 代码**
 
 ```python
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+
 from typing import Optional
 
 
@@ -269,12 +324,21 @@ class Solution:
 
 逐位相加、带进位，这和手算加法完全一致。题目把数字倒着存，其实就是在帮你从低位开始处理。
 
+**示例 case**
+
+- 输入：`[2,4,3]` 和 `[5,6,4]`
+- 输出：`[7,0,8]`。因为它们表示 `342 + 465 = 807`。
+
 **常见 Follow-up**
 
 - 如果链表是正序存储怎么办？
 - 如果不能改原链表，如何处理？
 
 ### 5. Linked List Cycle / Cycle II
+
+**这个题型 / 算法点的总结**
+
+`Linked List Cycle / Cycle II`` 主要在练链表指针操作，重点是想清楚节点之间该怎么断开、反转和接回去。
 
 **题目含义**
 
@@ -283,6 +347,12 @@ class Solution:
 **Python 代码**
 
 ```python
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+
 from typing import Optional
 
 
@@ -312,12 +382,21 @@ class Solution:
 
 只要问链表里有没有环，快慢指针几乎就是默认答案。进一步找入口时，记住“相遇点再和头节点同步走”这个结论。
 
+**示例 case**
+
+- 输入：链表尾部连回前面某个节点
+- 输出：`Cycle I` 判断是否有环，`Cycle II` 找到环入口。快慢指针相遇后可继续定位入口。
+
 **常见 Follow-up**
 
 - 为什么相遇后从头和相遇点一起走会在入口相遇？
 - 用哈希表也能做，差别是什么？
 
 ### 6. Palindrome Linked List
+
+**这个题型 / 算法点的总结**
+
+`Palindrome Linked List`` 主要在练链表指针操作，重点是想清楚节点之间该怎么断开、反转和接回去。
 
 **题目含义**
 
@@ -326,6 +405,12 @@ class Solution:
 **Python 代码**
 
 ```python
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+
 from typing import Optional
 
 
@@ -368,12 +453,21 @@ class Solution:
 
 回文判断通常需要双端比较，但链表不能从尾往前走，所以要先把后半段反转，手动造出两个方向。
 
+**示例 case**
+
+- 输入：`1 -> 2 -> 2 -> 1`
+- 输出：`True`。反转后半段后从两边向中间比较。
+
 **常见 Follow-up**
 
 - 比完之后要不要恢复链表？
 - 如果只能用递归，空间代价是什么？
 
 ### 7. Intersection of Two Linked Lists
+
+**这个题型 / 算法点的总结**
+
+`Intersection of Two Linked Lists`` 主要在练链表指针操作，重点是想清楚节点之间该怎么断开、反转和接回去。
 
 **题目含义**
 
@@ -387,6 +481,12 @@ class Solution:
 **Python 代码**
 
 ```python
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+
 from typing import Optional
 
 
@@ -413,12 +513,21 @@ class Solution:
 
 两个指针分别走 `A+B` 和 `B+A`，总路程对齐后就能在交点相遇。这题的关键是把长度差自动抵消掉。
 
+**示例 case**
+
+- 输入：两条链表在某个节点后共用尾部
+- 输出：返回第一个公共节点。双指针走 `A+B` 与 `B+A` 会自动对齐。
+
 **常见 Follow-up**
 
 - 为什么走完自己链表后切到另一条链表就能对齐？
 - 哈希表写法和双指针写法怎么比较？
 
 ### 8. Swap Nodes in Pairs
+
+**这个题型 / 算法点的总结**
+
+`Swap Nodes in Pairs` 的核心是先识别它最像哪种经典题型，再把题目翻译成那个模板。
 
 **题目含义**
 
@@ -427,6 +536,12 @@ class Solution:
 **Python 代码**
 
 ```python
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+
 from typing import Optional
 
 
@@ -459,12 +574,21 @@ class Solution:
 
 看到“成对交换节点”，要想到这不是换值，而是换指针。`dummy + prev + a + b` 这四个指针关系最稳定。
 
+**示例 case**
+
+- 输入：`1 -> 2 -> 3 -> 4`
+- 输出：`2 -> 1 -> 4 -> 3`。每两个节点交换一次。
+
 **常见 Follow-up**
 
 - 如果每 `k` 个交换一次，就是哪道题？
 - 交换节点值和交换节点本身有什么区别？
 
 ### 9. Copy List with Random Pointer
+
+**这个题型 / 算法点的总结**
+
+`Copy List with Random Pointer`` 主要在练链表指针操作，重点是想清楚节点之间该怎么断开、反转和接回去。
 
 **题目含义**
 
@@ -477,6 +601,8 @@ class Solution:
 **Python 代码**
 
 ```python
+from typing import Optional
+
 class Solution:
     def copyRandomList(self, head: 'Optional[Node]') -> 'Optional[Node]':
         if not head:
@@ -510,12 +636,21 @@ class Solution:
 
 这题的难点不是遍历，而是节点之间有额外的 `random` 关系。最稳的思路是先建立旧节点到新节点的映射。
 
+**示例 case**
+
+- 输入：链表节点除 `next` 外还有 `random` 指针
+- 输出：一条深拷贝链表，`next` 和 `random` 关系都要复制。
+
 **常见 Follow-up**
 
 - 你能讲 `O(1)` 额外空间的穿插复制法吗？
 - 为什么要分两遍构造？
 
 ### 10. Sort List
+
+**这个题型 / 算法点的总结**
+
+`Sort List`` 主要在练链表指针操作，重点是想清楚节点之间该怎么断开、反转和接回去。
 
 **题目含义**
 
@@ -529,6 +664,12 @@ class Solution:
 **Python 代码**
 
 ```python
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+
 from typing import Optional
 
 
@@ -578,12 +719,21 @@ class Solution:
 
 链表不适合随机访问，所以别想快速排序那套。面试默认答案是链表归并排序：找中点、拆开、递归合并。
 
+**示例 case**
+
+- 输入：`4 -> 2 -> 1 -> 3`
+- 输出：`1 -> 2 -> 3 -> 4`。链表排序通常用归并最稳定。
+
 **常见 Follow-up**
 
 - 为什么链表排序更偏向归并而不是快排？
 - 你能写 bottom-up 版吗？
 
 ### 11. LRU Cache
+
+**这个题型 / 算法点的总结**
+
+`LRU Cache` 的核心是先识别它最像哪种经典题型，再把题目翻译成那个模板。
 
 **题目含义**
 
@@ -665,12 +815,21 @@ class LRUCache:
 
 一旦题目同时要“按 key 快速找”和“按最近使用顺序快速删”，就该想到 `HashMap + Doubly Linked List` 的双结构组合。
 
+**示例 case**
+
+- 操作：`put(1,1)`, `put(2,2)`, `get(1)`, `put(3,3)`
+- 结果：插入 `3` 时会淘汰 key `2`，因为它是最近最少使用。
+
 **常见 Follow-up**
 
 - 如果变成 LFU，该多维护什么状态？
 - 为什么必须是双向链表？
 
 ### 12. Merge k Sorted Lists
+
+**这个题型 / 算法点的总结**
+
+`Merge k Sorted Lists`` 主要在练链表指针操作，重点是想清楚节点之间该怎么断开、反转和接回去。
 
 **题目含义**
 
@@ -683,6 +842,12 @@ class LRUCache:
 **Python 代码**
 
 ```python
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+
 import heapq
 from typing import List, Optional
 
@@ -721,12 +886,21 @@ class Solution:
 
 多个有序链表合并，本质就是反复拿当前最小值。只要 `k` 大于 2，最自然的优化就是最小堆。
 
+**示例 case**
+
+- 输入：多个已排序链表
+- 输出：合并后的有序链表。最常见做法是最小堆，每次拿当前最小头节点。
+
 **常见 Follow-up**
 
 - 分治合并和堆解法怎么比较？
 - 如果链表数量很少，是否直接两两合并更简单？
 
 ### 13. Reverse Nodes in k-Group
+
+**这个题型 / 算法点的总结**
+
+`Reverse Nodes in k-Group` 的核心是先识别它最像哪种经典题型，再把题目翻译成那个模板。
 
 **题目含义**
 
@@ -735,6 +909,12 @@ class Solution:
 **Python 代码**
 
 ```python
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+
 from typing import Optional
 
 
@@ -776,6 +956,11 @@ class Solution:
 **怎么想到这个方法**
 
 这题是在局部反转基础上再加“按组处理”。真正的面试重点是把一组的边界找出来，再把反转后的头尾接回原链表。
+
+**示例 case**
+
+- 输入：`1 -> 2 -> 3 -> 4 -> 5`, `k = 2`
+- 输出：`2 -> 1 -> 4 -> 3 -> 5`。不足 `k` 个的尾段保持不变。
 
 **常见 Follow-up**
 

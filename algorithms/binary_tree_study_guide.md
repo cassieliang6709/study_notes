@@ -14,6 +14,70 @@ title: "Binary Tree 题目分类讲义"
 
 ---
 
+## 这个题型 / 算法点的总结
+
+二叉树题的真正核心是“递归函数到底返回什么”。很多题表面不同，本质上都在做同一件事：从左右子树拿信息，再在当前节点合并。只要把递归定义讲清楚，树题通常会比一开始看上去简单很多。
+
+## 题目含义
+
+这份讲义是二叉树总览，不对应单独一道题。为了让你先抓住最稳定的模板，下面放的是代表题 `Maximum Depth of Binary Tree`。这题最适合入门，因为它能帮你建立“后序递归从子树拿结果”的基本感觉。
+
+## Python 代码
+
+```python
+from __future__ import annotations
+from dataclasses import dataclass
+from typing import Optional
+
+
+@dataclass
+class TreeNode:
+    val: int
+    left: Optional['TreeNode'] = None
+    right: Optional['TreeNode'] = None
+
+
+class Solution:
+    def maxDepth(self, root: Optional[TreeNode]) -> int:
+        if not root:
+            return 0
+        return 1 + max(self.maxDepth(root.left), self.maxDepth(root.right))
+
+
+root = TreeNode(
+    3,
+    left=TreeNode(9),
+    right=TreeNode(20, TreeNode(15), TreeNode(7)),
+)
+print(Solution().maxDepth(root))
+```
+
+## 时间复杂度
+
+每个节点只访问一次，所以时间复杂度是 `O(n)`。
+
+## 空间复杂度
+
+递归栈深度最多等于树高，所以空间复杂度是 `O(h)`；最坏情况下退化成链表时是 `O(n)`。
+
+## 怎么想到
+
+树题最容易卡住的地方，是一开始就在想“整棵树的答案怎么直接求”。更好的想法是先问：如果我已经知道左子树答案和右子树答案，当前节点要怎么合并？像最大深度这种题，当前节点只要取左右子树更大的那个再加一层就行。这个思路以后会不断复用到平衡树、直径、路径和这些题里。
+
+## 示例 case
+
+输入树：`[3,9,20,null,null,15,7]`
+输出：`3`
+解释：最长路径可以是 `3 -> 20 -> 15` 或 `3 -> 20 -> 7`，一共有 3 层。
+
+边界 case：如果输入是空树，输出是 `0`，因为没有节点也就没有深度。
+
+## 常见 Follow-up
+
+- 如果题目要的是最小深度，为什么不能直接把 `max` 换成 `min`？
+- 如果要同时返回“是否平衡”和“高度”，递归函数应该返回什么？
+- 如果题目问的是路径和或最大路径贡献值，返回值该表示整棵子树最优还是从当前节点往下的一条路？
+
 ## 一、分类总表
 
 先把你给出的题目去重后整理出来。

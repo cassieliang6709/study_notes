@@ -20,6 +20,10 @@ title: "03 链表详细教学"
 
 ### Reverse Linked List
 
+**这个题型 / 算法点的总结**
+
+`Reverse Linked List` 主要在练链表指针操作，重点是想清楚节点之间该怎么断开、反转和接回去。
+
 **题目含义**
 
 反转链表的标准做法是维护两个指针：
@@ -32,6 +36,12 @@ title: "03 链表详细教学"
 **代表 Python 代码**
 
 ```python
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+
 from typing import Optional
 
 class Solution:
@@ -60,12 +70,21 @@ class Solution:
 
 先看题型识别里的信号：这题本质上就是 `链表反转模板 / Linked List Reversal`。把题目翻译成这个模板后，再去套对应的不变量、状态定义或数据结构，就会更容易写出来。
 
+**示例 case**
+
+- 输入链表：`1 -> 2 -> 3 -> 4 -> 5`
+- 输出链表：`5 -> 4 -> 3 -> 2 -> 1`。整个链表方向被反过来。
+
 **常见 Follow-up**
 
 - 能不能把空间复杂度再压缩一层？
 - 有没有另一种常见模板也能解决这题？
 
 ### Reverse Linked List II
+
+**这个题型 / 算法点的总结**
+
+`Reverse Linked List II` 主要在练链表指针操作，重点是想清楚节点之间该怎么断开、反转和接回去。
 
 **题目含义**
 
@@ -79,6 +98,12 @@ class Solution:
 **代表 Python 代码**
 
 ```python
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+
 from typing import Optional
 
 class Solution:
@@ -111,12 +136,21 @@ class Solution:
 
 先看题型识别里的信号：这题本质上就是 `局部链表反转 / Partial Linked List Reversal`。把题目翻译成这个模板后，再去套对应的不变量、状态定义或数据结构，就会更容易写出来。
 
+**示例 case**
+
+- 输入：长度较短的链表样例
+- 输出：按题目要求返回重排、反转、合并或判断结果。链表题建议先画指针再写代码。
+
 **常见 Follow-up**
 
 - 能不能把空间复杂度再压缩一层？
 - 有没有另一种常见模板也能解决这题？
 
 ### Reorder List
+
+**这个题型 / 算法点的总结**
+
+`Reorder List` 主要在练链表指针操作，重点是想清楚节点之间该怎么断开、反转和接回去。
 
 **题目含义**
 
@@ -135,6 +169,12 @@ L0 -> Ln -> L1 -> Ln-1 -> ...
 **代表 Python 代码**
 
 ```python
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+
 from typing import Optional
 
 class Solution:
@@ -175,12 +215,21 @@ class Solution:
 
 先看题型识别里的信号：这题本质上就是 `找中点 + 反转 + 合并 / Split + Reverse + Merge`。把题目翻译成这个模板后，再去套对应的不变量、状态定义或数据结构，就会更容易写出来。
 
+**示例 case**
+
+- 输入：长度较短的链表样例
+- 输出：按题目要求返回重排、反转、合并或判断结果。链表题建议先画指针再写代码。
+
 **常见 Follow-up**
 
 - 能不能把空间复杂度再压缩一层？
 - 有没有另一种常见模板也能解决这题？
 
 ### Remove Nth Node From End
+
+**这个题型 / 算法点的总结**
+
+`Remove Nth Node From End` 的核心是先识别它最像哪种经典题型，再把题目翻译成那个模板。
 
 **题目含义**
 
@@ -194,6 +243,12 @@ class Solution:
 **代表 Python 代码**
 
 ```python
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+
 from typing import Optional
 
 class Solution:
@@ -224,12 +279,21 @@ class Solution:
 
 先看题型识别里的信号：这题本质上就是 `快慢指针 / Two Pointers`。把题目翻译成这个模板后，再去套对应的不变量、状态定义或数据结构，就会更容易写出来。
 
+**示例 case**
+
+- 输入：一个最小可手算的样例
+- 输出：先手推一遍算法流程，再对照代码中的循环、状态或数据结构变化。
+
 **常见 Follow-up**
 
 - 如果输入先排序或已经有序，能不能进一步简化？
 - 如果要返回具体区间或下标，代码里要额外维护什么？
 
 ### Add Two Numbers / Add Two Numbers II
+
+**这个题型 / 算法点的总结**
+
+`Add Two Numbers / Add Two Numbers II` 的核心是先识别它最像哪种经典题型，再把题目翻译成那个模板。
 
 **题目含义**
 
@@ -244,6 +308,12 @@ class Solution:
 **代表 Python 代码**
 
 ```python
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+
 from typing import Optional
 
 class Solution:
@@ -279,12 +349,21 @@ class Solution:
 
 先看题型识别里的信号：这题本质上就是 `链表模拟加法 / Linked List Addition`。把题目翻译成这个模板后，再去套对应的不变量、状态定义或数据结构，就会更容易写出来。
 
+**示例 case**
+
+- 输入：一个最小可手算的样例
+- 输出：先手推一遍算法流程，再对照代码中的循环、状态或数据结构变化。
+
 **常见 Follow-up**
 
 - 能不能把空间复杂度再压缩一层？
 - 有没有另一种常见模板也能解决这题？
 
 ### Merge k Sorted Lists
+
+**这个题型 / 算法点的总结**
+
+`Merge k Sorted Lists` 主要在练链表指针操作，重点是想清楚节点之间该怎么断开、反转和接回去。
 
 **题目含义**
 
@@ -297,6 +376,12 @@ class Solution:
 **代表 Python 代码**
 
 ```python
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+
 import heapq
 from typing import List, Optional
 
@@ -334,12 +419,21 @@ class Solution:
 
 先看题型识别里的信号：这题本质上就是 `堆 / Min Heap`。把题目翻译成这个模板后，再去套对应的不变量、状态定义或数据结构，就会更容易写出来。
 
+**示例 case**
+
+- 输入：多个已排序链表
+- 输出：合并后的有序链表。最常见做法是最小堆，每次拿当前最小头节点。
+
 **常见 Follow-up**
 
 - 如果 `k` 很小，为什么堆通常比全排序更合适？
 - 如果数据流持续到来，解法要怎么调整？
 
 ### Sort List
+
+**这个题型 / 算法点的总结**
+
+`Sort List` 主要在练链表指针操作，重点是想清楚节点之间该怎么断开、反转和接回去。
 
 **题目含义**
 
@@ -353,6 +447,12 @@ class Solution:
 **代表 Python 代码**
 
 ```python
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+
 from typing import Optional
 
 class Solution:
@@ -401,12 +501,21 @@ class Solution:
 
 先看题型识别里的信号：这题本质上就是 `链表归并排序 / Merge Sort on Linked List`。把题目翻译成这个模板后，再去套对应的不变量、状态定义或数据结构，就会更容易写出来。
 
+**示例 case**
+
+- 输入：`4 -> 2 -> 1 -> 3`
+- 输出：`1 -> 2 -> 3 -> 4`。链表排序通常用归并最稳定。
+
 **常见 Follow-up**
 
 - 能不能把空间复杂度再压缩一层？
 - 有没有另一种常见模板也能解决这题？
 
 ### Copy List with Random Pointer
+
+**这个题型 / 算法点的总结**
+
+`Copy List with Random Pointer` 主要在练链表指针操作，重点是想清楚节点之间该怎么断开、反转和接回去。
 
 **题目含义**
 
@@ -419,6 +528,8 @@ class Solution:
 **代表 Python 代码**
 
 ```python
+from typing import Optional
+
 class Solution:
     def copyRandomList(self, head: 'Optional[Node]') -> 'Optional[Node]':
         if not head:
@@ -451,6 +562,11 @@ class Solution:
 **怎么想到这个方法**
 
 先看题型识别里的信号：这题本质上就是 `哈希映射复制 / Hash Map Copy`。把题目翻译成这个模板后，再去套对应的不变量、状态定义或数据结构，就会更容易写出来。
+
+**示例 case**
+
+- 输入：链表节点除 `next` 外还有 `random` 指针
+- 输出：一条深拷贝链表，`next` 和 `random` 关系都要复制。
 
 **常见 Follow-up**
 

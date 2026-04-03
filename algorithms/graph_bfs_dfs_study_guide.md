@@ -13,6 +13,87 @@ title: "Graph / BFS / DFS 题目分类讲义"
 
 ---
 
+## 这个题型 / 算法点的总结
+
+图搜索题最重要的是先分清楚你到底要“搜完整个连通块”，还是“按层找最短步数”，还是“处理依赖顺序”。前者常用 DFS，中间常用 BFS，依赖关系常用拓扑排序。只要先把这三个角色分清楚，很多图题都会突然变得规整。
+
+## 题目含义
+
+这份讲义是图论入门总览，不是单独一道题。下面选 `Number of Islands` 做代表题，因为它最适合帮助 beginner 建立“把网格看成图，再做 flood fill”的第一层直觉。
+
+## Python 代码
+
+```python
+from typing import List
+
+
+class Solution:
+    def numIslands(self, grid: List[List[str]]) -> int:
+        rows, cols = len(grid), len(grid[0])
+
+        def dfs(r: int, c: int) -> None:
+            if r < 0 or r >= rows or c < 0 or c >= cols:
+                return
+            if grid[r][c] != '1':
+                return
+
+            grid[r][c] = '0'
+            dfs(r + 1, c)
+            dfs(r - 1, c)
+            dfs(r, c + 1)
+            dfs(r, c - 1)
+
+        islands = 0
+        for r in range(rows):
+            for c in range(cols):
+                if grid[r][c] == '1':
+                    islands += 1
+                    dfs(r, c)
+
+        return islands
+
+
+sample = [
+    ['1', '1', '0', '0'],
+    ['1', '0', '0', '1'],
+    ['0', '0', '1', '1'],
+]
+print(Solution().numIslands(sample))
+```
+
+## 时间复杂度
+
+每个格子最多访问一次，所以时间复杂度是 `O(rows * cols)`。
+
+## 空间复杂度
+
+递归栈最坏情况下可能达到整块连通区域大小，所以空间复杂度最坏是 `O(rows * cols)`。
+
+## 怎么想到
+
+看到“岛屿、区域、连通块”这类词时，不要急着想很多技巧，先把问题翻译成一句很朴素的话：如果我从一个陆地格子出发，能不能把和它连着的整块区域一次搜完？一旦这句话成立，这题就自然变成“扫描网格，发现新岛就计数并淹掉整块区域”。这就是很多网格图题的母模板。
+
+## 示例 case
+
+输入网格：
+
+```text
+1 1 0 0
+1 0 0 1
+0 0 1 1
+```
+
+输出：`2`
+解释：左上角是一座岛，右侧连在一起的是另一座岛。
+
+边界 case：如果全是 `0`，答案就是 `0`；如果只有一个 `1`，答案就是 `1`。
+
+## 常见 Follow-up
+
+- 如果题目问最短步数，为什么 DFS 往往不如 BFS 稳定？
+- 如果一开始有多个起点同时扩散，为什么应该用多源 BFS？
+- 如果题目给的是课程依赖关系，为什么要换成拓扑排序而不是普通 DFS/BFS？
+
 ## 一、先记住图题的判断信号
 
 看到下面这些描述时，优先往图上想：

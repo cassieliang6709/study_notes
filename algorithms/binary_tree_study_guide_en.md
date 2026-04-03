@@ -10,6 +10,70 @@ This guide covers the most common binary tree problem patterns for interviews. T
 
 ---
 
+## Pattern Summary
+
+The real key to binary tree problems is defining exactly what your recursive function returns. Many questions look different on the surface, but underneath they all ask you to gather information from the left subtree, gather information from the right subtree, and combine the two at the current node.
+
+## Problem Meaning
+
+This guide is a tree-pattern overview rather than one specific LeetCode problem. To anchor the pattern, the representative example below uses `Maximum Depth of Binary Tree`, because it is the cleanest entry point into postorder recursion.
+
+## Python Code
+
+```python
+from __future__ import annotations
+from dataclasses import dataclass
+from typing import Optional
+
+
+@dataclass
+class TreeNode:
+    val: int
+    left: Optional['TreeNode'] = None
+    right: Optional['TreeNode'] = None
+
+
+class Solution:
+    def maxDepth(self, root: Optional[TreeNode]) -> int:
+        if not root:
+            return 0
+        return 1 + max(self.maxDepth(root.left), self.maxDepth(root.right))
+
+
+root = TreeNode(
+    3,
+    left=TreeNode(9),
+    right=TreeNode(20, TreeNode(15), TreeNode(7)),
+)
+print(Solution().maxDepth(root))
+```
+
+## Time Complexity
+
+Each node is visited once, so the time complexity is `O(n)`.
+
+## Space Complexity
+
+The recursion stack is at most the height of the tree, so the space complexity is `O(h)`, or `O(n)` in the worst case.
+
+## How To Think About It
+
+Do not try to solve “the whole tree” all at once. Ask a smaller question first: if I already know the answer for the left subtree and the right subtree, how do I combine them at the current node? For max depth, the combination rule is just “take the larger depth and add one.” That same mindset scales to balanced tree, diameter, and path-sum problems.
+
+## Example Case
+
+Input tree: `[3,9,20,null,null,15,7]`
+Output: `3`
+Explanation: the longest root-to-leaf path has three nodes, such as `3 -> 20 -> 15`.
+
+Edge case: an empty tree returns `0` because there are no levels at all.
+
+## Common Follow-up Questions
+
+- Why does minimum depth need more care than simply replacing `max` with `min`?
+- How would you return both “height” and “balanced or not” from one recursive call?
+- In path-sum style problems, should the return value mean the best answer in the whole subtree or the best downward path starting here?
+
 ## Part 1: Problem Categories
 
 ### 1. Traversal Problems

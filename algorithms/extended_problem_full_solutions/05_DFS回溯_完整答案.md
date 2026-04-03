@@ -20,6 +20,10 @@ title: "05 DFS 与回溯完整答案"
 子集回溯 / Subset Backtracking
 ```
 
+**这个题型 / 算法点的总结**
+
+这题最重要的不是记答案，而是识别信号。看到 `Subsets` 时，优先把它归到 `子集回溯 / Subset Backtracking` 这类模板，再去套对应的不变量、状态定义或数据结构。
+
 **题目含义**
 
 子集题的特点是：每一层递归都代表一种当前选择结果，所以每层都可以把 `path` 加入答案。  
@@ -58,6 +62,11 @@ class Solution:
 
 先看题型识别里的信号：这题本质上就是 `子集回溯 / Subset Backtracking`。把题目翻译成这个模板后，再去套对应的不变量、状态定义或数据结构，就会更容易写出来。
 
+**示例 case**
+
+- 输入：一个最小可手算的样例
+- 输出：先手推一遍算法流程，再对照代码中的循环、状态或数据结构变化。
+
 **常见 Follow-up**
 
 - 哪些剪枝最值得优先做？
@@ -70,6 +79,10 @@ class Solution:
 ```text
 排列回溯 / Permutation Backtracking
 ```
+
+**这个题型 / 算法点的总结**
+
+这题最重要的不是记答案，而是识别信号。看到 `Permutations` 时，优先把它归到 `排列回溯 / Permutation Backtracking` 这类模板，再去套对应的不变量、状态定义或数据结构。
 
 **题目含义**
 
@@ -117,6 +130,11 @@ class Solution:
 
 先看题型识别里的信号：这题本质上就是 `排列回溯 / Permutation Backtracking`。把题目翻译成这个模板后，再去套对应的不变量、状态定义或数据结构，就会更容易写出来。
 
+**示例 case**
+
+- 输入：一个最小可手算的样例
+- 输出：先手推一遍算法流程，再对照代码中的循环、状态或数据结构变化。
+
 **常见 Follow-up**
 
 - 哪些剪枝最值得优先做？
@@ -129,6 +147,10 @@ class Solution:
 ```text
 组合回溯 / Combination Backtracking
 ```
+
+**这个题型 / 算法点的总结**
+
+这题最重要的不是记答案，而是识别信号。看到 `Combination Sum` 时，优先把它归到 `组合回溯 / Combination Backtracking` 这类模板，再去套对应的不变量、状态定义或数据结构。
 
 **题目含义**
 
@@ -173,6 +195,11 @@ class Solution:
 
 先看题型识别里的信号：这题本质上就是 `组合回溯 / Combination Backtracking`。把题目翻译成这个模板后，再去套对应的不变量、状态定义或数据结构，就会更容易写出来。
 
+**示例 case**
+
+- 输入：一个最小可手算的样例
+- 输出：先手推一遍算法流程，再对照代码中的循环、状态或数据结构变化。
+
 **常见 Follow-up**
 
 - 哪些剪枝最值得优先做？
@@ -185,6 +212,10 @@ class Solution:
 ```text
 约束回溯 / Constraint Backtracking
 ```
+
+**这个题型 / 算法点的总结**
+
+这题最重要的不是记答案，而是识别信号。看到 `Generate Parentheses` 时，优先把它归到 `约束回溯 / Constraint Backtracking` 这类模板，再去套对应的不变量、状态定义或数据结构。
 
 **题目含义**
 
@@ -230,6 +261,11 @@ Catalan 数量级。
 
 先看题型识别里的信号：这题本质上就是 `约束回溯 / Constraint Backtracking`。把题目翻译成这个模板后，再去套对应的不变量、状态定义或数据结构，就会更容易写出来。
 
+**示例 case**
+
+- 输入：一个最小可手算的样例
+- 输出：先手推一遍算法流程，再对照代码中的循环、状态或数据结构变化。
+
 **常见 Follow-up**
 
 - 哪些剪枝最值得优先做？
@@ -242,6 +278,10 @@ Catalan 数量级。
 ```text
 逐层选择回溯 / Multi-choice DFS
 ```
+
+**这个题型 / 算法点的总结**
+
+这题最重要的不是记答案，而是识别信号。看到 `Letter Combinations of a Phone Number` 时，优先把它归到 `逐层选择回溯 / Multi-choice DFS` 这类模板，再去套对应的不变量、状态定义或数据结构。
 
 **题目含义**
 
@@ -288,6 +328,11 @@ class Solution:
 
 先看题型识别里的信号：这题本质上就是 `逐层选择回溯 / Multi-choice DFS`。把题目翻译成这个模板后，再去套对应的不变量、状态定义或数据结构，就会更容易写出来。
 
+**示例 case**
+
+- 输入：一个最小可手算的样例
+- 输出：先手推一遍算法流程，再对照代码中的循环、状态或数据结构变化。
+
 **常见 Follow-up**
 
 - 如果要返回具体路径而不是只判断可行性，额外记录什么？
@@ -300,6 +345,10 @@ class Solution:
 ```text
 分段回溯 / Segment Partition Backtracking
 ```
+
+**这个题型 / 算法点的总结**
+
+这题最重要的不是记答案，而是识别信号。看到 `Restore IP Addresses` 时，优先把它归到 `分段回溯 / Segment Partition Backtracking` 这类模板，再去套对应的不变量、状态定义或数据结构。
 
 **题目含义**
 
@@ -349,6 +398,11 @@ class Solution:
 
 先看题型识别里的信号：这题本质上就是 `分段回溯 / Segment Partition Backtracking`。把题目翻译成这个模板后，再去套对应的不变量、状态定义或数据结构，就会更容易写出来。
 
+**示例 case**
+
+- 输入：一个最小可手算的样例
+- 输出：先手推一遍算法流程，再对照代码中的循环、状态或数据结构变化。
+
 **常见 Follow-up**
 
 - 哪些剪枝最值得优先做？
@@ -362,6 +416,10 @@ class Solution:
 树路径 DFS / Tree Path DFS
 ```
 
+**这个题型 / 算法点的总结**
+
+这题最重要的不是记答案，而是识别信号。看到 `Binary Tree Paths` 时，优先把它归到 `树路径 DFS / Tree Path DFS` 这类模板，再去套对应的不变量、状态定义或数据结构。
+
 **题目含义**
 
 从根一路走到叶子，把路径上的节点值收集起来。  
@@ -370,6 +428,13 @@ class Solution:
 **Python 代码**
 
 ```python
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+
 from typing import List, Optional
 
 class Solution:
@@ -405,6 +470,11 @@ class Solution:
 
 先看题型识别里的信号：这题本质上就是 `树路径 DFS / Tree Path DFS`。把题目翻译成这个模板后，再去套对应的不变量、状态定义或数据结构，就会更容易写出来。
 
+**示例 case**
+
+- 输入：一棵小型二叉树样例
+- 输出：根据题意返回遍历结果、布尔判断或某个树上统计值。树题重点是手动画出左右子树的递归关系。
+
 **常见 Follow-up**
 
 - 如果要返回具体路径而不是只判断可行性，额外记录什么？
@@ -417,6 +487,10 @@ class Solution:
 ```text
 DFS + 记忆化 / DFS with Memoization
 ```
+
+**这个题型 / 算法点的总结**
+
+这题最重要的不是记答案，而是识别信号。看到 `Word Break II` 时，优先把它归到 `DFS + 记忆化 / DFS with Memoization` 这类模板，再去套对应的不变量、状态定义或数据结构。
 
 **题目含义**
 
@@ -465,6 +539,11 @@ class Solution:
 
 先看题型识别里的信号：这题本质上就是 `DFS + 记忆化 / DFS with Memoization`。把题目翻译成这个模板后，再去套对应的不变量、状态定义或数据结构，就会更容易写出来。
 
+**示例 case**
+
+- 输入：一个最小可手算的样例
+- 输出：先手推一遍算法流程，再对照代码中的循环、状态或数据结构变化。
+
 **常见 Follow-up**
 
 - 如果要返回具体路径而不是只判断可行性，额外记录什么？
@@ -477,6 +556,10 @@ class Solution:
 ```text
 回溯装桶 / Bucket Backtracking
 ```
+
+**这个题型 / 算法点的总结**
+
+这题最重要的不是记答案，而是识别信号。看到 `Partition to K Equal Sum Subsets` 时，优先把它归到 `回溯装桶 / Bucket Backtracking` 这类模板，再去套对应的不变量、状态定义或数据结构。
 
 **题目含义**
 
@@ -531,6 +614,11 @@ class Solution:
 **怎么想到这个方法**
 
 先看题型识别里的信号：这题本质上就是 `回溯装桶 / Bucket Backtracking`。把题目翻译成这个模板后，再去套对应的不变量、状态定义或数据结构，就会更容易写出来。
+
+**示例 case**
+
+- 输入：一个最小可手算的样例
+- 输出：先手推一遍算法流程，再对照代码中的循环、状态或数据结构变化。
 
 **常见 Follow-up**
 

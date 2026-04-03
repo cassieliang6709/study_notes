@@ -140,8 +140,11 @@
             </li>
 
             <li class="part-title">BQ Prep</li>
-            <li class="chapter-item {% if page.url contains '/bq_prep/' %}active{% endif %}">
+            <li class="chapter-item {% if page.url == '/bq_prep/' %}active{% endif %}">
               <a href="{{ '/bq_prep/' | relative_url }}"><span class="ch-icon">◈</span>STAR + Story Bank</a>
+            </li>
+            <li class="chapter-item {% if page.url contains '/bq_prep/bilingual' %}active{% endif %}">
+              <a href="{{ '/bq_prep/bilingual' | relative_url }}">Bilingual Pack</a>
             </li>
 
             <li class="part-title">Foundations</li>

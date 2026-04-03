@@ -9,6 +9,61 @@ title: "OOD Python 学习指南（中文版）"
 
 ---
 
+## 学习重点总结
+
+这篇文档负责讲 OOD 题的通用解法，不是某一道具体题，而是“遇到系统设计题时你脑子里该按什么顺序想”。
+
+## 这篇文档的题目含义
+
+面试里的 OOD 题，核心不是把代码写出来，而是把现实问题拆成对象、职责和接口。这篇文档就是这套通用方法的说明书。
+
+## Python 代码
+
+```python
+from dataclasses import dataclass
+
+
+@dataclass
+class User:
+    user_id: str
+    name: str
+
+
+class UserDirectory:
+    def __init__(self) -> None:
+        self.users: dict[str, User] = {}
+
+    def add_user(self, user: User) -> None:
+        self.users[user.user_id] = user
+
+    def get_user(self, user_id: str) -> User | None:
+        return self.users.get(user_id)
+```
+
+## 时间复杂度
+
+本篇主要讲设计方法，不以复杂度为重点；如果涉及具体接口，复杂度取决于内部数据结构选择。
+
+## 空间复杂度
+
+本篇主要讲设计方法，不以复杂度为重点；通常取决于系统保存的数据量。
+
+## 怎么想到
+
+做 OOD 题时，最容易犯的错是直接开写类。更稳的顺序应该是：先定范围、再抽核心对象、再拆职责、最后才写接口和代码。
+
+## 示例 case
+
+- 场景：设计一个最小用户目录系统
+- 操作：添加用户、按 `user_id` 查询
+- 结果：你会自然想到 `User` 是数据对象，`UserDirectory` 是管理对象
+
+## 常见 follow-up
+
+- 什么时候需要抽象类或接口？
+- 什么情况下应该把逻辑拆成多个 service？
+- OOD 面试里，类太多和类太少分别有什么问题？
+
 ## 一、先搞清楚什么是 OOD
 
 OOD = `Object-Oriented Design`，面向对象设计。

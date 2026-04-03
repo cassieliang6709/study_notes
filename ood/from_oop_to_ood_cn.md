@@ -9,6 +9,64 @@ title: "从 OOP 到 OOD：如何从会写 class 过渡到能做设计题"
 
 ---
 
+## 学习重点总结
+
+这篇文档讲的是从 OOP 到 OOD 的思维过渡：从“会写类”变成“会决定哪些类应该存在、各自负责什么、怎么协作”。
+
+## 这篇文档的题目含义
+
+很多人不是不会 Python，也不是不会 class，而是不知道怎么把业务题目翻译成对象模型。这篇文档的目标就是解决这个断层。
+
+## Python 代码
+
+```python
+class ParkingSpot:
+    def __init__(self, spot_id: int) -> None:
+        self.spot_id = spot_id
+        self.occupied = False
+
+    def park(self) -> bool:
+        if self.occupied:
+            return False
+        self.occupied = True
+        return True
+
+
+class Level:
+    def __init__(self, spots: list[ParkingSpot]) -> None:
+        self.spots = spots
+
+    def find_free_spot(self) -> ParkingSpot | None:
+        for spot in self.spots:
+            if not spot.occupied:
+                return spot
+        return None
+```
+
+## 时间复杂度
+
+本篇主要讲设计思维，不以复杂度为重点；这里的复杂度只是具体接口实现的副产物。
+
+## 空间复杂度
+
+本篇主要讲设计思维，不以复杂度为重点。
+
+## 怎么想到
+
+如果你只停留在 OOP，通常只会问“类怎么写”；进入 OOD 后，关键问题会变成“哪些对象应该存在、谁来负责、谁调用谁”。
+
+## 示例 case
+
+- 场景：设计停车场时，不要把所有逻辑都塞进 `ParkingLot`
+- 拆法：`ParkingSpot` 管单车位状态，`Level` 管一层资源，`ParkingLot` 管整体协调
+- 为什么：这就是从语法写类走向职责分离的第一步
+
+## 常见 follow-up
+
+- 怎么判断一个类是不是 God Object？
+- 面试里要不要先问并发、数据库、分布式这些问题？
+- is-a 和 has-a 在 OOD 题里怎么区分？
+
 ## 一、先说最核心的区别
 
 很多人卡住，不是因为不会 Python，而是因为把 OOP 和 OOD 混了。
