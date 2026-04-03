@@ -1,0 +1,13 @@
+.DS_Store
+.claude/
+.jekyll-cache/
+.sass-cache/
+_site/
+
+# Python
+__pycache__/
+*.pyc
+
+# Local env
+.env
+.env.*
