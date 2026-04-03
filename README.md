@@ -1,87 +1,156 @@
----
-title: "Study Notes"
----
-
 # Study Notes
 
-整理后的目录结构如下：
+一个持续整理中的学习知识库，内容覆盖：
 
-- [algorithms](./algorithms): 算法讲义、LeetCode 路线图、刷题笔记
-- [python](./python): Python OOP 学习笔记
-- [ood](./ood): OOD 总结与案例
-- [books](./books): 独立书籍型项目与生成网页
-- [resources](./resources): 代码、数据集、模型等运行资源
+- 算法与刷题
+- Python 与 OOP 基础
+- OOD 设计
+- BQ 面试准备
+- 独立专题书籍与网页化笔记
+- 代码、数据集、模型等实验资源
 
-主要专题入口：
+这个仓库现在按“主题内容”和“运行资源”分开组织，GitHub 首页主要用于快速导航。
 
-- [扩展题型总览（中文）](./algorithms/extended_problem_patterns_cn.md)
-- [扩展题单详细教学](./algorithms/extended_problem_detailed/)
-- [扩展题单完整答案](./algorithms/extended_problem_full_solutions/)
+## Quick Start
+
+如果你第一次打开这个仓库，建议按这个顺序看：
+
+1. [Algorithms](./algorithms)
+2. [Python](./python)
+3. [OOD](./ood)
+4. [BQ Prep](./bq_prep)
+5. [Books](./books)
+
+## Main Sections
+
+### [algorithms](./algorithms)
+
+算法主目录，包含路线图、专题讲义、扩展题单和完整答案。
+
+重点入口：
+
+- [LeetCode 100 Pattern Roadmap CN](./algorithms/leetcode_100_pattern_roadmap_cn.md)
+- [Extended Problem Patterns CN](./algorithms/extended_problem_patterns_cn.md)
+- [Extended Problem Detailed](./algorithms/extended_problem_detailed/)
+- [Extended Problem Full Solutions](./algorithms/extended_problem_full_solutions/)
+- [LeetCode 100 Detailed](./algorithms/leetcode_100_detailed/)
+
+### [python](./python)
+
+Python OOP 基础与面向对象概念笔记。
+
+重点入口：
+
+- [Python Overview](./python/index.md)
+- [OOP Prerequisites](./python/python_oop_prerequisites_cn.md)
+- [OOP Concepts](./python/python_oop_concepts_cn.md)
+
+### [ood](./ood)
+
+面向对象设计总结、案例和桥接文档。
+
+重点入口：
+
+- [OOD Overview](./ood/index.md)
+- [OOD Python Guide](./ood/ood_python_guide_cn.md)
 - [From OOP to OOD](./ood/from_oop_to_ood_cn.md)
+- [OOD Cases](./ood/ood_cases/)
+
+### [bq_prep](./bq_prep)
+
+行为面试与 STAR 方法准备区。
+
+### [books](./books)
+
+独立成册的学习项目，适合直接网页阅读。
+
+当前项目：
+
 - [AI Projects Self Study](./books/ai_projects_self_study/)
 - [Amazon VO Coding Book](./books/amazon_vo_coding_book/book/)
 
-建议使用方式：
+### [resources](./resources)
 
-1. 看笔记时从 `algorithms`、`python`、`ood` 开始
-2. 看独立网页书时进入 `books`
-3. 跑代码、处理数据、查看模型时进入 `resources`
+运行资源集中区，避免代码、数据和模型与笔记正文混在一起。
 
-说明：
+包含：
 
-- 这次整理主要做目录重组，没有改动学习内容本身
-- 根目录现在只保留“入口”和“主分类”，减少源码、数据和生成物混放
+- [code](./resources/code/)
+- [datasets](./resources/datasets/)
+- [models](./resources/models/)
+
+## Suggested Usage
+
+### 如果你是来刷题
+
+从 [algorithms](./algorithms) 开始，优先看：
+
+- `leetcode_100_pattern_roadmap_cn.md`
+- `extended_problem_patterns_cn.md`
+- `extended_problem_detailed/`
+
+### 如果你是来补基础
+
+从 [python](./python) 和 [ood](./ood) 开始。
+
+### 如果你是来看完整网页书
+
+直接进 [books](./books)。
+
+### 如果你是来找代码或实验材料
+
+直接进 [resources](./resources)。
 
 ## Local Development
 
-首次安装依赖：
+这个仓库目前主要支持两种本地构建方式。
+
+### 1. Jekyll
+
+安装依赖：
 
 ```bash
 bundle config set --local path vendor/bundle
 bundle install
 ```
 
-本地启动预览：
+本地预览：
 
 ```bash
 bundle exec jekyll serve
 ```
 
-启动后默认访问：
+默认地址：
 
 ```text
 http://127.0.0.1:4000
 ```
 
-如果本机还没装 Jekyll，可以先确认 Ruby / Bundler 可用，再执行上面的 `bundle install`。
+### 2. Python Static Builder
 
-## Deploy To Vercel
-
-仓库已经添加了：
-
-- `Gemfile`
-- `vercel.json`
-
-Vercel 使用的构建方式是：
+如果本机 Ruby / Bundler 环境不稳定，也可以直接用项目内脚本生成静态站点：
 
 ```bash
-bundle exec jekyll build
+python3 build.py
 ```
 
-构建输出目录是：
+输出目录：
 
 ```text
 _site
 ```
 
-部署步骤：
+## Deploy
 
-1. 把当前改动 push 到 GitHub
-2. 登录 Vercel 并导入这个仓库
-3. 保持项目根目录为仓库根目录
-4. 首次部署后拿到线上 URL
-5. 以后每次 push，Vercel 会自动生成新的预览部署
+仓库已经包含：
 
-## Optional GitHub Pages
+- [Gemfile](./Gemfile)
+- [vercel.json](./vercel.json)
 
-这个项目本身也是标准 Jekyll 结构，所以如果后续你想切回 GitHub Pages，也可以直接使用 GitHub Pages 继续托管。
+当前 Vercel 构建方式基于 Jekyll，输出目录为 `_site`。
+
+## Notes
+
+- 根目录现在尽量只保留“入口”和“主分类”
+- 独立书籍型项目统一放在 [books](./books)
+- 代码、数据集、模型统一放在 [resources](./resources)
