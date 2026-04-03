@@ -3,6 +3,8 @@
 整理后的目录结构如下：
 
 - [algorithms](./algorithms): 算法讲义、LeetCode 路线图、刷题笔记
+- [extended_problem_detailed](./extended_problem_detailed): 扩展题单详细教学
+- [extended_problem_patterns_cn.md](./extended_problem_patterns_cn.md): 扩展题型汇总总览
 - [python](./python): Python OOP 学习笔记
 - [ood](./ood): OOD 总结与案例
 - [code](./code): 练习代码、作业代码、测试文件

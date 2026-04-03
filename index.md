@@ -5,6 +5,8 @@
 ## 导航
 
 - [Algorithms](./algorithms/)
+- [Extended Problems](./extended_problem_detailed/)
+- [Extended Pattern Roadmap CN](./extended_problem_patterns_cn.md)
 - [Python](./python/)
 - [OOD](./ood/)
 - [Code](./code/)
