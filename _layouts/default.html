@@ -15,36 +15,39 @@
   <body class="{% if page.url == '/' %}page-home{% else %}page-doc{% endif %}">
     <a id="top"></a>
     <div class="page-shell">
-      <header class="site-header">
-        <a class="brand" href="{{ '/' | relative_url }}">
-          <span class="brand-kicker">Cassie Liang</span>
-          <span class="brand-title">{{ site.title }}</span>
-        </a>
-        <p class="site-tagline">{{ site.description }}</p>
-        <nav class="site-nav" aria-label="Primary">
-          <a href="{{ '/' | relative_url }}" class="{% if page.url == '/' %}is-active{% endif %}">Home</a>
-          <a href="{{ '/algorithms/' | relative_url }}" class="{% if page.url contains '/algorithms/' %}is-active{% endif %}">Algorithms</a>
-          <a href="{{ '/extended_problem_detailed/' | relative_url }}" class="{% if page.url contains '/extended_problem_detailed/' or page.url contains '/extended_problem_patterns_cn' %}is-active{% endif %}">Extended</a>
-          <a href="{{ '/python/' | relative_url }}" class="{% if page.url contains '/python/' %}is-active{% endif %}">Python</a>
-          <a href="{{ '/ood/' | relative_url }}" class="{% if page.url contains '/ood/' or page.url contains '/from_oop_to_ood_cn' %}is-active{% endif %}">OOD</a>
-          <a href="{{ '/code/' | relative_url }}" class="{% if page.url contains '/code/' %}is-active{% endif %}">Code</a>
-          <a href="{{ '/datasets/' | relative_url }}" class="{% if page.url contains '/datasets/' %}is-active{% endif %}">Datasets</a>
-        </nav>
-      </header>
-
       <main class="content-frame">
         <div class="content-glow content-glow-a"></div>
         <div class="content-glow content-glow-b"></div>
-        <div class="reading-layout">
+        <div class="site-layout">
           <aside class="toc-panel" id="toc-panel" hidden>
             <div class="toc-card">
               <p class="toc-kicker">Quick Map</p>
               <nav id="toc-nav" aria-label="Table of contents"></nav>
             </div>
           </aside>
-          <article class="content-card" id="article-content">
-            {{ content }}
-          </article>
+          <div class="main-column">
+            <article class="content-card" id="article-content">
+              {{ content }}
+            </article>
+          </div>
+          <aside class="site-rail">
+            <header class="site-header">
+              <a class="brand" href="{{ '/' | relative_url }}">
+                <span class="brand-kicker">Cassie Liang</span>
+                <span class="brand-title">{{ site.title }}</span>
+              </a>
+              <p class="site-tagline">{{ site.description }}</p>
+              <nav class="site-nav" aria-label="Primary">
+                <a href="{{ '/' | relative_url }}" class="{% if page.url == '/' %}is-active{% endif %}">Home</a>
+                <a href="{{ '/algorithms/' | relative_url }}" class="{% if page.url contains '/algorithms/' %}is-active{% endif %}">Algorithms</a>
+                <a href="{{ '/extended_problem_detailed/' | relative_url }}" class="{% if page.url contains '/extended_problem_detailed/' or page.url contains '/extended_problem_patterns_cn' %}is-active{% endif %}">Extended</a>
+                <a href="{{ '/python/' | relative_url }}" class="{% if page.url contains '/python/' %}is-active{% endif %}">Python</a>
+                <a href="{{ '/ood/' | relative_url }}" class="{% if page.url contains '/ood/' or page.url contains '/from_oop_to_ood_cn' %}is-active{% endif %}">OOD</a>
+                <a href="{{ '/code/' | relative_url }}" class="{% if page.url contains '/code/' %}is-active{% endif %}">Code</a>
+                <a href="{{ '/datasets/' | relative_url }}" class="{% if page.url contains '/datasets/' %}is-active{% endif %}">Datasets</a>
+              </nav>
+            </header>
+          </aside>
         </div>
       </main>
 
