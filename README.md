@@ -11,6 +11,24 @@
 
 这个仓库现在按“内容区”和“资源区”分开组织。最适合 GitHub 首页的读法，不是把所有目录都点一遍，而是先选你的目标，再按对应顺序走。
 
+## Online Preview
+
+如果你想直接在线阅读，而不是在仓库里点文件，可以用下面这些 Vercel 入口：
+
+- 当前 `Study Notes` 主站预览：
+  <https://study-notes-murex-ten.vercel.app>
+- 之前用过的旧 Vercel 预览地址：
+  <https://study-notes.vercel.app>
+  说明：这个旧地址目前还是可访问的，但内容不是现在这版主站结构。
+- `AI Projects Self-Study Hub`：
+  <https://aiprojectsselfstudy.vercel.app>
+- `Amazon VO Coding Book`：
+  <https://amazon-vo-coding-book.vercel.app>
+- `BQ Prep` 独立预览：
+  <https://bq-prep.vercel.app>
+
+如果你想看“仓库结构”请继续往下读；如果你只想快速看网页内容，上面这些链接已经够用。
+
 ## 先看哪条路线
 
 如果你不想自己判断，直接按下面选一条：
