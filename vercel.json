@@ -2,6 +2,6 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": null,
   "installCommand": "gem install bundler -v 2.5.23 && bundle _2.5.23_ install",
-  "buildCommand": "bundle exec jekyll build",
+  "buildCommand": "bundle _2.5.23_ exec jekyll build",
   "outputDirectory": "_site"
 }
