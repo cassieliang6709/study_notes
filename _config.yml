@@ -1,6 +1,16 @@
 title: Study Notes
 description: Personal study notes for algorithms, Python, OOD, and interview practice
 markdown: kramdown
+encoding: utf-8
+
+exclude:
+  - datasets/
+  - models/
+  - Gemfile
+  - Gemfile.lock
+  - vercel.json
+  - README.md
+  - code/
 
 defaults:
   - scope:
