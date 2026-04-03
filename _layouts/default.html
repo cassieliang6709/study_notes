@@ -16,8 +16,6 @@
     <a id="top"></a>
     <div class="page-shell">
       <main class="content-frame">
-        <div class="content-glow content-glow-a"></div>
-        <div class="content-glow content-glow-b"></div>
         <div class="site-layout">
           <aside class="toc-panel" id="toc-panel" hidden>
             <div class="toc-card">
@@ -31,12 +29,21 @@
             </article>
           </div>
           <aside class="site-rail">
-            <header class="site-header">
+            <section class="rail-card rail-brand">
               <a class="brand" href="{{ '/' | relative_url }}">
                 <span class="brand-kicker">Cassie Liang</span>
                 <span class="brand-title">{{ site.title }}</span>
               </a>
               <p class="site-tagline">{{ site.description }}</p>
+              <div class="rail-badges">
+                <span class="rail-badge badge-focus">Focus</span>
+                <span class="rail-badge badge-notes">Notes</span>
+                <span class="rail-badge badge-practice">Practice</span>
+              </div>
+            </section>
+
+            <section class="rail-card">
+              <p class="rail-label">Main Navigation</p>
               <nav class="site-nav" aria-label="Primary">
                 <a href="{{ '/' | relative_url }}" class="{% if page.url == '/' %}is-active{% endif %}">Home</a>
                 <a href="{{ '/algorithms/' | relative_url }}" class="{% if page.url contains '/algorithms/' %}is-active{% endif %}">Algorithms</a>
@@ -46,7 +53,17 @@
                 <a href="{{ '/code/' | relative_url }}" class="{% if page.url contains '/code/' %}is-active{% endif %}">Code</a>
                 <a href="{{ '/datasets/' | relative_url }}" class="{% if page.url contains '/datasets/' %}is-active{% endif %}">Datasets</a>
               </nav>
-            </header>
+            </section>
+
+            <section class="rail-card rail-secondary">
+              <p class="rail-label">Quick Access</p>
+              <nav class="rail-links" aria-label="Quick links">
+                <a href="{{ '/extended_problem_patterns_cn.md' | relative_url }}">Pattern Roadmap</a>
+                <a href="{{ '/algorithms/leetcode_100_detailed/' | relative_url }}">LeetCode Detailed</a>
+                <a href="{{ '/ood/ood_cases/' | relative_url }}">OOD Cases</a>
+                <a href="https://github.com/cassieliang6709/study_notes">GitHub Repo</a>
+              </nav>
+            </section>
           </aside>
         </div>
       </main>

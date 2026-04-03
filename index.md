@@ -1,8 +1,25 @@
 # Study Notes
 
 <div class="home-hero">
-  <p class="hero-kicker">Focused Reading Space</p>
-  <p class="hero-copy">把算法、Python、OOD 和扩展题单整理成按主题可跳转的学习站点。首页直接进入你当前最想学的区域，减少来回找文件的成本。</p>
+  <div class="hero-copy-wrap">
+    <p class="hero-kicker">Learning Dashboard</p>
+    <h2 class="hero-title">一个更容易进入状态的学习面板</h2>
+    <p class="hero-copy">把算法、Python、OOD 和扩展题单整理成按主题进入的学习空间。首页像控制台，内页保持干净，减少来回找文件和迷路的成本。</p>
+  </div>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <strong>Algorithms</strong>
+      <span>主线刷题</span>
+    </div>
+    <div class="hero-stat">
+      <strong>Extended</strong>
+      <span>扩展题单</span>
+    </div>
+    <div class="hero-stat">
+      <strong>Python + OOD</strong>
+      <span>基础补强</span>
+    </div>
+  </div>
 </div>
 
 <div class="home-grid">
