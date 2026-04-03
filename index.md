@@ -16,7 +16,7 @@ title: Study Notes
     <strong>Extended Problems</strong>
     <span>更大题单的详细教学版，按 pattern 继续刷</span>
   </a>
-  <a class="home-card" href="./extended_problem_patterns_cn.md">
+  <a class="home-card" href="./extended_problem_patterns_cn">
     <strong>Pattern Roadmap</strong>
     <span>按题型整理的扩展题单总览</span>
   </a>
