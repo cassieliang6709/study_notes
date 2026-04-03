@@ -20,111 +20,440 @@ title: "03 链表详细教学"
 
 ### Reverse Linked List
 
-```text
-// 先记最标准反转模板
+**题目含义**
+
+反转链表的标准做法是维护两个指针：
+
+- `prev`：已经反转好的部分头节点
+- `cur`：当前要处理的节点
+
+每一步都先保存 `next`，再把当前节点指向 `prev`。
+
+**代表 Python 代码**
+
+```python
+from typing import Optional
+
+class Solution:
+    def reverseList(self, head: Optional['ListNode']) -> Optional['ListNode']:
+        prev = None
+        cur = head
+
+        while cur:
+            nxt = cur.next
+            cur.next = prev
+            prev = cur
+            cur = nxt
+
+        return prev
 ```
+
+**时间复杂度**
+
+`O(n)`。
+
+**空间复杂度**
+
+`O(1)`。
+
+**怎么想到这个方法**
+
+先看题型识别里的信号：这题本质上就是 `链表反转模板 / Linked List Reversal`。把题目翻译成这个模板后，再去套对应的不变量、状态定义或数据结构，就会更容易写出来。
+
+**常见 Follow-up**
+
+- 能不能把空间复杂度再压缩一层？
+- 有没有另一种常见模板也能解决这题？
 
 ### Reverse Linked List II
 
-```text
-// 局部区间反转
-// 常用 dummy + pre + 头插法
+**题目含义**
+
+这题是“只反转一段区间”。  
+关键是先找到反转区间前一个节点 `prev`，然后对区间做头插法重排。
+
+为什么要用 `dummy`：
+
+- 如果反转区间从头节点开始，`dummy` 可以统一处理
+
+**代表 Python 代码**
+
+```python
+from typing import Optional
+
+class Solution:
+    def reverseBetween(self, head: Optional['ListNode'], left: int, right: int) -> Optional['ListNode']:
+        dummy = ListNode(0, head)
+        prev = dummy
+
+        for _ in range(left - 1):
+            prev = prev.next
+
+        cur = prev.next
+        for _ in range(right - left):
+            nxt = cur.next
+            cur.next = nxt.next
+            nxt.next = prev.next
+            prev.next = nxt
+
+        return dummy.next
 ```
+
+**时间复杂度**
+
+`O(n)`。
+
+**空间复杂度**
+
+`O(1)`。
+
+**怎么想到这个方法**
+
+先看题型识别里的信号：这题本质上就是 `局部链表反转 / Partial Linked List Reversal`。把题目翻译成这个模板后，再去套对应的不变量、状态定义或数据结构，就会更容易写出来。
+
+**常见 Follow-up**
+
+- 能不能把空间复杂度再压缩一层？
+- 有没有另一种常见模板也能解决这题？
 
 ### Reorder List
 
+**题目含义**
+
+题目要求把链表重排成：
+
 ```text
-// 找中点
-// 反转后半段
-// 两段交错合并
+L0 -> Ln -> L1 -> Ln-1 -> ...
 ```
+
+标准做法分三步：
+
+1. 快慢指针找中点
+2. 反转后半段
+3. 前后两段交替合并
+
+**代表 Python 代码**
+
+```python
+from typing import Optional
+
+class Solution:
+    def reorderList(self, head: Optional['ListNode']) -> None:
+        if not head or not head.next:
+            return
+
+        slow = fast = head
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+
+        prev, cur = None, slow.next
+        slow.next = None
+        while cur:
+            nxt = cur.next
+            cur.next = prev
+            prev = cur
+            cur = nxt
+
+        first, second = head, prev
+        while second:
+            n1, n2 = first.next, second.next
+            first.next = second
+            second.next = n1
+            first, second = n1, n2
+```
+
+**时间复杂度**
+
+`O(n)`。
+
+**空间复杂度**
+
+`O(1)`。
+
+**怎么想到这个方法**
+
+先看题型识别里的信号：这题本质上就是 `找中点 + 反转 + 合并 / Split + Reverse + Merge`。把题目翻译成这个模板后，再去套对应的不变量、状态定义或数据结构，就会更容易写出来。
+
+**常见 Follow-up**
+
+- 能不能把空间复杂度再压缩一层？
+- 有没有另一种常见模板也能解决这题？
 
 ### Remove Nth Node From End
 
-```text
-// 快慢指针
-// fast 先走 n 步
+**题目含义**
+
+让 `fast` 先走 `n` 步，然后 `slow` 和 `fast` 一起走。  
+这样当 `fast` 到达末尾时，`slow` 正好在待删除节点前一个位置。
+
+为什么要用 `dummy`：
+
+- 如果删除的是头节点，`dummy` 能统一处理
+
+**代表 Python 代码**
+
+```python
+from typing import Optional
+
+class Solution:
+    def removeNthFromEnd(self, head: Optional['ListNode'], n: int) -> Optional['ListNode']:
+        dummy = ListNode(0, head)
+        fast = slow = dummy
+
+        for _ in range(n):
+            fast = fast.next
+
+        while fast.next:
+            fast = fast.next
+            slow = slow.next
+
+        slow.next = slow.next.next
+        return dummy.next
 ```
+
+**时间复杂度**
+
+`O(n)`。
+
+**空间复杂度**
+
+`O(1)`。
+
+**怎么想到这个方法**
+
+先看题型识别里的信号：这题本质上就是 `快慢指针 / Two Pointers`。把题目翻译成这个模板后，再去套对应的不变量、状态定义或数据结构，就会更容易写出来。
+
+**常见 Follow-up**
+
+- 如果输入先排序或已经有序，能不能进一步简化？
+- 如果要返回具体区间或下标，代码里要额外维护什么？
 
 ### Add Two Numbers / Add Two Numbers II
 
-```text
-// 前者逆序模拟加法
-// 后者通常用栈或先反转
+**题目含义**
+
+这题和手算加法完全一样：
+
+- 当前位 = 两个节点值 + 进位
+- 结果节点保存 `total % 10`
+- 新进位是 `total // 10`
+
+因为输入本身是逆序，所以我们直接从头往后加。
+
+**代表 Python 代码**
+
+```python
+from typing import Optional
+
+class Solution:
+    def addTwoNumbers(self, l1: Optional['ListNode'], l2: Optional['ListNode']) -> Optional['ListNode']:
+        dummy = ListNode()
+        cur = dummy
+        carry = 0
+
+        while l1 or l2 or carry:
+            x = l1.val if l1 else 0
+            y = l2.val if l2 else 0
+            total = x + y + carry
+
+            carry = total // 10
+            cur.next = ListNode(total % 10)
+            cur = cur.next
+
+            l1 = l1.next if l1 else None
+            l2 = l2.next if l2 else None
+
+        return dummy.next
 ```
+
+**时间复杂度**
+
+`O(max(m,n))`。
+
+**空间复杂度**
+
+`O(1)` 额外空间，不计答案链表。
+
+**怎么想到这个方法**
+
+先看题型识别里的信号：这题本质上就是 `链表模拟加法 / Linked List Addition`。把题目翻译成这个模板后，再去套对应的不变量、状态定义或数据结构，就会更容易写出来。
+
+**常见 Follow-up**
+
+- 能不能把空间复杂度再压缩一层？
+- 有没有另一种常见模板也能解决这题？
 
 ### Merge k Sorted Lists
 
-```text
-// 堆
-// 或分治归并
+**题目含义**
+
+合并两个有序链表可以双指针，但合并 `k` 个时最自然的是堆。  
+堆里维护每条链表当前头节点：
+
+- 每次弹出最小节点接到答案后面
+- 再把它的 `next` 放回堆中
+
+**代表 Python 代码**
+
+```python
+import heapq
+from typing import List, Optional
+
+class Solution:
+    def mergeKLists(self, lists: List[Optional['ListNode']]) -> Optional['ListNode']:
+        heap = []
+
+        for i, node in enumerate(lists):
+            if node:
+                heapq.heappush(heap, (node.val, i, node))
+
+        dummy = ListNode()
+        tail = dummy
+
+        while heap:
+            _, i, node = heapq.heappop(heap)
+            tail.next = node
+            tail = tail.next
+
+            if node.next:
+                heapq.heappush(heap, (node.next.val, i, node.next))
+
+        return dummy.next
 ```
+
+**时间复杂度**
+
+`O(N log k)`。
+
+**空间复杂度**
+
+`O(k)`。
+
+**怎么想到这个方法**
+
+先看题型识别里的信号：这题本质上就是 `堆 / Min Heap`。把题目翻译成这个模板后，再去套对应的不变量、状态定义或数据结构，就会更容易写出来。
+
+**常见 Follow-up**
+
+- 如果 `k` 很小，为什么堆通常比全排序更合适？
+- 如果数据流持续到来，解法要怎么调整？
 
 ### Sort List
 
-```text
-// 链表归并排序
+**题目含义**
+
+链表不适合快速排序，因为随机访问不方便。  
+归并排序更自然：
+
+1. 找中点拆成两半
+2. 递归排序左右两半
+3. 再合并两个有序链表
+
+**代表 Python 代码**
+
+```python
+from typing import Optional
+
+class Solution:
+    def sortList(self, head: Optional['ListNode']) -> Optional['ListNode']:
+        if not head or not head.next:
+            return head
+
+        slow, fast = head, head.next
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+
+        mid = slow.next
+        slow.next = None
+
+        left = self.sortList(head)
+        right = self.sortList(mid)
+        return self.merge(left, right)
+
+    def merge(self, a: Optional['ListNode'], b: Optional['ListNode']) -> Optional['ListNode']:
+        dummy = ListNode()
+        tail = dummy
+
+        while a and b:
+            if a.val <= b.val:
+                tail.next = a
+                a = a.next
+            else:
+                tail.next = b
+                b = b.next
+            tail = tail.next
+
+        tail.next = a or b
+        return dummy.next
 ```
+
+**时间复杂度**
+
+`O(n log n)`。
+
+**空间复杂度**
+
+`O(log n)` 递归栈。
+
+**怎么想到这个方法**
+
+先看题型识别里的信号：这题本质上就是 `链表归并排序 / Merge Sort on Linked List`。把题目翻译成这个模板后，再去套对应的不变量、状态定义或数据结构，就会更容易写出来。
+
+**常见 Follow-up**
+
+- 能不能把空间复杂度再压缩一层？
+- 有没有另一种常见模板也能解决这题？
 
 ### Copy List with Random Pointer
 
-```text
-// 哈希表 old -> new
-// 或穿插复制
+**题目含义**
+
+这题难点在于除了 `next` 之外还有 `random` 指针。  
+最稳的写法是：
+
+1. 第一遍创建所有新节点，建立 `旧节点 -> 新节点` 的映射
+2. 第二遍连接 `next` 和 `random`
+
+**代表 Python 代码**
+
+```python
+class Solution:
+    def copyRandomList(self, head: 'Optional[Node]') -> 'Optional[Node]':
+        if not head:
+            return None
+
+        old_to_new = {}
+        cur = head
+
+        while cur:
+            old_to_new[cur] = Node(cur.val)
+            cur = cur.next
+
+        cur = head
+        while cur:
+            old_to_new[cur].next = old_to_new.get(cur.next)
+            old_to_new[cur].random = old_to_new.get(cur.random)
+            cur = cur.next
+
+        return old_to_new[head]
 ```
 
----
+**时间复杂度**
 
-## 建议顺序
+`O(n)`。
 
-1. Reverse Linked List
-2. Remove Nth Node From End of List
-3. Merge Two Sorted Lists
-4. Add Two Numbers
-5. Intersection of Two Linked Lists
-6. Reorder List
-7. Reverse Linked List II
-8. Copy List with Random Pointer
-9. Sort List
-10. Merge k Sorted Lists
-11. Add Two Numbers II
+**空间复杂度**
 
+`O(n)`。
 
----
+**怎么想到这个方法**
 
-## Quiz
+先看题型识别里的信号：这题本质上就是 `哈希映射复制 / Hash Map Copy`。把题目翻译成这个模板后，再去套对应的不变量、状态定义或数据结构，就会更容易写出来。
 
-**Q1: `Reverse Linked List II`（反转 [left, right] 段），关键操作是什么？**
+**常见 Follow-up**
 
-- [ ] 先找到 left 位置，再整段截出来反转后拼回
-- [ ] 使用 dummy 节点，记录 left 前一个节点，局部反转后重新连接 ✅
-- [ ] 把链表转成数组再操作
-- [ ] 用递归反转整条链表
+- 如果空间受限，能不能改成排序或双指针？
+- 如果要返回所有答案而不是一个答案，如何去重？
 
-**Q2: `Reorder List`（L0→Ln→L1→Ln-1…）需要哪几步？**
-
-- [ ] 直接遍历重排
-- [ ] 找中点 → 反转后半段 → 交叉合并 ✅
-- [ ] 转成栈再重建
-- [ ] 用双端队列
-
-**Q3: `Copy List with Random Pointer` 的关键挑战是什么？**
-
-- [ ] 深拷贝普通 next 指针
-- [ ] 在没有原节点地址的情况下设置 random 指针
-- [ ] random 指针可能指向任意节点，需要先建立旧→新节点的映射 ✅
-- [ ] 链表本身是循环的
-
-**Q4: `Sort List` 的最优解法是什么，时间复杂度多少？**
-
-- [ ] 冒泡排序，O(n²)
-- [ ] 把链表转成数组排序，O(n log n) 但空间 O(n)
-- [ ] 链表归并排序，O(n log n)，空间 O(log n) ✅
-- [ ] 快速排序，O(n log n) 平均
-
-**Q5: 找链表倒数第 k 个节点，双指针法怎么设置间距？**
-
-- [ ] 两个指针同时出发
-- [ ] 让快指针先走 k 步，再同时走 ✅
-- [ ] 先求链表长度再计算
-- [ ] 快指针走 k-1 步

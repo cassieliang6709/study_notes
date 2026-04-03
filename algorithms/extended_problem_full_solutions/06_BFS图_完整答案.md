@@ -7,7 +7,7 @@ title: "06 BFS 与图完整答案"
 说明：
 
 - 本文按题目分节
-- 每题包含：题型识别、中文解释、English explanation、Python 标准解法
+- 每题包含：题型识别、题目含义、Python 代码、复杂度、思路来源、常见 Follow-up
 - 图题先问自己：这是最短路、连通块、拓扑排序，还是图建模？
 
 ---
@@ -20,24 +20,17 @@ title: "06 BFS 与图完整答案"
 无权图最短路径 / Shortest Path in Unweighted Graph
 ```
 
-**中文解释**
+**题目含义**
 
 每个单词都可以看成图中的一个节点。  
 如果两个单词只差一个字符，就连一条边。  
 题目要求最少变换次数，本质就是无权图最短路径，所以用 BFS。
 
-**English Explanation**
-
-Treat each word as a node in a graph.  
-Two words are connected if they differ by exactly one character.  
-Since the problem asks for the minimum number of transformations, it is a shortest-path problem in an unweighted graph, so BFS is the right approach.
-
-**Python 标准解法**
+**Python 代码**
 
 ```python
 from collections import deque
 from typing import List
-
 
 class Solution:
     def ladderLength(self, beginWord: str, endWord: str, wordList: List[str]) -> int:
@@ -62,7 +55,22 @@ class Solution:
         return 0
 ```
 
----
+**时间复杂度**
+
+经典写法约 `O(N * L * 26)`。
+
+**空间复杂度**
+
+`O(N * L)`。
+
+**怎么想到这个方法**
+
+先看题型识别里的信号：这题本质上就是 `无权图最短路径 / Shortest Path in Unweighted Graph`。把题目翻译成这个模板后，再去套对应的不变量、状态定义或数据结构，就会更容易写出来。
+
+**常见 Follow-up**
+
+- 如果要返回具体路径而不是只判断可行性，额外记录什么？
+- DFS、BFS、并查集三种解法分别适合什么场景？
 
 ## 2. Word Ladder II
 
@@ -72,7 +80,7 @@ class Solution:
 最短路径 + 回溯构造答案 / BFS Shortest Paths + Backtracking
 ```
 
-**中文解释**
+**题目含义**
 
 这一题不仅要最短长度，还要所有最短路径。  
 做法通常分两层：
@@ -80,20 +88,11 @@ class Solution:
 1. BFS 建最短层级关系，同时记录每个单词的父节点
 2. 从 `endWord` 回溯到 `beginWord`，构造所有答案
 
-**English Explanation**
-
-This problem asks not only for the shortest length, but for all shortest paths.  
-The usual approach has two phases:
-
-1. BFS to build shortest-level relationships while recording parent nodes
-2. Backtrack from `endWord` to `beginWord` to construct all valid shortest paths
-
-**Python 标准解法**
+**Python 代码**
 
 ```python
 from collections import defaultdict
 from typing import List
-
 
 class Solution:
     def findLadders(self, beginWord: str, endWord: str, wordList: List[str]) -> List[List[str]]:
@@ -130,7 +129,22 @@ class Solution:
         return ans
 ```
 
----
+**时间复杂度**
+
+通常是遍历所有点边或网格单元，常见写法为 `O(V+E)` 或 `O(mn)`。
+
+**空间复杂度**
+
+通常是 `O(V+E)` 或队列规模。
+
+**怎么想到这个方法**
+
+先看题型识别里的信号：这题本质上就是 `最短路径 + 回溯构造答案 / BFS Shortest Paths + Backtracking`。把题目翻译成这个模板后，再去套对应的不变量、状态定义或数据结构，就会更容易写出来。
+
+**常见 Follow-up**
+
+- 如果要返回具体路径而不是只判断可行性，额外记录什么？
+- DFS、BFS、并查集三种解法分别适合什么场景？
 
 ## 3. Walls and Gates
 
@@ -140,22 +154,16 @@ class Solution:
 多源 BFS / Multi-source BFS
 ```
 
-**中文解释**
+**题目含义**
 
 所有门都是距离的起点，所以要把所有门同时入队。  
 然后一层一层扩散，第一次走到某个空房间时，就是它到最近门的最短距离。
 
-**English Explanation**
-
-All gates are starting points for distance propagation, so we push all gates into the queue at once.  
-Then we expand level by level. The first time we reach an empty room is the shortest distance from a gate.
-
-**Python 标准解法**
+**Python 代码**
 
 ```python
 from collections import deque
 from typing import List
-
 
 class Solution:
     def wallsAndGates(self, rooms: List[List[int]]) -> None:
@@ -176,7 +184,22 @@ class Solution:
                     q.append((nr, nc))
 ```
 
----
+**时间复杂度**
+
+通常是遍历所有点边或网格单元，常见写法为 `O(V+E)` 或 `O(mn)`。
+
+**空间复杂度**
+
+通常是 `O(V+E)` 或队列规模。
+
+**怎么想到这个方法**
+
+先看题型识别里的信号：这题本质上就是 `多源 BFS / Multi-source BFS`。把题目翻译成这个模板后，再去套对应的不变量、状态定义或数据结构，就会更容易写出来。
+
+**常见 Follow-up**
+
+- 如果要返回具体路径而不是只判断可行性，额外记录什么？
+- DFS、BFS、并查集三种解法分别适合什么场景？
 
 ## 4. Shortest Distance from All Buildings
 
@@ -186,7 +209,7 @@ class Solution:
 多次 BFS 汇总距离 / Repeated BFS Distance Aggregation
 ```
 
-**中文解释**
+**题目含义**
 
 对每一栋建筑都做一次 BFS：
 
@@ -195,21 +218,11 @@ class Solution:
 
 最后在所有空地中，找 `reach == building_count` 的最小距离。
 
-**English Explanation**
-
-Run BFS from each building:
-
-- `dist[r][c]`: total distance from all buildings to this empty land
-- `reach[r][c]`: how many buildings can reach this empty land
-
-At the end, among all empty cells with `reach == building_count`, choose the minimum total distance.
-
-**Python 标准解法**
+**Python 代码**
 
 ```python
 from collections import deque
 from typing import List
-
 
 class Solution:
     def shortestDistance(self, grid: List[List[int]]) -> int:
@@ -244,7 +257,22 @@ class Solution:
         return ans if ans != float("inf") else -1
 ```
 
----
+**时间复杂度**
+
+通常是遍历所有点边或网格单元，常见写法为 `O(V+E)` 或 `O(mn)`。
+
+**空间复杂度**
+
+通常是 `O(V+E)` 或队列规模。
+
+**怎么想到这个方法**
+
+先看题型识别里的信号：这题本质上就是 `多次 BFS 汇总距离 / Repeated BFS Distance Aggregation`。把题目翻译成这个模板后，再去套对应的不变量、状态定义或数据结构，就会更容易写出来。
+
+**常见 Follow-up**
+
+- 如果要返回具体路径而不是只判断可行性，额外记录什么？
+- DFS、BFS、并查集三种解法分别适合什么场景？
 
 ## 5. The Maze
 
@@ -254,22 +282,16 @@ class Solution:
 图搜索 / Graph Search with Rolling Movement
 ```
 
-**中文解释**
+**题目含义**
 
 球不是一步一步走，而是会一直滚到撞墙才停。  
 所以从某个位置出发时，每个方向的“下一状态”不是相邻格子，而是滚动停止后的格子。
 
-**English Explanation**
-
-The ball does not move one cell at a time. It keeps rolling until it hits a wall.  
-So from one state, the next state in each direction is not the adjacent cell, but the stopping cell after rolling.
-
-**Python 标准解法**
+**Python 代码**
 
 ```python
 from collections import deque
 from typing import List
-
 
 class Solution:
     def hasPath(self, maze: List[List[int]], start: List[int], destination: List[int]) -> bool:
@@ -295,7 +317,22 @@ class Solution:
         return False
 ```
 
----
+**时间复杂度**
+
+请结合这题使用的主循环、排序、堆或递归分支来记忆复杂度。
+
+**空间复杂度**
+
+请结合辅助数据结构与递归深度来判断空间复杂度。
+
+**怎么想到这个方法**
+
+先看题型识别里的信号：这题本质上就是 `图搜索 / Graph Search with Rolling Movement`。把题目翻译成这个模板后，再去套对应的不变量、状态定义或数据结构，就会更容易写出来。
+
+**常见 Follow-up**
+
+- 如果要返回具体路径而不是只判断可行性，额外记录什么？
+- DFS、BFS、并查集三种解法分别适合什么场景？
 
 ## 6. Number of Islands
 
@@ -305,21 +342,15 @@ class Solution:
 连通块 DFS / Connected Components DFS
 ```
 
-**中文解释**
+**题目含义**
 
 每发现一个新的陆地 `1`，就说明找到一座新岛。  
 然后用 DFS 把整座岛全部“淹掉”，避免重复计数。
 
-**English Explanation**
-
-Whenever we find a new land cell `1`, we have discovered a new island.  
-Then use DFS to flood-fill the whole island so it will not be counted again.
-
-**Python 标准解法**
+**Python 代码**
 
 ```python
 from typing import List
-
 
 class Solution:
     def numIslands(self, grid: List[List[str]]) -> int:
@@ -344,7 +375,22 @@ class Solution:
         return ans
 ```
 
----
+**时间复杂度**
+
+`O(mn)`。
+
+**空间复杂度**
+
+`O(mn)` 最坏递归栈或队列。
+
+**怎么想到这个方法**
+
+先看题型识别里的信号：这题本质上就是 `连通块 DFS / Connected Components DFS`。把题目翻译成这个模板后，再去套对应的不变量、状态定义或数据结构，就会更容易写出来。
+
+**常见 Follow-up**
+
+- 如果要返回具体路径而不是只判断可行性，额外记录什么？
+- DFS、BFS、并查集三种解法分别适合什么场景？
 
 ## 7. Max Area of Island
 
@@ -354,19 +400,14 @@ class Solution:
 连通块面积 DFS / DFS Area Counting
 ```
 
-**中文解释**
+**题目含义**
 
 和 `Number of Islands` 很像，只不过不是数岛屿个数，而是让 DFS 返回当前岛屿的面积。
 
-**English Explanation**
-
-This is similar to `Number of Islands`, except instead of counting islands, DFS returns the area of the current island.
-
-**Python 标准解法**
+**Python 代码**
 
 ```python
 from typing import List
-
 
 class Solution:
     def maxAreaOfIsland(self, grid: List[List[int]]) -> int:
@@ -386,7 +427,22 @@ class Solution:
         return ans
 ```
 
----
+**时间复杂度**
+
+`O(mn)`。
+
+**空间复杂度**
+
+`O(mn)` 最坏递归栈。
+
+**怎么想到这个方法**
+
+先看题型识别里的信号：这题本质上就是 `连通块面积 DFS / DFS Area Counting`。把题目翻译成这个模板后，再去套对应的不变量、状态定义或数据结构，就会更容易写出来。
+
+**常见 Follow-up**
+
+- 如果要返回具体路径而不是只判断可行性，额外记录什么？
+- DFS、BFS、并查集三种解法分别适合什么场景？
 
 ## 8. Island Perimeter
 
@@ -396,21 +452,15 @@ class Solution:
 网格计数 / Grid Counting
 ```
 
-**中文解释**
+**题目含义**
 
 每个陆地格子先贡献 `4` 条边。  
 如果和上方或左方陆地相邻，就说明有公共边，要减去 `2`。
 
-**English Explanation**
-
-Each land cell initially contributes `4` edges.  
-If it touches land above or to the left, they share one boundary, so subtract `2`.
-
-**Python 标准解法**
+**Python 代码**
 
 ```python
 from typing import List
-
 
 class Solution:
     def islandPerimeter(self, grid: List[List[int]]) -> int:
@@ -429,7 +479,22 @@ class Solution:
         return ans
 ```
 
----
+**时间复杂度**
+
+请结合这题使用的主循环、排序、堆或递归分支来记忆复杂度。
+
+**空间复杂度**
+
+请结合辅助数据结构与递归深度来判断空间复杂度。
+
+**怎么想到这个方法**
+
+先看题型识别里的信号：这题本质上就是 `网格计数 / Grid Counting`。把题目翻译成这个模板后，再去套对应的不变量、状态定义或数据结构，就会更容易写出来。
+
+**常见 Follow-up**
+
+- 能不能把空间复杂度再压缩一层？
+- 有没有另一种常见模板也能解决这题？
 
 ## 9. Battleships in a Board
 
@@ -439,21 +504,15 @@ class Solution:
 扫描计数 / Pattern Counting
 ```
 
-**中文解释**
+**题目含义**
 
 一艘战舰的左边和上边都不会再有 `X`。  
 所以只统计那些“左边不是 X 且上边不是 X”的 `X`，它们就是每艘战舰的起点。
 
-**English Explanation**
-
-The topmost-leftmost cell of a battleship has no `X` above it and no `X` to its left.  
-So count only those `X` cells that do not have another `X` above or to the left.
-
-**Python 标准解法**
+**Python 代码**
 
 ```python
 from typing import List
-
 
 class Solution:
     def countBattleships(self, board: List[List[str]]) -> int:
@@ -472,7 +531,22 @@ class Solution:
         return ans
 ```
 
----
+**时间复杂度**
+
+请结合这题使用的主循环、排序、堆或递归分支来记忆复杂度。
+
+**空间复杂度**
+
+请结合辅助数据结构与递归深度来判断空间复杂度。
+
+**怎么想到这个方法**
+
+先看题型识别里的信号：这题本质上就是 `扫描计数 / Pattern Counting`。把题目翻译成这个模板后，再去套对应的不变量、状态定义或数据结构，就会更容易写出来。
+
+**常见 Follow-up**
+
+- 能不能把空间复杂度再压缩一层？
+- 有没有另一种常见模板也能解决这题？
 
 ## 10. Is Graph Bipartite?
 
@@ -482,22 +556,16 @@ class Solution:
 图染色 / Graph Coloring
 ```
 
-**中文解释**
+**题目含义**
 
 二分图的定义是：可以把所有点染成两种颜色，且相邻点颜色不同。  
 所以 BFS/DFS 过程中，尝试给相邻点染相反颜色；如果冲突，就不是二分图。
 
-**English Explanation**
-
-A graph is bipartite if we can color all nodes with two colors such that adjacent nodes have different colors.  
-So during BFS/DFS, assign opposite colors to neighbors. If a conflict appears, the graph is not bipartite.
-
-**Python 标准解法**
+**Python 代码**
 
 ```python
 from collections import deque
 from typing import List
-
 
 class Solution:
     def isBipartite(self, graph: List[List[int]]) -> bool:
@@ -523,7 +591,22 @@ class Solution:
         return True
 ```
 
----
+**时间复杂度**
+
+请结合这题使用的主循环、排序、堆或递归分支来记忆复杂度。
+
+**空间复杂度**
+
+请结合辅助数据结构与递归深度来判断空间复杂度。
+
+**怎么想到这个方法**
+
+先看题型识别里的信号：这题本质上就是 `图染色 / Graph Coloring`。把题目翻译成这个模板后，再去套对应的不变量、状态定义或数据结构，就会更容易写出来。
+
+**常见 Follow-up**
+
+- 如果要返回具体路径而不是只判断可行性，额外记录什么？
+- DFS、BFS、并查集三种解法分别适合什么场景？
 
 ## 11. Word Search
 
@@ -533,21 +616,15 @@ class Solution:
 矩阵 DFS 回溯 / Grid DFS Backtracking
 ```
 
-**中文解释**
+**题目含义**
 
 从每个起点开始 DFS，尝试匹配单词的第 `i` 个字符。  
 访问过的格子在当前路径里不能重复使用，所以要做标记再恢复。
 
-**English Explanation**
-
-Start DFS from each cell and try to match the `i`-th character of the word.  
-Cells already used in the current path cannot be reused, so we mark them temporarily and restore them afterward.
-
-**Python 标准解法**
+**Python 代码**
 
 ```python
 from typing import List
-
 
 class Solution:
     def exist(self, board: List[List[str]], word: str) -> bool:
@@ -578,7 +655,22 @@ class Solution:
         return False
 ```
 
----
+**时间复杂度**
+
+通常取决于搜索树大小，常见为指数级。
+
+**空间复杂度**
+
+递归栈加辅助状态，通常 `O(depth)` 到指数级状态空间。
+
+**怎么想到这个方法**
+
+先看题型识别里的信号：这题本质上就是 `矩阵 DFS 回溯 / Grid DFS Backtracking`。把题目翻译成这个模板后，再去套对应的不变量、状态定义或数据结构，就会更容易写出来。
+
+**常见 Follow-up**
+
+- 如果要返回具体路径而不是只判断可行性，额外记录什么？
+- DFS、BFS、并查集三种解法分别适合什么场景？
 
 ## 12. Word Search II
 
@@ -588,7 +680,7 @@ class Solution:
 Trie + DFS / Trie-guided DFS
 ```
 
-**中文解释**
+**题目含义**
 
 如果对每个单词都单独做一遍 `Word Search`，会非常慢。  
 更高效的做法是：
@@ -597,26 +689,15 @@ Trie + DFS / Trie-guided DFS
 2. 在棋盘上 DFS
 3. 当前路径只沿着 Trie 中存在的前缀继续搜索
 
-**English Explanation**
-
-Running `Word Search` independently for every word is too slow.  
-The efficient approach is:
-
-1. build a Trie from all words
-2. DFS on the board
-3. continue only if the current path is still a valid Trie prefix
-
-**Python 标准解法**
+**Python 代码**
 
 ```python
 from typing import List
-
 
 class TrieNode:
     def __init__(self):
         self.children = {}
         self.word = None
-
 
 class Solution:
     def findWords(self, board: List[List[str]], words: List[str]) -> List[str]:
@@ -656,7 +737,22 @@ class Solution:
         return ans
 ```
 
----
+**时间复杂度**
+
+通常取决于搜索树大小，常见为指数级。
+
+**空间复杂度**
+
+递归栈加辅助状态，通常 `O(depth)` 到指数级状态空间。
+
+**怎么想到这个方法**
+
+先看题型识别里的信号：这题本质上就是 `Trie + DFS / Trie-guided DFS`。把题目翻译成这个模板后，再去套对应的不变量、状态定义或数据结构，就会更容易写出来。
+
+**常见 Follow-up**
+
+- 如果要返回具体路径而不是只判断可行性，额外记录什么？
+- DFS、BFS、并查集三种解法分别适合什么场景？
 
 ## 13. Course Schedule
 
@@ -666,7 +762,7 @@ class Solution:
 拓扑排序判环 / Topological Sort for Cycle Detection
 ```
 
-**中文解释**
+**题目含义**
 
 课程依赖可以看成有向图。  
 如果图中有环，就无法完成所有课程。  
@@ -677,23 +773,11 @@ class Solution:
 
 最后如果处理的课程数等于总课程数，就说明无环。
 
-**English Explanation**
-
-Course prerequisites form a directed graph.  
-If the graph contains a cycle, it is impossible to finish all courses.  
-Use indegrees + queue for topological sorting:
-
-- courses with indegree 0 can be taken first
-- after taking one, reduce indegrees of dependent courses
-
-If the number of processed courses equals the total number of courses, the graph has no cycle.
-
-**Python 标准解法**
+**Python 代码**
 
 ```python
 from collections import defaultdict, deque
 from typing import List
-
 
 class Solution:
     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
@@ -718,7 +802,22 @@ class Solution:
         return seen == numCourses
 ```
 
----
+**时间复杂度**
+
+`O(V+E)`。
+
+**空间复杂度**
+
+`O(V+E)`。
+
+**怎么想到这个方法**
+
+先看题型识别里的信号：这题本质上就是 `拓扑排序判环 / Topological Sort for Cycle Detection`。把题目翻译成这个模板后，再去套对应的不变量、状态定义或数据结构，就会更容易写出来。
+
+**常见 Follow-up**
+
+- 能不能把空间复杂度再压缩一层？
+- 有没有另一种常见模板也能解决这题？
 
 ## 14. Course Schedule II
 
@@ -728,20 +827,15 @@ class Solution:
 拓扑排序输出顺序 / Topological Ordering
 ```
 
-**中文解释**
+**题目含义**
 
 和上一题同样是拓扑排序，只不过这次不仅要判断能否完成，还要返回一种合法学习顺序。
 
-**English Explanation**
-
-This is the same topological sort idea as the previous problem, but now we must return one valid ordering instead of just checking feasibility.
-
-**Python 标准解法**
+**Python 代码**
 
 ```python
 from collections import defaultdict, deque
 from typing import List
-
 
 class Solution:
     def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
@@ -766,7 +860,22 @@ class Solution:
         return ans if len(ans) == numCourses else []
 ```
 
----
+**时间复杂度**
+
+`O(V+E)`。
+
+**空间复杂度**
+
+`O(V+E)`。
+
+**怎么想到这个方法**
+
+先看题型识别里的信号：这题本质上就是 `拓扑排序输出顺序 / Topological Ordering`。把题目翻译成这个模板后，再去套对应的不变量、状态定义或数据结构，就会更容易写出来。
+
+**常见 Follow-up**
+
+- 能不能把空间复杂度再压缩一层？
+- 有没有另一种常见模板也能解决这题？
 
 ## 15. Alien Dictionary
 
@@ -776,7 +885,7 @@ class Solution:
 建图 + 拓扑排序 / Graph Construction + Topological Sort
 ```
 
-**中文解释**
+**题目含义**
 
 根据字典序相邻两个单词，找到第一个不同字符，就能得到一个顺序关系：
 
@@ -787,23 +896,11 @@ a -> b
 然后在所有字符之间做拓扑排序。  
 还要注意非法情况：前一个单词更长但前缀和后一个相同。
 
-**English Explanation**
-
-From each adjacent pair of words, find the first differing character and derive an order relation:
-
-```text
-a -> b
-```
-
-Then run topological sorting on all characters.  
-Also handle the invalid case where the earlier word is longer but has the later word as a prefix.
-
-**Python 标准解法**
+**Python 代码**
 
 ```python
 from collections import defaultdict, deque
 from typing import List
-
 
 class Solution:
     def alienOrder(self, words: List[str]) -> str:
@@ -835,7 +932,22 @@ class Solution:
         return "".join(ans) if len(ans) == len(indeg) else ""
 ```
 
----
+**时间复杂度**
+
+`O(C)` 到 `O(C + V + E)`。
+
+**空间复杂度**
+
+`O(V+E)`。
+
+**怎么想到这个方法**
+
+先看题型识别里的信号：这题本质上就是 `建图 + 拓扑排序 / Graph Construction + Topological Sort`。把题目翻译成这个模板后，再去套对应的不变量、状态定义或数据结构，就会更容易写出来。
+
+**常见 Follow-up**
+
+- 如果要返回具体路径而不是只判断可行性，额外记录什么？
+- DFS、BFS、并查集三种解法分别适合什么场景？
 
 ## 16. Clone Graph
 
@@ -845,7 +957,7 @@ class Solution:
 图复制 / Graph Copy with Hash Map
 ```
 
-**中文解释**
+**题目含义**
 
 图复制的核心永远是：
 
@@ -855,17 +967,7 @@ class Solution:
 
 只要有这个映射，就能避免重复创建节点，也能正确连接邻居。
 
-**English Explanation**
-
-The core of graph cloning is always:
-
-```text
-old node -> new node
-```
-
-Once we maintain this mapping, we avoid duplicate node creation and can connect neighbors correctly.
-
-**Python 标准解法**
+**Python 代码**
 
 ```python
 class Solution:
@@ -890,7 +992,22 @@ class Solution:
         return dfs(node)
 ```
 
----
+**时间复杂度**
+
+`O(V+E)`。
+
+**空间复杂度**
+
+`O(V)`。
+
+**怎么想到这个方法**
+
+先看题型识别里的信号：这题本质上就是 `图复制 / Graph Copy with Hash Map`。把题目翻译成这个模板后，再去套对应的不变量、状态定义或数据结构，就会更容易写出来。
+
+**常见 Follow-up**
+
+- 如果要返回具体路径而不是只判断可行性，额外记录什么？
+- DFS、BFS、并查集三种解法分别适合什么场景？
 
 ## 17. Reconstruct Itinerary
 
@@ -900,24 +1017,17 @@ class Solution:
 欧拉路径 / Eulerian Path with Lexicographical Order
 ```
 
-**中文解释**
+**题目含义**
 
 这题的技巧是 Hierholzer 算法。  
 把机票按逆序排序后放入邻接表，这样每次 `pop()` 出来的都是字典序最小的下一站。  
 DFS 走到走不动时，再把机场加入答案，最后反转。
 
-**English Explanation**
-
-The trick is Hierholzer’s algorithm for Eulerian path construction.  
-Sort tickets in reverse order when building adjacency lists so that each `pop()` gives the lexicographically smallest next airport.  
-During DFS, add the airport to the answer only when no further edge remains, then reverse the result at the end.
-
-**Python 标准解法**
+**Python 代码**
 
 ```python
 from collections import defaultdict
 from typing import List
-
 
 class Solution:
     def findItinerary(self, tickets: List[List[str]]) -> List[str]:
@@ -936,7 +1046,22 @@ class Solution:
         return ans[::-1]
 ```
 
----
+**时间复杂度**
+
+请结合这题使用的主循环、排序、堆或递归分支来记忆复杂度。
+
+**空间复杂度**
+
+请结合辅助数据结构与递归深度来判断空间复杂度。
+
+**怎么想到这个方法**
+
+先看题型识别里的信号：这题本质上就是 `欧拉路径 / Eulerian Path with Lexicographical Order`。把题目翻译成这个模板后，再去套对应的不变量、状态定义或数据结构，就会更容易写出来。
+
+**常见 Follow-up**
+
+- 能不能把空间复杂度再压缩一层？
+- 有没有另一种常见模板也能解决这题？
 
 ## 18. Pacific Atlantic Water Flow
 
@@ -946,7 +1071,7 @@ class Solution:
 反向 DFS / Reverse Reachability DFS
 ```
 
-**中文解释**
+**题目含义**
 
 正向思考会比较难，因为要从每个点判断能不能流到两个海。  
 更聪明的方式是反过来想：
@@ -956,21 +1081,10 @@ class Solution:
 
 能同时被两边访问到的点就是答案。
 
-**English Explanation**
-
-The forward direction is hard because from each cell we would need to test reachability to both oceans.  
-The better idea is reverse thinking:
-
-- start from the Pacific border and climb to higher or equal heights
-- start from the Atlantic border and climb to higher or equal heights
-
-Cells reachable from both searches are the answer.
-
-**Python 标准解法**
+**Python 代码**
 
 ```python
 from typing import List
-
 
 class Solution:
     def pacificAtlantic(self, heights: List[List[int]]) -> List[List[int]]:
@@ -1000,7 +1114,22 @@ class Solution:
         return [[r, c] for r, c in pac & atl]
 ```
 
----
+**时间复杂度**
+
+通常取决于搜索树大小，常见为指数级。
+
+**空间复杂度**
+
+递归栈加辅助状态，通常 `O(depth)` 到指数级状态空间。
+
+**怎么想到这个方法**
+
+先看题型识别里的信号：这题本质上就是 `反向 DFS / Reverse Reachability DFS`。把题目翻译成这个模板后，再去套对应的不变量、状态定义或数据结构，就会更容易写出来。
+
+**常见 Follow-up**
+
+- 如果要返回具体路径而不是只判断可行性，额外记录什么？
+- DFS、BFS、并查集三种解法分别适合什么场景？
 
 ## 19. Accounts Merge
 
@@ -1010,24 +1139,17 @@ class Solution:
 图连通分量 / Graph Connected Components
 ```
 
-**中文解释**
+**题目含义**
 
 邮箱之间如果出现在同一个账户里，就应该属于同一个人。  
 所以可以把邮箱看成图节点，把同账户里的邮箱连边。  
 最后求每个连通分量即可。
 
-**English Explanation**
-
-If two emails appear in the same account, they belong to the same person.  
-So model emails as graph nodes and connect emails that appear in the same account.  
-Then each connected component becomes one merged account.
-
-**Python 标准解法**
+**Python 代码**
 
 ```python
 from collections import defaultdict
 from typing import List
-
 
 class Solution:
     def accountsMerge(self, accounts: List[List[str]]) -> List[List[str]]:
@@ -1066,7 +1188,22 @@ class Solution:
         return ans
 ```
 
----
+**时间复杂度**
+
+约 `O(N alpha(N) + M log M)`。
+
+**空间复杂度**
+
+`O(N)`。
+
+**怎么想到这个方法**
+
+先看题型识别里的信号：这题本质上就是 `图连通分量 / Graph Connected Components`。把题目翻译成这个模板后，再去套对应的不变量、状态定义或数据结构，就会更容易写出来。
+
+**常见 Follow-up**
+
+- 如果要返回具体路径而不是只判断可行性，额外记录什么？
+- DFS、BFS、并查集三种解法分别适合什么场景？
 
 ## 20. All Nodes Distance K in Binary Tree
 
@@ -1076,22 +1213,16 @@ class Solution:
 树转无向图 + BFS / Tree to Undirected Graph + BFS
 ```
 
-**中文解释**
+**题目含义**
 
 树节点通常只能往下走，但这题允许“向上”走到父节点。  
 所以先把树转成无向图，再从 `target` 做 BFS，找距离为 `k` 的所有节点。
 
-**English Explanation**
-
-Normally tree traversal only goes downward, but here we also need to move upward to parents.  
-So first convert the tree into an undirected graph, then run BFS from the `target` node to find all nodes at distance `k`.
-
-**Python 标准解法**
+**Python 代码**
 
 ```python
 from collections import defaultdict, deque
 from typing import List
-
 
 class Solution:
     def distanceK(self, root: 'TreeNode', target: 'TreeNode', k: int) -> List[int]:
@@ -1125,7 +1256,22 @@ class Solution:
         return ans
 ```
 
----
+**时间复杂度**
+
+通常是遍历所有点边或网格单元，常见写法为 `O(V+E)` 或 `O(mn)`。
+
+**空间复杂度**
+
+通常是 `O(V+E)` 或队列规模。
+
+**怎么想到这个方法**
+
+先看题型识别里的信号：这题本质上就是 `树转无向图 + BFS / Tree to Undirected Graph + BFS`。把题目翻译成这个模板后，再去套对应的不变量、状态定义或数据结构，就会更容易写出来。
+
+**常见 Follow-up**
+
+- 如果要返回具体路径而不是只判断可行性，额外记录什么？
+- DFS、BFS、并查集三种解法分别适合什么场景？
 
 ## 21. Number of Connected Components in an Undirected Graph
 
@@ -1135,22 +1281,16 @@ class Solution:
 图连通分量计数 / Connected Components Counting
 ```
 
-**中文解释**
+**题目含义**
 
 每碰到一个未访问过的节点，就说明发现了一个新的连通分量。  
 然后 DFS/BFS 把整个分量都访问掉。
 
-**English Explanation**
-
-Whenever we encounter an unvisited node, we have found a new connected component.  
-Then DFS/BFS is used to traverse that entire component.
-
-**Python 标准解法**
+**Python 代码**
 
 ```python
 from collections import defaultdict
 from typing import List
-
 
 class Solution:
     def countComponents(self, n: int, edges: List[List[int]]) -> int:
@@ -1176,7 +1316,22 @@ class Solution:
         return ans
 ```
 
----
+**时间复杂度**
+
+请结合这题使用的主循环、排序、堆或递归分支来记忆复杂度。
+
+**空间复杂度**
+
+请结合辅助数据结构与递归深度来判断空间复杂度。
+
+**怎么想到这个方法**
+
+先看题型识别里的信号：这题本质上就是 `图连通分量计数 / Connected Components Counting`。把题目翻译成这个模板后，再去套对应的不变量、状态定义或数据结构，就会更容易写出来。
+
+**常见 Follow-up**
+
+- 如果要返回具体路径而不是只判断可行性，额外记录什么？
+- DFS、BFS、并查集三种解法分别适合什么场景？
 
 ## 22. Minesweeper
 
@@ -1186,7 +1341,7 @@ class Solution:
 网格 DFS 展开 / Grid DFS Expansion
 ```
 
-**中文解释**
+**题目含义**
 
 点击规则是：
 
@@ -1194,19 +1349,10 @@ class Solution:
 - 如果周围有雷，显示数字
 - 如果周围没有雷，显示 `B`，并继续递归展开周围格子
 
-**English Explanation**
-
-The click rules are:
-
-- if we click on a mine, it becomes `X`
-- if adjacent mines exist, show the count
-- if no adjacent mines exist, mark `B` and recursively reveal surrounding cells
-
-**Python 标准解法**
+**Python 代码**
 
 ```python
 from typing import List
-
 
 class Solution:
     def updateBoard(self, board: List[List[str]], click: List[int]) -> List[List[str]]:
@@ -1244,3 +1390,21 @@ class Solution:
 
         return board
 ```
+
+**时间复杂度**
+
+通常取决于搜索树大小，常见为指数级。
+
+**空间复杂度**
+
+递归栈加辅助状态，通常 `O(depth)` 到指数级状态空间。
+
+**怎么想到这个方法**
+
+先看题型识别里的信号：这题本质上就是 `网格 DFS 展开 / Grid DFS Expansion`。把题目翻译成这个模板后，再去套对应的不变量、状态定义或数据结构，就会更容易写出来。
+
+**常见 Follow-up**
+
+- 如果要返回具体路径而不是只判断可行性，额外记录什么？
+- DFS、BFS、并查集三种解法分别适合什么场景？
+

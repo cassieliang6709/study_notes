@@ -21,99 +21,347 @@ title: "07 栈与队列详细教学"
 
 ### Valid Parentheses
 
-```text
-// 栈基础题
+**题目含义**
+
+这是最基础的栈题。  
+遇到左括号就入栈，遇到右括号就检查栈顶是否是对应的左括号。
+
+**代表 Python 代码**
+
+```python
+class Solution:
+    def isValid(self, s: str) -> bool:
+        mp = {')': '(', ']': '[', '}': '{'}
+        stack = []
+
+        for ch in s:
+            if ch in mp:
+                if not stack or stack.pop() != mp[ch]:
+                    return False
+            else:
+                stack.append(ch)
+
+        return not stack
 ```
+
+**时间复杂度**
+
+`O(n)`。
+
+**空间复杂度**
+
+`O(n)`。
+
+**怎么想到这个方法**
+
+先看题型识别里的信号：这题本质上就是 `括号匹配 / Parenthesis Matching`。把题目翻译成这个模板后，再去套对应的不变量、状态定义或数据结构，就会更容易写出来。
+
+**常见 Follow-up**
+
+- 能不能把空间复杂度再压缩一层？
+- 有没有另一种常见模板也能解决这题？
 
 ### Simplify Path
 
-```text
-// 用栈维护路径片段
+**题目含义**
+
+Unix 路径里：
+
+- `.` 表示当前目录，忽略
+- `..` 表示回到上一级，弹栈
+- 普通字符串表示进入子目录，入栈
+
+最后把栈里的目录重新拼起来即可。
+
+**代表 Python 代码**
+
+```python
+class Solution:
+    def simplifyPath(self, path: str) -> str:
+        stack = []
+
+        for part in path.split("/"):
+            if part == "" or part == ".":
+                continue
+            if part == "..":
+                if stack:
+                    stack.pop()
+            else:
+                stack.append(part)
+
+        return "/" + "/".join(stack)
 ```
+
+**时间复杂度**
+
+`O(n)`。
+
+**空间复杂度**
+
+`O(n)`。
+
+**怎么想到这个方法**
+
+先看题型识别里的信号：这题本质上就是 `路径栈模拟 / Stack-based Path Simulation`。把题目翻译成这个模板后，再去套对应的不变量、状态定义或数据结构，就会更容易写出来。
+
+**常见 Follow-up**
+
+- 能不能把空间复杂度再压缩一层？
+- 有没有另一种常见模板也能解决这题？
 
 ### Decode String
 
-```text
-// 嵌套结构，遇到 ] 结算
+**题目含义**
+
+当遇到 `[` 时，说明当前字符串和重复次数要暂存起来，进入新层级。  
+当遇到 `]` 时，从栈里弹出之前的状态，把当前字符串按次数展开再接回去。
+
+**代表 Python 代码**
+
+```python
+class Solution:
+    def decodeString(self, s: str) -> str:
+        stack = []
+        cur_num = 0
+        cur_str = ""
+
+        for ch in s:
+            if ch.isdigit():
+                cur_num = cur_num * 10 + int(ch)
+            elif ch == "[":
+                stack.append((cur_str, cur_num))
+                cur_str = ""
+                cur_num = 0
+            elif ch == "]":
+                prev_str, num = stack.pop()
+                cur_str = prev_str + num * cur_str
+            else:
+                cur_str += ch
+
+        return cur_str
 ```
+
+**时间复杂度**
+
+`O(n * expanded_length)`，通常记作 `O(n)` 到输出规模。
+
+**空间复杂度**
+
+`O(n)`。
+
+**怎么想到这个方法**
+
+先看题型识别里的信号：这题本质上就是 `嵌套解码 / Nested Decoding with Stack`。把题目翻译成这个模板后，再去套对应的不变量、状态定义或数据结构，就会更容易写出来。
+
+**常见 Follow-up**
+
+- 能不能把空间复杂度再压缩一层？
+- 有没有另一种常见模板也能解决这题？
 
 ### Basic Calculator / II / III
 
-```text
-// II 先掌握乘除即时结算
-// I / III 再处理括号
+**题目含义**
+
+这组题是在一条主线上递进的：`II` 先掌握乘除即时结算，`I` 和 `III` 再把括号嵌套加回来。核心仍然是把运算符优先级拆成可维护的状态。
+
+**代表 Python 代码**
+
+```python
+class Solution:
+    def calculate(self, s: str) -> int:
+        stack = []
+        num = 0
+        sign = "+"
+
+        for i, ch in enumerate(s):
+            if ch.isdigit():
+                num = num * 10 + int(ch)
+            if ch in "+-*/" or i == len(s) - 1:
+                if sign == "+":
+                    stack.append(num)
+                elif sign == "-":
+                    stack.append(-num)
+                elif sign == "*":
+                    stack.append(stack.pop() * num)
+                else:
+                    stack.append(int(stack.pop() / num))
+                sign = ch
+                num = 0
+
+        return sum(stack)
 ```
+
+**时间复杂度**
+
+`O(n)`。
+
+**空间复杂度**
+
+`O(n)`。
+
+**怎么想到这个方法**
+
+表达式题先别被细节吓到，先拆成两件事：数字怎么读完整，优先级怎样在扫描时局部结算。
+
+**常见 Follow-up**
+
+- 加入括号后，为什么通常需要额外栈或递归？
+- 为什么除法要特别注意 Python 的取整方向？
 
 ### Longest Valid Parentheses
 
+**题目含义**
+
+栈里不直接存括号，而是存下标。  
+初始化放一个 `-1`，表示“上一个无法匹配的位置”。  
+这样每当找到一个合法区间时，就可以用：
+
 ```text
-// 栈 or DP
+当前下标 - 栈顶下标
 ```
+
+计算区间长度。
+
+**代表 Python 代码**
+
+```python
+class Solution:
+    def longestValidParentheses(self, s: str) -> int:
+        stack = [-1]
+        ans = 0
+
+        for i, ch in enumerate(s):
+            if ch == "(":
+                stack.append(i)
+            else:
+                stack.pop()
+                if not stack:
+                    stack.append(i)
+                else:
+                    ans = max(ans, i - stack[-1])
+
+        return ans
+```
+
+**时间复杂度**
+
+`O(n)`。
+
+**空间复杂度**
+
+`O(n)`。
+
+**怎么想到这个方法**
+
+先看题型识别里的信号：这题本质上就是 `栈 + 下标 / Stack with Indices`。把题目翻译成这个模板后，再去套对应的不变量、状态定义或数据结构，就会更容易写出来。
+
+**常见 Follow-up**
+
+- 能不能把空间复杂度再压缩一层？
+- 有没有另一种常见模板也能解决这题？
 
 ### Trapping Rain Water
 
-```text
-// 双指针更直观
-// 单调栈也要会
+**题目含义**
+
+这题可以用单调栈，也可以用双指针。  
+双指针更直观：
+
+- 左边能装多少水取决于 `left_max`
+- 右边能装多少水取决于 `right_max`
+
+每次先处理较低的一边，因为它的装水上限已经确定。
+
+**代表 Python 代码**
+
+```python
+from typing import List
+
+class Solution:
+    def trap(self, height: List[int]) -> int:
+        left, right = 0, len(height) - 1
+        left_max = right_max = 0
+        ans = 0
+
+        while left < right:
+            if height[left] < height[right]:
+                left_max = max(left_max, height[left])
+                ans += left_max - height[left]
+                left += 1
+            else:
+                right_max = max(right_max, height[right])
+                ans += right_max - height[right]
+                right -= 1
+
+        return ans
 ```
+
+**时间复杂度**
+
+`O(n)`。
+
+**空间复杂度**
+
+`O(1)` 双指针版。
+
+**怎么想到这个方法**
+
+先看题型识别里的信号：这题本质上就是 `双指针 / Two Pointers`。把题目翻译成这个模板后，再去套对应的不变量、状态定义或数据结构，就会更容易写出来。
+
+**常见 Follow-up**
+
+- 如果输入先排序或已经有序，能不能进一步简化？
+- 如果要返回具体区间或下标，代码里要额外维护什么？
 
 ### Exclusive Time of Functions
 
-```text
-// 模拟调用栈
+**题目含义**
+
+栈顶函数是当前正在运行的函数。  
+当新函数开始时，之前的函数先累计运行时间。  
+当函数结束时，把自己从栈里弹出，并更新结束时间。
+
+**代表 Python 代码**
+
+```python
+from typing import List
+
+class Solution:
+    def exclusiveTime(self, n: int, logs: List[str]) -> List[int]:
+        ans = [0] * n
+        stack = []
+        prev = 0
+
+        for log in logs:
+            fid, typ, time = log.split(":")
+            fid, time = int(fid), int(time)
+
+            if typ == "start":
+                if stack:
+                    ans[stack[-1]] += time - prev
+                stack.append(fid)
+                prev = time
+            else:
+                ans[stack.pop()] += time - prev + 1
+                prev = time + 1
+
+        return ans
 ```
 
----
+**时间复杂度**
 
-## 建议顺序
+`O(n)`。
 
-1. Valid Parentheses
-2. Simplify Path
-3. Decode String
-4. Basic Calculator II
-5. Basic Calculator
-6. Longest Valid Parentheses
-7. Trapping Rain Water
-8. Design Circular Queue
-9. Exclusive Time of Functions
-10. Basic Calculator III
+**空间复杂度**
 
+`O(n)`。
 
----
+**怎么想到这个方法**
 
-## Quiz
+先看题型识别里的信号：这题本质上就是 `调用栈模拟 / Call Stack Simulation`。把题目翻译成这个模板后，再去套对应的不变量、状态定义或数据结构，就会更容易写出来。
 
-**Q1: 单调栈（Monotonic Stack）适合解决什么类型的题？**
+**常见 Follow-up**
 
-- [ ] 求最短路径
-- [ ] 找每个元素左边/右边第一个比它大或小的元素 ✅
-- [ ] 括号匹配
-- [ ] 字符串解码
+- 能不能把空间复杂度再压缩一层？
+- 有没有另一种常见模板也能解决这题？
 
-**Q2: `Trapping Rain Water` 用单调栈，栈里存的是什么？**
-
-- [ ] 水的高度
-- [ ] 每个位置的雨水量
-- [ ] 下标（对应一个递减单调栈） ✅
-- [ ] 左右边界
-
-**Q3: `Decode String`（如 `3[a2[bc]]`）用栈解，遇到 `]` 时怎么处理？**
-
-- [ ] 直接输出
-- [ ] 弹出栈顶字符直到遇到 `[`，取出次数，将重复结果压回栈 ✅
-- [ ] 继续入栈
-- [ ] 递归调用
-
-**Q4: `Basic Calculator` 遇到 `(` 时应该做什么？**
-
-- [ ] 报错
-- [ ] 把当前结果和符号压栈，重置当前计算状态 ✅
-- [ ] 直接跳过
-- [ ] 立即计算括号内的表达式
-
-**Q5: `Largest Rectangle in Histogram` 用单调栈，栈维护什么性质？**
-
-- [ ] 递减序列
-- [ ] 递增序列（当遇到更矮的柱子时，弹出计算面积） ✅
-- [ ] 所有柱子的下标
-- [ ] 柱子高度的前缀和
