@@ -1,3 +1,7 @@
+---
+title: "7-Day Plan: Stanford CS336"
+---
+
 # 7-Day Plan: Stanford CS336
 
 对应项目：

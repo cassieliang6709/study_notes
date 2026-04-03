@@ -1,3 +1,7 @@
+---
+title: "Python"
+---
+
 # Python
 
 ## 目录

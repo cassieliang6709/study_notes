@@ -1,3 +1,7 @@
+---
+title: "7-Day Plan: DeepSearcher"
+---
+
 # 7-Day Plan: DeepSearcher
 
 对应项目：

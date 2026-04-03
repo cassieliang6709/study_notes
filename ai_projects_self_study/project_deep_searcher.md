@@ -1,3 +1,7 @@
+---
+title: "Project Guide: DeepSearcher"
+---
+
 # Project Guide: DeepSearcher
 
 原项目：

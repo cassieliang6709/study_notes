@@ -1,3 +1,7 @@
+---
+title: "7-Day Plan: MiniMind"
+---
+
 # 7-Day Plan: MiniMind
 
 对应项目：

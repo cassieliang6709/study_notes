@@ -1,3 +1,7 @@
+---
+title: "Track 2: LLM From Scratch"
+---
+
 # Track 2: LLM From Scratch
 
 这条线解决的是：

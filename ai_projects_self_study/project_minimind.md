@@ -1,3 +1,7 @@
+---
+title: "Project Guide: MiniMind"
+---
+
 # Project Guide: MiniMind
 
 原项目：

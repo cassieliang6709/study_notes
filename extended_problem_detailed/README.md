@@ -1,3 +1,7 @@
+---
+title: "扩展题单详细教学版目录"
+---
+
 # 扩展题单详细教学版目录
 
 这套文档是 [extended_problem_patterns_cn.md](../extended_problem_patterns_cn.md) 的详细展开版。

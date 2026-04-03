@@ -1,3 +1,7 @@
+---
+title: "LeetCode 100 Detailed"
+---
+
 # LeetCode 100 Detailed
 
 ## 目录

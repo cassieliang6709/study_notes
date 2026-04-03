@@ -1,3 +1,7 @@
+---
+title: "Python OOP 入门前置知识清单（中文版）"
+---
+
 # Python OOP 入门前置知识清单（中文版）
 
 > 目标：在学 OOP / OOD 之前，先补齐必须会的 Python 语法和基础知识  

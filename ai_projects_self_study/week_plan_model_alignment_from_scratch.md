@@ -1,3 +1,7 @@
+---
+title: "7-Day Plan: ModelAlignmentFromScratch"
+---
+
 # 7-Day Plan: ModelAlignmentFromScratch
 
 对应项目：

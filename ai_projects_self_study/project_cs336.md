@@ -1,3 +1,7 @@
+---
+title: "Project Guide: Stanford CS336"
+---
+
 # Project Guide: Stanford CS336
 
 课程主页：

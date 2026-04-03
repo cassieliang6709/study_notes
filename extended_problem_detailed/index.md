@@ -1,3 +1,7 @@
+---
+title: "Extended Problems Detailed"
+---
+
 # Extended Problems Detailed
 
 ## 目录

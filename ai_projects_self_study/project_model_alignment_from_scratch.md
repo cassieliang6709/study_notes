@@ -1,3 +1,7 @@
+---
+title: "Project Guide: ModelAlignmentFromScratch"
+---
+
 # Project Guide: ModelAlignmentFromScratch
 
 原项目：

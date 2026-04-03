@@ -1,3 +1,7 @@
+---
+title: "Project Guide: rag-from-scratch"
+---
+
 # Project Guide: rag-from-scratch
 
 原项目：

@@ -1,3 +1,7 @@
+---
+title: "7-Day Plan: RAG Techniques"
+---
+
 # 7-Day Plan: RAG Techniques
 
 对应项目：

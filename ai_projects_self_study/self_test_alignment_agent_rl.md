@@ -1,3 +1,7 @@
+---
+title: "自测题：Alignment / Agent RL"
+---
+
 # 自测题：Alignment / Agent RL
 
 这份题主要检查你有没有把：

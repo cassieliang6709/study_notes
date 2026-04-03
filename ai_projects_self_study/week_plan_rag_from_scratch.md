@@ -1,3 +1,7 @@
+---
+title: "7-Day Plan: rag-from-scratch"
+---
+
 # 7-Day Plan: rag-from-scratch
 
 对应项目：

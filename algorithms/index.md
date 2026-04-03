@@ -1,3 +1,7 @@
+---
+title: "Algorithms"
+---
+
 # Algorithms
 
 ## 总路线

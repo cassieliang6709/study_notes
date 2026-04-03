@@ -1,3 +1,7 @@
+---
+title: "OOD Python 学习指南（中文版）"
+---
+
 # OOD Python 学习指南（中文版）
 
 > 目标：用 Python 学会面试常见 OOD / 面向对象设计题  

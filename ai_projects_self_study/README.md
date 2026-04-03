@@ -1,3 +1,7 @@
+---
+title: "AI Projects Self-Study Hub"
+---
+
 # AI Projects Self-Study Hub
 
 这套文档是给你自己自学用的，不是课程官网，也不是仓库翻译。

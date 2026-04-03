@@ -1,3 +1,7 @@
+---
+title: "自测题：LLM From Scratch"
+---
+
 # 自测题：LLM From Scratch
 
 这份题是检查你有没有真正开始理解“模型本体”。

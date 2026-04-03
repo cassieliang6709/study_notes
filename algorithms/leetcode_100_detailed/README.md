@@ -1,3 +1,7 @@
+---
+title: "LeetCode Top 100 详细教学目录"
+---
+
 # LeetCode Top 100 详细教学目录
 
 这套文档是对 [leetcode_100_pattern_roadmap_cn.md](../leetcode_100_pattern_roadmap_cn.md) 的展开版。

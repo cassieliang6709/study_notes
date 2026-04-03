@@ -1,3 +1,7 @@
+---
+title: "Study Notes"
+---
+
 # Study Notes
 
 整理后的目录结构如下：
