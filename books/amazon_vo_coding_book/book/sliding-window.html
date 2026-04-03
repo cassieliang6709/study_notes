@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>首页 - Amazon VO Coding 高频题清单</title>
+        <title>6. 双指针 / 滑动窗口 - Amazon VO Coding 高频题清单</title>
 
 
         <!-- Custom HTML head -->
@@ -174,61 +174,123 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="amazon-vo-coding-高频题清单"><a class="header" href="#amazon-vo-coding-高频题清单">Amazon VO Coding 高频题清单</a></h1>
-<p>这本书是给 Amazon VO coding 准备的口袋手册。</p>
-<p>目标不是背题号，而是做到下面这件事：</p>
-<ol>
-<li>听到业务题面</li>
-<li>立刻翻译成算法模型</li>
-<li>快速套模板</li>
-<li>接住 follow-up</li>
-<li>用稳定的口语把思路讲出来</li>
-</ol>
-<h2 id="这本书怎么用"><a class="header" href="#这本书怎么用">这本书怎么用</a></h2>
-<p>建议按这个顺序看：</p>
-<ol>
-<li>先看<a href="high-frequency-overview.html">高频题型总表</a>，知道什么最常见</li>
-<li>再按题型刷各章，重点看“识别信号 + 业务包装 + 标准代码模板”</li>
-<li>然后看<a href="business-disguise-index.html">业务伪装索引</a>，训练把题面翻译回原题</li>
-<li>最后看<a href="speaking-scripts.html">面试开口模板与口语回答稿</a>和<a href="cheatsheet.html">一页速记</a></li>
-</ol>
-<h2 id="每章统一结构"><a class="header" href="#每章统一结构">每章统一结构</a></h2>
-<p>每个题型章节都尽量按同一个顺序组织：</p>
-<ol>
-<li>面试题目怎么问</li>
-<li>识别信号</li>
-<li>Amazon 风格业务包装</li>
-<li>标准代码模板</li>
-<li>代码讲解</li>
-<li>面试时怎么讲</li>
-<li>常见 follow-up 和回答</li>
-<li>Amazon 风格完整题面</li>
-<li>可直接背的口语回答稿</li>
-<li>推荐代表题</li>
-</ol>
-<h2 id="如果你只有-3-天"><a class="header" href="#如果你只有-3-天">如果你只有 3 天</a></h2>
-<ol>
-<li>第 1 天：
-<code>Graph topo</code>、<code>Grid BFS/DFS</code>、<code>Heap merge / Top K</code></li>
-<li>第 2 天：
-<code>Stack calculator</code>、<code>Sliding window</code>、<code>Intervals</code></li>
-<li>第 3 天：
-<code>HashSet longest consecutive</code>、<code>Linked list basics</code>、<code>Ordered map / binary search</code></li>
-</ol>
-<h2 id="这本书最想帮你解决的问题"><a class="header" href="#这本书最想帮你解决的问题">这本书最想帮你解决的问题</a></h2>
+                        <h1 id="6-双指针--滑动窗口"><a class="header" href="#6-双指针--滑动窗口">6. 双指针 / 滑动窗口</a></h1>
+<h2 id="面试题目怎么问"><a class="header" href="#面试题目怎么问">面试题目怎么问</a></h2>
 <ul>
-<li>题面很业务化，听不出本质</li>
-<li>明明会做，但现场讲不顺</li>
-<li>follow-up 一追问就散</li>
-<li>代码会写，但不知道怎么像面试里那样讲</li>
+<li>最长无重复子串</li>
+<li>最多包含 <code>K</code> 种不同字符的最长子串</li>
+<li>和至少为 <code>target</code> 的最短子数组</li>
+<li>统计满足条件的子数组个数</li>
+</ul>
+<h2 id="识别信号"><a class="header" href="#识别信号">识别信号</a></h2>
+<ul>
+<li>子串 / 子数组连续</li>
+<li>最长 / 最短</li>
+<li>“至多 K 个”“不超过 K 个”“满足某个窗口条件”</li>
+</ul>
+<h2 id="amazon-风格业务包装"><a class="header" href="#amazon-风格业务包装">Amazon 风格业务包装</a></h2>
+<ul>
+<li>找一段连续时间窗口，使某类商品种类数不超过 <code>K</code></li>
+<li>在用户行为日志里找最长不重复序列</li>
+<li>找最短连续区间，使销量总和达到目标</li>
+<li>分析订单流中满足条件的连续片段</li>
+</ul>
+<h2 id="你该怎么想"><a class="header" href="#你该怎么想">你该怎么想</a></h2>
+<ul>
+<li>看到“连续区间”先想到滑窗</li>
+<li>再问自己：窗口合法条件是什么</li>
+<li>最后问自己：答案在扩张时更新，还是在收缩时更新</li>
+</ul>
+<h2 id="标准代码模板-1至多-k-种字符"><a class="header" href="#标准代码模板-1至多-k-种字符">标准代码模板 1：至多 K 种字符</a></h2>
+<pre><code class="language-python">from collections import defaultdict
+
+def longest_substring_at_most_k(s, k):
+    count = defaultdict(int)
+    left = 0
+    ans = 0
+
+    for right, ch in enumerate(s):
+        count[ch] += 1
+
+        while len(count) &gt; k:
+            count[s[left]] -= 1
+            if count[s[left]] == 0:
+                del count[s[left]]
+            left += 1
+
+        ans = max(ans, right - left + 1)
+
+    return ans
+</code></pre>
+<h2 id="标准代码模板-2最长无重复子串"><a class="header" href="#标准代码模板-2最长无重复子串">标准代码模板 2：最长无重复子串</a></h2>
+<pre><code class="language-python">def length_of_longest_substring(s):
+    pos = {}
+    left = 0
+    ans = 0
+
+    for right, ch in enumerate(s):
+        if ch in pos and pos[ch] &gt;= left:
+            left = pos[ch] + 1
+        pos[ch] = right
+        ans = max(ans, right - left + 1)
+
+    return ans
+</code></pre>
+<h2 id="标准代码模板-3最短子数组和至少为-target"><a class="header" href="#标准代码模板-3最短子数组和至少为-target">标准代码模板 3：最短子数组和至少为 target</a></h2>
+<pre><code class="language-python">def min_subarray_len(target, nums):
+    left = 0
+    total = 0
+    ans = float('inf')
+
+    for right, x in enumerate(nums):
+        total += x
+        while total &gt;= target:
+            ans = min(ans, right - left + 1)
+            total -= nums[left]
+            left += 1
+
+    return 0 if ans == float('inf') else ans
+</code></pre>
+<h2 id="代码讲解"><a class="header" href="#代码讲解">代码讲解</a></h2>
+<ul>
+<li><code>right</code> 负责扩张窗口</li>
+<li><code>left</code> 在窗口不合法时收缩</li>
+<li>求最长通常在合法时更新答案</li>
+<li>求最短通常在合法后收缩过程中更新答案</li>
+</ul>
+<h2 id="面试时怎么讲"><a class="header" href="#面试时怎么讲">面试时怎么讲</a></h2>
+<ul>
+<li>这是连续区间问题，所以优先想滑动窗口</li>
+<li>我会定义一个“窗口合法条件”</li>
+<li>右指针扩张纳入新元素，左指针收缩直到重新合法</li>
+</ul>
+<h2 id="常见-follow-up-和回答"><a class="header" href="#常见-follow-up-和回答">常见 follow-up 和回答</a></h2>
+<p><strong>Q1：为什么滑窗是 <code>O(n)</code>？</strong><br>因为每个元素最多被左右指针各访问一次。</p>
+<p><strong>Q2：什么时候更新答案？</strong><br>求最长一般在窗口合法时；求最短一般在收缩时。</p>
+<p><strong>Q3：恰好 <code>K</code> 个怎么做？</strong><br><code>exactly(K) = atMost(K) - atMost(K - 1)</code>。</p>
+<p><strong>Q4：如果不是连续子数组，还能用滑窗吗？</strong><br>通常不行。</p>
+<h2 id="amazon-风格完整题面"><a class="header" href="#amazon-风格完整题面">Amazon 风格完整题面</a></h2>
+<blockquote>
+<p>You are given a stream of user actions.<br>Find the longest contiguous window that contains no more than <code>K</code> distinct action types.</p>
+</blockquote>
+<h2 id="可直接背的口语回答稿"><a class="header" href="#可直接背的口语回答稿">可直接背的口语回答稿</a></h2>
+<p>“这是一个连续区间优化问题，所以我会优先考虑滑动窗口。右指针负责扩张窗口，把新元素加入统计；如果窗口不合法，我就移动左指针收缩，直到重新满足条件。因为每个元素最多被两个指针访问一次，所以整体时间复杂度是 <code>O(n)</code>。”</p>
+<h2 id="推荐代表题"><a class="header" href="#推荐代表题">推荐代表题</a></h2>
+<ul>
+<li>Longest Substring Without Repeating Characters</li>
+<li>Longest Substring with At Most K Distinct Characters</li>
+<li>Minimum Size Subarray Sum</li>
 </ul>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="hash.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
 
-                            <a rel="next prefetch" href="high-frequency-overview.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="matrix-simulation.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
                             </a>
 
@@ -238,8 +300,11 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="hash.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
 
-                    <a rel="next prefetch" href="high-frequency-overview.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="matrix-simulation.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
                     </a>
             </nav>

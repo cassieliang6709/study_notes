@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>首页 - Amazon VO Coding 高频题清单</title>
+        <title>2. 矩阵搜索 / 岛屿 / 最短路 - Amazon VO Coding 高频题清单</title>
 
 
         <!-- Custom HTML head -->
@@ -174,61 +174,201 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="amazon-vo-coding-高频题清单"><a class="header" href="#amazon-vo-coding-高频题清单">Amazon VO Coding 高频题清单</a></h1>
-<p>这本书是给 Amazon VO coding 准备的口袋手册。</p>
-<p>目标不是背题号，而是做到下面这件事：</p>
-<ol>
-<li>听到业务题面</li>
-<li>立刻翻译成算法模型</li>
-<li>快速套模板</li>
-<li>接住 follow-up</li>
-<li>用稳定的口语把思路讲出来</li>
-</ol>
-<h2 id="这本书怎么用"><a class="header" href="#这本书怎么用">这本书怎么用</a></h2>
-<p>建议按这个顺序看：</p>
-<ol>
-<li>先看<a href="high-frequency-overview.html">高频题型总表</a>，知道什么最常见</li>
-<li>再按题型刷各章，重点看“识别信号 + 业务包装 + 标准代码模板”</li>
-<li>然后看<a href="business-disguise-index.html">业务伪装索引</a>，训练把题面翻译回原题</li>
-<li>最后看<a href="speaking-scripts.html">面试开口模板与口语回答稿</a>和<a href="cheatsheet.html">一页速记</a></li>
-</ol>
-<h2 id="每章统一结构"><a class="header" href="#每章统一结构">每章统一结构</a></h2>
-<p>每个题型章节都尽量按同一个顺序组织：</p>
-<ol>
-<li>面试题目怎么问</li>
-<li>识别信号</li>
-<li>Amazon 风格业务包装</li>
-<li>标准代码模板</li>
-<li>代码讲解</li>
-<li>面试时怎么讲</li>
-<li>常见 follow-up 和回答</li>
-<li>Amazon 风格完整题面</li>
-<li>可直接背的口语回答稿</li>
-<li>推荐代表题</li>
-</ol>
-<h2 id="如果你只有-3-天"><a class="header" href="#如果你只有-3-天">如果你只有 3 天</a></h2>
-<ol>
-<li>第 1 天：
-<code>Graph topo</code>、<code>Grid BFS/DFS</code>、<code>Heap merge / Top K</code></li>
-<li>第 2 天：
-<code>Stack calculator</code>、<code>Sliding window</code>、<code>Intervals</code></li>
-<li>第 3 天：
-<code>HashSet longest consecutive</code>、<code>Linked list basics</code>、<code>Ordered map / binary search</code></li>
-</ol>
-<h2 id="这本书最想帮你解决的问题"><a class="header" href="#这本书最想帮你解决的问题">这本书最想帮你解决的问题</a></h2>
+                        <h1 id="2-矩阵搜索--岛屿--最短路"><a class="header" href="#2-矩阵搜索--岛屿--最短路">2. 矩阵搜索 / 岛屿 / 最短路</a></h1>
+<h2 id="面试题目怎么问"><a class="header" href="#面试题目怎么问">面试题目怎么问</a></h2>
 <ul>
-<li>题面很业务化，听不出本质</li>
-<li>明明会做，但现场讲不顺</li>
-<li>follow-up 一追问就散</li>
-<li>代码会写，但不知道怎么像面试里那样讲</li>
+<li>给一个二维网格，统计有多少个岛屿</li>
+<li>从起点走到终点最少需要多少步</li>
+<li>网格里有障碍物，问能否走到终点</li>
+<li>多源扩散，例如腐烂橘子、火焰传播、离最近目标距离</li>
+</ul>
+<h2 id="识别信号"><a class="header" href="#识别信号">识别信号</a></h2>
+<ul>
+<li>输入是 <code>grid</code></li>
+<li>只能上下左右或加上对角线移动</li>
+<li>问最短路径</li>
+<li>问连通块数量</li>
+<li>问扩散层数 / 最少轮数</li>
+</ul>
+<h2 id="amazon-风格业务包装"><a class="header" href="#amazon-风格业务包装">Amazon 风格业务包装</a></h2>
+<ul>
+<li>warehouse 里机器人从起点走到货架，障碍物不能穿过</li>
+<li>delivery drone 在地图网格里找最短路线</li>
+<li>一批坏货从某些仓位开始扩散，问多久影响整个仓库</li>
+<li>仓库区域由可通行和不可通行位置组成，问有多少独立区域</li>
+</ul>
+<h2 id="你该怎么想"><a class="header" href="#你该怎么想">你该怎么想</a></h2>
+<ul>
+<li>只要是二维格子，先问自己：这是 shortest path 还是 connected components</li>
+<li>如果问最少几步，直接想到 BFS</li>
+<li>如果问连通块数量、独立区域、岛屿数，直接想到 flood fill</li>
+</ul>
+<h2 id="标准代码模板-1bfs-最短路"><a class="header" href="#标准代码模板-1bfs-最短路">标准代码模板 1：BFS 最短路</a></h2>
+<pre><code class="language-python">from collections import deque
+
+def shortest_path(grid, start, end):
+    m, n = len(grid), len(grid[0])
+    dirs = [(1, 0), (-1, 0), (0, 1), (0, -1)]
+    q = deque([(start[0], start[1], 0)])
+    visited = set([start])
+
+    while q:
+        x, y, dist = q.popleft()
+        if (x, y) == end:
+            return dist
+
+        for dx, dy in dirs:
+            nx, ny = x + dx, y + dy
+            if 0 &lt;= nx &lt; m and 0 &lt;= ny &lt; n:
+                if grid[nx][ny] != 1 and (nx, ny) not in visited:
+                    visited.add((nx, ny))
+                    q.append((nx, ny, dist + 1))
+    return -1
+</code></pre>
+<h2 id="标准代码模板-2dfs-统计岛屿"><a class="header" href="#标准代码模板-2dfs-统计岛屿">标准代码模板 2：DFS 统计岛屿</a></h2>
+<pre><code class="language-python">def num_islands(grid):
+    m, n = len(grid), len(grid[0])
+    dirs = [(1, 0), (-1, 0), (0, 1), (0, -1)]
+
+    def dfs(x, y):
+        if x &lt; 0 or x &gt;= m or y &lt; 0 or y &gt;= n or grid[x][y] != "1":
+            return
+        grid[x][y] = "0"
+        for dx, dy in dirs:
+            dfs(x + dx, y + dy)
+
+    count = 0
+    for i in range(m):
+        for j in range(n):
+            if grid[i][j] == "1":
+                count += 1
+                dfs(i, j)
+    return count
+</code></pre>
+<h2 id="标准代码模板-3多源-bfs"><a class="header" href="#标准代码模板-3多源-bfs">标准代码模板 3：多源 BFS</a></h2>
+<pre><code class="language-python">from collections import deque
+
+def multi_source_bfs(grid, sources):
+    m, n = len(grid), len(grid[0])
+    dirs = [(1, 0), (-1, 0), (0, 1), (0, -1)]
+    q = deque()
+    visited = set()
+
+    for x, y in sources:
+        q.append((x, y, 0))
+        visited.add((x, y))
+
+    while q:
+        x, y, dist = q.popleft()
+        for dx, dy in dirs:
+            nx, ny = x + dx, y + dy
+            if 0 &lt;= nx &lt; m and 0 &lt;= ny &lt; n:
+                if grid[nx][ny] != 1 and (nx, ny) not in visited:
+                    visited.add((nx, ny))
+                    q.append((nx, ny, dist + 1))
+</code></pre>
+<h2 id="标准代码模板-4状态-bfs-打破-k-个墙"><a class="header" href="#标准代码模板-4状态-bfs-打破-k-个墙">标准代码模板 4：状态 BFS 打破 k 个墙</a></h2>
+<pre><code class="language-python">from collections import deque
+
+def shortest_path_break_k_walls(grid, start, end, k):
+    m, n = len(grid), len(grid[0])
+    dirs = [(1, 0), (-1, 0), (0, 1), (0, -1)]
+    sx, sy = start
+    ex, ey = end
+
+    q = deque([(sx, sy, k, 0)])
+    visited = set([(sx, sy, k)])
+
+    while q:
+        x, y, remain, dist = q.popleft()
+        if (x, y) == (ex, ey):
+            return dist
+
+        for dx, dy in dirs:
+            nx, ny = x + dx, y + dy
+            if 0 &lt;= nx &lt; m and 0 &lt;= ny &lt; n:
+                nr = remain - grid[nx][ny]
+                state = (nx, ny, nr)
+                if nr &gt;= 0 and state not in visited:
+                    visited.add(state)
+                    q.append((nx, ny, nr, dist + 1))
+    return -1
+</code></pre>
+<h2 id="标准代码模板-5dijkstra-on-grid"><a class="header" href="#标准代码模板-5dijkstra-on-grid">标准代码模板 5：Dijkstra on Grid</a></h2>
+<pre><code class="language-python">import heapq
+
+def dijkstra_grid(cost, start, end):
+    m, n = len(cost), len(cost[0])
+    dirs = [(1,0), (-1,0), (0,1), (0,-1)]
+    INF = float('inf')
+
+    dist = [[INF] * n for _ in range(m)]
+    sx, sy = start
+    ex, ey = end
+    dist[sx][sy] = 0
+
+    pq = [(0, sx, sy)]
+
+    while pq:
+        cur_cost, x, y = heapq.heappop(pq)
+        if (x, y) == (ex, ey):
+            return cur_cost
+        if cur_cost &gt; dist[x][y]:
+            continue
+
+        for dx, dy in dirs:
+            nx, ny = x + dx, y + dy
+            if 0 &lt;= nx &lt; m and 0 &lt;= ny &lt; n:
+                new_cost = cur_cost + cost[nx][ny]
+                if new_cost &lt; dist[nx][ny]:
+                    dist[nx][ny] = new_cost
+                    heapq.heappush(pq, (new_cost, nx, ny))
+    return -1
+</code></pre>
+<h2 id="代码讲解"><a class="header" href="#代码讲解">代码讲解</a></h2>
+<ul>
+<li>无权最短路：BFS</li>
+<li>连通块：DFS / BFS flood fill</li>
+<li>多个起点同时扩散：multi-source BFS</li>
+<li>同一个格子但资源状态不同：状态 BFS</li>
+<li>边权不同：Dijkstra 或 0-1 BFS</li>
+</ul>
+<h2 id="面试时怎么讲"><a class="header" href="#面试时怎么讲">面试时怎么讲</a></h2>
+<ul>
+<li>如果问最短步数，我第一反应是 BFS，因为无权图的最短路就是按层扩展</li>
+<li>如果问区域数量，我会从每个未访问格子出发做一次 flood fill</li>
+<li>如果同一个格子在不同资源状态下意义不同，我会把状态扩成 <code>(x, y, extra_state)</code></li>
+</ul>
+<h2 id="常见-follow-up-和回答"><a class="header" href="#常见-follow-up-和回答">常见 follow-up 和回答</a></h2>
+<p><strong>Q1：为什么最短路要用 BFS，不用 DFS？</strong><br>因为每走一步代价都一样，BFS 按层扩展，第一次到终点时一定最短。</p>
+<p><strong>Q2：如果可以斜着走怎么办？</strong><br>把 <code>dirs</code> 改成 8 个方向。</p>
+<p><strong>Q3：visited 一定要单独开吗？</strong><br>不一定。允许修改输入时可以原地标记。</p>
+<p><strong>Q4：如果有多个起点同时扩散怎么办？</strong><br>用多源 BFS。</p>
+<p><strong>Q5：如果边有不同权重怎么办？</strong><br>非负权重用 Dijkstra；只有 0 和 1 时用 0-1 BFS。</p>
+<p><strong>Q6：如果最多可以打破一个墙怎么办？</strong><br>把状态从 <code>(x, y)</code> 扩成 <code>(x, y, remain_k)</code>。</p>
+<h2 id="amazon-风格完整题面"><a class="header" href="#amazon-风格完整题面">Amazon 风格完整题面</a></h2>
+<blockquote>
+<p>A warehouse robot starts at the entrance and needs to reach a target shelf.<br>The floor is represented as a grid. Some cells are blocked by obstacles.<br>Return the minimum number of steps needed to reach the shelf, or <code>-1</code> if it is impossible.</p>
+</blockquote>
+<h2 id="可直接背的口语回答稿"><a class="header" href="#可直接背的口语回答稿">可直接背的口语回答稿</a></h2>
+<p>“虽然题目在讲机器人和仓库，但抽象后就是一个二维 grid 上的无权最短路问题。每个可走格子是一个节点，机器人每次上下左右移动一步，所以边权相同。我会用 BFS 按层扩展，第一次到达终点时就是最短距离。如果题目变成区域数量，我就改成 DFS/BFS flood fill；如果出现多个起点或资源状态，我会切到多源 BFS 或状态 BFS。”</p>
+<h2 id="推荐代表题"><a class="header" href="#推荐代表题">推荐代表题</a></h2>
+<ul>
+<li>Number of Islands</li>
+<li>Shortest Path in Binary Matrix</li>
+<li>Walls and Gates</li>
+<li>Rotten Oranges</li>
 </ul>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="topo.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
 
-                            <a rel="next prefetch" href="high-frequency-overview.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="heap.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
                             </a>
 
@@ -238,8 +378,11 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="topo.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
 
-                    <a rel="next prefetch" href="high-frequency-overview.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="heap.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
                     </a>
             </nav>

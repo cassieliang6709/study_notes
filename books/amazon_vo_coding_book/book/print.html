@@ -9,7 +9,7 @@
 
         <!-- Custom HTML head -->
 
-        <meta name="description" content="">
+        <meta name="description" content="把 Amazon VO 业务题面翻译回算法模板的口袋手册">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
 
@@ -35,11 +35,11 @@
         <script>
             const path_to_root = "";
             const default_light_theme = "light";
-            const default_dark_theme = "light";
-            window.path_to_searchindex_js = "searchindex-fb249387.js";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "searchindex-5b618509.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-89012b62.js"></script>
+        <script src="toc-ec05092f.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -176,756 +176,1535 @@
                 <div id="mdbook-content" class="content">
                     <main>
                         <h1 id="amazon-vo-coding-高频题清单"><a class="header" href="#amazon-vo-coding-高频题清单">Amazon VO Coding 高频题清单</a></h1>
-<p>这本 <code>mdBook</code> 是基于一亩三分地和 Reddit 的公开可见内容整理的 Amazon VO coding 高频题单。</p>
-<p>目标不是做“纯 LeetCode 抄录”，而是把社区里反复出现的 Amazon VO coding 题型，整理成一个可以直接复习的版本：</p>
-<ul>
-<li>保留社区原始描述</li>
-<li>尽量还原真实面试题意</li>
-<li>给出标准解法与面试讲法</li>
-<li>补上练习路径和资料索引</li>
-</ul>
-<p>建议按这个顺序使用：</p>
+<p>这本书是给 Amazon VO coding 准备的口袋手册。</p>
+<p>目标不是背题号，而是做到下面这件事：</p>
 <ol>
-<li>先看 <a href="#vo-coding-高频题总表">VO Coding 高频题总表</a>，知道什么最常见。</li>
-<li>再看 <a href="#题目还原与解法">题目还原与解法</a>，按题型刷一轮。</li>
-<li>最后看 <a href="#资料与文档清单">资料与文档清单</a>，补模式、模板和 mock。</li>
+<li>听到业务题面</li>
+<li>立刻翻译成算法模型</li>
+<li>快速套模板</li>
+<li>接住 follow-up</li>
+<li>用稳定的口语把思路讲出来</li>
 </ol>
-<p>如果你只有 3 天：</p>
+<h2 id="这本书怎么用"><a class="header" href="#这本书怎么用">这本书怎么用</a></h2>
+<p>建议按这个顺序看：</p>
 <ol>
-<li>先刷 <code>Cache / BFS-DFS / Tree / Sliding Window</code></li>
-<li>然后刷 <code>Random O(1) / Binary Search / Topological Sort</code></li>
-<li>最后过一遍 <a href="#原始题源索引">原始题源索引</a>，熟悉社区里真实的问法</li>
+<li>先看<a href="#高频题型总表">高频题型总表</a>，知道什么最常见</li>
+<li>再按题型刷各章，重点看“识别信号 + 业务包装 + 标准代码模板”</li>
+<li>然后看<a href="#附录业务伪装索引">业务伪装索引</a>，训练把题面翻译回原题</li>
+<li>最后看<a href="#附录面试开口模板与口语回答稿">面试开口模板与口语回答稿</a>和<a href="#附录一页速记--3-天冲刺顺序">一页速记</a></li>
 </ol>
-<p>这本书里的“还原题目”分两类：</p>
+<h2 id="每章统一结构"><a class="header" href="#每章统一结构">每章统一结构</a></h2>
+<p>每个题型章节都尽量按同一个顺序组织：</p>
+<ol>
+<li>面试题目怎么问</li>
+<li>识别信号</li>
+<li>Amazon 风格业务包装</li>
+<li>标准代码模板</li>
+<li>代码讲解</li>
+<li>面试时怎么讲</li>
+<li>常见 follow-up 和回答</li>
+<li>Amazon 风格完整题面</li>
+<li>可直接背的口语回答稿</li>
+<li>推荐代表题</li>
+</ol>
+<h2 id="如果你只有-3-天"><a class="header" href="#如果你只有-3-天">如果你只有 3 天</a></h2>
+<ol>
+<li>第 1 天：
+<code>Graph topo</code>、<code>Grid BFS/DFS</code>、<code>Heap merge / Top K</code></li>
+<li>第 2 天：
+<code>Stack calculator</code>、<code>Sliding window</code>、<code>Intervals</code></li>
+<li>第 3 天：
+<code>HashSet longest consecutive</code>、<code>Linked list basics</code>、<code>Ordered map / binary search</code></li>
+</ol>
+<h2 id="这本书最想帮你解决的问题"><a class="header" href="#这本书最想帮你解决的问题">这本书最想帮你解决的问题</a></h2>
 <ul>
-<li>高可信：社区原描述已经能明确定位题意</li>
-<li>中可信：社区只给了模糊描述，我按常见 Amazon 追问方式做了保守还原</li>
+<li>题面很业务化，听不出本质</li>
+<li>明明会做，但现场讲不顺</li>
+<li>follow-up 一追问就散</li>
+<li>代码会写，但不知道怎么像面试里那样讲</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div>
-<h1 id="使用说明与还原方法"><a class="header" href="#使用说明与还原方法">使用说明与还原方法</a></h1>
-<h2 id="我怎么定义高频"><a class="header" href="#我怎么定义高频">我怎么定义“高频”</a></h2>
-<p>这本书不按 LeetCode 公司标签直接照搬，而是按下面三类证据综合判断：</p>
-<ul>
-<li>一亩三分地公开可见面经里反复出现</li>
-<li>一亩三分地总结帖直接把题列成高频清单</li>
-<li>Reddit 讨论里有人明确说 Amazon 实际问到过</li>
-</ul>
-<h2 id="我怎么处理原帖隐藏问题"><a class="header" href="#我怎么处理原帖隐藏问题">我怎么处理“原帖隐藏”问题</a></h2>
-<p>一亩三分地很多正文被隐藏，但公开页面通常还能看到：</p>
-<ul>
-<li>标题</li>
-<li><code>meta description</code></li>
-<li>搜索引擎 snippet</li>
-<li>页面中未完全隐藏的总结段落</li>
-</ul>
-<p>所以每道题我都会分开写：</p>
-<ul>
-<li><code>社区原始描述</code></li>
-<li><code>还原题目</code></li>
-<li><code>解法</code></li>
-</ul>
-<p>其中：</p>
-<ul>
-<li>“社区原始描述”尽量保持原意，不扩大</li>
-<li>“还原题目”是我根据公开线索和 Amazon 常见出题方式整理的复盘版</li>
-<li>如果无法完全确认，我会标成“中可信还原”</li>
-</ul>
-<h2 id="使用建议"><a class="header" href="#使用建议">使用建议</a></h2>
-<p>做 Amazon VO coding，不要只背题号，要同时准备三件事：</p>
-<ul>
-<li>5 分钟内说清楚 brute force 到 optimal 的路线</li>
-<li>能手写核心数据结构</li>
-<li>能扛住 follow-up：复杂度、边界、tradeoff、如何扩展</li>
-</ul>
-<p>从 Reddit 的公开讨论看，Amazon loop 很常见的问题不是题太偏，而是：</p>
-<ul>
-<li>BQ 占时长，coding 被压缩</li>
-<li>interviewer 会临时加 follow-up</li>
-<li>同一道题会从“能做出来”继续追到“能不能更快/更省空间/支持重复值/支持并发”</li>
-</ul>
-<p>所以这本书里每道题都默认补一个 follow-up 方向。</p>
-<div style="break-before: page; page-break-before: always;"></div>
-<h1 id="vo-coding-高频题总表"><a class="header" href="#vo-coding-高频题总表">VO Coding 高频题总表</a></h1>
-<p>下面这张表是按公开题源信号强弱整理的第一版。</p>
+<h1 id="高频题型总表"><a class="header" href="#高频题型总表">高频题型总表</a></h1>
+<h2 id="最值得优先刷的模板顺序"><a class="header" href="#最值得优先刷的模板顺序">最值得优先刷的模板顺序</a></h2>
+<ol>
+<li><code>Graph topo</code></li>
+<li><code>Grid BFS/DFS</code></li>
+<li><code>Heap merge / Top K</code></li>
+<li><code>Stack calculator</code></li>
+<li><code>Sliding window</code></li>
+<li><code>HashSet longest consecutive</code></li>
+<li><code>Spiral / matrix simulation</code></li>
+<li><code>Intervals</code></li>
+<li><code>Linked list basics</code></li>
+<li><code>Ordered map / binary search</code></li>
+</ol>
+<h2 id="10-类高频题型"><a class="header" href="#10-类高频题型">10 类高频题型</a></h2>
 <div class="table-wrapper">
 <table>
 <thead>
-<tr><th>优先级</th><th>题型</th><th>社区信号</th><th>建议状态</th></tr>
+<tr><th>题型</th><th>识别信号</th><th>标准模板</th></tr>
 </thead>
 <tbody>
-<tr><td>S</td><td>LRU / LFU / Custom Cache</td><td>一亩三分地多帖直接出现，Reddit 也有明确反馈</td><td>必刷</td></tr>
-<tr><td>S</td><td>Word Ladder</td><td>一亩三分地总结帖直接说“基本成了必考”</td><td>必刷</td></tr>
-<tr><td>S</td><td>Word Search</td><td>一亩三分地总结帖直接说“基本成了必考”</td><td>必刷</td></tr>
-<tr><td>S</td><td>Word Break I / II</td><td>一亩三分地总结帖直接列出，另有单帖点名 <code>Word Break II</code></td><td>必刷</td></tr>
-<tr><td>S</td><td>Binary Tree 变体</td><td>LCA / Diameter / Path Sum / Boundary / Vertical Order 多次出现</td><td>必刷</td></tr>
-<tr><td>A</td><td>Insert Delete GetRandom O(1) / 支持重复值</td><td>一亩三分地帖里明确出现并带 follow-up</td><td>高优先级</td></tr>
-<tr><td>A</td><td>Sliding Window 找排列/异位词索引</td><td>一亩三分地单帖给了接近原题的描述</td><td>高优先级</td></tr>
-<tr><td>A</td><td>Search in Sorted Array of Unknown Size</td><td>一亩三分地 VO 帖明确出现</td><td>高优先级</td></tr>
-<tr><td>A</td><td>Course Schedule</td><td>总结帖直接列出</td><td>高优先级</td></tr>
-<tr><td>A</td><td>Kth Largest Element</td><td>总结帖直接列出</td><td>高优先级</td></tr>
-<tr><td>B</td><td>Gas Station</td><td>总结帖直接列出</td><td>会做</td></tr>
-<tr><td>B</td><td>Concatenated Words</td><td>总结帖直接列出</td><td>会做</td></tr>
-<tr><td>B</td><td>0-1 Knapsack</td><td>总结帖直接列出</td><td>会做</td></tr>
-<tr><td>B</td><td>Edit Distance</td><td>总结帖直接列出</td><td>会讲思路</td></tr>
-<tr><td>B</td><td>Calendar / Meeting Schedule 小设计题</td><td>一亩三分地 VO 帖明确出现</td><td>会讲设计</td></tr>
+<tr><td>图论拓扑排序</td><td>依赖、先做 A 才能做 B、顺序、能否完成</td><td>邻接表 + 入度 + Kahn / DFS 染色</td></tr>
+<tr><td>矩阵搜索 / 岛屿 / 最短路</td><td>grid、障碍、最少步数、区域数、扩散</td><td>BFS / DFS / 多源 BFS</td></tr>
+<tr><td>堆 / 多路归并</td><td>多个有序流、Top K、K closest</td><td>min-heap / size-k heap</td></tr>
+<tr><td>栈 / 表达式解析</td><td>括号、嵌套、作用域、命令块</td><td>stack 保存上下文</td></tr>
+<tr><td>HashSet / HashMap</td><td>查存在、频率、分组、最长连续</td><td>set / map / Counter</td></tr>
+<tr><td>双指针 / 滑窗</td><td>连续区间、最长、最短、至多 K</td><td>left/right + while 收缩</td></tr>
+<tr><td>矩阵遍历模拟</td><td>顺时针、逆时针、一圈圈</td><td>四边界收缩</td></tr>
+<tr><td>区间 / 扫描线</td><td>[start, end]、冲突、并发峰值</td><td>排序 + merge / heap / sweep line</td></tr>
+<tr><td>链表基础操作</td><td>node.next、原地反转、中点、环</td><td>dummy + 三指针 + 快慢指针</td></tr>
+<tr><td>有序映射 / TreeMap</td><td>floor / ceiling、前驱后继、历史生效值</td><td>TreeMap / 排序 + 二分</td></tr>
 </tbody>
 </table>
 </div>
-<h2 id="一句话结论"><a class="header" href="#一句话结论">一句话结论</a></h2>
-<p>如果你只剩很短时间，先把下面 8 个做熟：</p>
+<h2 id="amazon-vo-里最常见的业务伪装"><a class="header" href="#amazon-vo-里最常见的业务伪装">Amazon VO 里最常见的业务伪装</a></h2>
+<ul>
+<li>workflow / dependency / pipeline -&gt; 拓扑排序</li>
+<li>warehouse robot / obstacle / route -&gt; Grid BFS</li>
+<li>event stream / top products -&gt; 堆</li>
+<li>pricing rule / nested config / logs -&gt; 栈</li>
+<li>inventory / dedupe / frequency -&gt; Hash</li>
+<li>time window / user behavior -&gt; 滑窗</li>
+<li>loading dock / meeting room / station -&gt; 区间</li>
+<li>linked sequence of tasks -&gt; 链表</li>
+<li>latest valid price before timestamp -&gt; ordered map</li>
+</ul>
+<h2 id="面试现场通用拆题口诀"><a class="header" href="#面试现场通用拆题口诀">面试现场通用拆题口诀</a></h2>
 <ol>
-<li>LRU Cache</li>
-<li>LFU Cache</li>
-<li>Word Ladder</li>
-<li>Word Search</li>
-<li>Word Break I / II</li>
-<li>LCA + Diameter + Path Sum</li>
-<li>Insert Delete GetRandom O(1)</li>
-<li>Search in Sorted Array of Unknown Size</li>
+<li>这是图、区间、网格，还是字符串？</li>
+<li>问的是存在、最短、最大、顺序，还是个数？</li>
+<li>业务词能不能换成 node、edge、grid、interval、stream？</li>
+<li>我最熟的模板里，哪个能一把套上去？</li>
 </ol>
 <div style="break-before: page; page-break-before: always;"></div>
-<h1 id="题目还原与解法"><a class="header" href="#题目还原与解法">题目还原与解法</a></h1>
-<h2 id="1-cache-家族"><a class="header" href="#1-cache-家族">1. Cache 家族</a></h2>
-<h3 id="11-lru--lfu--custom-cache"><a class="header" href="#11-lru--lfu--custom-cache">1.1 LRU / LFU / Custom Cache</a></h3>
-<p><code>优先级：S</code></p>
-<p>社区原始描述：</p>
-<ul>
-<li>一亩三分地有帖直接写到“实现一个 cache”</li>
-<li>另一帖公开描述里写到 “missed cache 和 LRU cache simulation”</li>
-<li>还有 Reddit 用户明确说 Amazon 问过 <code>LRU Cache</code>，另一个回复说自己被问到 <code>LFU Cache</code></li>
-</ul>
-<p>还原题目：</p>
-<ul>
-<li>设计一个缓存系统，支持 <code>get(key)</code> 和 <code>put(key, value)</code>，超出容量时按最近最少使用淘汰</li>
-<li>follow-up 常见会改成：
-<ul>
-<li>LFU</li>
-<li>支持 <code>miss count</code></li>
-<li>让你解释为什么能做到 <code>O(1)</code></li>
-<li>问如果要支持并发或 TTL 怎么改</li>
-</ul>
-</li>
-</ul>
-<p>核心解法：</p>
-<ul>
-<li><code>LRU</code>: <code>HashMap + Doubly Linked List</code></li>
-<li><code>LFU</code>: <code>key -&gt; node</code>，<code>freq -&gt; doubly linked list</code>，再维护 <code>min_freq</code></li>
-<li>面试时先讲：
-<ul>
-<li>为什么单链表不够</li>
-<li>为什么需要 O(1) 删除任意节点</li>
-<li>eviction 时怎么保证正确更新</li>
-</ul>
-</li>
-</ul>
-<p>易错点：</p>
-<ul>
-<li>更新已有 key 时忘记移动节点</li>
-<li>容量为 0</li>
-<li><code>LFU</code> 在频率升级后没有正确更新 <code>min_freq</code></li>
-<li>删除尾节点后没同步从 map 去掉</li>
-</ul>
-<p>建议练习：</p>
-<ul>
-<li>LeetCode 146 <code>LRU Cache</code></li>
-<li>LeetCode 460 <code>LFU Cache</code></li>
-<li>自己口述一个 <code>TTL cache</code> 的扩展版本</li>
-</ul>
-<h2 id="2-graph--bfs--dfs-家族"><a class="header" href="#2-graph--bfs--dfs-家族">2. Graph / BFS / DFS 家族</a></h2>
-<h3 id="21-word-ladder"><a class="header" href="#21-word-ladder">2.1 Word Ladder</a></h3>
-<p><code>优先级：S</code></p>
-<p>社区原始描述：</p>
-<ul>
-<li>一亩三分地总结帖直接写：<code>bfs dfs考的很多，word ladder，word search基本成了必考</code></li>
-</ul>
-<p>还原题目：</p>
-<ul>
-<li>给 <code>beginWord</code>、<code>endWord</code> 和字典，每次只能改一个字符，问最短转换长度</li>
-<li>follow-up：
-<ul>
-<li>输出路径而不只是长度</li>
-<li>优化时间复杂度</li>
-</ul>
-</li>
-</ul>
-<p>核心解法：</p>
-<ul>
-<li>标准 <code>BFS</code></li>
-<li>进阶直接讲 <code>bidirectional BFS</code></li>
-<li>若 interviewer 追优化，讲：
-<ul>
-<li>wildcard pattern 预处理</li>
-<li>双向 BFS 降搜索空间</li>
-</ul>
-</li>
-</ul>
-<p>易错点：</p>
-<ul>
-<li><code>endWord</code> 不在字典里</li>
-<li>访问标记时机不对导致重复入队</li>
-<li>复杂度说不清楚</li>
-</ul>
-<p>建议练习：</p>
-<ul>
-<li>LeetCode 127 <code>Word Ladder</code></li>
-<li>LeetCode 126 <code>Word Ladder II</code></li>
-</ul>
-<h3 id="22-word-search"><a class="header" href="#22-word-search">2.2 Word Search</a></h3>
-<p><code>优先级：S</code></p>
-<p>社区原始描述：</p>
-<ul>
-<li>同一篇总结帖把 <code>word search</code> 和 <code>word ladder</code> 放在一起，直接说成“基本成了必考”</li>
-</ul>
-<p>还原题目：</p>
-<ul>
-<li>在二维网格中找一个单词，字符可上下左右移动，同一个格子不能重复使用</li>
-<li>follow-up：
-<ul>
-<li>多个单词版本</li>
-<li>如何剪枝</li>
-</ul>
-</li>
-</ul>
-<p>核心解法：</p>
-<ul>
-<li><code>DFS + Backtracking</code></li>
-<li>多单词时讲 <code>Trie + DFS</code></li>
-</ul>
-<p>易错点：</p>
-<ul>
-<li>访问标记恢复</li>
-<li>边界判断顺序</li>
-<li>多单词版本没有做前缀剪枝</li>
-</ul>
-<p>建议练习：</p>
-<ul>
-<li>LeetCode 79 <code>Word Search</code></li>
-<li>LeetCode 212 <code>Word Search II</code></li>
-</ul>
-<h3 id="23-course-schedule"><a class="header" href="#23-course-schedule">2.3 Course Schedule</a></h3>
-<p><code>优先级：A</code></p>
-<p>社区原始描述：</p>
-<ul>
-<li>一亩三分地总结帖直接列出了 <code>210 course schedule</code></li>
-</ul>
-<p>还原题目：</p>
-<ul>
-<li>给依赖关系，判断能否完成所有课程，或输出一种可行顺序</li>
-</ul>
-<p>核心解法：</p>
-<ul>
-<li><code>Topological Sort</code></li>
-<li><code>BFS(Kahn)</code> 和 <code>DFS cycle detection</code> 都要会讲</li>
-</ul>
-<p>易错点：</p>
-<ul>
-<li>边方向说反</li>
-<li>只会判断可行，不会输出顺序</li>
-</ul>
-<p>建议练习：</p>
-<ul>
-<li>LeetCode 207</li>
-<li>LeetCode 210</li>
-</ul>
-<h2 id="3-dp--backtracking-家族"><a class="header" href="#3-dp--backtracking-家族">3. DP / Backtracking 家族</a></h2>
-<h3 id="31-word-break-i--ii"><a class="header" href="#31-word-break-i--ii">3.1 Word Break I / II</a></h3>
-<p><code>优先级：S</code></p>
-<p>社区原始描述：</p>
-<ul>
-<li>总结帖直接列了 <code>139 140 word break</code></li>
-<li>另一个 VO 准备帖里明确出现：<code>wordbreak II。follow up 问能不能更快</code></li>
-</ul>
-<p>还原题目：</p>
-<ul>
-<li><code>Word Break I</code>: 判断字符串能否被字典拆分</li>
-<li><code>Word Break II</code>: 输出所有合法拆分</li>
-<li>follow-up：
-<ul>
-<li>如何减少重复搜索</li>
-<li>如何更快</li>
-</ul>
-</li>
-</ul>
-<p>核心解法：</p>
-<ul>
-<li><code>Word Break I</code>: <code>DP</code></li>
-<li><code>Word Break II</code>: <code>DFS + memo</code></li>
-<li>如果 interviewer 继续问优化，可以讲 <code>Trie + memo</code></li>
-</ul>
-<p>易错点：</p>
-<ul>
-<li><code>Word Break II</code> 没做 memo 导致指数爆炸</li>
-<li>字符串切片过多，解释不清性能瓶颈</li>
-</ul>
-<p>建议练习：</p>
-<ul>
-<li>LeetCode 139</li>
-<li>LeetCode 140</li>
-<li>LeetCode 472 <code>Concatenated Words</code></li>
-</ul>
-<h3 id="32-0-1-knapsack--edit-distance"><a class="header" href="#32-0-1-knapsack--edit-distance">3.2 0-1 Knapsack / Edit Distance</a></h3>
-<p><code>优先级：B</code></p>
-<p>社区原始描述：</p>
-<ul>
-<li>总结帖列出 <code>0-1 knapsack</code></li>
-<li>同帖列出 <code>72 edit distance</code></li>
-</ul>
-<p>还原题目：</p>
-<ul>
-<li>这类题在 Amazon VO 里更像“验证你是否掌握标准 DP 推导”的保底题</li>
-</ul>
-<p>核心解法：</p>
-<ul>
-<li>背包：状态定义、二维到一维压缩</li>
-<li>编辑距离：<code>dp[i][j]</code> 表示前缀最小编辑次数</li>
-</ul>
-<p>建议练习：</p>
-<ul>
-<li>LeetCode 72</li>
-<li>经典 0-1 背包模板</li>
-</ul>
-<h2 id="4-tree-家族"><a class="header" href="#4-tree-家族">4. Tree 家族</a></h2>
-<h3 id="41-lca--diameter--path-sum--boundary--vertical-order"><a class="header" href="#41-lca--diameter--path-sum--boundary--vertical-order">4.1 LCA / Diameter / Path Sum / Boundary / Vertical Order</a></h3>
-<p><code>优先级：S</code></p>
-<p>社区原始描述：</p>
-<ul>
-<li>总结帖列出：
-<ul>
-<li><code>236 lca of tree</code></li>
-<li><code>545 boundary of tree</code></li>
-<li><code>314 binary vertical traversal</code></li>
-<li><code>437 path sum</code></li>
-<li><code>543 diameter of tree</code></li>
-</ul>
-</li>
-<li>另一帖还有一句：<code>bottom view of a binary tree，题目一贴出来我就觉得和 vertical 那道题差不多</code></li>
-</ul>
-<p>还原题目：</p>
-<ul>
-<li>Amazon 很喜欢把二叉树基础题包装成 traversal 变体</li>
-<li>常见问法：
-<ul>
-<li>最近公共祖先</li>
-<li>树的直径</li>
-<li>路径和计数</li>
-<li>边界遍历</li>
-<li>vertical order / bottom view</li>
-</ul>
-</li>
-</ul>
-<p>核心解法：</p>
-<ul>
-<li><code>LCA</code>: 递归返回左右子树命中情况</li>
-<li><code>Diameter</code>: 后序遍历，同时维护最大值</li>
-<li><code>Path Sum III</code>: 前缀和 + hashmap</li>
-<li><code>Vertical Order / Bottom View</code>: <code>BFS</code> 配合列坐标</li>
-<li><code>Boundary</code>: 分左边界、叶子、右边界</li>
-</ul>
-<p>易错点：</p>
-<ul>
-<li>把 <code>Path Sum I</code> 和 <code>Path Sum III</code> 混了</li>
-<li><code>vertical order</code> 不清楚同列同层的输出顺序</li>
-<li><code>bottom view</code> 和 <code>vertical traversal</code> 混用</li>
-</ul>
-<p>建议练习：</p>
-<ul>
-<li>LeetCode 236</li>
-<li>LeetCode 543</li>
-<li>LeetCode 437</li>
-<li>LeetCode 314</li>
-<li>LeetCode 545</li>
-</ul>
-<h2 id="5-随机结构--o1-设计"><a class="header" href="#5-随机结构--o1-设计">5. 随机结构 / O(1) 设计</a></h2>
-<h3 id="51-insert-delete-getrandom-o1"><a class="header" href="#51-insert-delete-getrandom-o1">5.1 Insert Delete GetRandom O(1)</a></h3>
-<p><code>优先级：A</code></p>
-<p>社区原始描述：</p>
-<ul>
-<li>一亩三分地帖子直接写到：<code>类似 380 + - random O(1)，follow up 如果有dup怎么办</code></li>
-</ul>
-<p>还原题目：</p>
-<ul>
-<li>设计一个数据结构，支持：
-<ul>
-<li><code>insert</code></li>
-<li><code>remove</code></li>
-<li><code>getRandom</code></li>
-</ul>
-</li>
-<li>所有操作尽量 <code>O(1)</code></li>
-<li>follow-up：如果允许重复值怎么办</li>
-</ul>
-<p>核心解法：</p>
-<ul>
-<li>标准版：<code>array + value_to_index</code></li>
-<li>重复值版：<code>array + value_to_indices(set)</code></li>
-</ul>
-<p>易错点：</p>
-<ul>
-<li>删除时忘记交换最后一个元素</li>
-<li>交换后没更新被换元素的下标</li>
-<li>重复值版没同步更新 index set</li>
-</ul>
-<p>建议练习：</p>
-<ul>
-<li>LeetCode 380</li>
-<li>LeetCode 381</li>
-</ul>
-<h2 id="6-binary-search--unknown-size"><a class="header" href="#6-binary-search--unknown-size">6. Binary Search / Unknown Size</a></h2>
-<h3 id="61-search-in-sorted-array-of-unknown-length"><a class="header" href="#61-search-in-sorted-array-of-unknown-length">6.1 Search in Sorted Array of Unknown Length</a></h3>
-<p><code>优先级：A</code></p>
-<p>社区原始描述：</p>
-<ul>
-<li>一亩三分地 Amazon VO 帖里明确写到：<code>search element in one sorted array which has infinate length</code></li>
-</ul>
-<p>还原题目：</p>
-<ul>
-<li>给一个有序数组，但你不知道长度，查目标值位置</li>
-<li>follow-up：如果数组其实是有限的，只是你拿不到长度，怎么办</li>
-</ul>
-<p>核心解法：</p>
-<ul>
-<li>先指数扩张右边界：<code>1, 2, 4, 8...</code></li>
-<li>再在 <code>[left, right]</code> 上做二分</li>
-</ul>
-<p>易错点：</p>
-<ul>
-<li>边界扩张时越界处理说不清</li>
-<li>把“未知长度”误解成“真的无限”</li>
-</ul>
-<p>建议练习：</p>
-<ul>
-<li>LeetCode 702 <code>Search in a Sorted Array of Unknown Size</code></li>
-</ul>
-<h2 id="7-sliding-window--string"><a class="header" href="#7-sliding-window--string">7. Sliding Window / String</a></h2>
-<h3 id="71-找所有排列出现位置"><a class="header" href="#71-找所有排列出现位置">7.1 找所有排列出现位置</a></h3>
-<p><code>优先级：A</code></p>
-<p>社区原始描述：</p>
-<ul>
-<li>一亩三分地帖子给出的描述非常接近原题：<code>给两个string，在string1中找到所有符合string2的排列组合的subsequence，返回相应的index</code></li>
-</ul>
-<p>还原题目：</p>
-<ul>
-<li>在长串中找所有子串起点，使该子串是短串的一个排列</li>
-<li>本质是 <code>find all anagrams / permutation in string</code></li>
-</ul>
-<p>核心解法：</p>
-<ul>
-<li>固定窗口长度</li>
-<li>维护频次数组或 hashmap</li>
-<li>窗口右移时增一个、减一个</li>
-</ul>
-<p>易错点：</p>
-<ul>
-<li><code>subsequence</code> 和 <code>substring</code> 在原帖里可能被混说，但题意明显是固定长度窗口匹配</li>
-<li>字典比较复杂度不会讲</li>
-</ul>
-<p>建议练习：</p>
-<ul>
-<li>LeetCode 438 <code>Find All Anagrams in a String</code></li>
-<li>LeetCode 567 <code>Permutation in String</code></li>
-</ul>
-<h2 id="8-heap--selection"><a class="header" href="#8-heap--selection">8. Heap / Selection</a></h2>
-<h3 id="81-kth-largest-element"><a class="header" href="#81-kth-largest-element">8.1 Kth Largest Element</a></h3>
-<p><code>优先级：A</code></p>
-<p>社区原始描述：</p>
-<ul>
-<li>一亩三分地总结帖直接列出 <code>215 kth largest element in array</code></li>
-</ul>
-<p>还原题目：</p>
-<ul>
-<li>给数组和 <code>k</code>，返回第 <code>k</code> 大元素</li>
-</ul>
-<p>核心解法：</p>
-<ul>
-<li><code>min-heap</code> 大小 <code>k</code></li>
-<li>或 <code>quickselect</code></li>
-</ul>
-<p>易错点：</p>
-<ul>
-<li>第 <code>k</code> 大和排序下标混淆</li>
-<li>只会堆，不会解释 quickselect 的平均复杂度</li>
-</ul>
-<p>建议练习：</p>
-<ul>
-<li>LeetCode 215</li>
-</ul>
-<h2 id="9-greedy"><a class="header" href="#9-greedy">9. Greedy</a></h2>
-<h3 id="91-gas-station"><a class="header" href="#91-gas-station">9.1 Gas Station</a></h3>
-<p><code>优先级：B</code></p>
-<p>社区原始描述：</p>
-<ul>
-<li>一亩三分地总结帖直接列出 <code>134 gas station</code></li>
-</ul>
-<p>还原题目：</p>
-<ul>
-<li>判断从哪个站点出发可以环绕一圈</li>
-</ul>
-<p>核心解法：</p>
-<ul>
-<li>总油量不足直接失败</li>
-<li>线性扫描维护当前油量，跌破 0 就重置起点</li>
-</ul>
-<h2 id="10-小型设计编码题"><a class="header" href="#10-小型设计编码题">10. 小型设计编码题</a></h2>
-<h3 id="101-calendar--meeting-schedule"><a class="header" href="#101-calendar--meeting-schedule">10.1 Calendar / Meeting Schedule</a></h3>
-<p><code>优先级：B</code></p>
-<p>社区原始描述：</p>
-<ul>
-<li>一亩三分地 VO 帖里明确写到：<code>设计一个日历系统</code>，要求支持“创建事件”“查看某个时间是否 busy”“查看某日的所有事件”</li>
-</ul>
-<p>还原题目：</p>
-<ul>
-<li>这类题介于 coding 和 LLD 之间</li>
-<li>面试官想看：
-<ul>
-<li>数据结构选择</li>
-<li>时间区间冲突判断</li>
-<li>API 设计</li>
-<li>复杂度解释</li>
-</ul>
-</li>
-</ul>
-<p>核心解法：</p>
-<ul>
-<li>单用户版可先用：
-<ul>
-<li><code>date -&gt; sorted intervals</code></li>
-<li><code>TreeMap / ordered list</code></li>
-</ul>
-</li>
-<li>如果 interviewer 继续问，讲：
-<ul>
-<li>重叠校验</li>
-<li>recurring events</li>
-<li>多时区</li>
-<li>并发写入</li>
-</ul>
-</li>
-</ul>
-<h2 id="最后怎么刷"><a class="header" href="#最后怎么刷">最后怎么刷</a></h2>
-<p>推荐顺序：</p>
-<ol>
-<li><code>LRU / LFU</code></li>
-<li><code>Word Ladder / Word Search</code></li>
-<li><code>Word Break / Concatenated Words</code></li>
-<li><code>LCA / Diameter / Path Sum / Vertical Order</code></li>
-<li><code>Random O(1) / Unknown Size Binary Search</code></li>
-<li><code>Course Schedule / Kth Largest / Gas Station</code></li>
-</ol>
-<p>如果你要 mock Amazon VO，建议每题都强制自己回答这 4 句：</p>
-<ol>
-<li>暴力解是什么</li>
-<li>为什么不够好</li>
-<li>最优结构为什么是这个</li>
-<li>如果 interviewer 要我继续优化，我准备怎么扩展</li>
-</ol>
-<div style="break-before: page; page-break-before: always;"></div>
-<h1 id="资料与文档清单"><a class="header" href="#资料与文档清单">资料与文档清单</a></h1>
-<h2 id="这本书内置的复习主线"><a class="header" href="#这本书内置的复习主线">这本书内置的复习主线</a></h2>
-<ol>
-<li>高频题总表</li>
-<li>题目还原与解法</li>
-<li>原始题源索引</li>
-</ol>
-<h2 id="你应该额外准备的文档"><a class="header" href="#你应该额外准备的文档">你应该额外准备的文档</a></h2>
-<h3 id="必备模板"><a class="header" href="#必备模板">必备模板</a></h3>
-<ul>
-<li><code>LRU / LFU</code> 模板</li>
-<li><code>BFS / DFS / Backtracking</code> 模板</li>
-<li><code>Topological Sort</code> 模板</li>
-<li><code>Sliding Window</code> 模板</li>
-<li><code>Tree DFS + prefix sum</code> 模板</li>
-<li><code>Heap / Quickselect</code> 模板</li>
-<li><code>Binary Search on answer / boundary</code> 模板</li>
-</ul>
-<h3 id="amazon-vo-特别要准备的讲法文档"><a class="header" href="#amazon-vo-特别要准备的讲法文档">Amazon VO 特别要准备的“讲法文档”</a></h3>
-<ul>
-<li>如何从 brute force 讲到 optimal</li>
-<li>如何分析时间复杂度和空间复杂度</li>
-<li>如何应对 follow-up：
-<ul>
-<li>支持重复值</li>
-<li>支持并发</li>
-<li>支持 TTL</li>
-<li>支持大数据量</li>
-<li>如何从单机扩到分布式</li>
-</ul>
-</li>
-</ul>
-<h3 id="建议-mock-清单"><a class="header" href="#建议-mock-清单">建议 mock 清单</a></h3>
-<ul>
-<li>45 分钟 mock：<code>15 分钟 BQ + 25 分钟 coding + 5 分钟 follow-up</code></li>
-<li>20 分钟压缩 mock：只做“澄清 + 方案 + 编码 + testcase”</li>
-<li>每次 mock 至少覆盖一题 cache 和一题 graph/tree</li>
-</ul>
-<h2 id="外部资料索引"><a class="header" href="#外部资料索引">外部资料索引</a></h2>
-<h3 id="一亩三分地"><a class="header" href="#一亩三分地">一亩三分地</a></h3>
-<ul>
-<li>LC 淘帖合集：<a href="https://www.1point3acres.com/bbs/collection/240817">https://www.1point3acres.com/bbs/collection/240817</a></li>
-<li>Amazon onsite 总结帖：<a href="https://www.1point3acres.com/bbs/thread-531445-1-1.html">https://www.1point3acres.com/bbs/thread-531445-1-1.html</a></li>
-<li>Amazon VO 过经与准备帖：<a href="https://www.1point3acres.com/bbs/thread-493883-1-1.html">https://www.1point3acres.com/bbs/thread-493883-1-1.html</a></li>
-</ul>
-<h3 id="reddit"><a class="header" href="#reddit">Reddit</a></h3>
-<ul>
-<li>频率榜是否有用的讨论，里面有人明确反馈 Amazon 问到 <code>LRU</code>、<code>LFU</code>：<a href="https://www.reddit.com/r/leetcode/comments/1ivwbp1/do_the_percompany_frequency_rankings_matter_for/">https://www.reddit.com/r/leetcode/comments/1ivwbp1/do_the_percompany_frequency_rankings_matter_for/</a></li>
-<li>Amazon SDE2 loop 体验讨论，能看出 coding 时间常被压缩、follow-up 很多：<a href="https://www.reddit.com/r/leetcode/comments/1mtr7t3/amazon_sde2_loop_rant_frustrating_experience/">https://www.reddit.com/r/leetcode/comments/1mtr7t3/amazon_sde2_loop_rant_frustrating_experience/</a></li>
-</ul>
-<h2 id="3-天压缩版计划"><a class="header" href="#3-天压缩版计划">3 天压缩版计划</a></h2>
-<h3 id="day-1"><a class="header" href="#day-1">Day 1</a></h3>
-<ul>
-<li><code>LRU</code></li>
-<li><code>LFU</code></li>
-<li><code>Word Ladder</code></li>
-<li><code>Word Search</code></li>
-</ul>
-<h3 id="day-2"><a class="header" href="#day-2">Day 2</a></h3>
-<ul>
-<li><code>Word Break I / II</code></li>
-<li><code>LCA</code></li>
-<li><code>Path Sum III</code></li>
-<li><code>Vertical Order</code></li>
-</ul>
-<h3 id="day-3"><a class="header" href="#day-3">Day 3</a></h3>
-<ul>
-<li><code>Random O(1)</code></li>
-<li><code>Unknown Size Binary Search</code></li>
-<li><code>Course Schedule</code></li>
-<li><code>Kth Largest</code></li>
-<li>快速过所有 source links</li>
+<h1 id="1-图论拓扑排序"><a class="header" href="#1-图论拓扑排序">1. 图论拓扑排序</a></h1>
+<h2 id="面试题目怎么问"><a class="header" href="#面试题目怎么问">面试题目怎么问</a></h2>
+<ul>
+<li>有 <code>numCourses</code> 门课，<code>prerequisites[i] = [a, b]</code> 表示学 <code>a</code> 之前必须先学 <code>b</code>，问是否能学完所有课</li>
+<li>如果可以学完，输出一种可行的上课顺序</li>
+<li>给你若干任务和依赖关系，判断有没有环</li>
+</ul>
+<h2 id="识别信号"><a class="header" href="#识别信号">识别信号</a></h2>
+<ul>
+<li>任务之间有依赖关系</li>
+<li>出现 “先做 A 才能做 B”</li>
+<li>问是否有环</li>
+<li>问能否完成全部任务</li>
+<li>问输出一个合法顺序</li>
+</ul>
+<h2 id="amazon-风格业务包装"><a class="header" href="#amazon-风格业务包装">Amazon 风格业务包装</a></h2>
+<ul>
+<li>fulfillment workflow 里，某些任务必须先做完才能做后续任务</li>
+<li>deployment pipeline 里，某些服务必须先启动依赖服务</li>
+<li>package processing system 里，某些步骤存在前置依赖</li>
+<li>training modules 之间有先修顺序</li>
+</ul>
+<h2 id="你该怎么想"><a class="header" href="#你该怎么想">你该怎么想</a></h2>
+<ul>
+<li>“A 依赖 B” 就翻译成有向边 <code>B -&gt; A</code></li>
+<li>问能不能做完，就是判环</li>
+<li>问执行顺序，就是拓扑排序</li>
+</ul>
+<h2 id="标准代码模板-1bfs-kahn-拓扑排序"><a class="header" href="#标准代码模板-1bfs-kahn-拓扑排序">标准代码模板 1：BFS Kahn 拓扑排序</a></h2>
+<pre><code class="language-python">from collections import defaultdict, deque
+
+def topo_sort(n, edges):
+    graph = defaultdict(list)
+    indegree = [0] * n
+
+    for nxt, pre in edges:
+        graph[pre].append(nxt)
+        indegree[nxt] += 1
+
+    q = deque([i for i in range(n) if indegree[i] == 0])
+    order = []
+
+    while q:
+        cur = q.popleft()
+        order.append(cur)
+        for nei in graph[cur]:
+            indegree[nei] -= 1
+            if indegree[nei] == 0:
+                q.append(nei)
+
+    return len(order) == n, order
+</code></pre>
+<h2 id="标准代码模板-2dfs-染色判环"><a class="header" href="#标准代码模板-2dfs-染色判环">标准代码模板 2：DFS 染色判环</a></h2>
+<pre><code class="language-python">from collections import defaultdict
+
+def has_cycle(n, edges):
+    graph = defaultdict(list)
+    for nxt, pre in edges:
+        graph[pre].append(nxt)
+
+    color = [0] * n
+    # 0 = 未访问, 1 = 正在访问, 2 = 已完成
+
+    def dfs(node):
+        if color[node] == 1:
+            return True
+        if color[node] == 2:
+            return False
+
+        color[node] = 1
+        for nei in graph[node]:
+            if dfs(nei):
+                return True
+        color[node] = 2
+        return False
+
+    for i in range(n):
+        if color[i] == 0 and dfs(i):
+            return True
+    return False
+</code></pre>
+<h2 id="标准代码模板-3字典序最小拓扑序"><a class="header" href="#标准代码模板-3字典序最小拓扑序">标准代码模板 3：字典序最小拓扑序</a></h2>
+<pre><code class="language-python">import heapq
+from collections import defaultdict
+
+def topo_smallest(n, edges):
+    graph = defaultdict(list)
+    indegree = [0] * n
+
+    for nxt, pre in edges:
+        graph[pre].append(nxt)
+        indegree[nxt] += 1
+
+    heap = []
+    for i in range(n):
+        if indegree[i] == 0:
+            heapq.heappush(heap, i)
+
+    order = []
+    while heap:
+        cur = heapq.heappop(heap)
+        order.append(cur)
+        for nei in graph[cur]:
+            indegree[nei] -= 1
+            if indegree[nei] == 0:
+                heapq.heappush(heap, nei)
+
+    return order if len(order) == n else []
+</code></pre>
+<h2 id="标准代码模板-4dfs-返回拓扑序"><a class="header" href="#标准代码模板-4dfs-返回拓扑序">标准代码模板 4：DFS 返回拓扑序</a></h2>
+<pre><code class="language-python">from collections import defaultdict
+
+def topo_dfs(n, edges):
+    graph = defaultdict(list)
+    for nxt, pre in edges:
+        graph[pre].append(nxt)
+
+    color = [0] * n
+    order = []
+
+    def dfs(node):
+        if color[node] == 1:
+            return False
+        if color[node] == 2:
+            return True
+
+        color[node] = 1
+        for nei in graph[node]:
+            if not dfs(nei):
+                return False
+        color[node] = 2
+        order.append(node)
+        return True
+
+    for i in range(n):
+        if color[i] == 0:
+            if not dfs(i):
+                return []
+
+    return order[::-1]
+</code></pre>
+<h2 id="代码讲解"><a class="header" href="#代码讲解">代码讲解</a></h2>
+<ul>
+<li>Kahn 的核心是“入度为 0 的节点就是当前可以做的任务”</li>
+<li>DFS 染色的核心是“再次碰到正在访问的节点，就说明出现回边，也就是有环”</li>
+<li>DFS 返回列表时，使用“后序加入 + reverse”</li>
+</ul>
+<h2 id="面试时怎么讲"><a class="header" href="#面试时怎么讲">面试时怎么讲</a></h2>
+<ul>
+<li>这是一个有向图判环 / 拓扑排序问题</li>
+<li>如果图里有环，就不可能完成所有任务</li>
+<li>我会先建邻接表和入度数组</li>
+<li>入度为 0 的节点先入队，逐步解锁后续任务</li>
+</ul>
+<h2 id="常见-follow-up-和回答"><a class="header" href="#常见-follow-up-和回答">常见 follow-up 和回答</a></h2>
+<p><strong>Q1：如果只需要判断能不能完成，不需要顺序呢？</strong><br>还是同一个模板，最后检查处理过的节点数是否等于总节点数。</p>
+<p><strong>Q2：如果需要返回任意一个合法顺序呢？</strong><br>在 BFS 过程中把出队顺序记录到 <code>order</code> 数组里。</p>
+<p><strong>Q3：如果有多个合法顺序怎么办？</strong><br>普通拓扑排序返回任意一个即可；如果要字典序最小，改成最小堆。</p>
+<p><strong>Q4：如果图不连通怎么办？</strong><br>没关系，所有入度为 0 的节点都会进队。</p>
+<p><strong>Q5：DFS 和 BFS 该怎么选？</strong><br>只判环时两者都行；要输出顺序时，BFS Kahn 通常更直观。</p>
+<p><strong>Q6：DFS 也能返回列表吗？</strong><br>能。后序加入 <code>order</code>，最后 <code>reverse</code>。</p>
+<h2 id="amazon-风格完整题面"><a class="header" href="#amazon-风格完整题面">Amazon 风格完整题面</a></h2>
+<blockquote>
+<p>You are given a list of tasks in a fulfillment workflow.<br>Some tasks depend on other tasks being completed first.<br>Determine whether all tasks can be completed.<br>If yes, return one valid execution order.</p>
+</blockquote>
+<h2 id="可直接背的口语回答稿"><a class="header" href="#可直接背的口语回答稿">可直接背的口语回答稿</a></h2>
+<p>“我先把业务任务抽象成有向图。每个任务是一个节点，如果 task A 依赖 task B，我就建一条 <code>B -&gt; A</code> 的边。这样问题就变成判断图里是否有环；如果无环，再输出一个拓扑序。我会优先用 Kahn 算法，维护每个节点的入度，把所有入度为 0 的任务先放进队列。每完成一个任务，就把它后继节点的入度减一。最后如果能处理完所有节点，就说明没有环，出队顺序也是一种合法的执行顺序。”</p>
+<h2 id="推荐代表题"><a class="header" href="#推荐代表题">推荐代表题</a></h2>
+<ul>
+<li>Course Schedule</li>
+<li>Course Schedule II</li>
+<li>Alien Dictionary</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div>
-<h1 id="原始题源索引"><a class="header" href="#原始题源索引">原始题源索引</a></h1>
-<p>下面只收录这本书实际用到的公开可见题源。</p>
-<h2 id="一亩三分地-1"><a class="header" href="#一亩三分地-1">一亩三分地</a></h2>
-<h3 id="1-amazon-onsite-面经总结"><a class="header" href="#1-amazon-onsite-面经总结">1. Amazon onsite 面经总结</a></h3>
+<h1 id="2-矩阵搜索--岛屿--最短路"><a class="header" href="#2-矩阵搜索--岛屿--最短路">2. 矩阵搜索 / 岛屿 / 最短路</a></h1>
+<h2 id="面试题目怎么问-1"><a class="header" href="#面试题目怎么问-1">面试题目怎么问</a></h2>
 <ul>
-<li>链接：<a href="https://www.1point3acres.com/bbs/thread-531445-1-1.html">https://www.1point3acres.com/bbs/thread-531445-1-1.html</a></li>
-<li>可见关键信号：
+<li>给一个二维网格，统计有多少个岛屿</li>
+<li>从起点走到终点最少需要多少步</li>
+<li>网格里有障碍物，问能否走到终点</li>
+<li>多源扩散，例如腐烂橘子、火焰传播、离最近目标距离</li>
+</ul>
+<h2 id="识别信号-1"><a class="header" href="#识别信号-1">识别信号</a></h2>
 <ul>
-<li><code>bfs dfs考的很多，word ladder，word search基本成了必考</code></li>
-<li><code>Coding: 1. 140 wordbreak ... 13. 127 word ladder ... 15. 380 + - random O(1) ... 19. 215 kth largest element in array</code></li>
+<li>输入是 <code>grid</code></li>
+<li>只能上下左右或加上对角线移动</li>
+<li>问最短路径</li>
+<li>问连通块数量</li>
+<li>问扩散层数 / 最少轮数</li>
+</ul>
+<h2 id="amazon-风格业务包装-1"><a class="header" href="#amazon-风格业务包装-1">Amazon 风格业务包装</a></h2>
+<ul>
+<li>warehouse 里机器人从起点走到货架，障碍物不能穿过</li>
+<li>delivery drone 在地图网格里找最短路线</li>
+<li>一批坏货从某些仓位开始扩散，问多久影响整个仓库</li>
+<li>仓库区域由可通行和不可通行位置组成，问有多少独立区域</li>
+</ul>
+<h2 id="你该怎么想-1"><a class="header" href="#你该怎么想-1">你该怎么想</a></h2>
+<ul>
+<li>只要是二维格子，先问自己：这是 shortest path 还是 connected components</li>
+<li>如果问最少几步，直接想到 BFS</li>
+<li>如果问连通块数量、独立区域、岛屿数，直接想到 flood fill</li>
+</ul>
+<h2 id="标准代码模板-1bfs-最短路"><a class="header" href="#标准代码模板-1bfs-最短路">标准代码模板 1：BFS 最短路</a></h2>
+<pre><code class="language-python">from collections import deque
+
+def shortest_path(grid, start, end):
+    m, n = len(grid), len(grid[0])
+    dirs = [(1, 0), (-1, 0), (0, 1), (0, -1)]
+    q = deque([(start[0], start[1], 0)])
+    visited = set([start])
+
+    while q:
+        x, y, dist = q.popleft()
+        if (x, y) == end:
+            return dist
+
+        for dx, dy in dirs:
+            nx, ny = x + dx, y + dy
+            if 0 &lt;= nx &lt; m and 0 &lt;= ny &lt; n:
+                if grid[nx][ny] != 1 and (nx, ny) not in visited:
+                    visited.add((nx, ny))
+                    q.append((nx, ny, dist + 1))
+    return -1
+</code></pre>
+<h2 id="标准代码模板-2dfs-统计岛屿"><a class="header" href="#标准代码模板-2dfs-统计岛屿">标准代码模板 2：DFS 统计岛屿</a></h2>
+<pre><code class="language-python">def num_islands(grid):
+    m, n = len(grid), len(grid[0])
+    dirs = [(1, 0), (-1, 0), (0, 1), (0, -1)]
+
+    def dfs(x, y):
+        if x &lt; 0 or x &gt;= m or y &lt; 0 or y &gt;= n or grid[x][y] != "1":
+            return
+        grid[x][y] = "0"
+        for dx, dy in dirs:
+            dfs(x + dx, y + dy)
+
+    count = 0
+    for i in range(m):
+        for j in range(n):
+            if grid[i][j] == "1":
+                count += 1
+                dfs(i, j)
+    return count
+</code></pre>
+<h2 id="标准代码模板-3多源-bfs"><a class="header" href="#标准代码模板-3多源-bfs">标准代码模板 3：多源 BFS</a></h2>
+<pre><code class="language-python">from collections import deque
+
+def multi_source_bfs(grid, sources):
+    m, n = len(grid), len(grid[0])
+    dirs = [(1, 0), (-1, 0), (0, 1), (0, -1)]
+    q = deque()
+    visited = set()
+
+    for x, y in sources:
+        q.append((x, y, 0))
+        visited.add((x, y))
+
+    while q:
+        x, y, dist = q.popleft()
+        for dx, dy in dirs:
+            nx, ny = x + dx, y + dy
+            if 0 &lt;= nx &lt; m and 0 &lt;= ny &lt; n:
+                if grid[nx][ny] != 1 and (nx, ny) not in visited:
+                    visited.add((nx, ny))
+                    q.append((nx, ny, dist + 1))
+</code></pre>
+<h2 id="标准代码模板-4状态-bfs-打破-k-个墙"><a class="header" href="#标准代码模板-4状态-bfs-打破-k-个墙">标准代码模板 4：状态 BFS 打破 k 个墙</a></h2>
+<pre><code class="language-python">from collections import deque
+
+def shortest_path_break_k_walls(grid, start, end, k):
+    m, n = len(grid), len(grid[0])
+    dirs = [(1, 0), (-1, 0), (0, 1), (0, -1)]
+    sx, sy = start
+    ex, ey = end
+
+    q = deque([(sx, sy, k, 0)])
+    visited = set([(sx, sy, k)])
+
+    while q:
+        x, y, remain, dist = q.popleft()
+        if (x, y) == (ex, ey):
+            return dist
+
+        for dx, dy in dirs:
+            nx, ny = x + dx, y + dy
+            if 0 &lt;= nx &lt; m and 0 &lt;= ny &lt; n:
+                nr = remain - grid[nx][ny]
+                state = (nx, ny, nr)
+                if nr &gt;= 0 and state not in visited:
+                    visited.add(state)
+                    q.append((nx, ny, nr, dist + 1))
+    return -1
+</code></pre>
+<h2 id="标准代码模板-5dijkstra-on-grid"><a class="header" href="#标准代码模板-5dijkstra-on-grid">标准代码模板 5：Dijkstra on Grid</a></h2>
+<pre><code class="language-python">import heapq
+
+def dijkstra_grid(cost, start, end):
+    m, n = len(cost), len(cost[0])
+    dirs = [(1,0), (-1,0), (0,1), (0,-1)]
+    INF = float('inf')
+
+    dist = [[INF] * n for _ in range(m)]
+    sx, sy = start
+    ex, ey = end
+    dist[sx][sy] = 0
+
+    pq = [(0, sx, sy)]
+
+    while pq:
+        cur_cost, x, y = heapq.heappop(pq)
+        if (x, y) == (ex, ey):
+            return cur_cost
+        if cur_cost &gt; dist[x][y]:
+            continue
+
+        for dx, dy in dirs:
+            nx, ny = x + dx, y + dy
+            if 0 &lt;= nx &lt; m and 0 &lt;= ny &lt; n:
+                new_cost = cur_cost + cost[nx][ny]
+                if new_cost &lt; dist[nx][ny]:
+                    dist[nx][ny] = new_cost
+                    heapq.heappush(pq, (new_cost, nx, ny))
+    return -1
+</code></pre>
+<h2 id="代码讲解-1"><a class="header" href="#代码讲解-1">代码讲解</a></h2>
+<ul>
+<li>无权最短路：BFS</li>
+<li>连通块：DFS / BFS flood fill</li>
+<li>多个起点同时扩散：multi-source BFS</li>
+<li>同一个格子但资源状态不同：状态 BFS</li>
+<li>边权不同：Dijkstra 或 0-1 BFS</li>
+</ul>
+<h2 id="面试时怎么讲-1"><a class="header" href="#面试时怎么讲-1">面试时怎么讲</a></h2>
+<ul>
+<li>如果问最短步数，我第一反应是 BFS，因为无权图的最短路就是按层扩展</li>
+<li>如果问区域数量，我会从每个未访问格子出发做一次 flood fill</li>
+<li>如果同一个格子在不同资源状态下意义不同，我会把状态扩成 <code>(x, y, extra_state)</code></li>
+</ul>
+<h2 id="常见-follow-up-和回答-1"><a class="header" href="#常见-follow-up-和回答-1">常见 follow-up 和回答</a></h2>
+<p><strong>Q1：为什么最短路要用 BFS，不用 DFS？</strong><br>因为每走一步代价都一样，BFS 按层扩展，第一次到终点时一定最短。</p>
+<p><strong>Q2：如果可以斜着走怎么办？</strong><br>把 <code>dirs</code> 改成 8 个方向。</p>
+<p><strong>Q3：visited 一定要单独开吗？</strong><br>不一定。允许修改输入时可以原地标记。</p>
+<p><strong>Q4：如果有多个起点同时扩散怎么办？</strong><br>用多源 BFS。</p>
+<p><strong>Q5：如果边有不同权重怎么办？</strong><br>非负权重用 Dijkstra；只有 0 和 1 时用 0-1 BFS。</p>
+<p><strong>Q6：如果最多可以打破一个墙怎么办？</strong><br>把状态从 <code>(x, y)</code> 扩成 <code>(x, y, remain_k)</code>。</p>
+<h2 id="amazon-风格完整题面-1"><a class="header" href="#amazon-风格完整题面-1">Amazon 风格完整题面</a></h2>
+<blockquote>
+<p>A warehouse robot starts at the entrance and needs to reach a target shelf.<br>The floor is represented as a grid. Some cells are blocked by obstacles.<br>Return the minimum number of steps needed to reach the shelf, or <code>-1</code> if it is impossible.</p>
+</blockquote>
+<h2 id="可直接背的口语回答稿-1"><a class="header" href="#可直接背的口语回答稿-1">可直接背的口语回答稿</a></h2>
+<p>“虽然题目在讲机器人和仓库，但抽象后就是一个二维 grid 上的无权最短路问题。每个可走格子是一个节点，机器人每次上下左右移动一步，所以边权相同。我会用 BFS 按层扩展，第一次到达终点时就是最短距离。如果题目变成区域数量，我就改成 DFS/BFS flood fill；如果出现多个起点或资源状态，我会切到多源 BFS 或状态 BFS。”</p>
+<h2 id="推荐代表题-1"><a class="header" href="#推荐代表题-1">推荐代表题</a></h2>
+<ul>
+<li>Number of Islands</li>
+<li>Shortest Path in Binary Matrix</li>
+<li>Walls and Gates</li>
+<li>Rotten Oranges</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="3-堆--多路归并"><a class="header" href="#3-堆--多路归并">3. 堆 / 多路归并</a></h1>
+<h2 id="面试题目怎么问-2"><a class="header" href="#面试题目怎么问-2">面试题目怎么问</a></h2>
+<ul>
+<li>合并 <code>k</code> 个有序链表</li>
+<li>合并多个有序数组</li>
+<li>找前 <code>k</code> 个高频元素</li>
+<li>找距离原点最近的 <code>k</code> 个点</li>
+<li>实时维护第 <code>k</code> 大 / 第 <code>k</code> 小元素</li>
+</ul>
+<h2 id="识别信号-2"><a class="header" href="#识别信号-2">识别信号</a></h2>
+<ul>
+<li>多个有序输入流</li>
+<li>每次只需要最小或最大</li>
+<li><code>Top K</code></li>
+<li>数据不断进来，要动态维护答案</li>
+</ul>
+<h2 id="amazon-风格业务包装-2"><a class="header" href="#amazon-风格业务包装-2">Amazon 风格业务包装</a></h2>
+<ul>
+<li>多个 warehouse 各自产生有序事件流，要合并成一个全局时间线</li>
+<li>多条配送线路各自按时间排序，要求输出整体最早事件</li>
+<li>电商商品里找 Top K 热门商品</li>
+<li>找离某个配送站最近的 K 个司机 / K 个仓库</li>
+</ul>
+<h2 id="你该怎么想-2"><a class="header" href="#你该怎么想-2">你该怎么想</a></h2>
+<ul>
+<li>多个输入源都已经有序，就想多路归并</li>
+<li>只关心当前最小 / 最大，就想 heap</li>
+<li>只要看到 <code>Top K</code>，先把堆当默认选项</li>
+</ul>
+<h2 id="标准代码模板-1合并-k-个有序数组"><a class="header" href="#标准代码模板-1合并-k-个有序数组">标准代码模板 1：合并 k 个有序数组</a></h2>
+<pre><code class="language-python">import heapq
+
+def merge_k_sorted_arrays(arrays):
+    heap = []
+    res = []
+
+    for i, arr in enumerate(arrays):
+        if arr:
+            heapq.heappush(heap, (arr[0], i, 0))
+
+    while heap:
+        val, row, idx = heapq.heappop(heap)
+        res.append(val)
+
+        if idx + 1 &lt; len(arrays[row]):
+            heapq.heappush(heap, (arrays[row][idx + 1], row, idx + 1))
+
+    return res
+</code></pre>
+<h2 id="标准代码模板-2合并-k-个有序链表"><a class="header" href="#标准代码模板-2合并-k-个有序链表">标准代码模板 2：合并 k 个有序链表</a></h2>
+<pre><code class="language-python">import heapq
+
+def merge_k_sorted_lists(lists):
+    heap = []
+    for i, node in enumerate(lists):
+        if node:
+            heapq.heappush(heap, (node.val, i, node))
+
+    dummy = ListNode(0)
+    cur = dummy
+
+    while heap:
+        val, i, node = heapq.heappop(heap)
+        cur.next = node
+        cur = cur.next
+        if node.next:
+            heapq.heappush(heap, (node.next.val, i, node.next))
+
+    return dummy.next
+</code></pre>
+<h2 id="标准代码模板-3top-k-高频"><a class="header" href="#标准代码模板-3top-k-高频">标准代码模板 3：Top K 高频</a></h2>
+<pre><code class="language-python">from collections import Counter
+import heapq
+
+def top_k_frequent(nums, k):
+    count = Counter(nums)
+    heap = []
+
+    for num, freq in count.items():
+        heapq.heappush(heap, (freq, num))
+        if len(heap) &gt; k:
+            heapq.heappop(heap)
+
+    return [num for freq, num in heap]
+</code></pre>
+<h2 id="标准代码模板-4k-closest"><a class="header" href="#标准代码模板-4k-closest">标准代码模板 4：K Closest</a></h2>
+<pre><code class="language-python">import heapq
+
+def k_closest(points, k):
+    heap = []
+
+    for x, y in points:
+        dist = x * x + y * y
+        heapq.heappush(heap, (-dist, x, y))
+        if len(heap) &gt; k:
+            heapq.heappop(heap)
+
+    return [(x, y) for neg_dist, x, y in heap]
+</code></pre>
+<h2 id="代码讲解-2"><a class="header" href="#代码讲解-2">代码讲解</a></h2>
+<ul>
+<li>多路归并时，堆里只维护每个流当前头部候选</li>
+<li>Top K 时，常见做法是大小为 <code>k</code> 的小顶堆</li>
+<li><code>K closest</code> 常用大小为 <code>k</code> 的“伪大顶堆”</li>
+</ul>
+<h2 id="面试时怎么讲-2"><a class="header" href="#面试时怎么讲-2">面试时怎么讲</a></h2>
+<ul>
+<li>只要问题核心是“随时拿到当前最小/最大”，就优先考虑堆</li>
+<li>多路归并时，堆里维护每个流当前最小候选</li>
+<li>每弹出一个值，再推进这个流的下一个候选</li>
+</ul>
+<h2 id="常见-follow-up-和回答-2"><a class="header" href="#常见-follow-up-和回答-2">常见 follow-up 和回答</a></h2>
+<p><strong>Q1：为什么是 <code>log k</code>，不是 <code>log n</code>？</strong><br>因为堆里同时最多只维护 <code>k</code> 个候选。</p>
+<p><strong>Q2：Top K 高频能不能比堆更快？</strong><br>能，频率范围合适时可以用 bucket sort。</p>
+<p><strong>Q3：为什么不把所有元素拉平后排序？</strong><br>可以，但通常是 <code>O(N log N)</code>；多路归并能做到 <code>O(N log k)</code>。</p>
+<p><strong>Q4：如果数据流特别大，不能一次性放进内存怎么办？</strong><br>有序流合并时仍然只维护每个流的当前指针。</p>
+<h2 id="amazon-风格完整题面-2"><a class="header" href="#amazon-风格完整题面-2">Amazon 风格完整题面</a></h2>
+<blockquote>
+<p>Each warehouse produces a sorted stream of shipping events ordered by timestamp.<br>Merge all streams into one globally sorted timeline.</p>
+</blockquote>
+<h2 id="可直接背的口语回答稿-2"><a class="header" href="#可直接背的口语回答稿-2">可直接背的口语回答稿</a></h2>
+<p>“题面虽然在讲多个仓库的事件流，但本质是多路归并。每个流本身已经有序，所以我不需要把所有元素一次性拉平排序。我会用一个最小堆，堆里只维护每个流当前最小的那个事件。每次弹出堆顶加入结果，再把该流的下一个事件压回堆。这样总复杂度是 <code>O(N log k)</code>。”</p>
+<h2 id="推荐代表题-2"><a class="header" href="#推荐代表题-2">推荐代表题</a></h2>
+<ul>
+<li>Merge K Sorted Lists</li>
+<li>Top K Frequent Elements</li>
+<li>K Closest Points to Origin</li>
+<li>Kth Largest Element in a Stream</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="4-栈--表达式解析"><a class="header" href="#4-栈--表达式解析">4. 栈 / 表达式解析</a></h1>
+<h2 id="面试题目怎么问-3"><a class="header" href="#面试题目怎么问-3">面试题目怎么问</a></h2>
+<ul>
+<li>计算包含 <code>+ -</code> 和括号的表达式</li>
+<li>计算包含 <code>+ - * /</code> 的字符串表达式</li>
+<li>求逆波兰表达式的值</li>
+<li>解析字符串中的嵌套结构</li>
+<li>给你一串日志或命令块，块之间可以嵌套，要求还原执行结果</li>
+</ul>
+<h2 id="识别信号-3"><a class="header" href="#识别信号-3">识别信号</a></h2>
+<ul>
+<li>输入是字符串表达式</li>
+<li>有括号</li>
+<li>有运算优先级</li>
+<li>有嵌套上下文</li>
+<li>有 <code>start/end</code>、<code>BEGIN/END</code>、<code>(</code>/<code>)</code></li>
+</ul>
+<h2 id="amazon-风格业务包装-3"><a class="header" href="#amazon-风格业务包装-3">Amazon 风格业务包装</a></h2>
+<ul>
+<li>解析定价公式</li>
+<li>计算折扣规则表达式</li>
+<li>解析带括号的配置规则</li>
+<li>处理日志或命令中的嵌套结构</li>
+</ul>
+<h2 id="你该怎么想-3"><a class="header" href="#你该怎么想-3">你该怎么想</a></h2>
+<ul>
+<li>只要字符串里有括号、优先级、嵌套，就先想 stack</li>
+<li>看到“当前上下文”和“进入新层级”，就想到入栈</li>
+<li>退出一层时，要把内层结果合并回外层</li>
+</ul>
+<h2 id="标准代码模板-1basic-calculator"><a class="header" href="#标准代码模板-1basic-calculator">标准代码模板 1：Basic Calculator</a></h2>
+<pre><code class="language-python">def calculate(s):
+    stack = []
+    res = 0
+    num = 0
+    sign = 1
+
+    for ch in s:
+        if ch.isdigit():
+            num = num * 10 + int(ch)
+        elif ch in '+-':
+            res += sign * num
+            num = 0
+            sign = 1 if ch == '+' else -1
+        elif ch == '(':
+            stack.append(res)
+            stack.append(sign)
+            res = 0
+            sign = 1
+        elif ch == ')':
+            res += sign * num
+            num = 0
+            res *= stack.pop()
+            res += stack.pop()
+
+    return res + sign * num
+</code></pre>
+<h2 id="标准代码模板-2逆波兰表达式"><a class="header" href="#标准代码模板-2逆波兰表达式">标准代码模板 2：逆波兰表达式</a></h2>
+<pre><code class="language-python">def eval_rpn(tokens):
+    stack = []
+    for token in tokens:
+        if token not in "+-*/":
+            stack.append(int(token))
+        else:
+            b = stack.pop()
+            a = stack.pop()
+            if token == "+":
+                stack.append(a + b)
+            elif token == "-":
+                stack.append(a - b)
+            elif token == "*":
+                stack.append(a * b)
+            else:
+                stack.append(int(a / b))
+    return stack[-1]
+</code></pre>
+<h2 id="标准代码模板-3decode-string"><a class="header" href="#标准代码模板-3decode-string">标准代码模板 3：Decode String</a></h2>
+<pre><code class="language-python">def decode_string(s):
+    stack = []
+    cur_num = 0
+    cur_str = ""
+
+    for ch in s:
+        if ch.isdigit():
+            cur_num = cur_num * 10 + int(ch)
+        elif ch == '[':
+            stack.append((cur_str, cur_num))
+            cur_str = ""
+            cur_num = 0
+        elif ch == ']':
+            prev_str, num = stack.pop()
+            cur_str = prev_str + cur_str * num
+        else:
+            cur_str += ch
+
+    return cur_str
+</code></pre>
+<h2 id="标准代码模板-4exclusive-time-of-functions"><a class="header" href="#标准代码模板-4exclusive-time-of-functions">标准代码模板 4：Exclusive Time of Functions</a></h2>
+<pre><code class="language-python">def exclusive_time(n, logs):
+    res = [0] * n
+    stack = []
+    prev_time = 0
+
+    for log in logs:
+        fn_id, typ, t = log.split(':')
+        fn_id = int(fn_id)
+        t = int(t)
+
+        if typ == "start":
+            if stack:
+                res[stack[-1]] += t - prev_time
+            stack.append(fn_id)
+            prev_time = t
+        else:
+            res[stack.pop()] += t - prev_time + 1
+            prev_time = t + 1
+
+    return res
+</code></pre>
+<h2 id="标准代码模板-5reverse-parentheses"><a class="header" href="#标准代码模板-5reverse-parentheses">标准代码模板 5：Reverse Parentheses</a></h2>
+<pre><code class="language-python">def reverse_parentheses(s):
+    stack = [""]
+    for ch in s:
+        if ch == '(':
+            stack.append("")
+        elif ch == ')':
+            cur = stack.pop()[::-1]
+            stack[-1] += cur
+        else:
+            stack[-1] += ch
+    return stack[0]
+</code></pre>
+<h2 id="代码讲解-3"><a class="header" href="#代码讲解-3">代码讲解</a></h2>
+<ul>
+<li>Basic Calculator：栈保存的是括号外层的 <code>res</code> 和 <code>sign</code></li>
+<li>Decode String：栈保存的是外层字符串和重复次数</li>
+<li>Exclusive Time：栈保存的是函数调用栈，栈顶就是当前执行函数</li>
+<li>Reverse Parentheses：栈保存每一层正在构造的字符串</li>
+</ul>
+<h2 id="面试时怎么讲-3"><a class="header" href="#面试时怎么讲-3">面试时怎么讲</a></h2>
+<ul>
+<li>这类题本质是单次扫描 + 保存上下文</li>
+<li>遇到数字就持续构造当前数</li>
+<li>遇到运算符就结算前一个数</li>
+<li>遇到括号或新作用域，就把当前层上下文压栈，退出时再合并</li>
+</ul>
+<h2 id="常见-follow-up-和回答-3"><a class="header" href="#常见-follow-up-和回答-3">常见 follow-up 和回答</a></h2>
+<p><strong>Q1：为什么要用栈？</strong><br>因为括号意味着多层上下文嵌套，栈最适合保存进入新层级前的状态。</p>
+<p><strong>Q2：如果再加 <code>* /</code> 怎么办？</strong><br>可以用当前层栈即时处理乘除，或者双栈通用解析。</p>
+<p><strong>Q3：怎么处理多位数？</strong><br><code>num = num * 10 + int(ch)</code>。</p>
+<p><strong>Q4：怎么处理空格？</strong><br>扫描时直接跳过。</p>
+<p><strong>Q5：日志 start / end 为什么也是栈？</strong><br>因为函数调用天然就是调用栈，进入一个函数压栈，结束时弹栈。</p>
+<h2 id="amazon-风格完整题面-3"><a class="header" href="#amazon-风格完整题面-3">Amazon 风格完整题面</a></h2>
+<blockquote>
+<p>You are given a pricing rule string.<br>The string may contain integers, <code>+</code>, <code>-</code>, and parentheses.<br>Return the final computed value after evaluating the rule.</p>
+</blockquote>
+<h2 id="可直接背的口语回答稿-3"><a class="header" href="#可直接背的口语回答稿-3">可直接背的口语回答稿</a></h2>
+<p>“我会把它看成标准表达式解析问题。因为括号代表进入一个新的上下文，所以我会顺序扫描字符串，用栈保存进入括号前的外层结果和符号。遇到数字就构造当前数，遇到加减就先把前一个数字结算进结果里；遇到右括号时，先算出括号内部的值，再乘上外层符号并加回外层结果。”</p>
+<h2 id="推荐代表题-3"><a class="header" href="#推荐代表题-3">推荐代表题</a></h2>
+<ul>
+<li>Basic Calculator</li>
+<li>Evaluate Reverse Polish Notation</li>
+<li>Decode String</li>
+<li>Exclusive Time of Functions</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="5-数组--hashset--hashmap"><a class="header" href="#5-数组--hashset--hashmap">5. 数组 + HashSet / HashMap</a></h1>
+<h2 id="面试题目怎么问-4"><a class="header" href="#面试题目怎么问-4">面试题目怎么问</a></h2>
+<ul>
+<li>找最长连续序列长度</li>
+<li>统计每个元素频率</li>
+<li>按某个规则分组，比如字母异位词</li>
+<li>两数之和、元素映射、出现次数统计</li>
+</ul>
+<h2 id="识别信号-4"><a class="header" href="#识别信号-4">识别信号</a></h2>
+<ul>
+<li>快速查找某个元素是否存在</li>
+<li>频率统计</li>
+<li>去重</li>
+<li>建立值到信息的映射</li>
+</ul>
+<h2 id="amazon-风格业务包装-4"><a class="header" href="#amazon-风格业务包装-4">Amazon 风格业务包装</a></h2>
+<ul>
+<li>inventory item IDs 里找最长连续编号区间</li>
+<li>统计每种商品出现次数</li>
+<li>把商品按某种属性分组</li>
+<li>订单号或用户 ID 做快速查重、去重、映射</li>
+</ul>
+<h2 id="你该怎么想-4"><a class="header" href="#你该怎么想-4">你该怎么想</a></h2>
+<ul>
+<li>看到“存在性判断”就想 set</li>
+<li>看到“频次”就想 map / Counter</li>
+<li>看到“最长连续”就想 Longest Consecutive Sequence</li>
+</ul>
+<h2 id="标准代码模板-1longest-consecutive-sequence"><a class="header" href="#标准代码模板-1longest-consecutive-sequence">标准代码模板 1：Longest Consecutive Sequence</a></h2>
+<pre><code class="language-python">def longest_consecutive(nums):
+    num_set = set(nums)
+    best = 0
+
+    for x in num_set:
+        if x - 1 not in num_set:
+            y = x
+            while y in num_set:
+                y += 1
+            best = max(best, y - x)
+
+    return best
+</code></pre>
+<h2 id="标准代码模板-2频次统计"><a class="header" href="#标准代码模板-2频次统计">标准代码模板 2：频次统计</a></h2>
+<pre><code class="language-python">from collections import Counter
+
+def count_freq(nums):
+    return Counter(nums)
+</code></pre>
+<h2 id="标准代码模板-3分组"><a class="header" href="#标准代码模板-3分组">标准代码模板 3：分组</a></h2>
+<pre><code class="language-python">from collections import defaultdict
+
+def group_by_first_letter(words):
+    groups = defaultdict(list)
+    for w in words:
+        groups[w[0]].append(w)
+    return groups
+</code></pre>
+<h2 id="标准代码模板-4two-sum"><a class="header" href="#标准代码模板-4two-sum">标准代码模板 4：Two Sum</a></h2>
+<pre><code class="language-python">def two_sum(nums, target):
+    seen = {}
+    for i, x in enumerate(nums):
+        if target - x in seen:
+            return [seen[target - x], i]
+        seen[x] = i
+    return []
+</code></pre>
+<h2 id="代码讲解-4"><a class="header" href="#代码讲解-4">代码讲解</a></h2>
+<ul>
+<li><code>set</code> 用来做高效存在性判断</li>
+<li><code>map</code> 用来记录频率、位置、分组、状态</li>
+<li>最长连续序列的关键是只从“没有前驱的点”开始扩展</li>
+</ul>
+<h2 id="面试时怎么讲-4"><a class="header" href="#面试时怎么讲-4">面试时怎么讲</a></h2>
+<ul>
+<li>如果题目核心是“某个元素在不在”，我优先考虑 <code>set</code></li>
+<li>如果题目核心是“某个元素对应什么信息”，我优先考虑 <code>map</code></li>
+<li>最长连续序列用 <code>set</code>，并只从连续段起点扩展</li>
+</ul>
+<h2 id="常见-follow-up-和回答-4"><a class="header" href="#常见-follow-up-和回答-4">常见 follow-up 和回答</a></h2>
+<p><strong>Q1：最长连续序列为什么是 <code>O(n)</code>？</strong><br>每个元素最多只会在某个连续段扩展中被访问一次。</p>
+<p><strong>Q2：什么时候用 <code>set</code>，什么时候用 <code>map</code>？</strong><br>只关心“在不在”用 <code>set</code>；需要记录频率、位置、分组时用 <code>map</code>。</p>
+<p><strong>Q3：如果数组特别大，空间不够怎么办？</strong><br>可以先排序再线性扫描，时间 <code>O(n log n)</code>，空间更省。</p>
+<h2 id="amazon-风格完整题面-4"><a class="header" href="#amazon-风格完整题面-4">Amazon 风格完整题面</a></h2>
+<blockquote>
+<p>You are given a list of inventory item IDs.<br>Return the length of the longest consecutive ID range that appears in the list.</p>
+</blockquote>
+<h2 id="可直接背的口语回答稿-4"><a class="header" href="#可直接背的口语回答稿-4">可直接背的口语回答稿</a></h2>
+<p>“这里业务背景可以先忽略，本质上就是数组里找最长连续序列。因为核心操作是高效判断某个数在不在，所以我会先把所有元素放进 <code>set</code>。然后只从连续段起点开始向后扩展，也就是只处理那些 <code>x - 1</code> 不在集合里的数。这样避免重复扫描，整体时间复杂度是 <code>O(n)</code>。”</p>
+<h2 id="推荐代表题-4"><a class="header" href="#推荐代表题-4">推荐代表题</a></h2>
+<ul>
+<li>Longest Consecutive Sequence</li>
+<li>Two Sum</li>
+<li>Group Anagrams</li>
+<li>Top K Frequent Elements</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="6-双指针--滑动窗口"><a class="header" href="#6-双指针--滑动窗口">6. 双指针 / 滑动窗口</a></h1>
+<h2 id="面试题目怎么问-5"><a class="header" href="#面试题目怎么问-5">面试题目怎么问</a></h2>
+<ul>
+<li>最长无重复子串</li>
+<li>最多包含 <code>K</code> 种不同字符的最长子串</li>
+<li>和至少为 <code>target</code> 的最短子数组</li>
+<li>统计满足条件的子数组个数</li>
+</ul>
+<h2 id="识别信号-5"><a class="header" href="#识别信号-5">识别信号</a></h2>
+<ul>
+<li>子串 / 子数组连续</li>
+<li>最长 / 最短</li>
+<li>“至多 K 个”“不超过 K 个”“满足某个窗口条件”</li>
+</ul>
+<h2 id="amazon-风格业务包装-5"><a class="header" href="#amazon-风格业务包装-5">Amazon 风格业务包装</a></h2>
+<ul>
+<li>找一段连续时间窗口，使某类商品种类数不超过 <code>K</code></li>
+<li>在用户行为日志里找最长不重复序列</li>
+<li>找最短连续区间，使销量总和达到目标</li>
+<li>分析订单流中满足条件的连续片段</li>
+</ul>
+<h2 id="你该怎么想-5"><a class="header" href="#你该怎么想-5">你该怎么想</a></h2>
+<ul>
+<li>看到“连续区间”先想到滑窗</li>
+<li>再问自己：窗口合法条件是什么</li>
+<li>最后问自己：答案在扩张时更新，还是在收缩时更新</li>
+</ul>
+<h2 id="标准代码模板-1至多-k-种字符"><a class="header" href="#标准代码模板-1至多-k-种字符">标准代码模板 1：至多 K 种字符</a></h2>
+<pre><code class="language-python">from collections import defaultdict
+
+def longest_substring_at_most_k(s, k):
+    count = defaultdict(int)
+    left = 0
+    ans = 0
+
+    for right, ch in enumerate(s):
+        count[ch] += 1
+
+        while len(count) &gt; k:
+            count[s[left]] -= 1
+            if count[s[left]] == 0:
+                del count[s[left]]
+            left += 1
+
+        ans = max(ans, right - left + 1)
+
+    return ans
+</code></pre>
+<h2 id="标准代码模板-2最长无重复子串"><a class="header" href="#标准代码模板-2最长无重复子串">标准代码模板 2：最长无重复子串</a></h2>
+<pre><code class="language-python">def length_of_longest_substring(s):
+    pos = {}
+    left = 0
+    ans = 0
+
+    for right, ch in enumerate(s):
+        if ch in pos and pos[ch] &gt;= left:
+            left = pos[ch] + 1
+        pos[ch] = right
+        ans = max(ans, right - left + 1)
+
+    return ans
+</code></pre>
+<h2 id="标准代码模板-3最短子数组和至少为-target"><a class="header" href="#标准代码模板-3最短子数组和至少为-target">标准代码模板 3：最短子数组和至少为 target</a></h2>
+<pre><code class="language-python">def min_subarray_len(target, nums):
+    left = 0
+    total = 0
+    ans = float('inf')
+
+    for right, x in enumerate(nums):
+        total += x
+        while total &gt;= target:
+            ans = min(ans, right - left + 1)
+            total -= nums[left]
+            left += 1
+
+    return 0 if ans == float('inf') else ans
+</code></pre>
+<h2 id="代码讲解-5"><a class="header" href="#代码讲解-5">代码讲解</a></h2>
+<ul>
+<li><code>right</code> 负责扩张窗口</li>
+<li><code>left</code> 在窗口不合法时收缩</li>
+<li>求最长通常在合法时更新答案</li>
+<li>求最短通常在合法后收缩过程中更新答案</li>
+</ul>
+<h2 id="面试时怎么讲-5"><a class="header" href="#面试时怎么讲-5">面试时怎么讲</a></h2>
+<ul>
+<li>这是连续区间问题，所以优先想滑动窗口</li>
+<li>我会定义一个“窗口合法条件”</li>
+<li>右指针扩张纳入新元素，左指针收缩直到重新合法</li>
+</ul>
+<h2 id="常见-follow-up-和回答-5"><a class="header" href="#常见-follow-up-和回答-5">常见 follow-up 和回答</a></h2>
+<p><strong>Q1：为什么滑窗是 <code>O(n)</code>？</strong><br>因为每个元素最多被左右指针各访问一次。</p>
+<p><strong>Q2：什么时候更新答案？</strong><br>求最长一般在窗口合法时；求最短一般在收缩时。</p>
+<p><strong>Q3：恰好 <code>K</code> 个怎么做？</strong><br><code>exactly(K) = atMost(K) - atMost(K - 1)</code>。</p>
+<p><strong>Q4：如果不是连续子数组，还能用滑窗吗？</strong><br>通常不行。</p>
+<h2 id="amazon-风格完整题面-5"><a class="header" href="#amazon-风格完整题面-5">Amazon 风格完整题面</a></h2>
+<blockquote>
+<p>You are given a stream of user actions.<br>Find the longest contiguous window that contains no more than <code>K</code> distinct action types.</p>
+</blockquote>
+<h2 id="可直接背的口语回答稿-5"><a class="header" href="#可直接背的口语回答稿-5">可直接背的口语回答稿</a></h2>
+<p>“这是一个连续区间优化问题，所以我会优先考虑滑动窗口。右指针负责扩张窗口，把新元素加入统计；如果窗口不合法，我就移动左指针收缩，直到重新满足条件。因为每个元素最多被两个指针访问一次，所以整体时间复杂度是 <code>O(n)</code>。”</p>
+<h2 id="推荐代表题-5"><a class="header" href="#推荐代表题-5">推荐代表题</a></h2>
+<ul>
+<li>Longest Substring Without Repeating Characters</li>
+<li>Longest Substring with At Most K Distinct Characters</li>
+<li>Minimum Size Subarray Sum</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="7-矩阵遍历模拟"><a class="header" href="#7-矩阵遍历模拟">7. 矩阵遍历模拟</a></h1>
+<h2 id="面试题目怎么问-6"><a class="header" href="#面试题目怎么问-6">面试题目怎么问</a></h2>
+<ul>
+<li>按螺旋顺序输出矩阵</li>
+<li>逆时针打印矩阵</li>
+<li>从外到内一层层遍历</li>
+<li>按边界一圈圈收缩输出</li>
+</ul>
+<h2 id="识别信号-6"><a class="header" href="#识别信号-6">识别信号</a></h2>
+<ul>
+<li>顺时针 / 逆时针</li>
+<li>一圈一圈</li>
+<li>边界不断缩小</li>
+<li>强模拟</li>
+</ul>
+<h2 id="amazon-风格业务包装-6"><a class="header" href="#amazon-风格业务包装-6">Amazon 风格业务包装</a></h2>
+<ul>
+<li>按仓库清点顺序一圈圈扫描货架</li>
+<li>机器人围绕区域边界做巡检</li>
+<li>dashboard 按某种顺时针顺序输出元素</li>
+</ul>
+<h2 id="标准代码模板"><a class="header" href="#标准代码模板">标准代码模板</a></h2>
+<pre><code class="language-python">def spiral_order(matrix):
+    if not matrix or not matrix[0]:
+        return []
+
+    top, bottom = 0, len(matrix) - 1
+    left, right = 0, len(matrix[0]) - 1
+    res = []
+
+    while top &lt;= bottom and left &lt;= right:
+        for j in range(left, right + 1):
+            res.append(matrix[top][j])
+        top += 1
+
+        for i in range(top, bottom + 1):
+            res.append(matrix[i][right])
+        right -= 1
+
+        if top &lt;= bottom:
+            for j in range(right, left - 1, -1):
+                res.append(matrix[bottom][j])
+            bottom -= 1
+
+        if left &lt;= right:
+            for i in range(bottom, top - 1, -1):
+                res.append(matrix[i][left])
+            left += 1
+
+    return res
+</code></pre>
+<h2 id="面试时怎么讲-6"><a class="header" href="#面试时怎么讲-6">面试时怎么讲</a></h2>
+<ul>
+<li>我会维护四个边界：<code>top</code>、<code>bottom</code>、<code>left</code>、<code>right</code></li>
+<li>每轮按四条边依次遍历</li>
+<li>每走完一条边，就把对应边界向内收缩</li>
+</ul>
+<h2 id="常见-follow-up-和回答-6"><a class="header" href="#常见-follow-up-和回答-6">常见 follow-up 和回答</a></h2>
+<p><strong>Q1：最容易错在哪里？</strong><br>单行或单列时的重复遍历，所以后两段遍历前要判断边界是否有效。</p>
+<p><strong>Q2：如果要求逆时针怎么办？</strong><br>改遍历顺序即可。</p>
+<p><strong>Q3：如果要求从内到外呢？</strong><br>可以先按外到内收集每层，最后反转层顺序。</p>
+<h2 id="amazon-风格完整题面-6"><a class="header" href="#amazon-风格完整题面-6">Amazon 风格完整题面</a></h2>
+<blockquote>
+<p>A warehouse scanner needs to inspect shelves layer by layer in clockwise order.<br>Return the inspection order of all shelf IDs in the matrix.</p>
+</blockquote>
+<h2 id="可直接背的口语回答稿-6"><a class="header" href="#可直接背的口语回答稿-6">可直接背的口语回答稿</a></h2>
+<p>“这是一个纯模拟题。我会维护 <code>top</code>、<code>bottom</code>、<code>left</code>、<code>right</code> 四个边界，每轮依次走上边、右边、下边、左边，然后向内收缩。最关键的点是处理单行单列，避免重复遍历。”</p>
+<h2 id="推荐代表题-6"><a class="header" href="#推荐代表题-6">推荐代表题</a></h2>
+<ul>
+<li>Spiral Matrix</li>
+<li>Spiral Matrix II</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="8-区间--扫描线"><a class="header" href="#8-区间--扫描线">8. 区间 / 扫描线</a></h1>
+<h2 id="面试题目怎么问-7"><a class="header" href="#面试题目怎么问-7">面试题目怎么问</a></h2>
+<ul>
+<li>合并重叠区间</li>
+<li>判断是否有区间冲突</li>
+<li>需要多少个会议室</li>
+<li>某一时刻最大并发量是多少</li>
+</ul>
+<h2 id="识别信号-7"><a class="header" href="#识别信号-7">识别信号</a></h2>
+<ul>
+<li>输入是一组 <code>[start, end]</code></li>
+<li>问是否重叠</li>
+<li>问最大同时存在多少个</li>
+<li>问合并后的区间</li>
+</ul>
+<h2 id="amazon-风格业务包装-7"><a class="header" href="#amazon-风格业务包装-7">Amazon 风格业务包装</a></h2>
+<ul>
+<li>配送车辆占用 loading dock 的时间区间是否冲突</li>
+<li>warehouse station / packing station / loading bay 需要多少个</li>
+<li>多个订单在时间轴上同时活跃，求峰值并发</li>
+<li>合并重叠的 delivery time slots</li>
+</ul>
+<h2 id="标准代码模板-1合并区间"><a class="header" href="#标准代码模板-1合并区间">标准代码模板 1：合并区间</a></h2>
+<pre><code class="language-python">def merge(intervals):
+    intervals.sort(key=lambda x: x[0])
+    res = []
+
+    for start, end in intervals:
+        if not res or res[-1][1] &lt; start:
+            res.append([start, end])
+        else:
+            res[-1][1] = max(res[-1][1], end)
+
+    return res
+</code></pre>
+<h2 id="标准代码模板-2meeting-rooms-ii"><a class="header" href="#标准代码模板-2meeting-rooms-ii">标准代码模板 2：Meeting Rooms II</a></h2>
+<pre><code class="language-python">import heapq
+
+def min_meeting_rooms(intervals):
+    if not intervals:
+        return 0
+
+    intervals.sort(key=lambda x: x[0])
+    heap = []
+    ans = 0
+
+    for start, end in intervals:
+        while heap and heap[0] &lt;= start:
+            heapq.heappop(heap)
+        heapq.heappush(heap, end)
+        ans = max(ans, len(heap))
+
+    return ans
+</code></pre>
+<h2 id="标准代码模板-3扫描线求最大并发"><a class="header" href="#标准代码模板-3扫描线求最大并发">标准代码模板 3：扫描线求最大并发</a></h2>
+<pre><code class="language-python">def max_overlap(intervals):
+    events = []
+    for start, end in intervals:
+        events.append((start, 1))
+        events.append((end, -1))
+
+    events.sort(key=lambda x: (x[0], x[1]))
+
+    cur = 0
+    best = 0
+    for _, delta in events:
+        cur += delta
+        best = max(best, cur)
+
+    return best
+</code></pre>
+<h2 id="面试时怎么讲-7"><a class="header" href="#面试时怎么讲-7">面试时怎么讲</a></h2>
+<ul>
+<li>区间题第一步通常是排序</li>
+<li>合并区间时，只需要和结果数组最后一个区间比较</li>
+<li>如果是求同时进行的数量，用最小堆维护当前最早结束的区间</li>
+</ul>
+<h2 id="常见-follow-up-和回答-7"><a class="header" href="#常见-follow-up-和回答-7">常见 follow-up 和回答</a></h2>
+<p><strong>Q1：为什么要先排序？</strong><br>不排序就无法在线性扫描时只和前一个相关区间比较。</p>
+<p><strong>Q2：区间端点相等算不算重叠？</strong><br>要先确认题意；会议室问题通常 <code>end &lt;= next_start</code> 视为不冲突。</p>
+<p><strong>Q3：会议室题为什么堆里放结束时间？</strong><br>因为我们只关心哪个区间最早结束。</p>
+<p><strong>Q4：什么时候用堆，什么时候用扫描线？</strong><br>资源分配更适合堆；只求并发峰值时扫描线更直接。</p>
+<h2 id="amazon-风格完整题面-7"><a class="header" href="#amazon-风格完整题面-7">Amazon 风格完整题面</a></h2>
+<blockquote>
+<p>Delivery trucks occupy loading docks over time intervals.<br>Return the minimum number of loading docks needed so that no truck has to wait.</p>
+</blockquote>
+<h2 id="可直接背的口语回答稿-7"><a class="header" href="#可直接背的口语回答稿-7">可直接背的口语回答稿</a></h2>
+<p>“这题本质是区间重叠和资源分配问题。我会先按开始时间排序，然后用一个最小堆维护当前所有正在占用资源的结束时间。每来一个新区间，就看最早结束的那个能不能释放。如果能释放就弹掉，再把当前区间压入堆。堆大小的峰值就是最少需要的资源数。”</p>
+<h2 id="推荐代表题-7"><a class="header" href="#推荐代表题-7">推荐代表题</a></h2>
+<ul>
+<li>Merge Intervals</li>
+<li>Meeting Rooms</li>
+<li>Meeting Rooms II</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="9-链表基础操作"><a class="header" href="#9-链表基础操作">9. 链表基础操作</a></h1>
+<h2 id="面试题目怎么问-8"><a class="header" href="#面试题目怎么问-8">面试题目怎么问</a></h2>
+<ul>
+<li>反转链表</li>
+<li>合并两个有序链表</li>
+<li><code>k</code> 个一组翻转链表</li>
+<li>找链表中点</li>
+<li>判断链表是否有环</li>
+</ul>
+<h2 id="识别信号-8"><a class="header" href="#识别信号-8">识别信号</a></h2>
+<ul>
+<li>单链表</li>
+<li>修改指针</li>
+<li>找中点 / 判环</li>
+<li>原地操作</li>
+</ul>
+<h2 id="amazon-风格业务包装-8"><a class="header" href="#amazon-风格业务包装-8">Amazon 风格业务包装</a></h2>
+<ul>
+<li>一个 order processing pipeline 用链式节点表示处理阶段</li>
+<li>多条有序事件链需要合并</li>
+<li>需要原地重排任务节点顺序</li>
+</ul>
+<h2 id="标准代码模板-1反转链表"><a class="header" href="#标准代码模板-1反转链表">标准代码模板 1：反转链表</a></h2>
+<pre><code class="language-python">def reverse_list(head):
+    prev = None
+    cur = head
+    while cur:
+        nxt = cur.next
+        cur.next = prev
+        prev = cur
+        cur = nxt
+    return prev
+</code></pre>
+<h2 id="标准代码模板-2合并两个有序链表"><a class="header" href="#标准代码模板-2合并两个有序链表">标准代码模板 2：合并两个有序链表</a></h2>
+<pre><code class="language-python">class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+def merge_two_lists(l1, l2):
+    dummy = ListNode(0)
+    cur = dummy
+
+    while l1 and l2:
+        if l1.val &lt;= l2.val:
+            cur.next = l1
+            l1 = l1.next
+        else:
+            cur.next = l2
+            l2 = l2.next
+        cur = cur.next
+
+    cur.next = l1 if l1 else l2
+    return dummy.next
+</code></pre>
+<h2 id="标准代码模板-3快慢指针找中点--判环"><a class="header" href="#标准代码模板-3快慢指针找中点--判环">标准代码模板 3：快慢指针找中点 / 判环</a></h2>
+<pre><code class="language-python">def middle_node(head):
+    slow = fast = head
+    while fast and fast.next:
+        slow = slow.next
+        fast = fast.next.next
+    return slow
+
+def has_cycle(head):
+    slow = fast = head
+    while fast and fast.next:
+        slow = slow.next
+        fast = fast.next.next
+        if slow == fast:
+            return True
+    return False
+</code></pre>
+<h2 id="面试时怎么讲-8"><a class="header" href="#面试时怎么讲-8">面试时怎么讲</a></h2>
+<ul>
+<li>链表题的核心是指针操作顺序</li>
+<li>我会优先考虑是否需要 <code>dummy head</code></li>
+<li>如果是反转，用 <code>prev / curr / next</code> 三指针</li>
+<li>如果是找中点或判环，用快慢指针</li>
+</ul>
+<h2 id="常见-follow-up-和回答-8"><a class="header" href="#常见-follow-up-和回答-8">常见 follow-up 和回答</a></h2>
+<p><strong>Q1：为什么很多链表题都建议用 <code>dummy head</code>？</strong><br>因为它能统一处理头节点变化的情况。</p>
+<p><strong>Q2：反转链表最容易错在哪里？</strong><br>最容易错在改指针后丢失后续节点，所以一定先保存 <code>next</code>。</p>
+<p><strong>Q3：快慢指针为什么能判环？</strong><br>如果有环，快指针最终一定会追上慢指针。</p>
+<h2 id="amazon-风格完整题面-8"><a class="header" href="#amazon-风格完整题面-8">Amazon 风格完整题面</a></h2>
+<blockquote>
+<p>A workflow is represented as a singly linked list of task nodes.<br>Reverse the order of the tasks in place.</p>
+</blockquote>
+<h2 id="可直接背的口语回答稿-8"><a class="header" href="#可直接背的口语回答稿-8">可直接背的口语回答稿</a></h2>
+<p>“题目给的是链表结构，所以我会直接做指针操作而不是先转数组。反转链表时，我用三个指针：<code>prev</code>、<code>curr</code>、<code>next</code>。每一步先保存后继，再反转当前指针方向，然后整体向前推进。这样时间 <code>O(n)</code>，空间 <code>O(1)</code>。”</p>
+<h2 id="推荐代表题-8"><a class="header" href="#推荐代表题-8">推荐代表题</a></h2>
+<ul>
+<li>Reverse Linked List</li>
+<li>Merge Two Sorted Lists</li>
+<li>Linked List Cycle</li>
+<li>Middle of the Linked List</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="10-有序映射--treemap"><a class="header" href="#10-有序映射--treemap">10. 有序映射 / TreeMap</a></h1>
+<h2 id="面试题目怎么问-9"><a class="header" href="#面试题目怎么问-9">面试题目怎么问</a></h2>
+<ul>
+<li>给你一些时间点和对应值，查询某个时间最近的历史值</li>
+<li>找不大于 <code>x</code> 的最大 key</li>
+<li>找不小于 <code>x</code> 的最小 key</li>
+<li>动态插入和查询最近元素</li>
+</ul>
+<h2 id="识别信号-9"><a class="header" href="#识别信号-9">识别信号</a></h2>
+<ul>
+<li>“最近的但不超过”</li>
+<li>“第一个大于等于”</li>
+<li>“前驱 / 后继”</li>
+<li>需要动态维护有序性</li>
+</ul>
+<h2 id="amazon-风格业务包装-9"><a class="header" href="#amazon-风格业务包装-9">Amazon 风格业务包装</a></h2>
+<ul>
+<li>查询某个时间点最近一次生效的价格</li>
+<li>查询某个订单时间之前最近一次库存状态</li>
+<li>找距离某个邮编最近的可用配送站</li>
+<li>动态维护按时间排序的事件并做前驱后继查询</li>
+</ul>
+<h2 id="你该怎么想-6"><a class="header" href="#你该怎么想-6">你该怎么想</a></h2>
+<ul>
+<li>看到“最近但不超过”“第一个不小于”，马上想有序结构</li>
+<li>哈希表只适合精确查找，不适合前驱后继</li>
+</ul>
+<h2 id="标准代码模板-1floor"><a class="header" href="#标准代码模板-1floor">标准代码模板 1：floor</a></h2>
+<pre><code class="language-python">import bisect
+
+def floor_value(keys, values, target):
+    idx = bisect.bisect_right(keys, target) - 1
+    if idx &lt; 0:
+        return None
+    return values[idx]
+</code></pre>
+<h2 id="标准代码模板-2ceiling"><a class="header" href="#标准代码模板-2ceiling">标准代码模板 2：ceiling</a></h2>
+<pre><code class="language-python">import bisect
+
+def ceiling_value(keys, values, target):
+    idx = bisect.bisect_left(keys, target)
+    if idx == len(keys):
+        return None
+    return values[idx]
+</code></pre>
+<h2 id="面试时怎么讲-9"><a class="header" href="#面试时怎么讲-9">面试时怎么讲</a></h2>
+<ul>
+<li>这类题核心不是哈希，而是有序查询</li>
+<li>Java 里会优先想到 <code>TreeMap</code></li>
+<li>Python 里如果不能用第三方库，常见做法是排序数组加二分</li>
+</ul>
+<h2 id="常见-follow-up-和回答-9"><a class="header" href="#常见-follow-up-和回答-9">常见 follow-up 和回答</a></h2>
+<p><strong>Q1：为什么哈希表不适合这类题？</strong><br>哈希表不维护顺序，无法高效回答 <code>floor</code> / <code>ceiling</code>。</p>
+<p><strong>Q2：Python 没有 TreeMap 怎么办？</strong><br>离线查询可用排序加二分；高频动态插入时要和面试官说明语言限制。</p>
+<p><strong>Q3：如果既要动态插入又要频繁查询最近值怎么办？</strong><br>理想结构是平衡树，比如 Java <code>TreeMap</code>。</p>
+<h2 id="amazon-风格完整题面-9"><a class="header" href="#amazon-风格完整题面-9">Amazon 风格完整题面</a></h2>
+<blockquote>
+<p>You are given historical price updates <code>(timestamp, price)</code>.<br>For a query timestamp <code>t</code>, return the latest price that became effective at or before <code>t</code>.</p>
+</blockquote>
+<h2 id="可直接背的口语回答稿-9"><a class="header" href="#可直接背的口语回答稿-9">可直接背的口语回答稿</a></h2>
+<p>“这个问题的关键不是查某个 key 是否存在，而是找不超过 <code>target</code> 的最近一个 key，也就是 <code>floor</code> 查询。所以我会优先想到 ordered map；在 Python 里如果不使用第三方库，可以先把时间戳排序，再用二分找到 <code>bisect_right(target) - 1</code> 的位置。”</p>
+<h2 id="推荐代表题-9"><a class="header" href="#推荐代表题-9">推荐代表题</a></h2>
+<ul>
+<li>Time Based Key-Value Store</li>
+<li>Find Right Interval</li>
+<li>各类 floor / ceiling 查询题</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="附录业务伪装索引"><a class="header" href="#附录业务伪装索引">附录：业务伪装索引</a></h1>
+<p>这一章不是按算法分类，而是按 Amazon 题面里常见的业务词来反查原题类型。</p>
+<h2 id="workflow--dependency--pipeline"><a class="header" href="#workflow--dependency--pipeline">workflow / dependency / pipeline</a></h2>
+<ul>
+<li>对应题型：图论拓扑排序</li>
+<li>你该怎么翻译：
+<ul>
+<li>task = 节点</li>
+<li>depends on = 有向边</li>
+<li>can finish = 判环</li>
+<li>execution order = 拓扑序</li>
 </ul>
 </li>
-<li>用途：
+</ul>
+<h2 id="warehouse-robot--route--obstacle"><a class="header" href="#warehouse-robot--route--obstacle">warehouse robot / route / obstacle</a></h2>
 <ul>
-<li>作为整本书的“高频题总表”主证据</li>
+<li>对应题型：Grid BFS / DFS</li>
+<li>你该怎么翻译：
+<ul>
+<li>warehouse map = grid</li>
+<li>robot moves one step = 无权图最短路</li>
+<li>blocked cell = 障碍物</li>
+<li>isolated region = 连通块</li>
 </ul>
 </li>
 </ul>
-<h3 id="2-amazon-vo-过经--准备帖"><a class="header" href="#2-amazon-vo-过经--准备帖">2. Amazon VO 过经 + 准备帖</a></h3>
+<h2 id="event-stream--sorted-feeds--earliest-event"><a class="header" href="#event-stream--sorted-feeds--earliest-event">event stream / sorted feeds / earliest event</a></h2>
 <ul>
-<li>链接：<a href="https://www.1point3acres.com/bbs/thread-493883-1-1.html">https://www.1point3acres.com/bbs/thread-493883-1-1.html</a></li>
-<li>可见关键信号：
+<li>对应题型：堆 / 多路归并</li>
+<li>你该怎么翻译：
 <ul>
-<li><code>wordbreak II。follow up 问能不能更快</code></li>
-<li><code>bottom view of a binary tree</code></li>
-<li><code>类似380 + - random O(1)...如果有dup怎么办</code></li>
-<li><code>设计一个日历系统</code></li>
-<li><code>给两个string...返回相应的index</code></li>
-</ul>
-</li>
-<li>用途：
-<ul>
-<li>还原 follow-up 风格</li>
-<li>还原 sliding window / calendar / random O(1) 题意</li>
+<li>multiple sorted streams = merge k sorted</li>
+<li>earliest event = min-heap</li>
 </ul>
 </li>
 </ul>
-<h3 id="3-amazon-vo-面经"><a class="header" href="#3-amazon-vo-面经">3. Amazon VO 面经</a></h3>
+<h2 id="top-products--hot-items--most-popular"><a class="header" href="#top-products--hot-items--most-popular">top products / hot items / most popular</a></h2>
 <ul>
-<li>链接：<a href="https://www.1point3acres.com/bbs/thread-889394-1-1.html">https://www.1point3acres.com/bbs/thread-889394-1-1.html</a></li>
-<li>可见关键信号：
+<li>对应题型：Top K / Hash + Heap</li>
+<li>你该怎么翻译：
 <ul>
-<li><code>一共4轮，3轮coding，1轮SD</code></li>
-<li><code>第一轮...实现一个计算器</code></li>
-<li><code>第二轮...实现一个cache</code></li>
-</ul>
-</li>
-<li>用途：
-<ul>
-<li>证明 Amazon VO coding 里会出现偏实现型题目</li>
+<li>frequency analytics = Counter</li>
+<li>top sellers = Top K</li>
 </ul>
 </li>
 </ul>
-<h3 id="4-amazon-video-面经"><a class="header" href="#4-amazon-video-面经">4. Amazon video 面经</a></h3>
+<h2 id="pricing-rule--discount-expression--nested-config--logs"><a class="header" href="#pricing-rule--discount-expression--nested-config--logs">pricing rule / discount expression / nested config / logs</a></h2>
 <ul>
-<li>链接：<a href="https://www.1point3acres.com/bbs/thread-156066-1-1.html">https://www.1point3acres.com/bbs/thread-156066-1-1.html</a></li>
-<li>可见关键信号：
+<li>对应题型：栈 / 表达式解析</li>
+<li>你该怎么翻译：
 <ul>
-<li><code>missed cache 和 LRU cache simulation</code></li>
-</ul>
-</li>
-<li>用途：
-<ul>
-<li>强化 cache 家族频率判断</li>
+<li>expression = 表达式求值</li>
+<li>nested config = 栈保存上下文</li>
+<li>start/end logs = 调用栈</li>
 </ul>
 </li>
 </ul>
-<h3 id="5-amazon-vo-面经"><a class="header" href="#5-amazon-vo-面经">5. Amazon VO 面经</a></h3>
+<h2 id="inventory--dedupe--user-status-map"><a class="header" href="#inventory--dedupe--user-status-map">inventory / dedupe / user status map</a></h2>
 <ul>
-<li>链接：<a href="https://www.1point3acres.com/bbs/thread-750586-1-1.html">https://www.1point3acres.com/bbs/thread-750586-1-1.html</a></li>
-<li>可见关键信号：
+<li>对应题型：HashSet / HashMap</li>
+<li>你该怎么翻译：
 <ul>
-<li><code>第一轮 系统设计 TinyUrl</code></li>
-<li><code>第三轮 伊斯流 和 买水果</code></li>
-</ul>
-</li>
-<li>用途：
-<ul>
-<li>说明 VO 里 design 和 coding 可能混搭</li>
+<li>quick lookup = set</li>
+<li>frequency = Counter</li>
+<li>user -&gt; status = map</li>
 </ul>
 </li>
 </ul>
-<h3 id="6-amazon-ng-三轮-vo"><a class="header" href="#6-amazon-ng-三轮-vo">6. Amazon NG 三轮 VO</a></h3>
+<h2 id="time-window--user-behavior--continuous-range"><a class="header" href="#time-window--user-behavior--continuous-range">time window / user behavior / continuous range</a></h2>
 <ul>
-<li>链接：<a href="https://www.1point3acres.com/bbs/thread-849964-1-1.html">https://www.1point3acres.com/bbs/thread-849964-1-1.html</a></li>
-<li>可见关键信号：
+<li>对应题型：滑动窗口</li>
+<li>你该怎么翻译：
 <ul>
-<li><code>search element in one sorted array which has infinate length</code></li>
-</ul>
-</li>
-<li>用途：
-<ul>
-<li>作为 unknown-size binary search 的直接证据</li>
+<li>contiguous range = 子数组 / 子串</li>
+<li>at most K types = 滑窗合法条件</li>
 </ul>
 </li>
 </ul>
-<h2 id="reddit-1"><a class="header" href="#reddit-1">Reddit</a></h2>
-<h3 id="1-频率榜是否有用"><a class="header" href="#1-频率榜是否有用">1. 频率榜是否有用</a></h3>
+<h2 id="loading-dock--station-scheduling--time-slots"><a class="header" href="#loading-dock--station-scheduling--time-slots">loading dock / station scheduling / time slots</a></h2>
 <ul>
-<li>链接：<a href="https://www.reddit.com/r/leetcode/comments/1ivwbp1/do_the_percompany_frequency_rankings_matter_for/">https://www.reddit.com/r/leetcode/comments/1ivwbp1/do_the_percompany_frequency_rankings_matter_for/</a></li>
-<li>可见关键信号：
+<li>对应题型：区间 / 扫描线</li>
+<li>你该怎么翻译：
 <ul>
-<li>有用户明确说自己 Amazon 面试被问到 <code>LRU Cache</code></li>
-<li>另一个回复说自己被问到 <code>LFU Cache</code></li>
-</ul>
-</li>
-<li>用途：
-<ul>
-<li>给 cache 家族增加跨社区证据</li>
+<li>time slot = interval</li>
+<li>number of docks / stations needed = Meeting Rooms II</li>
+<li>max concurrent jobs = 扫描线</li>
 </ul>
 </li>
 </ul>
-<h3 id="2-amazon-sde2-loop-体验"><a class="header" href="#2-amazon-sde2-loop-体验">2. Amazon SDE2 loop 体验</a></h3>
+<h2 id="linked-sequence-of-tasks"><a class="header" href="#linked-sequence-of-tasks">linked sequence of tasks</a></h2>
 <ul>
-<li>链接：<a href="https://www.reddit.com/r/leetcode/comments/1mtr7t3/amazon_sde2_loop_rant_frustrating_experience/">https://www.reddit.com/r/leetcode/comments/1mtr7t3/amazon_sde2_loop_rant_frustrating_experience/</a></li>
-<li>可见关键信号：
+<li>对应题型：链表</li>
+<li>你该怎么翻译：
 <ul>
-<li>coding 往往在大量 LP 之后被压缩</li>
-<li>设计 / coding 追问会很多</li>
-</ul>
-</li>
-<li>用途：
-<ul>
-<li>指导这本书为什么强调 follow-up 和压缩表达</li>
+<li>node.next = 链表</li>
+<li>reorder in place = 指针操作</li>
 </ul>
 </li>
 </ul>
-<h2 id="可信度说明"><a class="header" href="#可信度说明">可信度说明</a></h2>
+<h2 id="latest-valid-price-before-t--first-station-after-x"><a class="header" href="#latest-valid-price-before-t--first-station-after-x">latest valid price before t / first station after x</a></h2>
 <ul>
-<li><code>高可信</code>：公开文本已足够指向具体题型</li>
-<li><code>中可信</code>：社区描述不足以 100% 锁定原题，但可以锁定常见题型</li>
+<li>对应题型：有序映射 / 二分</li>
+<li>你该怎么翻译：
+<ul>
+<li>latest valid before <code>t</code> = floor</li>
+<li>first not smaller than <code>x</code> = ceiling</li>
 </ul>
-<p>这本书里绝大多数 <code>S</code> 级题都属于高可信。</p>
+</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="附录面试开口模板与口语回答稿"><a class="header" href="#附录面试开口模板与口语回答稿">附录：面试开口模板与口语回答稿</a></h1>
+<h2 id="通用开口模板"><a class="header" href="#通用开口模板">通用开口模板</a></h2>
+<p>题面很业务化时，可以先这样说：</p>
+<blockquote>
+<p>我先忽略业务术语，把问题抽象一下。这里本质上是一个……</p>
+</blockquote>
+<p>然后接：</p>
+<ul>
+<li>有向图判环 / 拓扑排序问题</li>
+<li>二维 grid 上的无权最短路问题</li>
+<li>多路归并问题</li>
+<li>表达式解析或嵌套上下文处理问题</li>
+<li>连续子数组的滑动窗口问题</li>
+<li>区间重叠和资源分配问题</li>
+</ul>
+<h2 id="为什么这个算法对"><a class="header" href="#为什么这个算法对">为什么这个算法对</a></h2>
+<h3 id="拓扑排序"><a class="header" href="#拓扑排序">拓扑排序</a></h3>
+<p>“如果图里有环，就不可能完成所有任务。Kahn 算法每次处理一个入度为 0 的节点，相当于执行一个当前没有前置依赖的任务。最后如果能处理完所有节点，就说明图无环。”</p>
+<h3 id="grid-bfs"><a class="header" href="#grid-bfs">Grid BFS</a></h3>
+<p>“因为每次移动一步的代价都一样，所以这是无权图最短路。BFS 按层扩展，第一次到终点时一定是最短距离。”</p>
+<h3 id="heap"><a class="header" href="#heap">Heap</a></h3>
+<p>“我只需要维护当前候选中的最值，不需要保存所有元素的全局顺序，所以堆最合适。”</p>
+<h3 id="stack"><a class="header" href="#stack">Stack</a></h3>
+<p>“括号或嵌套结构意味着有多层上下文。栈最适合保存进入一层前的状态，并在退出时恢复。”</p>
+<h3 id="sliding-window"><a class="header" href="#sliding-window">Sliding Window</a></h3>
+<p>“这是连续区间优化问题。窗口只会向右移动，所以每个元素最多被左右指针访问一次，能做到线性时间。”</p>
+<h2 id="复杂度怎么讲"><a class="header" href="#复杂度怎么讲">复杂度怎么讲</a></h2>
+<h3 id="拓扑排序-1"><a class="header" href="#拓扑排序-1">拓扑排序</a></h3>
+<ul>
+<li>时间：<code>O(V + E)</code></li>
+<li>空间：<code>O(V + E)</code></li>
+</ul>
+<h3 id="grid-bfs--dfs"><a class="header" href="#grid-bfs--dfs">Grid BFS / DFS</a></h3>
+<ul>
+<li>时间：<code>O(m * n)</code></li>
+<li>空间：<code>O(m * n)</code></li>
+</ul>
+<h3 id="heap-1"><a class="header" href="#heap-1">Heap</a></h3>
+<ul>
+<li>多路归并：<code>O(N log k)</code></li>
+<li>Top K：<code>O(n log k)</code></li>
+</ul>
+<h3 id="stack-1"><a class="header" href="#stack-1">Stack</a></h3>
+<ul>
+<li>时间：<code>O(n)</code></li>
+<li>空间：<code>O(n)</code></li>
+</ul>
+<h3 id="sliding-window-1"><a class="header" href="#sliding-window-1">Sliding Window</a></h3>
+<ul>
+<li>时间：<code>O(n)</code></li>
+<li>空间：<code>O(k)</code> 或字符集大小</li>
+</ul>
+<h2 id="follow-up-怎么自然接"><a class="header" href="#follow-up-怎么自然接">follow-up 怎么自然接</a></h2>
+<h3 id="topo"><a class="header" href="#topo">Topo</a></h3>
+<ul>
+<li>如果只判断能不能完成：看处理节点数是否等于总节点数</li>
+<li>如果要字典序最小：队列换最小堆</li>
+<li>如果问 DFS 能不能返回顺序：后序加入 + reverse</li>
+</ul>
+<h3 id="grid"><a class="header" href="#grid">Grid</a></h3>
+<ul>
+<li>允许斜走：改 <code>dirs</code></li>
+<li>多个起点：multi-source BFS</li>
+<li>能打破墙：状态 BFS</li>
+<li>权重不同：Dijkstra / 0-1 BFS</li>
+</ul>
+<h3 id="stack-2"><a class="header" href="#stack-2">Stack</a></h3>
+<ul>
+<li>加 <code>* /</code>：当前层栈即时处理乘除</li>
+<li>多位数：持续构造 <code>num</code></li>
+<li>日志 start/end：调用栈</li>
+</ul>
+<h3 id="intervals"><a class="header" href="#intervals">Intervals</a></h3>
+<ul>
+<li>端点相等算不算冲突：先问清题意</li>
+<li>最大并发时刻：扫描线</li>
+<li>为什么用堆：堆顶是最早结束区间</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="附录一页速记--3-天冲刺顺序"><a class="header" href="#附录一页速记--3-天冲刺顺序">附录：一页速记 / 3 天冲刺顺序</a></h1>
+<h2 id="一页速记"><a class="header" href="#一页速记">一页速记</a></h2>
+<ul>
+<li>依赖关系、能否完成、输出顺序：<code>拓扑排序</code></li>
+<li>grid 最短路：<code>BFS</code></li>
+<li>grid 连通块：<code>DFS/BFS flood fill</code></li>
+<li>多个有序流、Top K：<code>heap</code></li>
+<li>表达式、括号、嵌套：<code>stack</code></li>
+<li>查存在、做映射、频率统计：<code>set/map</code></li>
+<li>连续子串子数组：<code>sliding window</code></li>
+<li>一圈一圈打印矩阵：<code>四边界模拟</code></li>
+<li>区间重叠、会议室：<code>排序 + heap / merge</code></li>
+<li>链表原地操作：<code>dummy + 三指针 + 快慢指针</code></li>
+<li>最近不超过 / 第一个不小于：<code>ordered map / binary search</code></li>
+</ul>
+<h2 id="最后建议"><a class="header" href="#最后建议">最后建议</a></h2>
+<p>如果时间真的不多，优先把下面这些讲熟：</p>
+<ul>
+<li>为什么 <code>Course Schedule</code> 用拓扑排序</li>
+<li>为什么 grid 最短路用 <code>BFS</code></li>
+<li>为什么 <code>Merge K Sorted Lists</code> 用堆</li>
+<li>为什么 <code>Basic Calculator</code> 用栈</li>
+<li>为什么连续子串题常用滑窗</li>
+<li>为什么最长连续序列用 <code>set</code></li>
+</ul>
+<h2 id="3-天冲刺顺序"><a class="header" href="#3-天冲刺顺序">3 天冲刺顺序</a></h2>
+<h3 id="第-1-天"><a class="header" href="#第-1-天">第 1 天</a></h3>
+<ul>
+<li>Topological Sort</li>
+<li>Grid BFS / DFS</li>
+<li>Heap / Top K / Merge K</li>
+</ul>
+<h3 id="第-2-天"><a class="header" href="#第-2-天">第 2 天</a></h3>
+<ul>
+<li>Stack / Calculator / Decode String</li>
+<li>Sliding Window</li>
+<li>Intervals / Meeting Rooms</li>
+</ul>
+<h3 id="第-3-天"><a class="header" href="#第-3-天">第 3 天</a></h3>
+<ul>
+<li>HashSet / HashMap</li>
+<li>Linked List Basics</li>
+<li>Ordered Map / Binary Search</li>
+<li>快速过一遍业务伪装索引和口语稿</li>
+</ul>
 
                     </main>
 

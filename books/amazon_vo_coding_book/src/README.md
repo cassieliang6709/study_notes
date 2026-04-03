@@ -1,27 +1,52 @@
 # Amazon VO Coding 高频题清单
 
-这本 `mdBook` 是基于一亩三分地和 Reddit 的公开可见内容整理的 Amazon VO coding 高频题单。
+这本书是给 Amazon VO coding 准备的口袋手册。
 
-目标不是做“纯 LeetCode 抄录”，而是把社区里反复出现的 Amazon VO coding 题型，整理成一个可以直接复习的版本：
+目标不是背题号，而是做到下面这件事：
 
-- 保留社区原始描述
-- 尽量还原真实面试题意
-- 给出标准解法与面试讲法
-- 补上练习路径和资料索引
+1. 听到业务题面
+2. 立刻翻译成算法模型
+3. 快速套模板
+4. 接住 follow-up
+5. 用稳定的口语把思路讲出来
 
-建议按这个顺序使用：
+## 这本书怎么用
 
-1. 先看 [VO Coding 高频题总表](high-frequency-list.md)，知道什么最常见。
-2. 再看 [题目还原与解法](problems.md)，按题型刷一轮。
-3. 最后看 [资料与文档清单](documents.md)，补模式、模板和 mock。
+建议按这个顺序看：
 
-如果你只有 3 天：
+1. 先看[高频题型总表](high-frequency-overview.md)，知道什么最常见
+2. 再按题型刷各章，重点看“识别信号 + 业务包装 + 标准代码模板”
+3. 然后看[业务伪装索引](business-disguise-index.md)，训练把题面翻译回原题
+4. 最后看[面试开口模板与口语回答稿](speaking-scripts.md)和[一页速记](cheatsheet.md)
 
-1. 先刷 `Cache / BFS-DFS / Tree / Sliding Window`
-2. 然后刷 `Random O(1) / Binary Search / Topological Sort`
-3. 最后过一遍 [原始题源索引](sources.md)，熟悉社区里真实的问法
+## 每章统一结构
 
-这本书里的“还原题目”分两类：
+每个题型章节都尽量按同一个顺序组织：
 
-- 高可信：社区原描述已经能明确定位题意
-- 中可信：社区只给了模糊描述，我按常见 Amazon 追问方式做了保守还原
+1. 面试题目怎么问
+2. 识别信号
+3. Amazon 风格业务包装
+4. 标准代码模板
+5. 代码讲解
+6. 面试时怎么讲
+7. 常见 follow-up 和回答
+8. Amazon 风格完整题面
+9. 可直接背的口语回答稿
+10. 推荐代表题
+
+## 如果你只有 3 天
+
+1. 第 1 天：
+   `Graph topo`、`Grid BFS/DFS`、`Heap merge / Top K`
+2. 第 2 天：
+   `Stack calculator`、`Sliding window`、`Intervals`
+3. 第 3 天：
+   `HashSet longest consecutive`、`Linked list basics`、`Ordered map / binary search`
+
+## 这本书最想帮你解决的问题
+
+- 题面很业务化，听不出本质
+- 明明会做，但现场讲不顺
+- follow-up 一追问就散
+- 代码会写，但不知道怎么像面试里那样讲
+

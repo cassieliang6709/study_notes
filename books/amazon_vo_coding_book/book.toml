@@ -1,13 +1,13 @@
 [book]
-authors = ["Cassie", "OpenAI Codex"]
+authors = ["Cassie + Codex"]
 language = "zh-CN"
 src = "src"
 title = "Amazon VO Coding 高频题清单"
-
-[build]
-build-dir = "book"
+description = "把 Amazon VO 业务题面翻译回算法模板的口袋手册"
 
 [output.html]
 default-theme = "light"
-preferred-dark-theme = "light"
+preferred-dark-theme = "navy"
+git-repository-url = ""
 site-url = "/"
+additional-css = []

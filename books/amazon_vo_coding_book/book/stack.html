@@ -3,12 +3,12 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>题目还原与解法 - Amazon VO Coding 高频题清单</title>
+        <title>4. 栈 / 表达式解析 - Amazon VO Coding 高频题清单</title>
 
 
         <!-- Custom HTML head -->
 
-        <meta name="description" content="">
+        <meta name="description" content="把 Amazon VO 业务题面翻译回算法模板的口袋手册">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
 
@@ -34,11 +34,11 @@
         <script>
             const path_to_root = "";
             const default_light_theme = "light";
-            const default_dark_theme = "light";
-            window.path_to_searchindex_js = "searchindex-fb249387.js";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "searchindex-5b618509.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-89012b62.js"></script>
+        <script src="toc-ec05092f.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -174,450 +174,181 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="题目还原与解法"><a class="header" href="#题目还原与解法">题目还原与解法</a></h1>
-<h2 id="1-cache-家族"><a class="header" href="#1-cache-家族">1. Cache 家族</a></h2>
-<h3 id="11-lru--lfu--custom-cache"><a class="header" href="#11-lru--lfu--custom-cache">1.1 LRU / LFU / Custom Cache</a></h3>
-<p><code>优先级：S</code></p>
-<p>社区原始描述：</p>
-<ul>
-<li>一亩三分地有帖直接写到“实现一个 cache”</li>
-<li>另一帖公开描述里写到 “missed cache 和 LRU cache simulation”</li>
-<li>还有 Reddit 用户明确说 Amazon 问过 <code>LRU Cache</code>，另一个回复说自己被问到 <code>LFU Cache</code></li>
-</ul>
-<p>还原题目：</p>
-<ul>
-<li>设计一个缓存系统，支持 <code>get(key)</code> 和 <code>put(key, value)</code>，超出容量时按最近最少使用淘汰</li>
-<li>follow-up 常见会改成：
-<ul>
-<li>LFU</li>
-<li>支持 <code>miss count</code></li>
-<li>让你解释为什么能做到 <code>O(1)</code></li>
-<li>问如果要支持并发或 TTL 怎么改</li>
-</ul>
-</li>
-</ul>
-<p>核心解法：</p>
-<ul>
-<li><code>LRU</code>: <code>HashMap + Doubly Linked List</code></li>
-<li><code>LFU</code>: <code>key -&gt; node</code>，<code>freq -&gt; doubly linked list</code>，再维护 <code>min_freq</code></li>
-<li>面试时先讲：
-<ul>
-<li>为什么单链表不够</li>
-<li>为什么需要 O(1) 删除任意节点</li>
-<li>eviction 时怎么保证正确更新</li>
-</ul>
-</li>
-</ul>
-<p>易错点：</p>
-<ul>
-<li>更新已有 key 时忘记移动节点</li>
-<li>容量为 0</li>
-<li><code>LFU</code> 在频率升级后没有正确更新 <code>min_freq</code></li>
-<li>删除尾节点后没同步从 map 去掉</li>
-</ul>
-<p>建议练习：</p>
-<ul>
-<li>LeetCode 146 <code>LRU Cache</code></li>
-<li>LeetCode 460 <code>LFU Cache</code></li>
-<li>自己口述一个 <code>TTL cache</code> 的扩展版本</li>
-</ul>
-<h2 id="2-graph--bfs--dfs-家族"><a class="header" href="#2-graph--bfs--dfs-家族">2. Graph / BFS / DFS 家族</a></h2>
-<h3 id="21-word-ladder"><a class="header" href="#21-word-ladder">2.1 Word Ladder</a></h3>
-<p><code>优先级：S</code></p>
-<p>社区原始描述：</p>
-<ul>
-<li>一亩三分地总结帖直接写：<code>bfs dfs考的很多，word ladder，word search基本成了必考</code></li>
-</ul>
-<p>还原题目：</p>
-<ul>
-<li>给 <code>beginWord</code>、<code>endWord</code> 和字典，每次只能改一个字符，问最短转换长度</li>
-<li>follow-up：
-<ul>
-<li>输出路径而不只是长度</li>
-<li>优化时间复杂度</li>
-</ul>
-</li>
-</ul>
-<p>核心解法：</p>
-<ul>
-<li>标准 <code>BFS</code></li>
-<li>进阶直接讲 <code>bidirectional BFS</code></li>
-<li>若 interviewer 追优化，讲：
-<ul>
-<li>wildcard pattern 预处理</li>
-<li>双向 BFS 降搜索空间</li>
-</ul>
-</li>
-</ul>
-<p>易错点：</p>
-<ul>
-<li><code>endWord</code> 不在字典里</li>
-<li>访问标记时机不对导致重复入队</li>
-<li>复杂度说不清楚</li>
-</ul>
-<p>建议练习：</p>
-<ul>
-<li>LeetCode 127 <code>Word Ladder</code></li>
-<li>LeetCode 126 <code>Word Ladder II</code></li>
-</ul>
-<h3 id="22-word-search"><a class="header" href="#22-word-search">2.2 Word Search</a></h3>
-<p><code>优先级：S</code></p>
-<p>社区原始描述：</p>
-<ul>
-<li>同一篇总结帖把 <code>word search</code> 和 <code>word ladder</code> 放在一起，直接说成“基本成了必考”</li>
-</ul>
-<p>还原题目：</p>
-<ul>
-<li>在二维网格中找一个单词，字符可上下左右移动，同一个格子不能重复使用</li>
-<li>follow-up：
-<ul>
-<li>多个单词版本</li>
-<li>如何剪枝</li>
-</ul>
-</li>
-</ul>
-<p>核心解法：</p>
-<ul>
-<li><code>DFS + Backtracking</code></li>
-<li>多单词时讲 <code>Trie + DFS</code></li>
-</ul>
-<p>易错点：</p>
-<ul>
-<li>访问标记恢复</li>
-<li>边界判断顺序</li>
-<li>多单词版本没有做前缀剪枝</li>
-</ul>
-<p>建议练习：</p>
-<ul>
-<li>LeetCode 79 <code>Word Search</code></li>
-<li>LeetCode 212 <code>Word Search II</code></li>
-</ul>
-<h3 id="23-course-schedule"><a class="header" href="#23-course-schedule">2.3 Course Schedule</a></h3>
-<p><code>优先级：A</code></p>
-<p>社区原始描述：</p>
-<ul>
-<li>一亩三分地总结帖直接列出了 <code>210 course schedule</code></li>
-</ul>
-<p>还原题目：</p>
-<ul>
-<li>给依赖关系，判断能否完成所有课程，或输出一种可行顺序</li>
-</ul>
-<p>核心解法：</p>
-<ul>
-<li><code>Topological Sort</code></li>
-<li><code>BFS(Kahn)</code> 和 <code>DFS cycle detection</code> 都要会讲</li>
-</ul>
-<p>易错点：</p>
-<ul>
-<li>边方向说反</li>
-<li>只会判断可行，不会输出顺序</li>
-</ul>
-<p>建议练习：</p>
-<ul>
-<li>LeetCode 207</li>
-<li>LeetCode 210</li>
-</ul>
-<h2 id="3-dp--backtracking-家族"><a class="header" href="#3-dp--backtracking-家族">3. DP / Backtracking 家族</a></h2>
-<h3 id="31-word-break-i--ii"><a class="header" href="#31-word-break-i--ii">3.1 Word Break I / II</a></h3>
-<p><code>优先级：S</code></p>
-<p>社区原始描述：</p>
-<ul>
-<li>总结帖直接列了 <code>139 140 word break</code></li>
-<li>另一个 VO 准备帖里明确出现：<code>wordbreak II。follow up 问能不能更快</code></li>
-</ul>
-<p>还原题目：</p>
-<ul>
-<li><code>Word Break I</code>: 判断字符串能否被字典拆分</li>
-<li><code>Word Break II</code>: 输出所有合法拆分</li>
-<li>follow-up：
-<ul>
-<li>如何减少重复搜索</li>
-<li>如何更快</li>
-</ul>
-</li>
-</ul>
-<p>核心解法：</p>
-<ul>
-<li><code>Word Break I</code>: <code>DP</code></li>
-<li><code>Word Break II</code>: <code>DFS + memo</code></li>
-<li>如果 interviewer 继续问优化，可以讲 <code>Trie + memo</code></li>
-</ul>
-<p>易错点：</p>
-<ul>
-<li><code>Word Break II</code> 没做 memo 导致指数爆炸</li>
-<li>字符串切片过多，解释不清性能瓶颈</li>
-</ul>
-<p>建议练习：</p>
-<ul>
-<li>LeetCode 139</li>
-<li>LeetCode 140</li>
-<li>LeetCode 472 <code>Concatenated Words</code></li>
-</ul>
-<h3 id="32-0-1-knapsack--edit-distance"><a class="header" href="#32-0-1-knapsack--edit-distance">3.2 0-1 Knapsack / Edit Distance</a></h3>
-<p><code>优先级：B</code></p>
-<p>社区原始描述：</p>
-<ul>
-<li>总结帖列出 <code>0-1 knapsack</code></li>
-<li>同帖列出 <code>72 edit distance</code></li>
-</ul>
-<p>还原题目：</p>
-<ul>
-<li>这类题在 Amazon VO 里更像“验证你是否掌握标准 DP 推导”的保底题</li>
-</ul>
-<p>核心解法：</p>
-<ul>
-<li>背包：状态定义、二维到一维压缩</li>
-<li>编辑距离：<code>dp[i][j]</code> 表示前缀最小编辑次数</li>
-</ul>
-<p>建议练习：</p>
-<ul>
-<li>LeetCode 72</li>
-<li>经典 0-1 背包模板</li>
-</ul>
-<h2 id="4-tree-家族"><a class="header" href="#4-tree-家族">4. Tree 家族</a></h2>
-<h3 id="41-lca--diameter--path-sum--boundary--vertical-order"><a class="header" href="#41-lca--diameter--path-sum--boundary--vertical-order">4.1 LCA / Diameter / Path Sum / Boundary / Vertical Order</a></h3>
-<p><code>优先级：S</code></p>
-<p>社区原始描述：</p>
-<ul>
-<li>总结帖列出：
-<ul>
-<li><code>236 lca of tree</code></li>
-<li><code>545 boundary of tree</code></li>
-<li><code>314 binary vertical traversal</code></li>
-<li><code>437 path sum</code></li>
-<li><code>543 diameter of tree</code></li>
-</ul>
-</li>
-<li>另一帖还有一句：<code>bottom view of a binary tree，题目一贴出来我就觉得和 vertical 那道题差不多</code></li>
-</ul>
-<p>还原题目：</p>
-<ul>
-<li>Amazon 很喜欢把二叉树基础题包装成 traversal 变体</li>
-<li>常见问法：
-<ul>
-<li>最近公共祖先</li>
-<li>树的直径</li>
-<li>路径和计数</li>
-<li>边界遍历</li>
-<li>vertical order / bottom view</li>
-</ul>
-</li>
-</ul>
-<p>核心解法：</p>
-<ul>
-<li><code>LCA</code>: 递归返回左右子树命中情况</li>
-<li><code>Diameter</code>: 后序遍历，同时维护最大值</li>
-<li><code>Path Sum III</code>: 前缀和 + hashmap</li>
-<li><code>Vertical Order / Bottom View</code>: <code>BFS</code> 配合列坐标</li>
-<li><code>Boundary</code>: 分左边界、叶子、右边界</li>
-</ul>
-<p>易错点：</p>
-<ul>
-<li>把 <code>Path Sum I</code> 和 <code>Path Sum III</code> 混了</li>
-<li><code>vertical order</code> 不清楚同列同层的输出顺序</li>
-<li><code>bottom view</code> 和 <code>vertical traversal</code> 混用</li>
-</ul>
-<p>建议练习：</p>
-<ul>
-<li>LeetCode 236</li>
-<li>LeetCode 543</li>
-<li>LeetCode 437</li>
-<li>LeetCode 314</li>
-<li>LeetCode 545</li>
-</ul>
-<h2 id="5-随机结构--o1-设计"><a class="header" href="#5-随机结构--o1-设计">5. 随机结构 / O(1) 设计</a></h2>
-<h3 id="51-insert-delete-getrandom-o1"><a class="header" href="#51-insert-delete-getrandom-o1">5.1 Insert Delete GetRandom O(1)</a></h3>
-<p><code>优先级：A</code></p>
-<p>社区原始描述：</p>
-<ul>
-<li>一亩三分地帖子直接写到：<code>类似 380 + - random O(1)，follow up 如果有dup怎么办</code></li>
-</ul>
-<p>还原题目：</p>
-<ul>
-<li>设计一个数据结构，支持：
-<ul>
-<li><code>insert</code></li>
-<li><code>remove</code></li>
-<li><code>getRandom</code></li>
-</ul>
-</li>
-<li>所有操作尽量 <code>O(1)</code></li>
-<li>follow-up：如果允许重复值怎么办</li>
-</ul>
-<p>核心解法：</p>
-<ul>
-<li>标准版：<code>array + value_to_index</code></li>
-<li>重复值版：<code>array + value_to_indices(set)</code></li>
-</ul>
-<p>易错点：</p>
-<ul>
-<li>删除时忘记交换最后一个元素</li>
-<li>交换后没更新被换元素的下标</li>
-<li>重复值版没同步更新 index set</li>
-</ul>
-<p>建议练习：</p>
-<ul>
-<li>LeetCode 380</li>
-<li>LeetCode 381</li>
-</ul>
-<h2 id="6-binary-search--unknown-size"><a class="header" href="#6-binary-search--unknown-size">6. Binary Search / Unknown Size</a></h2>
-<h3 id="61-search-in-sorted-array-of-unknown-length"><a class="header" href="#61-search-in-sorted-array-of-unknown-length">6.1 Search in Sorted Array of Unknown Length</a></h3>
-<p><code>优先级：A</code></p>
-<p>社区原始描述：</p>
-<ul>
-<li>一亩三分地 Amazon VO 帖里明确写到：<code>search element in one sorted array which has infinate length</code></li>
-</ul>
-<p>还原题目：</p>
-<ul>
-<li>给一个有序数组，但你不知道长度，查目标值位置</li>
-<li>follow-up：如果数组其实是有限的，只是你拿不到长度，怎么办</li>
-</ul>
-<p>核心解法：</p>
-<ul>
-<li>先指数扩张右边界：<code>1, 2, 4, 8...</code></li>
-<li>再在 <code>[left, right]</code> 上做二分</li>
-</ul>
-<p>易错点：</p>
-<ul>
-<li>边界扩张时越界处理说不清</li>
-<li>把“未知长度”误解成“真的无限”</li>
-</ul>
-<p>建议练习：</p>
-<ul>
-<li>LeetCode 702 <code>Search in a Sorted Array of Unknown Size</code></li>
-</ul>
-<h2 id="7-sliding-window--string"><a class="header" href="#7-sliding-window--string">7. Sliding Window / String</a></h2>
-<h3 id="71-找所有排列出现位置"><a class="header" href="#71-找所有排列出现位置">7.1 找所有排列出现位置</a></h3>
-<p><code>优先级：A</code></p>
-<p>社区原始描述：</p>
-<ul>
-<li>一亩三分地帖子给出的描述非常接近原题：<code>给两个string，在string1中找到所有符合string2的排列组合的subsequence，返回相应的index</code></li>
-</ul>
-<p>还原题目：</p>
-<ul>
-<li>在长串中找所有子串起点，使该子串是短串的一个排列</li>
-<li>本质是 <code>find all anagrams / permutation in string</code></li>
-</ul>
-<p>核心解法：</p>
-<ul>
-<li>固定窗口长度</li>
-<li>维护频次数组或 hashmap</li>
-<li>窗口右移时增一个、减一个</li>
-</ul>
-<p>易错点：</p>
-<ul>
-<li><code>subsequence</code> 和 <code>substring</code> 在原帖里可能被混说，但题意明显是固定长度窗口匹配</li>
-<li>字典比较复杂度不会讲</li>
-</ul>
-<p>建议练习：</p>
-<ul>
-<li>LeetCode 438 <code>Find All Anagrams in a String</code></li>
-<li>LeetCode 567 <code>Permutation in String</code></li>
-</ul>
-<h2 id="8-heap--selection"><a class="header" href="#8-heap--selection">8. Heap / Selection</a></h2>
-<h3 id="81-kth-largest-element"><a class="header" href="#81-kth-largest-element">8.1 Kth Largest Element</a></h3>
-<p><code>优先级：A</code></p>
-<p>社区原始描述：</p>
-<ul>
-<li>一亩三分地总结帖直接列出 <code>215 kth largest element in array</code></li>
-</ul>
-<p>还原题目：</p>
-<ul>
-<li>给数组和 <code>k</code>，返回第 <code>k</code> 大元素</li>
-</ul>
-<p>核心解法：</p>
-<ul>
-<li><code>min-heap</code> 大小 <code>k</code></li>
-<li>或 <code>quickselect</code></li>
-</ul>
-<p>易错点：</p>
-<ul>
-<li>第 <code>k</code> 大和排序下标混淆</li>
-<li>只会堆，不会解释 quickselect 的平均复杂度</li>
-</ul>
-<p>建议练习：</p>
-<ul>
-<li>LeetCode 215</li>
-</ul>
-<h2 id="9-greedy"><a class="header" href="#9-greedy">9. Greedy</a></h2>
-<h3 id="91-gas-station"><a class="header" href="#91-gas-station">9.1 Gas Station</a></h3>
-<p><code>优先级：B</code></p>
-<p>社区原始描述：</p>
-<ul>
-<li>一亩三分地总结帖直接列出 <code>134 gas station</code></li>
-</ul>
-<p>还原题目：</p>
-<ul>
-<li>判断从哪个站点出发可以环绕一圈</li>
-</ul>
-<p>核心解法：</p>
-<ul>
-<li>总油量不足直接失败</li>
-<li>线性扫描维护当前油量，跌破 0 就重置起点</li>
-</ul>
-<h2 id="10-小型设计编码题"><a class="header" href="#10-小型设计编码题">10. 小型设计编码题</a></h2>
-<h3 id="101-calendar--meeting-schedule"><a class="header" href="#101-calendar--meeting-schedule">10.1 Calendar / Meeting Schedule</a></h3>
-<p><code>优先级：B</code></p>
-<p>社区原始描述：</p>
-<ul>
-<li>一亩三分地 VO 帖里明确写到：<code>设计一个日历系统</code>，要求支持“创建事件”“查看某个时间是否 busy”“查看某日的所有事件”</li>
-</ul>
-<p>还原题目：</p>
-<ul>
-<li>这类题介于 coding 和 LLD 之间</li>
-<li>面试官想看：
-<ul>
-<li>数据结构选择</li>
-<li>时间区间冲突判断</li>
-<li>API 设计</li>
-<li>复杂度解释</li>
-</ul>
-</li>
-</ul>
-<p>核心解法：</p>
-<ul>
-<li>单用户版可先用：
-<ul>
-<li><code>date -&gt; sorted intervals</code></li>
-<li><code>TreeMap / ordered list</code></li>
-</ul>
-</li>
-<li>如果 interviewer 继续问，讲：
-<ul>
-<li>重叠校验</li>
-<li>recurring events</li>
-<li>多时区</li>
-<li>并发写入</li>
-</ul>
-</li>
+                        <h1 id="4-栈--表达式解析"><a class="header" href="#4-栈--表达式解析">4. 栈 / 表达式解析</a></h1>
+<h2 id="面试题目怎么问"><a class="header" href="#面试题目怎么问">面试题目怎么问</a></h2>
+<ul>
+<li>计算包含 <code>+ -</code> 和括号的表达式</li>
+<li>计算包含 <code>+ - * /</code> 的字符串表达式</li>
+<li>求逆波兰表达式的值</li>
+<li>解析字符串中的嵌套结构</li>
+<li>给你一串日志或命令块，块之间可以嵌套，要求还原执行结果</li>
+</ul>
+<h2 id="识别信号"><a class="header" href="#识别信号">识别信号</a></h2>
+<ul>
+<li>输入是字符串表达式</li>
+<li>有括号</li>
+<li>有运算优先级</li>
+<li>有嵌套上下文</li>
+<li>有 <code>start/end</code>、<code>BEGIN/END</code>、<code>(</code>/<code>)</code></li>
+</ul>
+<h2 id="amazon-风格业务包装"><a class="header" href="#amazon-风格业务包装">Amazon 风格业务包装</a></h2>
+<ul>
+<li>解析定价公式</li>
+<li>计算折扣规则表达式</li>
+<li>解析带括号的配置规则</li>
+<li>处理日志或命令中的嵌套结构</li>
+</ul>
+<h2 id="你该怎么想"><a class="header" href="#你该怎么想">你该怎么想</a></h2>
+<ul>
+<li>只要字符串里有括号、优先级、嵌套，就先想 stack</li>
+<li>看到“当前上下文”和“进入新层级”，就想到入栈</li>
+<li>退出一层时，要把内层结果合并回外层</li>
+</ul>
+<h2 id="标准代码模板-1basic-calculator"><a class="header" href="#标准代码模板-1basic-calculator">标准代码模板 1：Basic Calculator</a></h2>
+<pre><code class="language-python">def calculate(s):
+    stack = []
+    res = 0
+    num = 0
+    sign = 1
+
+    for ch in s:
+        if ch.isdigit():
+            num = num * 10 + int(ch)
+        elif ch in '+-':
+            res += sign * num
+            num = 0
+            sign = 1 if ch == '+' else -1
+        elif ch == '(':
+            stack.append(res)
+            stack.append(sign)
+            res = 0
+            sign = 1
+        elif ch == ')':
+            res += sign * num
+            num = 0
+            res *= stack.pop()
+            res += stack.pop()
+
+    return res + sign * num
+</code></pre>
+<h2 id="标准代码模板-2逆波兰表达式"><a class="header" href="#标准代码模板-2逆波兰表达式">标准代码模板 2：逆波兰表达式</a></h2>
+<pre><code class="language-python">def eval_rpn(tokens):
+    stack = []
+    for token in tokens:
+        if token not in "+-*/":
+            stack.append(int(token))
+        else:
+            b = stack.pop()
+            a = stack.pop()
+            if token == "+":
+                stack.append(a + b)
+            elif token == "-":
+                stack.append(a - b)
+            elif token == "*":
+                stack.append(a * b)
+            else:
+                stack.append(int(a / b))
+    return stack[-1]
+</code></pre>
+<h2 id="标准代码模板-3decode-string"><a class="header" href="#标准代码模板-3decode-string">标准代码模板 3：Decode String</a></h2>
+<pre><code class="language-python">def decode_string(s):
+    stack = []
+    cur_num = 0
+    cur_str = ""
+
+    for ch in s:
+        if ch.isdigit():
+            cur_num = cur_num * 10 + int(ch)
+        elif ch == '[':
+            stack.append((cur_str, cur_num))
+            cur_str = ""
+            cur_num = 0
+        elif ch == ']':
+            prev_str, num = stack.pop()
+            cur_str = prev_str + cur_str * num
+        else:
+            cur_str += ch
+
+    return cur_str
+</code></pre>
+<h2 id="标准代码模板-4exclusive-time-of-functions"><a class="header" href="#标准代码模板-4exclusive-time-of-functions">标准代码模板 4：Exclusive Time of Functions</a></h2>
+<pre><code class="language-python">def exclusive_time(n, logs):
+    res = [0] * n
+    stack = []
+    prev_time = 0
+
+    for log in logs:
+        fn_id, typ, t = log.split(':')
+        fn_id = int(fn_id)
+        t = int(t)
+
+        if typ == "start":
+            if stack:
+                res[stack[-1]] += t - prev_time
+            stack.append(fn_id)
+            prev_time = t
+        else:
+            res[stack.pop()] += t - prev_time + 1
+            prev_time = t + 1
+
+    return res
+</code></pre>
+<h2 id="标准代码模板-5reverse-parentheses"><a class="header" href="#标准代码模板-5reverse-parentheses">标准代码模板 5：Reverse Parentheses</a></h2>
+<pre><code class="language-python">def reverse_parentheses(s):
+    stack = [""]
+    for ch in s:
+        if ch == '(':
+            stack.append("")
+        elif ch == ')':
+            cur = stack.pop()[::-1]
+            stack[-1] += cur
+        else:
+            stack[-1] += ch
+    return stack[0]
+</code></pre>
+<h2 id="代码讲解"><a class="header" href="#代码讲解">代码讲解</a></h2>
+<ul>
+<li>Basic Calculator：栈保存的是括号外层的 <code>res</code> 和 <code>sign</code></li>
+<li>Decode String：栈保存的是外层字符串和重复次数</li>
+<li>Exclusive Time：栈保存的是函数调用栈，栈顶就是当前执行函数</li>
+<li>Reverse Parentheses：栈保存每一层正在构造的字符串</li>
+</ul>
+<h2 id="面试时怎么讲"><a class="header" href="#面试时怎么讲">面试时怎么讲</a></h2>
+<ul>
+<li>这类题本质是单次扫描 + 保存上下文</li>
+<li>遇到数字就持续构造当前数</li>
+<li>遇到运算符就结算前一个数</li>
+<li>遇到括号或新作用域，就把当前层上下文压栈，退出时再合并</li>
+</ul>
+<h2 id="常见-follow-up-和回答"><a class="header" href="#常见-follow-up-和回答">常见 follow-up 和回答</a></h2>
+<p><strong>Q1：为什么要用栈？</strong><br>因为括号意味着多层上下文嵌套，栈最适合保存进入新层级前的状态。</p>
+<p><strong>Q2：如果再加 <code>* /</code> 怎么办？</strong><br>可以用当前层栈即时处理乘除，或者双栈通用解析。</p>
+<p><strong>Q3：怎么处理多位数？</strong><br><code>num = num * 10 + int(ch)</code>。</p>
+<p><strong>Q4：怎么处理空格？</strong><br>扫描时直接跳过。</p>
+<p><strong>Q5：日志 start / end 为什么也是栈？</strong><br>因为函数调用天然就是调用栈，进入一个函数压栈，结束时弹栈。</p>
+<h2 id="amazon-风格完整题面"><a class="header" href="#amazon-风格完整题面">Amazon 风格完整题面</a></h2>
+<blockquote>
+<p>You are given a pricing rule string.<br>The string may contain integers, <code>+</code>, <code>-</code>, and parentheses.<br>Return the final computed value after evaluating the rule.</p>
+</blockquote>
+<h2 id="可直接背的口语回答稿"><a class="header" href="#可直接背的口语回答稿">可直接背的口语回答稿</a></h2>
+<p>“我会把它看成标准表达式解析问题。因为括号代表进入一个新的上下文，所以我会顺序扫描字符串，用栈保存进入括号前的外层结果和符号。遇到数字就构造当前数，遇到加减就先把前一个数字结算进结果里；遇到右括号时，先算出括号内部的值，再乘上外层符号并加回外层结果。”</p>
+<h2 id="推荐代表题"><a class="header" href="#推荐代表题">推荐代表题</a></h2>
+<ul>
+<li>Basic Calculator</li>
+<li>Evaluate Reverse Polish Notation</li>
+<li>Decode String</li>
+<li>Exclusive Time of Functions</li>
 </ul>
-<h2 id="最后怎么刷"><a class="header" href="#最后怎么刷">最后怎么刷</a></h2>
-<p>推荐顺序：</p>
-<ol>
-<li><code>LRU / LFU</code></li>
-<li><code>Word Ladder / Word Search</code></li>
-<li><code>Word Break / Concatenated Words</code></li>
-<li><code>LCA / Diameter / Path Sum / Vertical Order</code></li>
-<li><code>Random O(1) / Unknown Size Binary Search</code></li>
-<li><code>Course Schedule / Kth Largest / Gas Station</code></li>
-</ol>
-<p>如果你要 mock Amazon VO，建议每题都强制自己回答这 4 句：</p>
-<ol>
-<li>暴力解是什么</li>
-<li>为什么不够好</li>
-<li>最优结构为什么是这个</li>
-<li>如果 interviewer 要我继续优化，我准备怎么扩展</li>
-</ol>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="high-frequency-list.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="heap.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                             </a>
 
-                            <a rel="next prefetch" href="documents.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="hash.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
                             </a>
 
@@ -627,11 +358,11 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="high-frequency-list.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="heap.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                     </a>
 
-                    <a rel="next prefetch" href="documents.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="hash.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
                     </a>
             </nav>

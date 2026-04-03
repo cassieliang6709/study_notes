@@ -3,12 +3,12 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>使用说明与还原方法 - Amazon VO Coding 高频题清单</title>
+        <title>附录：业务伪装索引 - Amazon VO Coding 高频题清单</title>
 
 
         <!-- Custom HTML head -->
 
-        <meta name="description" content="">
+        <meta name="description" content="把 Amazon VO 业务题面翻译回算法模板的口袋手册">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
 
@@ -34,11 +34,11 @@
         <script>
             const path_to_root = "";
             const default_light_theme = "light";
-            const default_dark_theme = "light";
-            window.path_to_searchindex_js = "searchindex-fb249387.js";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "searchindex-5b618509.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-89012b62.js"></script>
+        <script src="toc-ec05092f.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -174,58 +174,125 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="使用说明与还原方法"><a class="header" href="#使用说明与还原方法">使用说明与还原方法</a></h1>
-<h2 id="我怎么定义高频"><a class="header" href="#我怎么定义高频">我怎么定义“高频”</a></h2>
-<p>这本书不按 LeetCode 公司标签直接照搬，而是按下面三类证据综合判断：</p>
+                        <h1 id="附录业务伪装索引"><a class="header" href="#附录业务伪装索引">附录：业务伪装索引</a></h1>
+<p>这一章不是按算法分类，而是按 Amazon 题面里常见的业务词来反查原题类型。</p>
+<h2 id="workflow--dependency--pipeline"><a class="header" href="#workflow--dependency--pipeline">workflow / dependency / pipeline</a></h2>
 <ul>
-<li>一亩三分地公开可见面经里反复出现</li>
-<li>一亩三分地总结帖直接把题列成高频清单</li>
-<li>Reddit 讨论里有人明确说 Amazon 实际问到过</li>
-</ul>
-<h2 id="我怎么处理原帖隐藏问题"><a class="header" href="#我怎么处理原帖隐藏问题">我怎么处理“原帖隐藏”问题</a></h2>
-<p>一亩三分地很多正文被隐藏，但公开页面通常还能看到：</p>
+<li>对应题型：图论拓扑排序</li>
+<li>你该怎么翻译：
 <ul>
-<li>标题</li>
-<li><code>meta description</code></li>
-<li>搜索引擎 snippet</li>
-<li>页面中未完全隐藏的总结段落</li>
+<li>task = 节点</li>
+<li>depends on = 有向边</li>
+<li>can finish = 判环</li>
+<li>execution order = 拓扑序</li>
 </ul>
-<p>所以每道题我都会分开写：</p>
+</li>
+</ul>
+<h2 id="warehouse-robot--route--obstacle"><a class="header" href="#warehouse-robot--route--obstacle">warehouse robot / route / obstacle</a></h2>
 <ul>
-<li><code>社区原始描述</code></li>
-<li><code>还原题目</code></li>
-<li><code>解法</code></li>
-</ul>
-<p>其中：</p>
+<li>对应题型：Grid BFS / DFS</li>
+<li>你该怎么翻译：
 <ul>
-<li>“社区原始描述”尽量保持原意，不扩大</li>
-<li>“还原题目”是我根据公开线索和 Amazon 常见出题方式整理的复盘版</li>
-<li>如果无法完全确认，我会标成“中可信还原”</li>
+<li>warehouse map = grid</li>
+<li>robot moves one step = 无权图最短路</li>
+<li>blocked cell = 障碍物</li>
+<li>isolated region = 连通块</li>
 </ul>
-<h2 id="使用建议"><a class="header" href="#使用建议">使用建议</a></h2>
-<p>做 Amazon VO coding，不要只背题号，要同时准备三件事：</p>
+</li>
+</ul>
+<h2 id="event-stream--sorted-feeds--earliest-event"><a class="header" href="#event-stream--sorted-feeds--earliest-event">event stream / sorted feeds / earliest event</a></h2>
 <ul>
-<li>5 分钟内说清楚 brute force 到 optimal 的路线</li>
-<li>能手写核心数据结构</li>
-<li>能扛住 follow-up：复杂度、边界、tradeoff、如何扩展</li>
-</ul>
-<p>从 Reddit 的公开讨论看，Amazon loop 很常见的问题不是题太偏，而是：</p>
+<li>对应题型：堆 / 多路归并</li>
+<li>你该怎么翻译：
 <ul>
-<li>BQ 占时长，coding 被压缩</li>
-<li>interviewer 会临时加 follow-up</li>
-<li>同一道题会从“能做出来”继续追到“能不能更快/更省空间/支持重复值/支持并发”</li>
+<li>multiple sorted streams = merge k sorted</li>
+<li>earliest event = min-heap</li>
 </ul>
-<p>所以这本书里每道题都默认补一个 follow-up 方向。</p>
+</li>
+</ul>
+<h2 id="top-products--hot-items--most-popular"><a class="header" href="#top-products--hot-items--most-popular">top products / hot items / most popular</a></h2>
+<ul>
+<li>对应题型：Top K / Hash + Heap</li>
+<li>你该怎么翻译：
+<ul>
+<li>frequency analytics = Counter</li>
+<li>top sellers = Top K</li>
+</ul>
+</li>
+</ul>
+<h2 id="pricing-rule--discount-expression--nested-config--logs"><a class="header" href="#pricing-rule--discount-expression--nested-config--logs">pricing rule / discount expression / nested config / logs</a></h2>
+<ul>
+<li>对应题型：栈 / 表达式解析</li>
+<li>你该怎么翻译：
+<ul>
+<li>expression = 表达式求值</li>
+<li>nested config = 栈保存上下文</li>
+<li>start/end logs = 调用栈</li>
+</ul>
+</li>
+</ul>
+<h2 id="inventory--dedupe--user-status-map"><a class="header" href="#inventory--dedupe--user-status-map">inventory / dedupe / user status map</a></h2>
+<ul>
+<li>对应题型：HashSet / HashMap</li>
+<li>你该怎么翻译：
+<ul>
+<li>quick lookup = set</li>
+<li>frequency = Counter</li>
+<li>user -&gt; status = map</li>
+</ul>
+</li>
+</ul>
+<h2 id="time-window--user-behavior--continuous-range"><a class="header" href="#time-window--user-behavior--continuous-range">time window / user behavior / continuous range</a></h2>
+<ul>
+<li>对应题型：滑动窗口</li>
+<li>你该怎么翻译：
+<ul>
+<li>contiguous range = 子数组 / 子串</li>
+<li>at most K types = 滑窗合法条件</li>
+</ul>
+</li>
+</ul>
+<h2 id="loading-dock--station-scheduling--time-slots"><a class="header" href="#loading-dock--station-scheduling--time-slots">loading dock / station scheduling / time slots</a></h2>
+<ul>
+<li>对应题型：区间 / 扫描线</li>
+<li>你该怎么翻译：
+<ul>
+<li>time slot = interval</li>
+<li>number of docks / stations needed = Meeting Rooms II</li>
+<li>max concurrent jobs = 扫描线</li>
+</ul>
+</li>
+</ul>
+<h2 id="linked-sequence-of-tasks"><a class="header" href="#linked-sequence-of-tasks">linked sequence of tasks</a></h2>
+<ul>
+<li>对应题型：链表</li>
+<li>你该怎么翻译：
+<ul>
+<li>node.next = 链表</li>
+<li>reorder in place = 指针操作</li>
+</ul>
+</li>
+</ul>
+<h2 id="latest-valid-price-before-t--first-station-after-x"><a class="header" href="#latest-valid-price-before-t--first-station-after-x">latest valid price before t / first station after x</a></h2>
+<ul>
+<li>对应题型：有序映射 / 二分</li>
+<li>你该怎么翻译：
+<ul>
+<li>latest valid before <code>t</code> = floor</li>
+<li>first not smaller than <code>x</code> = ceiling</li>
+</ul>
+</li>
+</ul>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="ordered-map.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                             </a>
 
-                            <a rel="next prefetch" href="high-frequency-list.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="speaking-scripts.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
                             </a>
 
@@ -235,11 +302,11 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="ordered-map.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                     </a>
 
-                    <a rel="next prefetch" href="high-frequency-list.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="speaking-scripts.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
                     </a>
             </nav>

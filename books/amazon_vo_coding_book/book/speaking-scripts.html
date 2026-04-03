@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>首页 - Amazon VO Coding 高频题清单</title>
+        <title>附录：面试开口模板与口语回答稿 - Amazon VO Coding 高频题清单</title>
 
 
         <!-- Custom HTML head -->
@@ -174,61 +174,94 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="amazon-vo-coding-高频题清单"><a class="header" href="#amazon-vo-coding-高频题清单">Amazon VO Coding 高频题清单</a></h1>
-<p>这本书是给 Amazon VO coding 准备的口袋手册。</p>
-<p>目标不是背题号，而是做到下面这件事：</p>
-<ol>
-<li>听到业务题面</li>
-<li>立刻翻译成算法模型</li>
-<li>快速套模板</li>
-<li>接住 follow-up</li>
-<li>用稳定的口语把思路讲出来</li>
-</ol>
-<h2 id="这本书怎么用"><a class="header" href="#这本书怎么用">这本书怎么用</a></h2>
-<p>建议按这个顺序看：</p>
-<ol>
-<li>先看<a href="high-frequency-overview.html">高频题型总表</a>，知道什么最常见</li>
-<li>再按题型刷各章，重点看“识别信号 + 业务包装 + 标准代码模板”</li>
-<li>然后看<a href="business-disguise-index.html">业务伪装索引</a>，训练把题面翻译回原题</li>
-<li>最后看<a href="speaking-scripts.html">面试开口模板与口语回答稿</a>和<a href="cheatsheet.html">一页速记</a></li>
-</ol>
-<h2 id="每章统一结构"><a class="header" href="#每章统一结构">每章统一结构</a></h2>
-<p>每个题型章节都尽量按同一个顺序组织：</p>
-<ol>
-<li>面试题目怎么问</li>
-<li>识别信号</li>
-<li>Amazon 风格业务包装</li>
-<li>标准代码模板</li>
-<li>代码讲解</li>
-<li>面试时怎么讲</li>
-<li>常见 follow-up 和回答</li>
-<li>Amazon 风格完整题面</li>
-<li>可直接背的口语回答稿</li>
-<li>推荐代表题</li>
-</ol>
-<h2 id="如果你只有-3-天"><a class="header" href="#如果你只有-3-天">如果你只有 3 天</a></h2>
-<ol>
-<li>第 1 天：
-<code>Graph topo</code>、<code>Grid BFS/DFS</code>、<code>Heap merge / Top K</code></li>
-<li>第 2 天：
-<code>Stack calculator</code>、<code>Sliding window</code>、<code>Intervals</code></li>
-<li>第 3 天：
-<code>HashSet longest consecutive</code>、<code>Linked list basics</code>、<code>Ordered map / binary search</code></li>
-</ol>
-<h2 id="这本书最想帮你解决的问题"><a class="header" href="#这本书最想帮你解决的问题">这本书最想帮你解决的问题</a></h2>
+                        <h1 id="附录面试开口模板与口语回答稿"><a class="header" href="#附录面试开口模板与口语回答稿">附录：面试开口模板与口语回答稿</a></h1>
+<h2 id="通用开口模板"><a class="header" href="#通用开口模板">通用开口模板</a></h2>
+<p>题面很业务化时，可以先这样说：</p>
+<blockquote>
+<p>我先忽略业务术语，把问题抽象一下。这里本质上是一个……</p>
+</blockquote>
+<p>然后接：</p>
 <ul>
-<li>题面很业务化，听不出本质</li>
-<li>明明会做，但现场讲不顺</li>
-<li>follow-up 一追问就散</li>
-<li>代码会写，但不知道怎么像面试里那样讲</li>
+<li>有向图判环 / 拓扑排序问题</li>
+<li>二维 grid 上的无权最短路问题</li>
+<li>多路归并问题</li>
+<li>表达式解析或嵌套上下文处理问题</li>
+<li>连续子数组的滑动窗口问题</li>
+<li>区间重叠和资源分配问题</li>
+</ul>
+<h2 id="为什么这个算法对"><a class="header" href="#为什么这个算法对">为什么这个算法对</a></h2>
+<h3 id="拓扑排序"><a class="header" href="#拓扑排序">拓扑排序</a></h3>
+<p>“如果图里有环，就不可能完成所有任务。Kahn 算法每次处理一个入度为 0 的节点，相当于执行一个当前没有前置依赖的任务。最后如果能处理完所有节点，就说明图无环。”</p>
+<h3 id="grid-bfs"><a class="header" href="#grid-bfs">Grid BFS</a></h3>
+<p>“因为每次移动一步的代价都一样，所以这是无权图最短路。BFS 按层扩展，第一次到终点时一定是最短距离。”</p>
+<h3 id="heap"><a class="header" href="#heap">Heap</a></h3>
+<p>“我只需要维护当前候选中的最值，不需要保存所有元素的全局顺序，所以堆最合适。”</p>
+<h3 id="stack"><a class="header" href="#stack">Stack</a></h3>
+<p>“括号或嵌套结构意味着有多层上下文。栈最适合保存进入一层前的状态，并在退出时恢复。”</p>
+<h3 id="sliding-window"><a class="header" href="#sliding-window">Sliding Window</a></h3>
+<p>“这是连续区间优化问题。窗口只会向右移动，所以每个元素最多被左右指针访问一次，能做到线性时间。”</p>
+<h2 id="复杂度怎么讲"><a class="header" href="#复杂度怎么讲">复杂度怎么讲</a></h2>
+<h3 id="拓扑排序-1"><a class="header" href="#拓扑排序-1">拓扑排序</a></h3>
+<ul>
+<li>时间：<code>O(V + E)</code></li>
+<li>空间：<code>O(V + E)</code></li>
+</ul>
+<h3 id="grid-bfs--dfs"><a class="header" href="#grid-bfs--dfs">Grid BFS / DFS</a></h3>
+<ul>
+<li>时间：<code>O(m * n)</code></li>
+<li>空间：<code>O(m * n)</code></li>
+</ul>
+<h3 id="heap-1"><a class="header" href="#heap-1">Heap</a></h3>
+<ul>
+<li>多路归并：<code>O(N log k)</code></li>
+<li>Top K：<code>O(n log k)</code></li>
+</ul>
+<h3 id="stack-1"><a class="header" href="#stack-1">Stack</a></h3>
+<ul>
+<li>时间：<code>O(n)</code></li>
+<li>空间：<code>O(n)</code></li>
+</ul>
+<h3 id="sliding-window-1"><a class="header" href="#sliding-window-1">Sliding Window</a></h3>
+<ul>
+<li>时间：<code>O(n)</code></li>
+<li>空间：<code>O(k)</code> 或字符集大小</li>
+</ul>
+<h2 id="follow-up-怎么自然接"><a class="header" href="#follow-up-怎么自然接">follow-up 怎么自然接</a></h2>
+<h3 id="topo"><a class="header" href="#topo">Topo</a></h3>
+<ul>
+<li>如果只判断能不能完成：看处理节点数是否等于总节点数</li>
+<li>如果要字典序最小：队列换最小堆</li>
+<li>如果问 DFS 能不能返回顺序：后序加入 + reverse</li>
+</ul>
+<h3 id="grid"><a class="header" href="#grid">Grid</a></h3>
+<ul>
+<li>允许斜走：改 <code>dirs</code></li>
+<li>多个起点：multi-source BFS</li>
+<li>能打破墙：状态 BFS</li>
+<li>权重不同：Dijkstra / 0-1 BFS</li>
+</ul>
+<h3 id="stack-2"><a class="header" href="#stack-2">Stack</a></h3>
+<ul>
+<li>加 <code>* /</code>：当前层栈即时处理乘除</li>
+<li>多位数：持续构造 <code>num</code></li>
+<li>日志 start/end：调用栈</li>
+</ul>
+<h3 id="intervals"><a class="header" href="#intervals">Intervals</a></h3>
+<ul>
+<li>端点相等算不算冲突：先问清题意</li>
+<li>最大并发时刻：扫描线</li>
+<li>为什么用堆：堆顶是最早结束区间</li>
 </ul>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="business-disguise-index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
 
-                            <a rel="next prefetch" href="high-frequency-overview.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="cheatsheet.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
                             </a>
 
@@ -238,8 +271,11 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="business-disguise-index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
 
-                    <a rel="next prefetch" href="high-frequency-overview.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="cheatsheet.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
                     </a>
             </nav>
