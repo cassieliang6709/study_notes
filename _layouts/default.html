@@ -14,6 +14,11 @@
   </head>
   <body class="{% if page.url == '/' %}page-home{% else %}page-doc{% endif %}">
     <a id="top"></a>
+    <div class="page-aurora" aria-hidden="true">
+      <span class="aurora aurora-one"></span>
+      <span class="aurora aurora-two"></span>
+      <span class="aurora aurora-three"></span>
+    </div>
     <div class="page-shell">
       <main class="content-frame">
         <div class="site-layout">
@@ -24,6 +29,32 @@
             </div>
           </aside>
           <div class="main-column">
+            <header class="page-banner">
+              <div class="page-banner-copy">
+                <p class="page-banner-kicker">
+                  {% if page.url == '/' %}Learning Workspace{% else %}Knowledge Page{% endif %}
+                </p>
+                <h1 class="page-banner-title">
+                  {% if page.url == '/' %}
+                    {{ site.title }}
+                  {% else %}
+                    {{ page.title | default: site.title }}
+                  {% endif %}
+                </h1>
+                <p class="page-banner-text">
+                  {% if page.url == '/' %}
+                    一个更有节奏感的学习入口，把笔记、题单和练习放进同一个可快速切换的工作台。
+                  {% else %}
+                    {{ page.excerpt | default: site.description | strip_html | normalize_whitespace | truncate: 160 }}
+                  {% endif %}
+                </p>
+              </div>
+              <div class="page-banner-meta">
+                <span>Readable layout</span>
+                <span>Fast navigation</span>
+                <a href="https://github.com/cassieliang6709/study_notes">Repository</a>
+              </div>
+            </header>
             <article class="content-card" id="article-content">
               {{ content }}
             </article>

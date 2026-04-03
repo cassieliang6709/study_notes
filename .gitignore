@@ -3,6 +3,8 @@
 .jekyll-cache/
 .sass-cache/
 _site/
+.bundle/
+vendor/bundle/
 
 # Python
 __pycache__/

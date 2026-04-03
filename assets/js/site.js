@@ -28,6 +28,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const link = document.createElement("a");
         link.href = "#" + heading.id;
         link.textContent = heading.textContent.trim();
+        link.dataset.target = heading.id;
 
         item.appendChild(link);
         list.appendChild(item);
@@ -35,6 +36,31 @@ document.addEventListener("DOMContentLoaded", function () {
 
       tocNav.appendChild(list);
       tocPanel.hidden = false;
+
+      const links = Array.from(tocNav.querySelectorAll("a[data-target]"));
+      const observer = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            const id = entry.target.getAttribute("id");
+            const link = tocNav.querySelector('a[data-target="' + id + '"]');
+
+            if (link && entry.isIntersecting) {
+              links.forEach(function (item) {
+                item.classList.remove("is-active");
+              });
+              link.classList.add("is-active");
+            }
+          });
+        },
+        {
+          rootMargin: "-20% 0px -65% 0px",
+          threshold: [0.2, 0.6]
+        }
+      );
+
+      headings.forEach(function (heading) {
+        observer.observe(heading);
+      });
     }
   }
 
