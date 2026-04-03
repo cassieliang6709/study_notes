@@ -6,6 +6,60 @@
 
 ---
 
+## 这个项目 / 学习主题的总结
+
+`rag-from-scratch` 最适合拿来建立 RAG 的第一性原理。它把系统压到最小，只保留最关键的几层：检索、上下文拼接、生成和结果检查。你真正要学到的不是“会跑 notebook”，而是为什么检索质量会直接决定回答质量。
+
+## 本页在教什么
+
+这页在教你怎么看一个最小 RAG 项目。重点不是功能多，而是链路清楚，方便你建立第一个稳定心智模型。
+
+## Python 代码
+
+```python
+def retrieve(question: str, docs: list[str], top_k: int) -> list[str]:
+    question_words = set(question.lower().split())
+    ranked = sorted(
+        docs,
+        key=lambda doc: len(question_words & set(doc.lower().split())),
+        reverse=True,
+    )
+    return ranked[:top_k]
+
+
+docs = [
+    "RAG uses retrieved context to ground answers",
+    "FastAPI is a Python web framework",
+    "Chunking affects retrieval quality",
+]
+
+print(retrieve("How does RAG use context", docs, 2))
+```
+
+## 时间复杂度
+
+这个最小示例会把每个文档都扫描一次，所以时间复杂度近似为 `O(n * m)`，其中 `n` 是文档数，`m` 是单份文档平均词数。
+
+## 空间复杂度
+
+主要是临时集合和排序结果，额外空间复杂度近似为 `O(n)`。
+
+## 怎么想到
+
+初学 RAG 时，不要先想复杂 agent、reranker 或 evaluation 框架，先问自己一句话：模型回答时，外部知识是怎么被接进来的？一旦把这个问题盯住，RAG 的最小链路就会非常清楚。
+
+## 示例 case
+
+输入问题：`How does RAG use context`
+输出上下文：优先返回和 `RAG`、`context` 更相关的文档。
+解释：这能帮助你看懂“为什么最终答案不是凭空来的，而是被检索结果约束住的”。
+
+## 常见 Follow-up
+
+- `top_k` 变大后，答案一定更好吗？
+- `chunk_size` 为什么会改变检索效果？
+- 为什么看检索结果往往比只看最终答案更重要？
+
 ## 这页为什么值得看
 
 `rag-from-scratch` 不是“RAG 仓库之一”，而是你最适合开始的那个。

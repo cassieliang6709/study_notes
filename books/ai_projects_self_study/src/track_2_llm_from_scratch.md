@@ -11,6 +11,49 @@ title: "Track 2: LLM From Scratch"
 
 ---
 
+## 这个学习主线的总结
+
+这条主线是从“我知道 LLM 很强”走到“我能解释 token、batch、loss、sampling 怎么连起来”。它强调的是模型本体理解，而不是 API 调用熟练度。
+
+## 本页在教什么
+
+这页在教你为什么先从 `MiniMind` 这种低门槛实现入手，再去 `CS336` 这种系统课程，会更稳。
+
+## Python 代码
+
+```python
+tokens = [1, 2, 3, 4]
+inputs = tokens[:-1]
+targets = tokens[1:]
+
+print(inputs)
+print(targets)
+```
+
+## 时间复杂度
+
+这个最小样例只切分一次序列，时间复杂度是 `O(n)`。
+
+## 空间复杂度
+
+输入输出序列都和原长度相关，空间复杂度是 `O(n)`。
+
+## 怎么想到
+
+很多人学模型会直接看最复杂的课程或仓库，结果术语很多但链路不清。更好的顺序是先建立“下一个 token 预测”这个最小直觉，再逐步扩到完整训练系统。
+
+## 示例 case
+
+输入 token：`[1, 2, 3, 4]`
+输出训练对：`[1, 2, 3] -> [2, 3, 4]`
+解释：这就是语言模型训练最小监督形式的雏形。
+
+## 常见 Follow-up
+
+- tokenizer、embedding、attention 应该按什么顺序学？
+- 为什么只会调 API 不等于理解模型本体？
+- 做完 MiniMind 后，读 CS336 时最该抓哪条主线？
+
 ## 这条线的正确顺序
 
 1. [MiniMind](./project_minimind.md)

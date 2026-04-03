@@ -1,5 +1,6 @@
 ---
 title: BQ Interview Prep Bilingual
+permalink: /bq_prep/bilingual/
 ---
 
 <section class="bq-hero">
@@ -134,7 +135,7 @@ title: BQ Interview Prep Bilingual
 
 <section class="bq-story-card">
   <div class="bq-story-head">
-    <h3>Story 4 — Deloitte: Audit Data Automation</h3>
+    <h3>Story 4 — Deloitte: Journal Entry ETL &amp; Mapping Pipeline</h3>
     <div class="bq-tag-row">
       <span class="bq-tag">Invent and Simplify</span>
       <span class="bq-tag">Deliver Results</span>
@@ -144,22 +145,22 @@ title: BQ Interview Prep Bilingual
   <details open>
     <summary>English Oral Version</summary>
     <div class="bq-story-body">
-      <p>At Deloitte, every audit engagement started with manual data cleaning. Clients would send Excel files in inconsistent formats, with different date conventions, encoding issues, and random empty rows, so the team would spend one to two days cleaning everything from scratch before analysis could even begin. The bigger problem was that manual cleaning creates silent errors, and in an audit context those errors can affect every downstream conclusion.</p>
+      <p>At Deloitte, one of the biggest bottlenecks in audit engagements was journal entry data heterogeneity. Every client sent financial data in a different format with its own chart of accounts, so before we could do any analysis, the team had to spend one to two days manually cleaning and mapping thousands of account names into a common internal taxonomy. It was slow, repetitive, and very prone to silent human error.</p>
 
-      <p>I decided to automate that process during a busy audit season, even though the team had no technical background and no previous automation workflow. I built a Python and pandas script that standardized date formats, normalized column names, fixed encoding issues, and removed invalid rows. But the more important part was the validation layer. After cleaning, the script automatically checked for anomalies like unusually large amounts, dates outside a reasonable range, and missing values in critical fields, then generated a flagged report for human review before analysis began. I also wrote simple documentation and walked the team through how to use it so it could scale beyond just me.</p>
+      <p>I built an automated ETL pipeline in Python with pandas to standardize and map that data reliably. First, I added a normalization layer to ingest raw CSV and Excel files, handle encoding issues, trim whitespace, and normalize column names. Second, I built a rule-based mapping engine that used a hash map for exact matching against a historical master dictionary, which handled about 70 to 80 percent of accounts immediately, and then used regex-based fuzzy matching for close variations. Third, I explicitly designed the system not to guess. If a journal entry did not meet a high-confidence match threshold, it went into an exception log instead of silently passing through.</p>
 
-      <p>The result was that data preparation time dropped from one to two days down to about three hours per engagement. In one case, the validation layer caught a batch of date-entry errors that would have silently passed through manual cleaning and corrupted the downstream analysis. The lesson I took from that was to always ask when a repeated process discovers errors. If the answer is late, adding an automated validation layer is usually one of the highest-leverage improvements you can make.</p>
+      <p>The result was that data preparation and mapping time dropped from up to two days to about three hours per engagement. More importantly, the exception log changed the team's workflow from reviewing everything manually to reviewing only the roughly 10 percent of edge cases that actually needed human judgment. The biggest lesson for me was that automated systems should never fail silently. If confidence is low, the system should surface the ambiguity instead of pretending it knows the answer.</p>
     </div>
   </details>
 
   <details>
     <summary>中文版口语版</summary>
     <div class="bq-story-body">
-      <p>在 Deloitte 做审计时，每个 engagement 一开始都要做大量手工数据清洗。客户会发来格式不统一的 Excel 文件，日期格式不一样、编码有问题、还会有随机空行，所以团队通常要花一到两天先把数据整理干净，后面的分析才能开始。更大的问题是，手工清洗很容易引入 silent errors，而在 audit 这种场景下，这种错误一旦进入后续分析，影响会被一路放大。</p>
+      <p>在 Deloitte，我做过一个很典型的 audit data automation 项目。最大的瓶颈其实不是分析本身，而是 journal entry 数据的异构性。每个客户给的财务数据格式都不一样，chart of accounts 也完全不同，所以在真正分析之前，团队要先花一到两天手工清洗和映射成内部统一 taxonomy，才能做到 apples-to-apples comparability。这个过程既慢，又非常容易产生 silent human error。</p>
 
-      <p>所以在一个非常忙的 audit season 里，我决定把这个流程自动化，虽然当时团队基本没有技术背景，也没有现成的 automation 经验。我用 Python 和 pandas 写了一个脚本，去统一日期格式、标准化列名、修复编码问题、删除空行和无效记录。但我觉得更关键的不是清洗本身，而是 validation layer。清洗完成后，脚本会自动检查一些关键规则，比如异常大的金额、不合理的日期范围、关键字段缺失等，并生成一份 flagged report，在正式分析开始前先让人 review。这实际上把错误发现的时点，从很后面挪到了最前面。我还写了很简单的使用文档，带着团队成员一起上手，所以这个工具很快就不只是我个人在用。</p>
+      <p>我用 Python 和 pandas 设计并实现了一条自动化 ETL pipeline。第一层是 data normalization，用来 ingest 原始 CSV 和 Excel 文件，处理编码问题、去掉多余空格、统一列名。第二层是 mapping engine，我做了一个 rule-based 的映射系统，先用 hash map 去做 <code>O(1)</code> exact match，对历史 master dictionary 里的标准账户名可以立刻命中，大概能覆盖 70% 到 80% 的情况；剩下的再通过 regex-based fuzzy matching 去捕捉轻微命名差异。第三层，也是我觉得最重要的一层，是 exception handling。我明确把系统设计成不去“猜”。任何没达到高置信度阈值的条目，都会被打到 <code>Exception Log</code> 里，让人去 review，而不是静默通过。</p>
 
-      <p>最后数据准备时间从每个项目的一到两天降到了大约三小时，而且在其中一个项目里，这个 validation layer 还提前抓到了一批客户原始数据里的日期录入错误，否则这些错误会静悄悄地通过人工清洗并污染后面的全部分析。这个故事对我最大的影响是形成了一个思维模型：对于任何重复性手工流程，都要先问一个问题，错误到底是在什么时候被发现的。如果答案是“很晚”，那自动化的 validation layer 往往就是最值得优先做的部分。</p>
+      <p>最后这个 pipeline 把每个 engagement 的数据准备和映射时间从最多两天降到了大约三小时。更重要的是，Exception Log 把团队的工作方式从“人工看 100% 的数据”变成了“只看大约 10% 真正需要人工判断的 edge cases”，同时也保证了下游 risk model 使用的是可比、可审计的一致数据。这个项目给我最深的工程教训是，自动化系统绝对不能 silent failure。如果系统没有把握，就应该显式暴露不确定性，而不是假装自己知道答案。</p>
     </div>
   </details>
 

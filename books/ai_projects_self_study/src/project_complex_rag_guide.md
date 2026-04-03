@@ -9,6 +9,59 @@ title: "Project Guide: Complex RAG Guide"
 
 ---
 
+## 这个项目 / 学习主题的总结
+
+`complex-RAG-guide` 的价值在于告诉你：真实 RAG 系统为什么会长出 cleaning、rewriting、filtering、planning、evaluation 这些层。它适合用来回答“最小 RAG 跑通以后，下一步复杂度到底从哪里来”。
+
+## 本页在教什么
+
+这页在教你怎么看“复杂 RAG”不是乱堆模块，而是针对不同失败点逐层补结构。
+
+## Python 代码
+
+```python
+def rewrite_query(query: str) -> str:
+    return query.replace("it", "the retrieved document")
+
+
+def filter_docs(docs: list[str], keyword: str) -> list[str]:
+    return [doc for doc in docs if keyword.lower() in doc.lower()]
+
+
+query = "How do I use it safely?"
+docs = [
+    "The retrieved document should be cited in the answer.",
+    "FastAPI app startup sequence.",
+]
+
+rewritten = rewrite_query(query)
+filtered = filter_docs(docs, "document")
+print(rewritten)
+print(filtered)
+```
+
+## 时间复杂度
+
+示例里主要做一次字符串处理和一次线性过滤，所以时间复杂度是 `O(n)`。
+
+## 空间复杂度
+
+过滤后的结果列表最多保留所有文档，所以空间复杂度是 `O(n)`。
+
+## 怎么想到
+
+复杂 RAG 的每一层都不是凭空加出来的，而是某个失败模式逼出来的。比如检索不稳，就会想到 query rewriting 或 filtering；回答不可信，就会想到 citation 和 evaluation。
+
+## 示例 case
+
+例子：用户问题里出现模糊代词 `it`，系统先把 query 改写得更明确，再过滤掉明显不相关文档。这样你就能看到“复杂度”其实是在修正系统失误。
+
+## 常见 Follow-up
+
+- 什么情况下值得加 query rewriting？
+- filtering 和 reranking 在职责上有什么区别？
+- evaluation 为什么是复杂 RAG 里迟早会补的一层？
+
 ## 这个项目最适合你学什么
 
 这个项目适合你在基础 RAG 之后，继续看“复杂 RAG 管线怎么长出来”。

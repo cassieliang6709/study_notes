@@ -9,6 +9,49 @@ title: "Project Guide: RAG Techniques"
 
 ---
 
+## 这个项目 / 学习主题的总结
+
+`rag_techniques` 更像 RAG 技术实验场，而不是单一系统。它的核心价值是帮你建立技术地图：不同技巧到底在优化哪一层，以及什么时候值得试它们。
+
+## 本页在教什么
+
+这页在教你不要把各种 RAG 技巧当成孤立术语，而是要把它们放回“检索前、检索中、检索后、生成前”这些位置里理解。
+
+## Python 代码
+
+```python
+techniques = {
+    "query_rewrite": "improve retrieval input",
+    "rerank": "improve retrieval output order",
+    "citation": "improve answer trust",
+}
+
+for name, goal in techniques.items():
+    print(f"{name}: {goal}")
+```
+
+## 时间复杂度
+
+这个示例只是遍历一个小字典，本页主要目标是理解技术分类，不以复杂度为重点。
+
+## 空间复杂度
+
+本页主要目标是理解技术分类，不以复杂度为重点。
+
+## 怎么想到
+
+当你看到很多 technique 时，最容易迷路。最稳的方法不是记名字，而是问一句：它到底在优化哪一层？只要这个问题答出来，技术地图就会开始成形。
+
+## 示例 case
+
+例子：如果系统主要问题是检索回来的内容顺序不对，那优先考虑 rerank；如果问题是用户提问方式和文档写法差很远，那优先考虑 query rewrite。
+
+## 常见 Follow-up
+
+- 哪些 technique 最适合先做对照实验？
+- 什么情况下先换 retrieval，而不是先换模型？
+- citation 和 evaluation 分别解决什么问题？
+
 ## 这个项目最适合你学什么
 
 这个仓库更像一套 RAG 技术实验库。

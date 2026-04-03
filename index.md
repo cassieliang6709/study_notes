@@ -26,6 +26,8 @@ title: Study Notes
 ### 想读成体系的专题书
 
 - [Books](./books/)
+- [AI Projects Self Study](./books/ai_projects_self_study/)
+- [Amazon VO Coding Book](./books/amazon_vo_coding_book/book/)
 
 ## 六个主入口分别负责什么
 
@@ -41,6 +43,12 @@ title: Study Notes
   独立成册专题书
 - [Resources](./resources/)
   代码、数据、模型等实验资源
+
+## 如果你准备按整本书来学
+
+1. 先从 [Books](./books/) 选一本
+2. `AI Projects Self Study`：先读 `How To Use This Book`，再选一条 `Track`
+3. `Amazon VO Coding Book`：先读 `methodology`，再看 `high-frequency-list` 和 `problems`
 
 ## 读 coding 文档时建议的顺序
 

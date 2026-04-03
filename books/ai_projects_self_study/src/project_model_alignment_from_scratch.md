@@ -6,6 +6,49 @@
 
 ---
 
+## 这个项目 / 学习主题的总结
+
+`ModelAlignmentFromScratch` 的价值在于把 SFT、EI、GRPO 这些名字拉回实现层。它能帮助你看懂：预训练以后，模型为什么还需要进一步对齐，以及对齐到底在优化什么。
+
+## 本页在教什么
+
+这页在教你从“训练名称”走向“训练目标”，理解 alignment 为什么会比普通监督学习多出 reward、grading、sampling 这些部件。
+
+## Python 代码
+
+```python
+responses = {
+    "answer_a": 0.55,
+    "answer_b": 0.82,
+    "answer_c": 0.61,
+}
+
+best_answer = max(responses, key=responses.get)
+print(best_answer, responses[best_answer])
+```
+
+## 时间复杂度
+
+遍历候选回答找最高分，时间复杂度是 `O(n)`。
+
+## 空间复杂度
+
+额外空间主要是候选回答表，本例空间复杂度是 `O(n)`。
+
+## 怎么想到
+
+理解 alignment 时，最稳的切入点不是公式，而是问：系统凭什么知道哪种回答更好？一旦你盯住“评分信号”这个核心，SFT、偏好优化和 RL 的区别就会更好理解。
+
+## 示例 case
+
+例子：三条候选回答分别有不同分数，系统选择奖励更高的一条。这能帮你抓住“alignment 在做偏好选择”这件事。
+
+## 常见 Follow-up
+
+- SFT 和 preference optimization 的核心差别是什么？
+- reward signal 从哪里来？
+- 为什么 agent RL 往往比单轮回答训练更不稳定？
+
 ## 这页为什么重要
 
 这个项目的价值不在“又一个训练仓库”，而在于它让你第一次真正面对这个问题：

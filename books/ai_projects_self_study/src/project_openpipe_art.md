@@ -6,6 +6,49 @@
 
 ---
 
+## 这个项目 / 学习主题的总结
+
+`OpenPipe ART` 让你第一次认真面对 agent reinforcement training 的复杂度。它的重点不只是“再训练一次模型”，而是 trajectory、rollout、reward over interaction 这些多步问题。
+
+## 本页在教什么
+
+这页在教你区分单轮回答训练和 agent 训练，理解为什么一旦任务跨多步，训练难度会迅速上升。
+
+## Python 代码
+
+```python
+trajectories = {
+    "plan_a": [0.2, 0.4, 0.1],
+    "plan_b": [0.3, 0.5, 0.6],
+}
+
+total_reward = {name: sum(scores) for name, scores in trajectories.items()}
+print(total_reward)
+print(max(total_reward, key=total_reward.get))
+```
+
+## 时间复杂度
+
+遍历所有 trajectory 分数求和，时间复杂度是 `O(n)`。
+
+## 空间复杂度
+
+额外空间是奖励汇总字典，所以空间复杂度是 `O(n)`。
+
+## 怎么想到
+
+想理解 agent RL，先不要急着看大框架，先抓住一个最朴素的问题：系统不是只输出一句话，而是连续执行多步动作时，奖励该怎么累计？一旦这个问题清楚了，trajectory 的意义就出来了。
+
+## 示例 case
+
+例子：`plan_b` 三步累计奖励更高，因此训练更倾向保留它。这个简单例子能帮助你建立多步奖励不是“一次打分”的直觉。
+
+## 常见 Follow-up
+
+- rollout 为什么会让训练成本更高？
+- reward design 为什么会直接影响 agent 行为？
+- agent RL 和普通偏好优化最大的工程差异是什么？
+
 ## 这页为什么重要
 
 `ART` 不是普通微调框架，而是一个更接近 agent reinforcement training 的入口。

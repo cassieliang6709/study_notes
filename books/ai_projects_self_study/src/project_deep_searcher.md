@@ -6,6 +6,52 @@
 
 ---
 
+## 这个项目 / 学习主题的总结
+
+`DeepSearcher` 更接近“能做成系统”的形态。它的重点不是最小原理，而是工程分层：provider、数据加载、查询流程、配置管理。这能帮助你从 demo 心智切到产品心智。
+
+## 本页在教什么
+
+这页在教你怎么看一个搜索系统为什么要拆成多层，而不是所有逻辑都塞进一个 notebook。
+
+## Python 代码
+
+```python
+class SearchProvider:
+    def search(self, query: str) -> list[str]:
+        return [f"result for: {query}"]
+
+
+def run_pipeline(query: str, provider: SearchProvider) -> list[str]:
+    normalized_query = query.strip().lower()
+    return provider.search(normalized_query)
+
+
+print(run_pipeline("Private Data Search", SearchProvider()))
+```
+
+## 时间复杂度
+
+示例重点是分层而不是算法优化，本节不以复杂度为重点。
+
+## 空间复杂度
+
+示例重点是分层而不是算法优化，本节不以复杂度为重点。
+
+## 怎么想到
+
+当系统开始有多种 provider、多种数据源和多种调用方式时，继续把逻辑写在一个地方会很快失控。把 provider 层和 pipeline 层拆开，是从“能跑”走向“能维护”的第一步。
+
+## 示例 case
+
+例子：同一个查询流程不变，只替换 `SearchProvider` 的实现，就能切不同搜索后端。这正是工程化系统要保留的能力。
+
+## 常见 Follow-up
+
+- provider 抽象为什么重要？
+- 数据加载和查询为什么应该分阶段？
+- 从 demo 到系统时，最先需要补的工程层有哪些？
+
 ## 这页为什么重要
 
 `DeepSearcher` 不是最小教学 demo，而是更接近“可以拿来搭系统”的那类项目。

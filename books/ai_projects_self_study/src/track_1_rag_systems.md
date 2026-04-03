@@ -11,6 +11,44 @@ title: "Track 1: RAG Systems"
 
 ---
 
+## 这个学习主线的总结
+
+这条主线的核心不是把所有 RAG 仓库都看一遍，而是按难度和抽象层次逐步升级：先学最小链路，再看复杂组件，再建技术地图，最后接近系统形态。这样 beginner 才不会一开始就被复杂度淹没。
+
+## 本页在教什么
+
+这页在教你为什么 RAG 相关项目不能乱序看，以及每一站分别在补哪一层能力。
+
+## Python 代码
+
+```python
+steps = ["retrieve", "build context", "generate answer"]
+for step in steps:
+    print(step)
+```
+
+## 时间复杂度
+
+本页重点是学习路径设计，不以复杂度为重点。
+
+## 空间复杂度
+
+本页重点是学习路径设计，不以复杂度为重点。
+
+## 怎么想到
+
+RAG 相关资源太多时，最容易犯的错是按 star 数或热度乱看。更有效的顺序应该由“学习阻力”决定，而不是由“功能多少”决定。
+
+## 示例 case
+
+例子：先做 `rag-from-scratch`，你会先看懂主链路；再做 `complex-RAG-guide`，你才知道 rewriting、filtering 这些层为什么出现。
+
+## 常见 Follow-up
+
+- 为什么不建议 beginner 第一站就上 deep research 系统？
+- 基础 RAG 和复杂 RAG 的分水岭是什么？
+- 什么时候说明你已经可以从 demo 进入系统级项目？
+
 ## 这条线的正确顺序
 
 1. [rag-from-scratch](./project_rag_from_scratch.md)

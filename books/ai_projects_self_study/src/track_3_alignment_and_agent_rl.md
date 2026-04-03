@@ -11,6 +11,44 @@ title: "Track 3: Alignment And Agent RL"
 
 ---
 
+## 这个学习主线的总结
+
+这条主线解决的是“模型为什么在预训练后还不够可用”。它会带你从单模型对齐走到多步 agent 强化训练，让你看到稳定性和奖励设计为什么会变成核心问题。
+
+## 本页在教什么
+
+这页在教你为什么要先理解 SFT / 偏好优化，再去理解 agent RL，而不是一上来直接看最复杂的 rollout 框架。
+
+## Python 代码
+
+```python
+preferences = {"response_a": 1, "response_b": 0}
+chosen = max(preferences, key=preferences.get)
+print(chosen)
+```
+
+## 时间复杂度
+
+本页重点是训练思路，不以复杂度为重点。
+
+## 空间复杂度
+
+本页重点是训练思路，不以复杂度为重点。
+
+## 怎么想到
+
+alignment 最容易让人困惑的地方，是一堆训练名词并排出现。更稳的方法是按问题难度排序：先理解单步偏好，再理解多步奖励，这样 agent RL 的复杂度才不会显得跳跃。
+
+## 示例 case
+
+例子：如果两个回答里一个更符合偏好标注，系统会更倾向保留高分回答。再往后，agent RL 只是把这个选择问题扩展到多步轨迹上。
+
+## 常见 Follow-up
+
+- SFT、偏好优化、GRPO 的差别怎么用一句话讲清？
+- 为什么 agent 任务训练更不稳定？
+- reward model 和 grader 在实践里分别扮演什么角色？
+
 ## 这条线的正确顺序
 
 1. [ModelAlignmentFromScratch](./project_model_alignment_from_scratch.md)

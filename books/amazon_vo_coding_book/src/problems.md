@@ -1,5 +1,67 @@
 # 题目还原与解法
 
+## 这个题型页的总结
+
+这页不是简单列题，而是把 Amazon VO 常见高频题按题型家族整理，再补上原始信号、还原题目、核心解法和 follow-up 方向。它的重点是让你形成“同一类题怎么一起准备”的感觉。
+
+## 本页在教什么
+
+这页在教你如何把 cache、graph、DP、tree 这些常见 Amazon 家族题放到同一张图里理解，而不是一题一题孤立背。
+
+## Python 代码
+
+```python
+from collections import deque
+
+
+def ladder_length(begin: str, end: str, word_list: list[str]) -> int:
+    words = set(word_list)
+    if end not in words:
+        return 0
+
+    queue = deque([(begin, 1)])
+    visited = {begin}
+
+    while queue:
+        word, steps = queue.popleft()
+        if word == end:
+            return steps
+        for i in range(len(word)):
+            for ch in "abcdefghijklmnopqrstuvwxyz":
+                nxt = word[:i] + ch + word[i + 1:]
+                if nxt in words and nxt not in visited:
+                    visited.add(nxt)
+                    queue.append((nxt, steps + 1))
+    return 0
+
+
+print(ladder_length("hit", "cog", ["hot", "dot", "dog", "lot", "log", "cog"]))
+```
+
+## 时间复杂度
+
+以 `Word Ladder` 为代表题，朴素 BFS 会枚举每个位置的 26 个字符，时间复杂度常写作 `O(N * L * 26)`，其中 `N` 是词数，`L` 是单词长度。
+
+## 空间复杂度
+
+队列、访问集合和字典集合都与词数相关，所以空间复杂度是 `O(N)`。
+
+## 怎么想到
+
+准备 Amazon VO 时，不要只问“我会不会这道题”，还要问“这道题属于哪个家族、同家族的 follow-up 会怎么追”。像 `Word Ladder`、`Course Schedule`、`Word Search` 放在一起看，你会更容易形成 BFS / DFS / 图搜索的稳定模板。
+
+## 示例 case
+
+输入：`begin = "hit"`, `end = "cog"`
+输出：`5`
+解释：一条最短路径是 `hit -> hot -> dot -> dog -> cog`。这个例子能帮助你把图 BFS 和最短步数问题连起来。
+
+## 常见 Follow-up
+
+- 如果 interviewer 要你输出路径而不是长度，该怎么补？
+- 什么情况下值得讲双向 BFS？
+- 同一轮里如果又问 `Word Search` 或 `Course Schedule`，它们和 `Word Ladder` 的共同模板是什么？
+
 ## 1. Cache 家族
 
 ### 1.1 LRU / LFU / Custom Cache

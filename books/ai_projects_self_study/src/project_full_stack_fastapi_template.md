@@ -10,6 +10,54 @@
 
 ---
 
+## 这个项目 / 学习主题的总结
+
+`full-stack-fastapi-template` 的价值在于把“后端 API、前端、数据库、认证、部署”这些真实产品层一次性摆到你面前。它适合帮助你从脚本和 notebook 心智切到完整应用心智。
+
+## 本页在教什么
+
+这页在教你怎么看一个完整 Web 应用的最小分层，而不是只会写一个单文件 API。
+
+## Python 代码
+
+```python
+users = []
+
+
+def create_user(email: str) -> dict[str, str]:
+    user = {"email": email, "status": "active"}
+    users.append(user)
+    return user
+
+
+print(create_user("cassie@example.com"))
+print(users)
+```
+
+## 时间复杂度
+
+这个最小示例只做一次追加，时间复杂度是 `O(1)`。
+
+## 空间复杂度
+
+用户列表随着数据增长，空间复杂度是 `O(n)`。
+
+## 怎么想到
+
+学全栈模板时，不要先陷进框架细节，先问自己：一个真实产品最小需要哪些层？只要先看清 API、状态、数据存储、用户身份这几层，后面的框架代码才有意义。
+
+## 示例 case
+
+输入：新增一个邮箱为 `cassie@example.com` 的用户
+输出：返回用户对象，并保存到列表里
+解释：这对应了真实应用里“请求到达后端，后端处理并持久化状态”的最小版本。
+
+## 常见 Follow-up
+
+- router、schema、model、db 这几层为什么要分开？
+- 登录态为什么会显著提升项目复杂度？
+- 从本地跑通到部署上线，中间还会多哪些系统问题？
+
 ## 这页为什么重要
 
 如果你要学 `FastAPI + 前端 + 数据库 + 认证 + 部署`，这个项目是非常合适的第一站。

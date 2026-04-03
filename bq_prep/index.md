@@ -153,7 +153,7 @@ title: BQ Interview Prep
 
 <section class="bq-story-card">
   <div class="bq-story-head">
-    <h3>Story 4 — Deloitte: Audit Data Automation</h3>
+    <h3>Story 4 — Deloitte: Journal Entry ETL &amp; Mapping Pipeline</h3>
     <div class="bq-tag-row">
       <span class="bq-tag">Invent and Simplify</span>
       <span class="bq-tag">Deliver Results</span>
@@ -164,34 +164,34 @@ title: BQ Interview Prep
     <summary>STARR 分析</summary>
     <div class="bq-story-body">
       <p><strong>Situation</strong><br>
-      Auditor at Deloitte. Every engagement started with 1–2 days of manual data cleaning — clients submitted Excel files in inconsistent formats, different date formats, encoding issues, random empty rows. Done from scratch every time. Manual cleaning introduces silent errors that flow into every downstream analysis step. In audit context, decisions get made on top of that data.</p>
+      At Deloitte, a major bottleneck in audit engagements was data heterogeneity. Every client provided journal entry data in different formats with custom charts of accounts. Before any analysis could happen, we needed apples-to-apples comparability. The team was spending 1 to 2 days manually cleaning and mapping thousands of client-specific accounts to our standard internal taxonomy, and the process was highly prone to silent human error.</p>
 
       <p><strong>Task</strong><br>
-      Automate the cleaning process during a busy audit season where every project had a deadline — and in a team with no technical background and no prior automation experience.</p>
+      I needed to build an automated, scalable solution to ingest this unstructured client data, standardize it, and map it reliably, so the team could focus on risk assessment instead of manual data entry.</p>
 
       <p><strong>Actions</strong><br>
-      Automation script: Python + pandas to detect and standardize date formats, normalize column names, fix encoding issues, remove empty/invalid rows. Whatever format the client sent → clean, consistent file, no manual work.</p>
+      I designed and built an automated ETL pipeline using Python and pandas. First, I created a data normalization layer that ingested raw CSV and Excel files, handled encoding issues, stripped whitespace, and normalized column names so downstream logic could run on a consistent schema.</p>
 
-      <p>Validation layer: after cleaning, script auto-checks rules: unusually large dollar amounts, dates outside reasonable range, missing values in critical fields. Outputs a flagged report for human review before analysis begins. Shifts error discovery from late (after conclusions drawn) to the start.</p>
+      <p>Second, I built a rule-based mapping engine. It first used a hash map for <code>O(1)</code> exact matching against a historical master dictionary, which categorized about 70 to 80 percent of standard accounts instantly. For the remaining entries, I added a regex-based fuzzy matching layer to catch slight naming variations.</p>
 
-      <p>Team rollout: wrote simple documentation, walked colleagues through it. Other people on the team started using it within a short time — scaled beyond a personal tool.</p>
+      <p>Third, and most importantly, I designed the system not to guess. Any entry that did not meet a high-confidence threshold was routed into an <code>Exception Log</code>. That validation layer made sure ambiguous data never silently slipped through the pipeline.</p>
 
       <p><strong>Result</strong><br>
-      Data preparation time: 1–2 days → ~3 hours per engagement. In one project, the validation layer caught a batch of date entry errors in client data that would have silently passed through manual cleaning and corrupted all downstream analysis.</p>
+      The pipeline reduced data preparation and mapping time from up to 2 days to about 3 hours per engagement. By generating the exception log, I shifted the team's workflow from reviewing 100 percent of the data to reviewing only the roughly 10 percent of edge cases that actually required human judgment. It also guaranteed consistent account mapping for downstream risk models.</p>
 
       <p><strong>Reflection</strong><br>
-      Key mental model: for any repeated manual process, ask "when does an error in this process get discovered?" If the answer is "late," an automated validation layer is almost always worth building. This thinking directly carried forward to the BERTScore pipeline at YouDescribe — same instinct, different domain. Next: design the validation logic before the cleaning logic, not as an afterthought.</p>
+      The biggest engineering lesson for me was to never let an automated system fail silently. By explicitly isolating unmapped or low-confidence items into a validation layer, errors were caught at the ingestion stage rather than deep in the analysis phase. That mental model — designing strict validation and exception handling before core processing logic — is something I carried forward into later pipeline work, including BERTScore.</p>
     </div>
   </details>
 
   <details>
     <summary>口语版本</summary>
     <div class="bq-story-body">
-      <p>At Deloitte, every audit engagement started with manual data cleaning. Clients would send Excel files in inconsistent formats, with different date conventions, encoding issues, and random empty rows, so the team would spend one to two days cleaning everything from scratch before analysis could even begin. The bigger problem was that manual cleaning creates silent errors, and in an audit context those errors can affect every downstream conclusion.</p>
+      <p>At Deloitte, one of the biggest bottlenecks in audit engagements was journal entry data heterogeneity. Every client sent financial data in a different format with its own chart of accounts, so before we could do any analysis, the team had to spend one to two days manually cleaning and mapping thousands of account names into a common internal taxonomy. It was slow, repetitive, and very prone to silent human error.</p>
 
-      <p>I decided to automate that process during a busy audit season, even though the team had no technical background and no previous automation workflow. I built a Python and pandas script that standardized date formats, normalized column names, fixed encoding issues, and removed invalid rows. But the more important part was the validation layer. After cleaning, the script automatically checked for anomalies like unusually large amounts, dates outside a reasonable range, and missing values in critical fields, then generated a flagged report for human review before analysis began. I also wrote simple documentation and walked the team through how to use it so it could scale beyond just me.</p>
+      <p>I built an automated ETL pipeline in Python with pandas to standardize and map that data reliably. First, I added a normalization layer to ingest raw CSV and Excel files, handle encoding issues, trim whitespace, and normalize column names. Second, I built a rule-based mapping engine that used a hash map for exact matching against a historical master dictionary, which handled about 70 to 80 percent of accounts immediately, and then used regex-based fuzzy matching for close variations. Third, I explicitly designed the system not to guess. If a journal entry did not meet a high-confidence match threshold, it went into an exception log instead of silently passing through.</p>
 
-      <p>The result was that data preparation time dropped from one to two days down to about three hours per engagement. In one case, the validation layer caught a batch of date-entry errors that would have silently passed through manual cleaning and corrupted the downstream analysis. The lesson I took from that was to always ask when a repeated process discovers errors. If the answer is late, adding an automated validation layer is usually one of the highest-leverage improvements you can make.</p>
+      <p>The result was that data preparation and mapping time dropped from up to two days to about three hours per engagement. More importantly, the exception log changed the team's workflow from reviewing everything manually to reviewing only the roughly 10 percent of edge cases that actually needed human judgment. The biggest lesson for me was that automated systems should never fail silently. If confidence is low, the system should surface the ambiguity instead of pretending it knows the answer.</p>
     </div>
   </details>
 </section>

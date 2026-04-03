@@ -6,6 +6,49 @@
 
 ---
 
+## 这个项目 / 学习主题的总结
+
+`MiniMind` 很适合第一次把“小模型从输入到输出”的主链路串起来。它能帮你把 tokenizer、model、loss、generation 不再看成分散术语，而是看成一个连续流程。
+
+## 本页在教什么
+
+这页在教你用最小模型项目建立“文本是怎么变成 token，再变成预测”的基本直觉。
+
+## Python 代码
+
+```python
+text = "hello"
+vocab = {ch: idx for idx, ch in enumerate(sorted(set(text)))}
+tokens = [vocab[ch] for ch in text]
+
+print(vocab)
+print(tokens)
+```
+
+## 时间复杂度
+
+这个最小 tokenizer 示例线性扫描字符串，所以时间复杂度是 `O(n)`。
+
+## 空间复杂度
+
+词表和 token 序列都和输入长度相关，所以空间复杂度是 `O(n)`。
+
+## 怎么想到
+
+很多人一看到 LLM 就直接跳到 attention 或训练技巧，但更稳的入门顺序是先把最基础的问题搞懂：原始文本到底怎么进模型？只要 token 化这一步清楚了，后面的 embedding、forward、loss 才有真实落点。
+
+## 示例 case
+
+输入：`hello`
+输出：字符词表和对应 token id 序列。
+解释：这能帮助你把“文本进模型”从抽象名词变成可见的数据流。
+
+## 常见 Follow-up
+
+- tokenizer 和 embedding 的边界在哪里？
+- logits 和 loss 是怎么从 token 序列继续算出来的？
+- 为什么训练脚本和推理脚本的关注点不一样？
+
 ## 这页为什么重要
 
 `MiniMind` 很适合做“模型本体第一站”。

@@ -1,5 +1,11 @@
 # Study Notes
 
+- GitHub Repo: [cassieliang6709/study_notes](https://github.com/cassieliang6709/study_notes)
+- Live Site: [study-notes-murex-ten.vercel.app](https://study-notes-murex-ten.vercel.app)
+- AI Projects Book: [aiprojectsselfstudy.vercel.app](https://aiprojectsselfstudy.vercel.app)
+- Amazon VO Coding Book: [amazon-vo-coding-book.vercel.app](https://amazon-vo-coding-book.vercel.app)
+- BQ Prep: [bq-prep.vercel.app](https://bq-prep.vercel.app)
+
 这是一个按学习路径组织的知识库，目标不是“把文件都放上来”，而是让 beginner 也能看懂：
 
 - 先学什么
@@ -57,6 +63,8 @@
 - [books](./books/)
 - [resources](./resources/)
 
+如果你更喜欢按“整本书”学习，而不是在仓库里来回跳，优先从 [books/index.md](./books/index.md) 进去。
+
 ## 推荐学习路线
 
 ### 1. 想系统刷题
@@ -92,6 +100,11 @@
 
 从 [books/index.md](./books/index.md) 开始。
 
+推荐顺序：
+
+1. `AI Projects Self Study`：先看 `How To Use This Book`，再选一个 `Track`，最后进入 `Project Guide`
+2. `Amazon VO Coding Book`：先看 `methodology`，再看 `high-frequency-list`，最后进入 `problems`
+
 ## Algorithms 模块内部怎么分工
 
 这是仓库里最容易重复的部分，所以这里明确边界。
@@ -120,6 +133,24 @@
 
 负责把高频公司题拆成一题一页，适合单点冲刺。
 
+## Books 模块内部怎么分工
+
+### 首页 / 目录页
+
+负责告诉你这本书怎么读、先从哪里开始，不展开所有正文。
+
+### Project Guide / Methodology
+
+负责解释“这页到底在教什么、为什么应该先学它、最小例子怎么理解”。
+
+### Track / Study Path
+
+负责把同主题项目排成 beginner 友好的学习顺序。
+
+### Week Plan / Self Test / Answer Key
+
+负责练习、自测、复盘和对照答案，不替代正文导学页。
+
 ## 读题解时怎么读最有效
 
 不要只看代码。推荐顺序：
@@ -134,16 +165,11 @@
 
 ## Online Preview
 
-- 主站：
-  <https://study-notes-murex-ten.vercel.app>
-- 旧站：
-  <https://study-notes.vercel.app>
-- `AI Projects Self-Study Hub`：
-  <https://aiprojectsselfstudy.vercel.app>
-- `Amazon VO Coding Book`：
-  <https://amazon-vo-coding-book.vercel.app>
-- `BQ Prep`：
-  <https://bq-prep.vercel.app>
+- 主站：[study-notes-murex-ten.vercel.app](https://study-notes-murex-ten.vercel.app)
+- 旧站：[study-notes.vercel.app](https://study-notes.vercel.app)
+- `AI Projects Self-Study Hub`：[aiprojectsselfstudy.vercel.app](https://aiprojectsselfstudy.vercel.app)
+- `Amazon VO Coding Book`：[amazon-vo-coding-book.vercel.app](https://amazon-vo-coding-book.vercel.app)
+- `BQ Prep`：[bq-prep.vercel.app](https://bq-prep.vercel.app)
 
 ## 本地构建
 
@@ -166,3 +192,4 @@ mdbook build books/ai_projects_self_study
 - 想补 OOP：去 [python](./python/)
 - 想做设计题：去 [ood](./ood/)
 - 想冲 Amazon：去 [company_hot_questions](./algorithms/company_hot_questions/)
+- 想按整本书来学：去 [books](./books/)

@@ -12,6 +12,58 @@
 
 ---
 
+## 这个方法页的总结
+
+这页真正想教你的不是某一个仓库，而是“怎么学项目才不会停留在看 README”。核心原则很稳定：先找最小主链路，再跑通最小版本，再做一个小改动，最后用自己的话复盘。很多人学不会项目，不是因为材料少，而是因为一开始就把目标定成“全部看懂”。
+
+## 本页在教什么
+
+这页在教你一套通用项目学习法。无论你后面读的是 RAG、LLM from scratch、alignment 还是全栈模板，都可以先用这套顺序把项目拆小，再决定深入哪一层。
+
+## Python 代码
+
+```python
+from dataclasses import dataclass
+
+
+@dataclass
+class ExperimentLog:
+    change: str
+    result: str
+    why: str
+
+
+log = ExperimentLog(
+    change="top_k: 3 -> 5",
+    result="answer used more supporting context",
+    why="retrieval covered more relevant chunks",
+)
+
+print(log)
+```
+
+## 时间复杂度
+
+本页主要是学习方法论，不以算法复杂度为重点。
+
+## 空间复杂度
+
+本页主要是学习方法论，不以算法复杂度为重点。
+
+## 怎么想到
+
+如果你一上来就试图理解整个项目，信息量会大到无法吸收。更稳的做法是先把问题降维成三个问题：最小输入是什么、最关键的中间步骤是什么、最后输出是什么。只要主链路清楚了，代码阅读和实验就会有抓手。
+
+## 示例 case
+
+例子：学习一个最小 RAG notebook 时，不先追问所有 embedding 细节，而是先确认 `question -> retrieval -> context -> answer` 这条链路真的跑通。然后只改一个参数，例如 `top_k`，再记录结果变化。
+
+## 常见 Follow-up
+
+- 如果项目太大，怎么找第一天应该看的文件？
+- 如果跑不通，应该先修环境还是先读代码？
+- 如果时间有限，什么样的“最小改动”最值得做？
+
 ## 正确顺序
 
 ### 第 1 步：先找到最小主链路
