@@ -1,31 +1,24 @@
 ---
-title: "OOD"
+title: 面向对象设计
 ---
 
-# OOD
+# 面向对象设计
 
-这个模块负责把你从“会写 class”带到“会做设计题”。它和 Python 模块的区别是：
+这个模块负责把你从"会写 class"带到"会做设计题"。
 
-- `python` 讲语言和 OOP 基础
-- `ood` 讲建模、职责拆分、对象协作和案例
+## 文档
 
-## 适合谁
+- [从 OOP 到 OOD：思维过渡](./from_oop_to_ood_cn/) — 从会写类到会做设计题的思维方法
+- [OOD Python 指南](./ood_python_guide_cn/) — OOD 题的通用建模方法
 
-- 会写基本 class，但不会拆系统
-- 一到 Parking Lot / Elevator / Locker 就不知道从哪下手
-- 想准备 OOD / design interview
+## 案例
 
-## 这里的文档怎么分工
-
-- [OOD Python Guide CN](./ood_python_guide_cn.md)
-  讲 OOD 题的一般方法
-- [From OOP to OOD](./from_oop_to_ood_cn.md)
-  讲从“写类”到“做设计”的思维过渡
-- [OOD Cases](./ood_cases/)
-  讲具体系统题案例
+- [Parking Lot（停车场）](./ood_cases/parking_lot_python/) — 经典 OOD 面试题，含完整 Python 实现
+- [Amazon Locker](./ood_cases/amazon_locker_python/) — 三层结构、状态机、多 actor 协作
+- [Elevator System（电梯系统）](./ood_cases/elevator_system_python/) — 调度算法、状态管理
 
 ## 推荐阅读顺序
 
-1. `OOD Python Guide`
-2. `From OOP to OOD`
-3. `OOD Cases`
+1. 先读 OOD Python 指南，建立建模框架
+2. 再读 OOP to OOD，理解思维过渡
+3. 按顺序做案例：Parking Lot → Amazon Locker → Elevator
