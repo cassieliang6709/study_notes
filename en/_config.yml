@@ -2,6 +2,7 @@ title: Cassie Liang
 description: Backend engineer — Java, Python, AI systems
 markdown: kramdown
 encoding: utf-8
+permalink: pretty
 
 exclude:
   - Gemfile

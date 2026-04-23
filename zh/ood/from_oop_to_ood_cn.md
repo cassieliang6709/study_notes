@@ -641,8 +641,8 @@ class ParkingLot:
 
 看这几份：
 
-- [python_oop_prerequisites_cn.md](/Users/cassie/study_notes/python_oop_prerequisites_cn.md)
-- [python_oop_concepts_cn.md](/Users/cassie/study_notes/python_oop_concepts_cn.md)
+- [python_oop_prerequisites_cn.md](../python/python_oop_prerequisites_cn/)
+- [python_oop_concepts_cn.md](../python/python_oop_concepts_cn/)
 
 ### 第 2 步
 
@@ -655,10 +655,10 @@ class ParkingLot:
 
 再看这些 OOD 案例：
 
-- [parking_lot_python.md](/Users/cassie/study_notes/ood_cases/parking_lot_python.md)
-- [elevator_system_python.md](/Users/cassie/study_notes/ood_cases/elevator_system_python.md)
-- [atm_python.md](/Users/cassie/study_notes/ood_cases/atm_python.md)
-- [amazon_locker_python.md](/Users/cassie/study_notes/ood_cases/amazon_locker_python.md)
+- [parking_lot_python.md](./ood_cases/parking_lot_python/)
+- [elevator_system_python.md](./ood_cases/elevator_system_python/)
+
+- [amazon_locker_python.md](./ood_cases/amazon_locker_python/)
 
 ### 第 4 步
 

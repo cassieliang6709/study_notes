@@ -2,6 +2,7 @@ title: 梁玥 · 学习笔记
 description: 后端工程师 — Java、Python、AI 系统
 markdown: kramdown
 encoding: utf-8
+permalink: pretty
 
 exclude:
   - Gemfile

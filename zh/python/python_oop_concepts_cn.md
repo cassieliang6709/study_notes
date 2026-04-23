@@ -782,7 +782,7 @@ class Library:
 
 建议你按这个顺序学：
 
-1. 先看 [python_oop_prerequisites_cn.md](./python_oop_prerequisites_cn.md)
+1. 先看 [python_oop_prerequisites_cn.md](./python_oop_prerequisites_cn/)
 2. 再看这份 OOP 概念文档
 3. 自己手写 2 到 3 个简单类
 4. 再去看停车场、ATM、电梯这类 OOD 题
